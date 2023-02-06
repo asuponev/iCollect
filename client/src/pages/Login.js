@@ -34,8 +34,12 @@ function Login() {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      my={10}
     >
       <ToastContainer />
+      <Box my={2}>
+        <p className="h5">Welcome Back!</p>
+      </Box>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Box my={2}>
           <FieldEmail
@@ -51,7 +55,8 @@ function Login() {
         </Box>
         <Button
           type="submit"
-          variant="contained">Log In</Button>
+          variant="contained"
+          fullWidth>Log In</Button>
       </form>
       <Box my={2}>
         Don't have an account ? <Link to="/register"> Sign Up </Link>

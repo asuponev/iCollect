@@ -34,8 +34,12 @@ function Registration() {
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
+      my={10}
     >
       <ToastContainer />
+      <Box my={2}>
+        <p className="h5">Create An Account</p>
+      </Box>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Box my={2}>
           <FieldFirstName
@@ -63,7 +67,8 @@ function Registration() {
         </Box>
         <Button
           type="submit"
-          variant="contained">Sign Up</Button>
+          variant="contained"
+          fullWidth>Create an Account</Button>
       </form>
       <Box my={2}>
         Already have an account? <Link to="/login"> Log In </Link>
