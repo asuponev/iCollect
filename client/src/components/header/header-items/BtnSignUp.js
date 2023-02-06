@@ -15,7 +15,7 @@ export const BtnSignUp = () => {
     <Button 
       variant="contained" 
       onClick={onClickSignUp}
-      sx={{ backgroundColor: "#2F4059" }}
+      sx={{ height: "32px" }}
     >
       <span className="text-white">Sign Up</span>
     </Button>

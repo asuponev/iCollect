@@ -31,7 +31,6 @@ export const Search = () => {
         sx={{
           backgroundColor: "#192B45",
           width: "200px",
-          border: "2px solid #2F4059",
           borderRadius: "4px"
         }}
         InputProps={{

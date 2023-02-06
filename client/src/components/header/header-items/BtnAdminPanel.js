@@ -13,7 +13,7 @@ export const BtnAdminPanel = () => {
       variant="text"
       onClick={() => navigate(routes.ADMIN)}
       startIcon={
-        <AppsOutlinedIcon sx={{ color: "#FFFFFF" }} />
+        <AppsOutlinedIcon sx={{ color: "#FFFFFF", height: "32px" }} />
       }
     >
       <span className="text-white">Admin Panel</span>

@@ -11,8 +11,8 @@ function Header() {
 
   return (
     <Box
-      p={3}
       sx={{
+        padding: "16px 24px",
         backgroundColor: "#142339",
       }}
     >

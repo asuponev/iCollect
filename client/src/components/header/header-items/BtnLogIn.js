@@ -12,9 +12,10 @@ export const BtnLogIn = () => {
   }
 
   return (
-    <Button 
+    <Button
       variant="text"
       onClick={onClickLogin}
+      sx={{ height: "32px" }}
     >
       <span className="text-white">Log In</span>
     </Button>
