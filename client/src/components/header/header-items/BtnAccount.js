@@ -15,6 +15,7 @@ export const BtnAccount = () => {
       startIcon={
         <PermIdentityOutlinedIcon sx={{ color: "#FFFFFF" }} />
       }
+      sx={{ height: "32px" }}
     >
       <span className="text-white">Account</span>
     </Button>
