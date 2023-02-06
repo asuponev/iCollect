@@ -1,0 +1,31 @@
+.header__lang-switcher {
+  width: 64px;
+
+  #mui-component-select-lang {
+    width: 100%;
+    color: #FFFFFF;
+    background: #192B45;
+    padding: 6px 30px 6px 12px;
+    border: 1.2px solid #2F4059;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .MuiSvgIcon-root {
+    fill: #FFFFFF;
+  }
+
+  &-item {
+    font-size: 14px;
+  }
+}
+
+.text-white {
+  font-size: 14px;
+}
+
+.text-logo {
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 700;
+}

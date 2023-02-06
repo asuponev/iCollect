@@ -5,10 +5,13 @@ import routes from './utils/routes';
 import Home from './pages/Home';
 import Registration from './pages/Registration';
 import Login from './pages/Login';
+import Header from './components/header/Header';
 
 function App() {
+  console.log(document.URL.split('/')[3])
   return (
     <>
+      <Header />
       <Container maxWidth="lg">
         <Routes>
           <Route path={routes.HOME} element={<Home />} />
