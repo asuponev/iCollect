@@ -6,7 +6,7 @@
     color: #FFFFFF;
     background: #192B45;
     padding: 6px 30px 6px 12px;
-    border: 1.2px solid #2F4059;
+    border: 2px solid #2F4059;
     border-radius: 4px;
     font-size: 14px;
   }
@@ -28,4 +28,11 @@
   color: #FFFFFF;
   font-size: 18px;
   font-weight: 700;
+}
+
+.header__search-input {
+  input {
+    color: #FFFFFF;
+    font-size: 14px;
+  }
 }

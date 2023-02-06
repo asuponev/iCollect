@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Header from './components/header/Header';
 
 function App() {
-  console.log(document.URL.split('/')[3])
+  
   return (
     <>
       <Header />

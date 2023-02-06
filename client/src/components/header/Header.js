@@ -21,7 +21,10 @@ function Header() {
         alignItems="center"
         justifyContent="space-between"
       >
-        <HeaderItems.Logo />
+        <Stack direction="row" alignItems="center" spacing={3}>
+          <HeaderItems.Logo />
+          <HeaderItems.Search />
+        </Stack>
         <Stack direction="row" spacing={2}>
           <Stack direction="row" spacing={1}>
             <HeaderItems.ThemeSwitcher />

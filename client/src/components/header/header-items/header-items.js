@@ -6,3 +6,4 @@ export { Logo } from './Logo';
 export { BtnLogOut } from './BtnLogOut';
 export { BtnAccount } from './BtnAccount';
 export { BtnAdminPanel } from './BtnAdminPanel';
+export { Search } from './Search';
