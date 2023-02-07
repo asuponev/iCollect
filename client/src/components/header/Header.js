@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Stack } from '@mui/material';
 
 import * as HeaderItems from './header-items/header-items';
+import GlobalContext from '../../utils/context/GlobalContext';
 
 function Header() {
+  const { isAuth, setIsAuth } = useContext(GlobalContext);
 
-  const isAuth = false;
   const isAdmin = false;
   const isRegister = false;
 
@@ -36,7 +37,7 @@ function Header() {
                 <>
                   {isAdmin ? <HeaderItems.BtnAdminPanel /> : null}
                   <HeaderItems.BtnAccount />
-                  <HeaderItems.BtnLogOut />
+                  <HeaderItems.BtnLogOut setIsAuth={setIsAuth} />
                 </>
               ) : (
                 <>

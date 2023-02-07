@@ -1,10 +1,11 @@
 import React from 'react';
 import { Button } from '@mui/material';
 
-export const BtnLogOut = () => {
+export const BtnLogOut = ({ setIsAuth }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    setIsAuth(false);
   }
 
   return (
