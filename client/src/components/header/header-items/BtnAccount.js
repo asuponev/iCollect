@@ -3,19 +3,17 @@ import { Button } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
 
-import routes from '../../../utils/routes';
-
-export const BtnAccount = () => {
+export const BtnAccount = ({ status }) => {
   let navigate = useNavigate();
 
   return (
     <Button
       variant="text"
-      onClick={() => navigate(routes.ACCOUNT)}
+      onClick={() => navigate(`/users/${status.id}`)}
       startIcon={
         <PermIdentityOutlinedIcon sx={{ color: "#FFFFFF" }} />
       }
-      sx={{ height: "32px" }}
+      sx={{ height: 32 }}
     >
       <span className="text-white">Account</span>
     </Button>

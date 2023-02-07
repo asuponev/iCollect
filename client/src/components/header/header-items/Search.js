@@ -30,7 +30,7 @@ export const Search = () => {
         className="header__search-input"
         sx={{
           backgroundColor: "#192B45",
-          width: "200px",
+          width: 200,
           borderRadius: "4px"
         }}
         InputProps={{

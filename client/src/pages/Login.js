@@ -1,31 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { Box, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import GlobalContext from '../utils/context/GlobalContext';
 import { FieldEmail, FieldPassword } from '../components/form/TextFields';
-import { authApi } from '../utils/apis/authApi';
-import routes from '../utils/routes';
+import { authApi } from '../utils/requests/requests';
 
 function Login() {
+  const { status, setStatus } = useContext(GlobalContext);
   let navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onFormSubmit = async (values) => {
-    try {
-      const { data } = await authApi('login', { ...values });
-      if (data) {
-        localStorage.setItem('token', JSON.stringify(data.token));
-        navigate(routes.HOME);
-      }
-    } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
+    authApi('login', { ...values })
+      .then(res => {
+        localStorage.setItem('token', JSON.stringify(res.token));
+        if (res.role === 'ADMIN') {
+          setStatus({ ...status, isAuth: true, id: res._id, isAdmin: true });
+        } else {
+          setStatus({ ...status, isAuth: true, id: res._id });
+        }
+        navigate('/');
+      }).catch(error => {
+        toast.error(error.message, { position: 'top-right' });
       })
-    }
   }
 
   return (

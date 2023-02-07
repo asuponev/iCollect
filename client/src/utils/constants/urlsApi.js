@@ -1,7 +1,8 @@
 const urls = {
   REGISTER: '/auth/register',
   LOGIN: '/auth/login',
-  ACCOUNT: '/auth/me'
+  AUTH: '/auth/me',
+  USERS: '/users'
 }
 
 export default urls;

@@ -79,8 +79,8 @@ export const getMe = async (req, res) => {
     res.json(userData);
   } catch (error) {
     console.log(error);
-    res.status(500).json({
-      message: 'No access, please log in'
+    res.status(401).json({
+      message: 'User is unauthorized'
     });
   }
 }
