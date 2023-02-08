@@ -1,14 +1,14 @@
 import React from 'react';
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 export const ThemeSwitcher = () => {
   return (
     <Stack direction="row" spacing={0.8} alignItems="center">
-      <span className="text-white">Dark Mode</span>
+      <Typography variant="caption" fontSize={14} color="#FFFFFF">Dark Mode</Typography>
       <div className="form-check form-switch">
-        <input 
-          className="form-check-input" 
-          type="checkbox" 
+        <input
+          className="form-check-input"
+          type="checkbox"
           role="button"
         />
       </div>

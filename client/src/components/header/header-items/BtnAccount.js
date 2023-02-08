@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
 
@@ -15,7 +15,7 @@ export const BtnAccount = ({ status }) => {
       }
       sx={{ height: 32 }}
     >
-      <span className="text-white">Account</span>
+      <Typography variant="button" color="#FFFFFF">Account</Typography>
     </Button>
   );
 }

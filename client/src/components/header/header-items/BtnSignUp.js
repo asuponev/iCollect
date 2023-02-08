@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
 export const BtnSignUp = () => {
@@ -10,12 +10,12 @@ export const BtnSignUp = () => {
   }
 
   return (
-    <Button 
-      variant="contained" 
+    <Button
+      variant="contained"
       onClick={onClickSignUp}
       sx={{ height: 32 }}
     >
-      <span className="text-white">Sign Up</span>
+      <Typography variant="button" color="#FFFFFF">Sign Up</Typography>
     </Button>
   );
 }

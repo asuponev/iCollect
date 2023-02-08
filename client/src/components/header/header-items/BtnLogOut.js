@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
 export const BtnLogOut = ({ status, setStatus }) => {
@@ -17,7 +17,7 @@ export const BtnLogOut = ({ status, setStatus }) => {
       sx={{ backgroundColor: "#2F4059", height: 32 }}
       onClick={logout}
     >
-      <span className="text-white">Log Out</span>
+      <Typography variant="button" color="#FFFFFF">Log Out</Typography>
     </Button>
   );
 }

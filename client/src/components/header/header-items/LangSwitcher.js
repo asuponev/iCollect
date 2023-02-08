@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Select, FormControl, MenuItem } from '@mui/material';
 
-import './header-items.scss';
-
 export const LangSwitcher = () => {
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
 
@@ -17,14 +15,24 @@ export const LangSwitcher = () => {
         name="lang"
         value={lang}
         onChange={handleChange}
-        className="header__lang-switcher"
+        sx={{
+          width: 64,
+          "& .MuiSelect-select": {
+            width: "100%",
+            color: "#FFFFFF",
+            background: "#192B45",
+            padding: "6px 30px 5.88px 12px",
+            borderRadius: "4px",
+            fontSize: 14,
+            lineHeight: "20px"
+          },
+          "& .MuiSvgIcon-root": {
+            fill: "#FFFFFF"
+          }
+        }}
       >
-        <MenuItem value={"en"}>
-          <span className="header__lang-switcher-item">En</span>
-        </MenuItem>
-        <MenuItem value={"ru"}>
-          <span className="header__lang-switcher-item">Ru</span>
-        </MenuItem>
+        <MenuItem value={"en"}>En</MenuItem>
+        <MenuItem value={"ru"}>Ru</MenuItem>
       </Select>
     </FormControl>
   )

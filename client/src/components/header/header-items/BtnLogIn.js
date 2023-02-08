@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
 export const BtnLogIn = () => {
@@ -15,7 +15,7 @@ export const BtnLogIn = () => {
       onClick={onClickLogin}
       sx={{ height: 32 }}
     >
-      <span className="text-white">Log In</span>
+      <Typography variant="button" color="#FFFFFF">Log In</Typography>
     </Button>
   );
 }

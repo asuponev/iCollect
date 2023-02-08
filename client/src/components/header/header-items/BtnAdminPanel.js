@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useNavigate } from 'react-router';
 
@@ -15,7 +15,7 @@ export const BtnAdminPanel = () => {
       }
       sx={{ height: 32 }}
     >
-      <span className="text-white">Admin Panel</span>
+      <Typography variant="button" color="#FFFFFF">Admin Panel</Typography>
     </Button>
   );
 }
