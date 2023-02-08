@@ -8,7 +8,7 @@ function Header() {
   const { status, setStatus } = useContext(GlobalContext);
 
   return (
-    <Box sx={{ width: "100%", backgroundColor: "#142339" }}>
+    <Box component="header" sx={{ width: "100%", backgroundColor: "#142339" }}>
       <Container maxWidth="xl" sx={{ padding: "16px 24px" }}>
         <Stack
           direction="row"

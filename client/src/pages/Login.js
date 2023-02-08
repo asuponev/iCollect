@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GlobalContext from '../utils/context/GlobalContext';
@@ -38,9 +38,7 @@ function Login() {
       my={10}
     >
       <ToastContainer />
-      <Box my={2}>
-        <p className="h5">Welcome Back!</p>
-      </Box>
+      <Typography variant="h6" my={2}>Welcome Back!</Typography>
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <Box my={2}>
           <FieldEmail
@@ -59,9 +57,7 @@ function Login() {
           variant="contained"
           fullWidth>Log In</Button>
       </form>
-      <Box my={2}>
-        Don't have an account ? <Link to="/register"> Sign Up </Link>
-      </Box>
+      <Typography my={2} fontSize={13}>Don't have an account ? <Link to="/register">Sign Up</Link></Typography>
     </Box>
   );
 }
