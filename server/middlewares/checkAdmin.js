@@ -1,10 +1,6 @@
-import User from '../models/User.js';
-
 export default async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.id);
-    if (user.role === 'ADMIN') {
-      req.user = user;
+    if (req.user.role === 'ADMIN') {
       next();
     } else {
       res.status(403).json({

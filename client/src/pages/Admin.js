@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { getUsers, deleteUsers, updateUsers } from '../utils/requests/requests';
+import { getUsers, updateUsers } from '../utils/requests/requests';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
 import BreadCrumbs from '../components/admin/BreadCrumbs';
@@ -31,7 +31,7 @@ function Admin() {
 
   const deleteSelectedUsers = (users) => {
     if (users) {
-      onRequest(deleteUsers, users);
+      onRequest(updateUsers, [users, 'delete']);
       onRequest(getUsers);
     }
   }

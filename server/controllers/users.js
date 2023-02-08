@@ -17,29 +17,6 @@ export const getUser = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
-    if (req.user.role === 'ADMIN') {
-      const allUsers = await User.find({ role: /ADMIN|USER/ });
-      res.json(allUsers);
-    } else {
-      res.status(403).json({
-        message: 'Not access'
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      message: 'Request failed'
-    });
-  }
-}
-
-export const deleteSelectUsers = async (req, res) => {
-  try {
-    const selectedUsersId = Object.values(req.query);
-    selectedUsersId.forEach(async (userId) => {
-      let user = await User.findByIdAndUpdate(userId, { role: 'ARCHIVE', isActive: false }, { new: true });
-      await user.save();
-    })
     const allUsers = await User.find({ role: /ADMIN|USER/ });
     res.json(allUsers);
   } catch (error) {
@@ -52,18 +29,20 @@ export const deleteSelectUsers = async (req, res) => {
 
 export const updateSelectUsers = async (req, res) => {
   try {
-    const selectedUsersId = req.body[0];
-    selectedUsersId.forEach(async (userId) => {
-      let user = await User.findById(userId);
+    req.body[0].forEach(async (id) => {
+      let user = await User.findById(id);
       if (req.body[1] === 'block') {
         user.isActive = !user.isActive;
       } else if (req.body[1] === 'admin') {
         user.role = user.role === 'USER' ? 'ADMIN' : 'USER';
+      } else if (req.body[1] === 'delete') {
+        user.role = 'ARCHIVE';
+        user.isActive = false;
       }
       await user.save();
     })
-    const allUsers = await User.find({ role: /ADMIN|USER/ });
-    res.json(allUsers);
+    const users = await User.find({ role: /ADMIN|USER/ });
+    res.json(users);
   } catch (error) {
     console.log(error);
     res.status(500).json({
