@@ -8,6 +8,17 @@
   font-family: 'Roboto', sans-serif;
 }
 
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ }
+
 a:any-link {
   text-decoration: none;
 }

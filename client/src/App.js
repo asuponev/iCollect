@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Account from './pages/Account';
 import Header from './components/header/Header';
 import Admin from './pages/Admin';
+import Footer from './components/footer/Footer';
 
 function App() {
   const [status, setStatus] = useState({
@@ -47,6 +48,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </Container>
+      <Footer />
     </GlobalContext.Provider>
   );
 }
