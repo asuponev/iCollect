@@ -31,3 +31,12 @@ export const getOneUser = async (id) => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const getUsers = async () => {
+  try {
+    const { data } = await axios.get(urls.USERS);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}

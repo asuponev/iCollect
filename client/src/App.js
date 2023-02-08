@@ -9,6 +9,7 @@ import Registration from './pages/Registration';
 import Login from './pages/Login';
 import Account from './pages/Account';
 import Header from './components/header/Header';
+import Admin from './pages/Admin';
 
 function App() {
   const [status, setStatus] = useState({
@@ -43,6 +44,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/users/:id" element={<Account />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </Container>
     </GlobalContext.Provider>
