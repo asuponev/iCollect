@@ -9,7 +9,7 @@ import GlobalContext from '../utils/context/GlobalContext';
 import { FieldEmail, FieldPassword } from '../components/form/TextFields';
 import { authApi } from '../utils/requests/requests';
 
-function Login() {
+export const Login = () => {
   const { status, setStatus } = useContext(GlobalContext);
   let navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -61,5 +61,3 @@ function Login() {
     </Box>
   );
 }
-
-export default Login;

@@ -4,13 +4,9 @@ import Container from '@mui/material/Container';
 
 import GlobalContext from './utils/context/GlobalContext';
 import { checkAuth } from './utils/requests/requests';
-import Home from './pages/Home';
-import Registration from './pages/Registration';
-import Login from './pages/Login';
-import Account from './pages/Account';
 import Header from './components/header/Header';
-import Admin from './pages/Admin';
 import Footer from './components/footer/Footer';
+import * as Pages from './pages/pages';
 
 function App() {
   const [status, setStatus] = useState({
@@ -41,11 +37,11 @@ function App() {
       <Header />
       <Container maxWidth="xl">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/users/:id" element={<Account />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/" element={<Pages.Home />} />
+          <Route path="/login" element={<Pages.Login />} />
+          <Route path="/register" element={<Pages.Registration />} />
+          <Route path="/users/:id" element={<Pages.Account />} />
+          <Route path="/admin" element={<Pages.Admin />} />
         </Routes>
       </Container>
       <Footer />

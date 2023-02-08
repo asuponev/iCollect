@@ -6,7 +6,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import BreadCrumbs from '../components/admin/BreadCrumbs';
 import Table from '../components/admin/Table';
 
-function Admin() {
+export const Admin = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

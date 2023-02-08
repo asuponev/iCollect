@@ -8,7 +8,7 @@ import BreadCrumbs from '../components/account/BreadCrumbs';
 import UserInfo from '../components/account/UserInfo';
 import Collections from '../components/account/Collections';
 
-function Account() {
+export const Account = () => {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -47,5 +47,3 @@ function Account() {
     </>
   );
 }
-
-export default Account;
