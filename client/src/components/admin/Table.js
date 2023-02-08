@@ -1,8 +1,10 @@
 import { DataGrid } from '@mui/x-data-grid';
+import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import { useState } from 'react';
 
 import TableTools from './TableTools';
 import { tableStyles } from './table-styles';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const Table = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
   if (!users) users = [];
@@ -16,7 +18,14 @@ const Table = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelect
     { field: 'email', headerName: 'Email', flex: 1, minWidth: 180 },
     { field: 'status', headerName: 'Status', flex: 1, minWidth: 70 },
     { field: 'role', headerName: 'Role', flex: 1, minWidth: 70 },
-    { field: 'date', headerName: 'Date of registr', flex: 1, minWidth: 130 },
+    { field: 'date', headerName: 'Created on', flex: 1, minWidth: 130 },
+    { field: 'actions', type: 'actions', width: 50, getActions: (params) => [
+      <GridActionsCellItem
+        icon={<LaunchIcon color="primary"/>}
+        label="View profile"
+        onClick={() => window.open(`/users/${params.id}`, '_blank')}
+      />]
+    },
   ]
 
   const formatDate = (date) => {
