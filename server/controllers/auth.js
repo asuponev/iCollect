@@ -51,6 +51,12 @@ export const login = async (req, res) => {
         message: 'Incorrect login or password'
       })
     };
+    
+    if (!user.isActive) {
+      return res.status(403).json({
+        message: 'You are blocked, contact the site administrator'
+      })
+    };
 
     const isValidPassword = await bcrypt.compare(req.body.password, user._doc.passwordHash);
     if (!isValidPassword) {

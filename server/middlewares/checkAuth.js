@@ -5,6 +5,11 @@ export default (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      if (!decoded.isActive) {
+        return res.status(403).json({
+          message: 'No access, user is blocked'
+        })
+      }
       req.user = decoded;
       next();
     } catch (error) {

@@ -40,3 +40,21 @@ export const getUsers = async () => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const deleteUsers = async (users) => {
+  try {
+    const { data } = await axios.delete(urls.USERS, {params: users});
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const updateUsers = async (usersWithAction) => {
+  try {
+    const { data } = await axios.patch(urls.USERS, usersWithAction);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
