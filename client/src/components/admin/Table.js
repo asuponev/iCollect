@@ -37,12 +37,12 @@ const Table = ({ users }) => {
   return (
     <>
       <TableTools selectedUsers={selectedUsers} />
-      <div style={{ height: "calc(100vh - 64px)", width: "100%" }}>
+      <div style={{ height: 500, width: "100%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={15}
-          rowsPerPageOptions={[15]}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
           checkboxSelection
           headerHeight={44}
           rowHeight={40}
@@ -65,7 +65,8 @@ const Table = ({ users }) => {
               display: "none"
             },
             "& .MuiDataGrid-footerContainer": {
-              justifyContent: "flex-end"
+              justifyContent: "flex-end",
+              border: "none"
             },
             "& .MuiDataGrid-selectedRowCount": {
               display: "none"
