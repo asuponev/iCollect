@@ -1,6 +1,8 @@
 import { Stack, Avatar, Typography } from '@mui/material';
+import ErrorMessage from '../ErrorMessage';
 
 const UserInfo = ({ userData }) => {
+  if (!Object.keys(userData).length) return <ErrorMessage />;
 
   return (
     <Stack direction="row" spacing={2} alignItems="center" mt={4} mb={6}>

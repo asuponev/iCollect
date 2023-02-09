@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GlobalContext from '../utils/context/GlobalContext';
-import { FieldFirstName, FieldLastName, FieldEmail, FieldPassword } from '../components/form/TextFields';
+import FormRegister from '../components/form/form-register';
 import { authApi } from '../utils/requests/requests';
 
 export const Registration = () => {
@@ -35,36 +35,12 @@ export const Registration = () => {
     >
       <ToastContainer />
       <Typography variant="h6" my={2}>Create An Account</Typography>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Box my={2}>
-          <FieldFirstName
-            register={register}
-            errors={errors}
-          />
-        </Box>
-        <Box my={2}>
-          <FieldLastName
-            register={register}
-            errors={errors}
-          />
-        </Box>
-        <Box my={2}>
-          <FieldEmail
-            register={register}
-            errors={errors}
-          />
-        </Box>
-        <Box my={2}>
-          <FieldPassword
-            register={register}
-            errors={errors}
-          />
-        </Box>
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth>Create an Account</Button>
-      </form>
+      <FormRegister
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        onFormSubmit={onFormSubmit}
+      />
       <Typography my={2} fontSize={13}>Already have an account? <Link to="/login">Log In</Link></Typography>
     </Box>
   );

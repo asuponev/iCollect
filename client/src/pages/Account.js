@@ -4,7 +4,7 @@ import { getOneUser } from '../../src/utils/requests/requests';
 
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
-import BreadCrumbs from '../components/account/BreadCrumbs';
+import BreadCrumbs from '../components/BreadCrumbs';
 import UserInfo from '../components/account/UserInfo';
 import Collections from '../components/account/Collections';
 
@@ -29,13 +29,16 @@ export const Account = () => {
     // eslint-disable-next-line
   }, [id])
 
-  const errorMessage = error ? <ErrorMessage error={error}/> : null;
+  const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <>
-      <BreadCrumbs userData={userData} />
+      <BreadCrumbs
+        prevLinks={[{ 'Home': '/' }]}
+        current={`${userData.firstName} ${userData.lastName}`}
+      />
       <UserInfo userData={userData} />
-      <Collections />
+      <Collections id={id} />
     </>
   ) : null;
 

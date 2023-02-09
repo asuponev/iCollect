@@ -49,3 +49,25 @@ export const updateUsers = async (usersWithAction) => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const createCollection = async (id, values) => {
+  try {
+    const { data } = await axios.post(
+      `${urls.USERS}/${id}`,
+      values,
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const getAllCollectionsUser = async (id) => {
+  try {
+    const { data } = await axios.get(`${urls.USERS}/${id}/collections`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message || error.message);
+  }
+}

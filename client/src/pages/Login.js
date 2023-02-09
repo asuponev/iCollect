@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GlobalContext from '../utils/context/GlobalContext';
-import { FieldEmail, FieldPassword } from '../components/form/TextFields';
+import FormLogin from '../components/form/form-login';
 import { authApi } from '../utils/requests/requests';
 
 export const Login = () => {
@@ -39,24 +39,12 @@ export const Login = () => {
     >
       <ToastContainer />
       <Typography variant="h6" my={2}>Welcome Back!</Typography>
-      <form onSubmit={handleSubmit(onFormSubmit)}>
-        <Box my={2}>
-          <FieldEmail
-            register={register}
-            errors={errors}
-          />
-        </Box>
-        <Box my={2}>
-          <FieldPassword
-            register={register}
-            errors={errors}
-          />
-        </Box>
-        <Button
-          type="submit"
-          variant="contained"
-          fullWidth>Log In</Button>
-      </form>
+      <FormLogin
+        register={register}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        onFormSubmit={onFormSubmit}
+      />
       <Typography my={2} fontSize={13}>Don't have an account ? <Link to="/register">Sign Up</Link></Typography>
     </Box>
   );

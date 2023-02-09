@@ -1,67 +1,75 @@
-import { Stack, Typography, Card, CardActions, CardContent, CardMedia, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Stack, Typography, Card, CardActions, CardContent, CardMedia } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import Spinner from '../Spinner';
+import ErrorMessage from '../ErrorMessage';
+import { getAllCollectionsUser } from '../../utils/requests/requests';
+import CreateCollection from './account-collections/create-collection';
 
-const blank = [
-  {
-    "author": "author 1",
-    "subject": "subject 1",
-    "title": "title 1",
-    "description": "description 1",
-    "cover": "https://loremflickr.com/640/480/nature",
-    "count": 16,
-    "id": "1"
-  },
-  {
-    "author": "author 2",
-    "subject": "subject 2",
-    "title": "title 2",
-    "description": "description 2",
-    "cover": "https://loremflickr.com/640/480/nature",
-    "count": 7,
-    "id": "2"
-  },
-  {
-    "author": "author 3",
-    "subject": "subject 3",
-    "title": "title 3",
-    "description": "description 3",
-    "cover": "https://loremflickr.com/640/480/nature",
-    "count": 43,
-    "id": "3"
-  },
-]
+const Collections = ({ id }) => {
+  const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const Collections = () => {
+  useEffect(() => {
+    onRequestGetCollection(id);
+    // eslint-disable-next-line
+  }, [id])
 
-  const cards = blank.map(collection => {
+  const onRequestGetCollection = (id) => {
+    setError(null);
+    setLoading(true);
+    getAllCollectionsUser(id)
+      .then(res => {
+        setCollections(res);
+        setLoading(false);
+      })
+      .catch(error => {
+        setLoading(false);
+        setError(error.message);
+      })
+  }
+
+  const cards = collections.map(collection => {
     return (
       <CollectionCard
-        key={collection.id}
+        key={collection._id}
         {...collection}
       />
     )
   })
 
+  const errorMessage = error ? <ErrorMessage error={error} /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const content = !(loading || error) ? (
+    <>
+      {cards}
+    </>
+  ) : null;
+
   return (
     <Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
         <Typography variant="h5" fontWeight="500">Collections</Typography>
-        <Button variant="contained">+ Add Collection</Button>
+        <CreateCollection id={id} onRequestGetCollection={onRequestGetCollection}/>
       </Stack>
       <Stack
         direction="row"
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="flex-start"
         sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
+        mb={6}
       >
-        {cards}
+        {errorMessage}
+        {spinner}
+        {content}
       </Stack>
     </Stack>
   )
 }
 
-const CollectionCard = ({ subject, title, description, cover, count }) => {
+const CollectionCard = ({ subject, title, description, coverUrl, count }) => {
   return (
     <Card
       sx={{
@@ -73,7 +81,7 @@ const CollectionCard = ({ subject, title, description, cover, count }) => {
     >
       <CardMedia
         sx={{ height: 160 }}
-        image={cover}
+        image={coverUrl}
         title={title}
       />
       <CardContent sx={{ padding: "16px 16px 0" }}>

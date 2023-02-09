@@ -1,10 +1,11 @@
 import { TextField } from '@mui/material';
 
-export const FieldFirstName = ({ register, errors }) => {
+export const FormTextField = ({ name, label, register, errors }) => {
+
   return (
     <TextField
-      {...register("firstName", {
-        required: "First name is required",
+      {...register(name, {
+        required: `${label} is required`,
         minLength: {
           value: 2,
           message: "Min length is 2"
@@ -14,37 +15,16 @@ export const FieldFirstName = ({ register, errors }) => {
           message: "Max length is 50"
         }
       })}
-      label="First name"
+      label={label}
       variant="outlined"
-      error={!!errors.firstName}
-      helperText={errors.firstName && `${errors.firstName.message}`}
+      error={!!errors[name]}
+      helperText={errors[name]?.message}
+      fullWidth
     />
   )
 }
 
-export const FieldLastName = ({ register, errors }) => {
-  return (
-    <TextField
-      {...register("lastName", {
-        required: "Last name is required",
-        minLength: {
-          value: 2,
-          message: "Min length is 2"
-        },
-        maxLength: {
-          value: 50,
-          message: "Max length is 50"
-        }
-      })}
-      label="Last name"
-      variant="outlined"
-      error={!!errors.lastName}
-      helperText={errors.lastName && `${errors.lastName.message}`}
-    />
-  )
-}
-
-export const FieldEmail = ({ register, errors }) => {
+export const FormEmailField = ({ register, errors }) => {
   return (
     <TextField
       {...register("email", {
@@ -63,7 +43,7 @@ export const FieldEmail = ({ register, errors }) => {
   )
 }
 
-export const FieldPassword = ({ register, errors }) => {
+export const FormPswField = ({ register, errors }) => {
   return (
     <TextField
       {...register("password", {
@@ -78,6 +58,25 @@ export const FieldPassword = ({ register, errors }) => {
       variant="outlined"
       error={!!errors.password}
       helperText={errors.password && `${errors.password.message}`}
+    />
+  )
+}
+
+export const FieldDescription = ({ name, label, register, errors }) => {
+  return (
+    <TextField
+      {...register(name, {
+        required: `${label} is required`,
+        minLength: {
+          value: 5,
+          message: "Min length is 5"
+        }
+      })}
+      label={label}
+      variant="outlined"
+      error={!!errors[name]}
+      helperText={errors[name]?.message}
+      fullWidth
     />
   )
 }
