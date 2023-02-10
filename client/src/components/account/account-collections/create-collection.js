@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent } from '@mui/material';
-
+import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { createCollection, updateCollection } from '../../../utils/requests/requests';
 import { getOneCollection } from '../../../utils/requests/requests';
 
@@ -72,6 +72,18 @@ const CreateCollection = ({
 
   return (
     <Dialog open={openModalForm} onClose={handleCloseModalForm}>
+      <Tooltip
+        title="Close form"
+        placement="top"
+        sx={{ position: "relative" }}
+      >
+        <IconButton
+          onClick={() => handleCloseModalForm()}
+          sx={{ position: "absolute", top: 0, right: 0 }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </Tooltip>
       <DialogTitle>
         {
           !isEditing ? <>Add new collection</> : <>Edit collection</>

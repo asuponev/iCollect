@@ -14,6 +14,9 @@ const CollectionCard = ({
   onEditCollection,
   onDeleteCollection
 }) => {
+
+  if (description.length > 100) description = `${description.slice(0,100)}...`;
+
   return (
     <Card
       sx={{
@@ -28,7 +31,7 @@ const CollectionCard = ({
         image={coverUrl || imageNotFound}
         title={title}
       />
-      <CardContent sx={{ padding: "16px 16px 0" }}>
+      <CardContent sx={{ padding: "16px 16px 0", height: 115 }}>
         <Stack 
           direction="row"
           justifyContent="space-between"

@@ -86,7 +86,7 @@ const Collections = ({ id }) => {
       <Stack
         direction="row"
         alignItems="center"
-        justifyContent="flex-start"
+        justifyContent="center"
         sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
         mb={6}
       >
