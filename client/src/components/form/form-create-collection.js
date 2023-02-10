@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
 
@@ -9,15 +9,42 @@ import subjects from '../../utils/constants/collection-subjects';
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
 
-const FormCreateCollection = ({ handleClose, id, onRequest }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+const FormCreateCollection = ({
+  handleClose,
+  id,
+  onRequestCreate,
+  onRequestUpdate,
+  collectionId,
+  isEditing,
+  valuesForEdit
+}) => {
+  const { register, handleSubmit, formState: { errors }, getValues } = useForm({
+    defaultValues: {
+      title: valuesForEdit.title || '',
+      subject: valuesForEdit.subject || '',
+      description: valuesForEdit.description || '',
+    }
+  });
   const [selectedImg, setSelectedImg] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
 
+  useEffect(() => {
+    if (isEditing) {
+      setImageUrl(valuesForEdit.coverUrl);
+    } else {
+      setImageUrl('');
+    }
+    // eslint-disable-next-line
+  }, [isEditing])
+
   const onFormSubmit = async (values) => {
     values.coverUrl = imageUrl;
-    values.authorId = id;
-    onRequest(id, values);
+    if (isEditing) {
+      onRequestUpdate(collectionId, values);
+    } else {
+      values.authorId = id;
+      onRequestCreate(values);
+    }
     handleClose();
   }
 
@@ -26,10 +53,11 @@ const FormCreateCollection = ({ handleClose, id, onRequest }) => {
       <Stack>
         <Box my={2}>
           {
-            (selectedImg instanceof File) && imageUrl ? (
+            (selectedImg instanceof File && imageUrl) ||
+              (isEditing && imageUrl) ? (
               <FormUploadedImage
-                imageUrl={imageUrl}
                 setSelectedImg={setSelectedImg}
+                imageUrl={imageUrl}
                 setImageUrl={setImageUrl}
               />
             ) : (
@@ -55,6 +83,7 @@ const FormCreateCollection = ({ handleClose, id, onRequest }) => {
             options={subjects}
             register={register}
             errors={errors}
+            defaultValue={getValues().subject ? getValues().subject : ''}
           />
         </Box>
         <Box my={2}>
@@ -71,7 +100,11 @@ const FormCreateCollection = ({ handleClose, id, onRequest }) => {
         </Box>
       </Stack>
       <Box my={2} sx={{ display: "flex", alignItems: "center", gap: "24px" }}>
-        <Button type="submit" variant="contained">Create Collection</Button>
+        <Button type="submit" variant="contained">
+          {
+            !isEditing ? <>Create Collection</> : <>Save Edited Collection</>
+          }
+        </Button>
         <Button variant="text" onClick={() => handleClose()}>Cancel</Button>
       </Box>
     </form>

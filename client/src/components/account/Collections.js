@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Typography, Card, CardActions, CardContent, CardMedia } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { Stack, Typography, Button } from '@mui/material';
 import Spinner from '../Spinner';
 import ErrorMessage from '../ErrorMessage';
 import { getAllCollectionsUser } from '../../utils/requests/requests';
 import CreateCollection from './account-collections/create-collection';
+import CollectionCard from './account-collections/collection-card';
 
 const Collections = ({ id }) => {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [openModalForm, setOpenModalForm] = useState(false);
+  const [currentCollectionId, setCurrentCollectionId] = useState('');
 
   useEffect(() => {
-    onRequestGetCollection(id);
-    // eslint-disable-next-line
+    onRequestGetCollections(id);
   }, [id])
 
-  const onRequestGetCollection = (id) => {
+  const onRequestGetCollections = (id) => {
     setError(null);
     setLoading(true);
     getAllCollectionsUser(id)
@@ -31,11 +31,31 @@ const Collections = ({ id }) => {
       })
   }
 
+  const handleCloseModalForm = () => {
+    setOpenModalForm(false);
+    setTimeout(() => setCurrentCollectionId(''), 300);
+  };
+
+  const onCreateCollection = () => {
+    setOpenModalForm(true);
+  }
+
+  const onEditCollection = (collectionId) => {
+    setCurrentCollectionId(collectionId);
+    setTimeout(() => setOpenModalForm(true), 500);
+  }
+
+  const onDeleteCollection = (collectionId) => {
+    console.log(collectionId);
+  }
+
   const cards = collections.map(collection => {
     return (
       <CollectionCard
         key={collection._id}
         {...collection}
+        onEditCollection={onEditCollection}
+        onDeleteCollection={onDeleteCollection}
       />
     )
   })
@@ -52,7 +72,16 @@ const Collections = ({ id }) => {
     <Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
         <Typography variant="h5" fontWeight="500">Collections</Typography>
-        <CreateCollection id={id} onRequestGetCollection={onRequestGetCollection}/>
+        <Button variant="contained" onClick={onCreateCollection}>
+          + Add Collection
+        </Button>
+        <CreateCollection
+          openModalForm={openModalForm}
+          handleCloseModalForm={handleCloseModalForm}
+          id={id}
+          onRequestGetCollections={onRequestGetCollections}
+          collectionId={currentCollectionId}
+        />
       </Stack>
       <Stack
         direction="row"
@@ -66,37 +95,6 @@ const Collections = ({ id }) => {
         {content}
       </Stack>
     </Stack>
-  )
-}
-
-const CollectionCard = ({ subject, title, description, coverUrl, count }) => {
-  return (
-    <Card
-      sx={{
-        width: 336,
-        border: "1px solid #F9F9F9",
-        boxShadow: "2px 2px 16px rgba(0, 0, 0, 0.08)",
-        borderRadius: "8px",
-      }}
-    >
-      <CardMedia
-        sx={{ height: 160 }}
-        image={coverUrl}
-        title={title}
-      />
-      <CardContent sx={{ padding: "16px 16px 0" }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" color="text.secondary">
-          <Typography variant="overline" lineHeight="18px">{subject}</Typography>
-          <Typography variant="caption">{count} items</Typography>
-        </Stack>
-        <Typography gutterBottom variant="h6">{title}</Typography>
-        <Typography variant="body2" color="text.secondary">{description}</Typography>
-      </CardContent>
-      <CardActions sx={{ padding: 2, alignItems: "center" }}>
-        <EditOutlinedIcon fontSize="small" sx={{ color: "#1E70EB" }} />
-        <DeleteOutlinedIcon fontSize="small" sx={{ color: "#F43B47" }} />
-      </CardActions>
-    </Card>
   )
 }
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import { TextField, MenuItem } from '@mui/material';
 
-const FormSelect = ({ name, register, errors, options }) => {
+const FormSelect = ({ name, register, errors, options, defaultValue }) => {
   return (
     <TextField
       select
       fullWidth
       name={name}
       label={`Select ${name}`}
-      defaultValue=''
+      defaultValue={defaultValue}
       inputProps={register(name, {
         required: `Please select ${name}`,
       })}

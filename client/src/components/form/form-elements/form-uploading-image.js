@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../utils/firebase';
 
-const FormUploadingImage = ({ selectedImg, setSelectedImg,setImageUrl }) => {
+const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl }) => {
 
   useEffect(() => {
     uploadImg(selectedImg);

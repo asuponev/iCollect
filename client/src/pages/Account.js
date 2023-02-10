@@ -26,7 +26,6 @@ export const Account = () => {
         setLoading(false);
         setError(error.message);
       })
-    // eslint-disable-next-line
   }, [id])
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;

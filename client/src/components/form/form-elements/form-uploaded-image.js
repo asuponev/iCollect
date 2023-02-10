@@ -1,8 +1,8 @@
 import { Stack, Box, Tooltip, IconButton } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-const FormUploadedImage = ({ imageUrl, setSelectedImg, setImageUrl }) => {
-
+const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl }) => {
+  
   const onRemoveImg = () => {
     setSelectedImg(null);
     setImageUrl('');

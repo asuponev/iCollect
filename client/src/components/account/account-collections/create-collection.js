@@ -1,48 +1,94 @@
-import * as React from 'react';
-import { Button, Dialog, DialogTitle, DialogContent } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Dialog, DialogTitle, DialogContent } from '@mui/material';
 
-import { createCollection } from '../../../utils/requests/requests';
+import { createCollection, updateCollection } from '../../../utils/requests/requests';
+import { getOneCollection } from '../../../utils/requests/requests';
 
 import FormCreateCollection from '../../form/form-create-collection';
 
-const CreateCollection = ({ id, onRequestGetCollection }) => {
-  const [open, setOpen] = React.useState(false);
+const CreateCollection = ({
+  openModalForm,
+  handleCloseModalForm,
+  id,
+  onRequestGetCollections,
+  collectionId
+}) => {
+  const [valuesForEdit, setValuesForEdit] = useState({
+    title: '',
+    subject: '',
+    description: '',
+    coverUrl: ''
+  })
 
-  const onRequestCreateCollection = (id, values) => {
-    createCollection(id, { ...values })
-    .then(res => {
-      onRequestGetCollection(id);
-      // console.log(res);
-    }).catch(error => {
-      console.log(error);
-      // toast.error(error.message, { position: 'top-right' });
-    })
+  const isEditing = Boolean(collectionId);
+
+  useEffect(() => {
+    if (isEditing) {
+      getOneCollection(collectionId)
+        .then(res => {
+          setValuesForEdit({
+            title: res.title,
+            subject: res.subject,
+            description: res.description,
+            coverUrl: res.coverUrl
+          })
+        }).catch(error => {
+          console.log(error);
+          // toast.error(error.message, { position: 'top-right' });
+        })
+    } else {
+      setValuesForEdit({
+        title: '',
+        subject: '',
+        description: '',
+        coverUrl: ''
+      })
+    }
+    // eslint-disable-next-line
+  }, [isEditing])
+
+
+  const onRequestCreateCollection = (values) => {
+    createCollection({ ...values })
+      .then(res => {
+        onRequestGetCollections(id);
+        console.log(res);
+      }).catch(error => {
+        console.log(error);
+        // toast.error(error.message, { position: 'top-right' });
+      })
   }
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const onRequestUpdateCollection = (collectionId, values) => {
+    updateCollection(collectionId, { ...values })
+      .then(res => {
+        onRequestGetCollections(id);
+        console.log(res);
+      }).catch(error => {
+        console.log(error);
+        // toast.error(error.message, { position: 'top-right' });
+      })
+  }
 
   return (
-    <div>
-      <Button variant="contained" onClick={handleClickOpen}>
-        + Add Collection
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add new collection</DialogTitle>
-        <DialogContent>
-          <FormCreateCollection 
-            handleClose={handleClose}
-            id={id}
-            onRequest={onRequestCreateCollection}
-          />
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog open={openModalForm} onClose={handleCloseModalForm}>
+      <DialogTitle>
+        {
+          !isEditing ? <>Add new collection</> : <>Edit collection</>
+        }
+      </DialogTitle>
+      <DialogContent>
+        <FormCreateCollection
+          handleClose={handleCloseModalForm}
+          id={id}
+          onRequestCreate={onRequestCreateCollection}
+          onRequestUpdate={onRequestUpdateCollection}
+          collectionId={collectionId}
+          isEditing={isEditing}
+          valuesForEdit={valuesForEdit}
+        />
+      </DialogContent>
+    </Dialog>
   );
 }
 

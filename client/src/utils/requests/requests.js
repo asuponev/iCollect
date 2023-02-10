@@ -50,10 +50,23 @@ export const updateUsers = async (usersWithAction) => {
   }
 }
 
-export const createCollection = async (id, values) => {
+export const createCollection = async (values) => {
   try {
     const { data } = await axios.post(
-      `${urls.USERS}/${id}`,
+      '/collections',
+      values,
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const updateCollection = async (collectionId, values) => {
+  try {
+    const { data } = await axios.patch(
+      `/collections/${collectionId}`,
       values,
       { withCredentials: true }
     );
@@ -66,6 +79,15 @@ export const createCollection = async (id, values) => {
 export const getAllCollectionsUser = async (id) => {
   try {
     const { data } = await axios.get(`${urls.USERS}/${id}/collections`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message || error.message);
+  }
+}
+
+export const getOneCollection = async (collectionId) => {
+  try {
+    const { data } = await axios.get(`collections/${collectionId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message || error.message);
