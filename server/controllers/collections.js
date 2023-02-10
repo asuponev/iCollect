@@ -23,9 +23,10 @@ export const createCollection = async (req, res) => {
 export const updateCollection = async (req, res) => {
   try {
     const requestor = req.user;
+    const requestorId = requestor._id.toString();
     const collection = await Collection.findById(req.params.id);
-    const owner = collection.authorId;
-    if (requestor.role === 'ADMIN' || requestor._id === owner) {
+    const authorId = collection.authorId.toString();
+    if (requestor.role === 'ADMIN' || requestorId === authorId) {
       collection.title = req.body.title;
       collection.description = req.body.description;
       collection.subject = req.body.subject;

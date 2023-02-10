@@ -1,6 +1,7 @@
 import { TextField } from '@mui/material';
 
 export const FormTextField = ({ name, label, register, errors }) => {
+  const validValue = name === 'title' ? 20 : 50;
 
   return (
     <TextField
@@ -11,8 +12,8 @@ export const FormTextField = ({ name, label, register, errors }) => {
           message: "Min length is 2"
         },
         maxLength: {
-          value: 50,
-          message: "Max length is 50"
+          value: {validValue},
+          message: `Max length is ${validValue}`
         }
       })}
       label={label}
