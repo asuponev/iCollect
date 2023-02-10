@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <Box component="header" sx={{ width: "100%", backgroundColor: "#142339" }}>
-      <Container maxWidth="xl" sx={{ padding: "16px 24px" }}>
+      <Container maxWidth={false} sx={{ padding: "16px 24px", maxWidth: 1440 }}>
         <Stack
           direction="row"
           alignItems="center"

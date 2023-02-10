@@ -11,7 +11,7 @@ const Footer = () => {
         marginTop: "auto"
       }}
     >
-      <Container maxWidth="xl" sx={{ padding: "12px 24px" }}>
+      <Container maxWidth={false} sx={{ padding: "12px 24px", maxWidth: 1440 }}>
         <Stack
           direction="row"
           alignItems="center"

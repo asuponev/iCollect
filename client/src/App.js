@@ -35,7 +35,7 @@ function App() {
   return (
     <GlobalContext.Provider value={{ status, setStatus }}>
       <Header />
-      <Container maxWidth="xl">
+      <Container maxWidth={false} sx={{ maxWidth: 1440 }}>
         <Routes>
           <Route path="/" element={<Pages.Home />} />
           <Route path="/login" element={<Pages.Login />} />
