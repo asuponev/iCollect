@@ -41,6 +41,7 @@ function App() {
           <Route path="/login" element={<Pages.Login />} />
           <Route path="/register" element={<Pages.Registration />} />
           <Route path="/users/:id" element={<Pages.Account />} />
+          <Route path="/collections/:id" element={<Pages.Collection />} />
           <Route path="/admin" element={<Pages.Admin />} />
         </Routes>
       </Container>

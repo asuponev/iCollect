@@ -93,3 +93,25 @@ export const getOneCollection = async (collectionId) => {
     throw new Error(error.response.data.message || error.message);
   }
 }
+
+export const createItem = async (collectionId, values) => {
+  try {
+    const { data } = await axios.post(
+      `collections/${collectionId}`,
+      values,
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const getAllCollectionItems = async (collectionId) => {
+  try {
+    const { data } = await axios.get(`collections/${collectionId}/items`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}

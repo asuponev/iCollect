@@ -1,7 +1,7 @@
-import { Stack, Typography, Card, CardActions, CardContent, CardMedia, Tooltip, IconButton } from '@mui/material';
+import { Stack, Typography, Card, CardActions, CardContent, CardMedia, CardActionArea, Tooltip, IconButton } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-
+import { useNavigate } from 'react-router';
 import imageNotFound from '../../../utils/constants/image-not-found';
 
 const CollectionCard = ({
@@ -14,8 +14,8 @@ const CollectionCard = ({
   onEditCollection,
   onDeleteCollection
 }) => {
-
-  if (description.length > 100) description = `${description.slice(0,100)}...`;
+  let navigate = useNavigate();
+  if (description.length > 100) description = `${description.slice(0, 100)}...`;
 
   return (
     <Card
@@ -26,24 +26,26 @@ const CollectionCard = ({
         borderRadius: "8px",
       }}
     >
-      <CardMedia
-        sx={{ height: 160 }}
-        image={coverUrl || imageNotFound}
-        title={title}
-      />
-      <CardContent sx={{ padding: "16px 16px 0", height: 115 }}>
-        <Stack 
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          color="text.secondary"
-        >
-          <Typography variant="overline" lineHeight="18px">{subject}</Typography>
-          <Typography variant="caption">{count ? count : 0} items</Typography>
-        </Stack>
-        <Typography gutterBottom variant="h6">{title}</Typography>
-        <Typography variant="body2" color="text.secondary">{description}</Typography>
-      </CardContent>
+      <CardActionArea onClick={() => navigate(`/collections/${_id}`)}>
+        <CardMedia
+          sx={{ height: 160 }}
+          image={coverUrl || imageNotFound}
+          title={title}
+        />
+        <CardContent sx={{ padding: "16px 16px 0", height: 115 }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            color="text.secondary"
+          >
+            <Typography variant="overline" lineHeight="18px">{subject}</Typography>
+            <Typography variant="caption">{count ? count : 0} items</Typography>
+          </Stack>
+          <Typography gutterBottom variant="h6">{title}</Typography>
+          <Typography variant="body2" color="text.secondary">{description}</Typography>
+        </CardContent>
+      </CardActionArea>
       <CardActions sx={{ padding: 2, alignItems: "center" }}>
         <Tooltip title="Edit collection" placement="bottom">
           <IconButton

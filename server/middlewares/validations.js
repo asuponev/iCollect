@@ -18,3 +18,8 @@ export const collectionValidation = [
   body('subject', 'Select collection subject').isLength({ min: 1 }),
   body('coverUrl', 'Incorrect image link').optional().isString(),
 ]
+
+export const itemValidation = [
+  body('title', 'Enter collection title').isLength({ min: 2, max: 20 }),
+  body('tags', 'Enter tags').isLength({ min: 1 }),
+]
