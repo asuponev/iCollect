@@ -17,7 +17,7 @@ export const Registration = () => {
   const onFormSubmit = async (values) => {
     authApi('register', { ...values })
       .then(res => {
-        localStorage.setItem('token', JSON.stringify(res.token));
+        localStorage.setItem('token', res.token);
         setStatus({ ...status, isAuth: true, id: res._id });
         navigate('/');
       }).catch(error => {

@@ -17,7 +17,7 @@ export const Login = () => {
   const onFormSubmit = async (values) => {
     authApi('login', { ...values })
       .then(res => {
-        localStorage.setItem('token', JSON.stringify(res.token));
+        localStorage.setItem('token', res.token);
         if (res.role === 'ADMIN') {
           setStatus({ ...status, isAuth: true, id: res._id, isAdmin: true });
         } else {
