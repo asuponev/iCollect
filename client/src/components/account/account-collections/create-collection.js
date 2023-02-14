@@ -17,7 +17,8 @@ const CreateCollection = ({
     title: '',
     subject: '',
     description: '',
-    coverUrl: ''
+    coverUrl: '',
+    extraFields: []
   })
 
   const isEditing = Boolean(collectionId);
@@ -30,7 +31,8 @@ const CreateCollection = ({
             title: res.title,
             subject: res.subject,
             description: res.description,
-            coverUrl: res.coverUrl
+            coverUrl: res.coverUrl,
+            extraFields: res.extraFields
           })
         }).catch(error => {
           console.log(error);
@@ -41,7 +43,8 @@ const CreateCollection = ({
         title: '',
         subject: '',
         description: '',
-        coverUrl: ''
+        coverUrl: '',
+        extraFields: []
       })
     }
     // eslint-disable-next-line

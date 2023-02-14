@@ -33,8 +33,10 @@ const FormCreateCollection = ({
   useEffect(() => {
     if (isEditing) {
       setImageUrl(valuesForEdit.coverUrl);
+      setExtraFields(valuesForEdit.extraFields);
     } else {
       setImageUrl('');
+      setExtraFields([]);
     }
     // eslint-disable-next-line
   }, [isEditing])
@@ -43,6 +45,7 @@ const FormCreateCollection = ({
     values.extraFields = extraFields;
     values.coverUrl = imageUrl;
     if (isEditing) {
+      console.log(values)
       onRequestUpdate(collectionId, values);
     } else {
       values.authorId = id;
@@ -114,7 +117,7 @@ const FormCreateCollection = ({
         <Box my={2} sx={{ display: "flex", alignItems: "center", gap: "24px" }}>
           <Button type="submit" variant="contained">
             {
-              !isEditing ? <>Create Collection</> : <>Save Edited Collection</>
+              !isEditing ? <>Create Collection</> : <>Save Changes</>
             }
           </Button>
           <Button variant="text" onClick={() => handleClose()}>Cancel</Button>

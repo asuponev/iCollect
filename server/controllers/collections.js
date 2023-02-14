@@ -32,6 +32,7 @@ export const updateCollection = async (req, res) => {
       collection.description = req.body.description;
       collection.subject = req.body.subject;
       collection.coverUrl = req.body.coverUrl;
+      collection.extraFields = req.body.extraFields;
       await collection.save();
       res.json(collection);
     } else {
