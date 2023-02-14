@@ -1,5 +1,5 @@
 import { Stack, Avatar, Typography } from '@mui/material';
-import ErrorMessage from '../ErrorMessage';
+import ErrorMessage from '../../ErrorMessage';
 
 const UserInfo = ({ userData }) => {
   if (!Object.keys(userData).length) return <ErrorMessage />;

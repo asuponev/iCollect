@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { getUsers, updateUsers } from '../utils/requests/requests';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
-import BreadCrumbs from '../components/admin/BreadCrumbs';
-import Table from '../components/admin/Table';
+import BreadCrumbs from '../components/BreadCrumbs';
+import AdminTable from '../components/admin/admin-table';
 
 export const Admin = () => {
   const [users, setUsers] = useState([]);
@@ -54,8 +54,11 @@ export const Admin = () => {
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <>
-      <BreadCrumbs />
-      <Table
+      <BreadCrumbs
+        prevLinks={[{ 'Home': '/' }]}
+        current='Admin Panel'
+      />
+      <AdminTable
         users={users}
         deleteSelectedUsers={deleteSelectedUsers}
         blockSelectedUsers={blockSelectedUsers}

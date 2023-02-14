@@ -2,11 +2,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import { useState } from 'react';
 
-import TableTools from './TableTools';
+import AdminTableTools from './admin-table-tools';
 import { tableStyles } from './table-styles';
 import LaunchIcon from '@mui/icons-material/Launch';
 
-const Table = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
+const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
   if (!users) users = [];
 
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -49,7 +49,7 @@ const Table = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelect
 
   return (
     <>
-      <TableTools
+      <AdminTableTools
         selectedUsers={selectedUsers}
         deleteSelectedUsers={deleteSelectedUsers}
         blockSelectedUsers={blockSelectedUsers}
@@ -75,4 +75,4 @@ const Table = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelect
   )
 }
 
-export default Table;
+export default AdminTable;

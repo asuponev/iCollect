@@ -3,7 +3,7 @@ import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
 
-const TableTools = ({ selectedUsers, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
+const AdminTableTools = ({ selectedUsers, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
 
   return (
     <Stack spacing={2} mt={2} mb={3}>
@@ -58,4 +58,4 @@ const TableTools = ({ selectedUsers, deleteSelectedUsers, blockSelectedUsers, ma
   )
 }
 
-export default TableTools;
+export default AdminTableTools;

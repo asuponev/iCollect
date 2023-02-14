@@ -45,7 +45,6 @@ const FormCreateCollection = ({
     values.extraFields = extraFields;
     values.coverUrl = imageUrl;
     if (isEditing) {
-      console.log(values)
       onRequestUpdate(collectionId, values);
     } else {
       values.authorId = id;

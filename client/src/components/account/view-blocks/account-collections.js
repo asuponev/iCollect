@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Stack, Typography, Button } from '@mui/material';
-import Spinner from '../Spinner';
-import ErrorMessage from '../ErrorMessage';
-import { getAllCollectionsUser } from '../../utils/requests/requests';
-import CreateCollection from './account-collections/create-collection';
-import CollectionCard from './account-collections/collection-card';
+import Spinner from '../../Spinner';
+import ErrorMessage from '../../ErrorMessage';
+import { getAllCollectionsUser } from '../../../utils/requests/requests';
+import CreateCollection from '../account-collections/create-collection';
+import CollectionCard from '../account-collections/collection-card';
 
-const Collections = ({ id }) => {
+const AccountCollections = ({ id }) => {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -98,4 +98,4 @@ const Collections = ({ id }) => {
   )
 }
 
-export default Collections;
+export default AccountCollections;
