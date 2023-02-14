@@ -28,7 +28,7 @@ const FormCreateCollection = ({
   });
   const [selectedImg, setSelectedImg] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
-  const [extraFields, setExtraFields] = useState([{ name: '', type: '' }]);
+  const [extraFields, setExtraFields] = useState([]);
 
   useEffect(() => {
     if (isEditing) {

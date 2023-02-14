@@ -6,14 +6,12 @@ import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
 
 const FormCreateItem = ({ collectionId, handleClose, onRequestCreate, extraFields }) => {
-  const { register, handleSubmit, control, formState: { errors }, getValues } = useForm({
+  const { register, handleSubmit, control, formState: { errors } } = useForm({
     defaultValues: {
       title: '',
       tags: []
     }
   });
-
-  console.log(getValues())
 
   const onFormSubmit = (values) => {
     values.collectionId = collectionId;

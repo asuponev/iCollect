@@ -19,7 +19,7 @@ const TableItems = ({
   ]
 
   const extraColumns = extraFields.map(field => {
-    return { field: field.type, headerName: field.name, flex: 1, minWidth: 70 }
+    return { field: field.type, headerName: field.name, flex: 1, minWidth: 130 }
   })
 
   const columns = [
@@ -31,12 +31,11 @@ const TableItems = ({
     let newItem = {}
     for (let key in item) {
       if (key === '_id') {
-        newItem.id= item[key]
+        newItem.id = item[key]
       } else {
-        newItem[key]= item[key]
+        newItem[key] = item[key]
       }
-      
-  }
+    }
     return {
       ...newItem
     }

@@ -1,5 +1,7 @@
+import React from 'react';
 import { Box, TextField, MenuItem, IconButton, Button } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
+import extraFieldsTypes from '../../../utils/constants/extra-fields-types';
 
 const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
 
@@ -10,7 +12,7 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
   }
 
   const addExtraFields = () => {
-    setExtraFields([...extraFields, { name: '', type: '' }])
+    setExtraFields([...extraFields, { name: '', type: '' }]);
   }
 
   const removeExtraFields = (i) => {
@@ -19,12 +21,16 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
     setExtraFields(newExtraField);
   }
 
-  const optionsExtraFields = ['number1', 'number2', 'number3', 'string1', 'string2', 'string3', 'text1', 'text2', 'text3', 'date1', 'date2', 'date3', 'checkbox1', 'checkbox2', 'checkbox3'];
-
   return (
     <>
       {extraFields.map((element, index) => (
-        <Box my={2} display="flex" justifyContent="flex-start" gap={1} key={index}>
+        <Box 
+          my={2}
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          gap={1} key={index}
+        >
           <TextField
             name="name"
             label="Name extra field"
@@ -41,22 +47,19 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
             onChange={e => handleChange(index, e)}
             sx={{ width: 130 }}
           >
-            {optionsExtraFields.map((option) => (
+            {extraFieldsTypes.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
             ))}
           </TextField>
-          {
-            index ?
-              <IconButton
-                aria-label="remove"
-                size="small"
-                onClick={() => removeExtraFields(index)}
-              >
-                <RemoveIcon sx={{ width: 20, height: 20 }} />
-              </IconButton> : null
-          }
+          <IconButton
+            size="small"
+            onClick={() => removeExtraFields(index)}
+            sx={{ width: 35, height: 35 }}
+          >
+            <RemoveIcon sx={{ width: 20, height: 20 }}/>
+          </IconButton>
         </Box>
       ))
       }
