@@ -12,7 +12,7 @@ export const FormTextField = ({ name, label, register, errors }) => {
           message: "Min length is 2"
         },
         maxLength: {
-          value: {validValue},
+          value: validValue,
           message: `Max length is ${validValue}`
         }
       })}

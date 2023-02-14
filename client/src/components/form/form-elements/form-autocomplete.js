@@ -29,6 +29,7 @@ const FormAutocomplete = ({ control, name, label, options, errors }) => {
           }}
           defaultValue={[]}
           freeSolo
+          autoSelect
         />
       )}
     />

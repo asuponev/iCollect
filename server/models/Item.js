@@ -30,9 +30,9 @@ const ItemSchema = new mongoose.Schema(
     date1: Date,
     date2: Date,
     date3: Date,
-    boolean1: Boolean,
-    boolean2: Boolean,
-    boolean3: Boolean,
+    checkbox1: Boolean,
+    checkbox2: Boolean,
+    checkbox3: Boolean,
   }, {
   timestamps: true
 });

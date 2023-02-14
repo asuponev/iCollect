@@ -7,7 +7,8 @@ import { tableStyles } from '../../admin/table-styles';
 const TableItems = ({
   items,
   selectedItems,
-  setSelectedItems
+  setSelectedItems,
+  extraFields
 }) => {
   if (!items) items = [];
 
@@ -17,14 +18,29 @@ const TableItems = ({
     { field: 'tags', headerName: 'Tags', flex: 1, minWidth: 130 },
   ]
 
-  const columns = constantColumns;
+  const extraColumns = extraFields.map(field => {
+    return { field: field.type, headerName: field.name, flex: 1, minWidth: 70 }
+  })
 
-  const rows = items?.map(item => {
+  const columns = [
+    ...constantColumns,
+    ...extraColumns
+  ]
+
+  const rows = items.map(item => {
+    let newItem = {}
+    for (let key in item) {
+      if (key === '_id') {
+        newItem.id= item[key]
+      } else {
+        newItem[key]= item[key]
+      }
+      
+  }
     return {
-      id: item?._id,
-      title: item?.title,
-      tags: item?.tags,
+      ...newItem
     }
+
   })
 
   const tableSize = items.length > 10 ? 10 : items.length;

@@ -42,6 +42,7 @@ const CollectionView = ({ collectionData }) => {
     setOpenModalForm(false);
   };
 
+
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
@@ -50,6 +51,7 @@ const CollectionView = ({ collectionData }) => {
         items={items}
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
+        extraFields={collectionData.extraFields}
       />
     </>
   ) : null;
@@ -65,6 +67,7 @@ const CollectionView = ({ collectionData }) => {
         openModalForm={openModalForm}
         handleCloseModalForm={handleCloseModalForm}
         onItemsRequest={onItemsRequest}
+        extraFields={collectionData.extraFields}
       />
       {errorMessage}
       {spinner}

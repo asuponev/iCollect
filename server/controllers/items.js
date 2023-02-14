@@ -7,6 +7,21 @@ export const createItem = async (req, res) => {
       title: req.body.title,
       tags: req.body.tags,
       collectionId: req.body.collectionId,
+      number1: req.body.number1,
+      number2: req.body.number2,
+      number3: req.body.number3,
+      string1: req.body.string1,
+      string2: req.body.string2,
+      string3: req.body.string3,
+      text1: req.body.text1,
+      text2: req.body.text2,
+      text3: req.body.text3,
+      date1: req.body.date1,
+      date2: req.body.date2,
+      date3: req.body.date3,
+      checkbox1: req.body.checkbox1,
+      checkbox2: req.body.checkbox2,
+      checkbox3: req.body.checkbox3,
     });
     const item = await doc.save();
     res.json(item);

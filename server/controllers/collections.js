@@ -9,6 +9,7 @@ export const createCollection = async (req, res) => {
       subject: req.body.subject,
       coverUrl: req.body.coverUrl,
       authorId: req.body.authorId,
+      extraFields: req.body.extraFields
     });
     const collection = await doc.save();
     res.json(collection);

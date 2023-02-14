@@ -23,6 +23,7 @@ const CollectionSchema = new mongoose.Schema(
       required: true,
     },
     coverUrl: String,
+    extraFields: Array
   }, {
   timestamps: true
 });

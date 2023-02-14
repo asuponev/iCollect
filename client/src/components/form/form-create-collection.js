@@ -8,6 +8,7 @@ import FormSelect from './form-elements/form-select';
 import subjects from '../../utils/constants/collection-subjects';
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
+import FormCreateExtraField from './form-elements/form-create-extra-field';
 
 const FormCreateCollection = ({
   handleClose,
@@ -27,6 +28,7 @@ const FormCreateCollection = ({
   });
   const [selectedImg, setSelectedImg] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [extraFields, setExtraFields] = useState([{ name: '', type: '' }]);
 
   useEffect(() => {
     if (isEditing) {
@@ -38,6 +40,7 @@ const FormCreateCollection = ({
   }, [isEditing])
 
   const onFormSubmit = async (values) => {
+    values.extraFields = extraFields;
     values.coverUrl = imageUrl;
     if (isEditing) {
       onRequestUpdate(collectionId, values);
@@ -100,6 +103,12 @@ const FormCreateCollection = ({
             control={control}
             name="description"
           /> */}
+          </Box>
+          <Box my={2}>
+            <FormCreateExtraField
+              extraFields={extraFields}
+              setExtraFields={setExtraFields}
+            />
           </Box>
         </Stack>
         <Box my={2} sx={{ display: "flex", alignItems: "center", gap: "24px" }}>

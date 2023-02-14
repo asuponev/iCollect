@@ -8,7 +8,8 @@ const CreateItem = ({
   collectionId,
   openModalForm,
   handleCloseModalForm,
-  onItemsRequest
+  onItemsRequest,
+  extraFields
 }) => {
 
   const onRequestCreateItem = (collectionId, values) => {
@@ -21,7 +22,6 @@ const CreateItem = ({
         // toast.error(error.message, { position: 'top-right' });
       })
   }
-
 
   return (
     <Dialog open={openModalForm} onClose={handleCloseModalForm}>
@@ -43,6 +43,7 @@ const CreateItem = ({
           collectionId={collectionId}
           handleClose={handleCloseModalForm}
           onRequestCreate={onRequestCreateItem}
+          extraFields={extraFields}
         />
       </DialogContent>
     </Dialog>
