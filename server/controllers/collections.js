@@ -52,7 +52,7 @@ export const getAllCollectionsUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {
-      const allCollectionsUser = await Collection.find({ authorId: req.params.id });
+      const allCollectionsUser = await Collection.find({ authorId: req.params.id }).sort({ updatedAt: -1 });
       res.json(allCollectionsUser);
     } else {
       res.status(404).json({
