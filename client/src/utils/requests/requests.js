@@ -124,3 +124,16 @@ export const getItem = async (collectionId, itemId) => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const createComment = async (itemId, message) => {
+  try {
+    const { data } = await axios.post(
+      '/comments',
+      { itemId, message },
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}

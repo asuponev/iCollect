@@ -1,28 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar, Stack, Typography } from '@mui/material';
 
+import { createComment } from '../../../utils/requests/requests';
 import GlobalContext from '../../../utils/context/GlobalContext';
 import FormComment from '../../form/form-comment';
 
-const ItemComments = () => {
+const ItemComments = ({ itemId }) => {
   const { userInfo } = useContext(GlobalContext);
+  const [commentsData, setCommentData] = useState([]);
 
-  const comments = [
-    {
-      _id: '1',
-      authorfirstName: 'Sarah',
-      authorlastName: 'Lynch',
-      message: 'Marketing non-disclosure agreement scrum project alpha lean startup startup business plan user experience angel investor focus research & development value proposition graphical user interface investor. ',
-      itemId: '1111'
-    },
-    {
-      _id: '2',
-      authorfirstName: 'Sarah',
-      authorlastName: 'Lynch',
-      message: 'Marketing non-disclosure agreement scrum project alpha lean startup startup business plan user experience angel investor focus research & development value proposition graphical user interface investor. ',
-      itemId: '2222'
-    }
-  ]
+  const onCreateComment = (itemId, message) => {
+    createComment(itemId, message)
+      .then(res => {
+        setCommentData([...commentsData, res]);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
 
   const avatarStyles = {
     background: "linear-gradient(180deg, #F43B47 0%, #453A94 100%)",
@@ -31,7 +26,7 @@ const ItemComments = () => {
     fontSize: 16,
   }
 
-  const commentsBlock = comments.map(comment => {
+  const commentsBlock = commentsData.map(comment => {
     return (
       <Stack
         key={comment._id}
@@ -40,10 +35,10 @@ const ItemComments = () => {
         my={3}
       >
         <Avatar sx={avatarStyles}>
-          {comment.authorfirstName[0]} {comment.authorlastName[0]}
+          {comment.firstName[0]} {comment.lastName[0]}
         </Avatar>
         <Stack spacing={1}>
-          <Typography color="#142339" fontWeight={500}>{comment.authorfirstName} {comment.authorlastName}</Typography>
+          <Typography color="#142339" fontWeight={500}>{comment.firstName} {comment.lastName}</Typography>
           <Typography color="#585E67">{comment.message}</Typography>
         </Stack>
       </Stack>
@@ -58,7 +53,7 @@ const ItemComments = () => {
         <Avatar sx={avatarStyles}>
           {userInfo.firstName[0]} {userInfo.lastName[0]}
         </Avatar>
-        <FormComment />
+        <FormComment onCreateComment={onCreateComment} itemId={itemId}/>
       </Stack>
     </Stack>
   )

@@ -40,7 +40,7 @@ const ItemView = ({ itemData, collectionData, authorData }) => {
           <Typography fontSize={16} fontWeight={700}>{collectionData.title}</Typography>
         </Stack>
       </Stack>
-      <ItemComments />
+      <ItemComments itemId={itemData._id} />
     </>
   )
 }

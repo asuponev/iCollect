@@ -3,6 +3,7 @@ import { register, login, getMe } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
 import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection } from '../controllers/collections.js';
 import { createItem, getAllCollectionItems, getItem } from '../controllers/items.js';
+import { createComment } from '../controllers/comments.js';
 import { registerValidation, loginValidation, collectionValidation, itemValidation } from '../middlewares/validations.js';
 import { handleValidationsErrors } from '../middlewares/handleValidationsErrors.js';
 import checkAuth from '../middlewares/checkAuth.js';
@@ -26,5 +27,7 @@ router.patch('/collections/:id', checkAuth, collectionValidation, handleValidati
 router.post('/collections/:id', checkAuth, itemValidation, handleValidationsErrors, createItem);
 router.get('/collections/:id/items', getAllCollectionItems);
 router.get('/collections/:collectionId/items/:itemId', getItem);
+
+router.post('/comments', checkAuth, createComment);
 
 export default router;
