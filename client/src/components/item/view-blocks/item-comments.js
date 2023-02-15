@@ -1,13 +1,35 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Stack, Typography } from '@mui/material';
-
-import { createComment } from '../../../utils/requests/requests';
+import { createComment, getAllItemComment } from '../../../utils/requests/requests';
 import GlobalContext from '../../../utils/context/GlobalContext';
 import FormComment from '../../form/form-comment';
+
+import ErrorMessage from '../../ErrorMessage';
+import Spinner from '../../Spinner';
 
 const ItemComments = ({ itemId }) => {
   const { userInfo } = useContext(GlobalContext);
   const [commentsData, setCommentData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    onRequestComment(itemId);
+  }, [itemId]);
+
+  const onRequestComment = (itemId) => {
+    setError(null);
+    setLoading(true);
+    getAllItemComment(itemId)
+      .then(res => {
+        console.log(res)
+        setCommentData(res);
+        setLoading(false);
+      }).catch(error => {
+        setLoading(false);
+        setError(error.message);
+      })
+  }
 
   const onCreateComment = (itemId, message) => {
     createComment(itemId, message)
@@ -45,7 +67,9 @@ const ItemComments = ({ itemId }) => {
     )
   })
 
-  return (
+  const errorMessage = error ? <ErrorMessage error={error} /> : null;
+  const spinner = loading ? <Spinner /> : null;
+  const content = !(loading || error) ? (
     <Stack>
       <Typography variant="h6" gutterBottom>Comments</Typography>
       {commentsBlock}
@@ -53,9 +77,17 @@ const ItemComments = ({ itemId }) => {
         <Avatar sx={avatarStyles}>
           {userInfo.firstName[0]} {userInfo.lastName[0]}
         </Avatar>
-        <FormComment onCreateComment={onCreateComment} itemId={itemId}/>
+        <FormComment onCreateComment={onCreateComment} itemId={itemId} />
       </Stack>
     </Stack>
+  ) : null;
+
+  return (
+    <>
+      {errorMessage}
+      {spinner}
+      {content}
+    </>
   )
 }
 

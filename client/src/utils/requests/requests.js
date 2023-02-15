@@ -137,3 +137,12 @@ export const createComment = async (itemId, message) => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const getAllItemComment = async (itemId) => {
+  try {
+    const { data } = await axios.get(`comments/${itemId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
