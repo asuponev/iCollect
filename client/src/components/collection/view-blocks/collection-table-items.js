@@ -1,5 +1,7 @@
 import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 // import TableTools from './TableTools';
 import { tableStyles } from '../../admin/table-styles';
@@ -8,7 +10,8 @@ const TableItems = ({
   items,
   selectedItems,
   setSelectedItems,
-  extraFields
+  extraFields,
+  collectionId
 }) => {
   if (!items) items = [];
 
@@ -22,9 +25,20 @@ const TableItems = ({
     return { field: field.type, headerName: field.name, flex: 1, minWidth: 130 }
   })
 
+  const actionColumns = [
+    { field: 'actions', type: 'actions', width: 50, getActions: (params) => [
+      <GridActionsCellItem
+        icon={<LaunchIcon color="primary"/>}
+        label="View profile"
+        onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
+      />]
+    },
+  ]
+
   const columns = [
     ...constantColumns,
-    ...extraColumns
+    ...extraColumns,
+    ...actionColumns
   ]
 
   const rows = items.map(item => {

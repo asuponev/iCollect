@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { register, login, getMe } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
 import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection } from '../controllers/collections.js';
-import { createItem, getAllCollectionItems } from '../controllers/items.js';
+import { createItem, getAllCollectionItems, getItem } from '../controllers/items.js';
 import { registerValidation, loginValidation, collectionValidation, itemValidation } from '../middlewares/validations.js';
 import { handleValidationsErrors } from '../middlewares/handleValidationsErrors.js';
 import checkAuth from '../middlewares/checkAuth.js';
@@ -24,6 +24,7 @@ router.get('/collections/:id', getOneCollection);
 router.patch('/collections/:id', checkAuth, collectionValidation, handleValidationsErrors, updateCollection);
 
 router.post('/collections/:id', checkAuth, itemValidation, handleValidationsErrors, createItem);
-router.get('/collections/:id/items', checkAuth, getAllCollectionItems);
+router.get('/collections/:id/items', getAllCollectionItems);
+router.get('/collections/:collectionId/items/:itemId', getItem);
 
 export default router;

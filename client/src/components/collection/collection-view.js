@@ -52,6 +52,7 @@ const CollectionView = ({ collectionData }) => {
         selectedItems={selectedItems}
         setSelectedItems={setSelectedItems}
         extraFields={collectionData.extraFields}
+        collectionId={collectionId}
       />
     </>
   ) : null;

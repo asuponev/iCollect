@@ -15,6 +15,11 @@ function App() {
     isAdmin: false,
     isActive: true,
   })
+  const [userInfo, setUserInfo] = useState({
+    userId: '',
+    firstName: '',
+    lastName: ''
+  })
 
   useEffect(() => {
     checkAuth()
@@ -24,16 +29,18 @@ function App() {
         } else {
           setStatus({ ...status, id: res._id, isAuth: true });
         }
+        setUserInfo({ ...userInfo, userId: res._id, firstName: res.firstName, lastName: res.lastName })
       })
       .catch(error => {
         setStatus({ ...status, id: '', isAuth: false });
+        setUserInfo({ ...userInfo, userId: '', firstName: '', lastName: '' })
         console.log(error.message);
       })
     // eslint-disable-next-line
   }, [])
 
   return (
-    <GlobalContext.Provider value={{ status, setStatus }}>
+    <GlobalContext.Provider value={{ status, setStatus, userInfo, setUserInfo }}>
       <Header />
       <Container maxWidth={false} sx={{ maxWidth: 1440 }}>
         <Routes>
@@ -42,6 +49,7 @@ function App() {
           <Route path="/register" element={<Pages.Registration />} />
           <Route path="/users/:id" element={<Pages.Account />} />
           <Route path="/collections/:id" element={<Pages.Collection />} />
+          <Route path="/collections/:collectionId/items/:itemId" element={<Pages.Item />} />
           <Route path="/admin" element={<Pages.Admin />} />
         </Routes>
       </Container>

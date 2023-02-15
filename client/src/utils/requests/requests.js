@@ -115,3 +115,12 @@ export const getAllCollectionItems = async (collectionId) => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const getItem = async (collectionId, itemId) => {
+  try {
+    const { data } = await axios.get(`collections/${collectionId}/items/${itemId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}

@@ -3,6 +3,7 @@ import Collection from '../models/Collection.js';
 
 export const createItem = async (req, res) => {
   try {
+    console.log(req.body.date1)
     const doc = new Item({
       title: req.body.title,
       tags: req.body.tags,
@@ -44,6 +45,18 @@ export const getAllCollectionItems = async (req, res) => {
         message: `Collection with ID ${req.params.id} was not found`
       });
     }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
+
+export const getItem = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.itemId);
+    res.json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json({

@@ -6,6 +6,11 @@ const GlobalContext = createContext({
     isAuth: false,
     isAdmin: false,
     isActive: true
+  },
+  userInfo: {
+    userId: '',
+    firstName: '',
+    lastName: ''
   }
 });
 
