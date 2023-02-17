@@ -152,3 +152,15 @@ export const deleteItems = async (req, res) => {
     });
   }
 }
+
+export const getLastItems = async (req, res) => {
+  try {
+    const items = await Item.find().sort({ createdAt: -1 });
+    res.json(items.slice(0, 4));
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}

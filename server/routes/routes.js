@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { register, login, getMe } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
 import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection, deleteCollection } from '../controllers/collections.js';
-import { createItem, getAllCollectionItems, getItem, updateItem, deleteItem, deleteItems } from '../controllers/items.js';
+import { createItem, getAllCollectionItems, getItem, updateItem, deleteItem, deleteItems, getLastItems } from '../controllers/items.js';
 import { createComment, getAllItemComment } from '../controllers/comments.js';
 import { addLike, getAllItemLikes, removeLike } from '../controllers/likes.js';
 import { registerValidation, loginValidation, collectionValidation, itemValidation } from '../middlewares/validations.js';
@@ -39,5 +39,7 @@ router.get('/comments/:itemId', checkAuth, getAllItemComment);
 router.post('/likes', checkAuth, addLike);
 router.get('/likes/:itemId', checkAuth, getAllItemLikes);
 router.delete('/likes/:itemId', checkAuth, removeLike);
+
+router.get('/items', getLastItems);
 
 export default router;

@@ -29,8 +29,11 @@ const ItemView = ({ itemData, collectionData, authorData }) => {
           <ItemLikes itemId={itemData._id} />
         </Stack>
         <Typography fontSize={24} fontWeight={700}>{itemData.title}</Typography>
-        <ItemTags itemData={itemData} />
-        <ItemExtraFields itemData={itemData} extraFields={collectionData.extraFields} />
+        <Stack mt={3} spacing={1.5}>
+          <Typography>Tags</Typography>
+          <ItemTags tags={itemData.tags} />
+        </Stack>
+        <ItemExtraFields itemData={itemData} extraFields={collectionData.extraFields || []} />
         <Stack mt={3} spacing={1.5}>
           <Typography>Author</Typography>
           <Typography fontSize={16} fontWeight={700}>{authorData.firstName} {authorData.lastName}</Typography>

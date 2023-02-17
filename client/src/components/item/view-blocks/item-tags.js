@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
-const ItemTags = ({ itemData }) => {
+const ItemTags = ({ tags }) => {
 
-  const tagsView = itemData.tags.map(tag => {
+  const tagsView = tags.map(tag => {
     return (
       <Box
         key={tag} mr={1}
@@ -18,11 +18,8 @@ const ItemTags = ({ itemData }) => {
   });
 
   return (
-    <Stack mt={3} spacing={1.5}>
-      <Typography>Tags</Typography>
-      <Stack direction="row" alignItems="center" justifyContent="flex-start">
-        {tagsView}
-      </Stack>
+    <Stack direction="row" alignItems="center" justifyContent="flex-start">
+      {tagsView}
     </Stack>
   )
 }

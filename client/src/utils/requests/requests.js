@@ -95,7 +95,7 @@ export const getAllCollectionsUser = async (userId) => {
 
 export const getOneCollection = async (collectionId) => {
   try {
-    const { data } = await axios.get(`collections/${collectionId}`);
+    const { data } = await axios.get(`/collections/${collectionId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message || error.message);
@@ -105,7 +105,7 @@ export const getOneCollection = async (collectionId) => {
 export const createItem = async (collectionId, values) => {
   try {
     const { data } = await axios.post(
-      `collections/${collectionId}`,
+      `/collections/${collectionId}`,
       values,
       { withCredentials: true }
     );
@@ -118,7 +118,7 @@ export const createItem = async (collectionId, values) => {
 export const updateItem = async (collectionId, itemId, values) => {
   try {
     const { data } = await axios.patch(
-      `collections/${collectionId}/items/${itemId}`,
+      `/collections/${collectionId}/items/${itemId}`,
       values,
       { withCredentials: true }
     );
@@ -130,7 +130,7 @@ export const updateItem = async (collectionId, itemId, values) => {
 
 export const deleteItem = async (collectionId, itemId) => {
   try {
-    const { data } = await axios.delete(`collections/${collectionId}/items/${itemId}`);
+    const { data } = await axios.delete(`/collections/${collectionId}/items/${itemId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -140,7 +140,7 @@ export const deleteItem = async (collectionId, itemId) => {
 export const deleteItems = async (collectionId, items) => {
   try {
     const { data } = await axios.delete(
-      `collections/${collectionId}/items/`,
+      `/collections/${collectionId}/items/`,
       { params: items }
     );
     return data;
@@ -151,7 +151,7 @@ export const deleteItems = async (collectionId, items) => {
 
 export const getAllCollectionItems = async (collectionId) => {
   try {
-    const { data } = await axios.get(`collections/${collectionId}/items`);
+    const { data } = await axios.get(`/collections/${collectionId}/items`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -160,7 +160,7 @@ export const getAllCollectionItems = async (collectionId) => {
 
 export const getItem = async (collectionId, itemId) => {
   try {
-    const { data } = await axios.get(`collections/${collectionId}/items/${itemId}`);
+    const { data } = await axios.get(`/collections/${collectionId}/items/${itemId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -182,7 +182,7 @@ export const createComment = async (itemId, message) => {
 
 export const getAllItemComment = async (itemId) => {
   try {
-    const { data } = await axios.get(`comments/${itemId}`);
+    const { data } = await axios.get(`/comments/${itemId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -204,7 +204,7 @@ export const addLIke = async (itemId) => {
 
 export const getAllItemLikes = async (itemId) => {
   try {
-    const { data } = await axios.get(`likes/${itemId}`);
+    const { data } = await axios.get(`/likes/${itemId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -213,7 +213,16 @@ export const getAllItemLikes = async (itemId) => {
 
 export const removeLike = async (itemId) => {
   try {
-    const { data } = await axios.delete(`likes/${itemId}`);
+    const { data } = await axios.delete(`/likes/${itemId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const getLastItems = async () => {
+  try {
+    const { data } = await axios.get(`/items`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);

@@ -1,10 +1,15 @@
 import React from 'react';
+import { Stack } from '@mui/material';
+
+import HomeLastItems from '../components/home/home-last-items';
+import HomeBiggestCollections from '../components/home/home-biggest-collections';
 
 export const Home = () => {
 
   return (
-    <div>
-      Home page
-    </div>
+    <Stack>
+      <HomeLastItems />
+      <HomeBiggestCollections />
+    </Stack>
   );
 }
