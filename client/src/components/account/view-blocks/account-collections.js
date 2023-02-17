@@ -7,7 +7,7 @@ import CreateCollection from '../account-collections/create-collection';
 import CollectionCard from '../account-collections/collection-card';
 import { ToastContainer, toast } from 'react-toastify';
 
-const AccountCollections = ({ id }) => {
+const AccountCollections = ({ userId }) => {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,13 +15,13 @@ const AccountCollections = ({ id }) => {
   const [currentCollectionId, setCurrentCollectionId] = useState('');
 
   useEffect(() => {
-    onRequestGetCollections(id);
-  }, [id])
+    onRequestGetCollections(userId);
+  }, [userId])
 
-  const onRequestGetCollections = (id) => {
+  const onRequestGetCollections = (userId) => {
     setError(null);
     setLoading(true);
-    getAllCollectionsUser(id)
+    getAllCollectionsUser(userId)
       .then(res => {
         setCollections(res);
         setLoading(false);
@@ -50,7 +50,7 @@ const AccountCollections = ({ id }) => {
     deleteCollection(collectionId)
       .then(res => {
         toast.info(res.message, { position: 'top-right' });
-        onRequestGetCollections(id);
+        onRequestGetCollections(userId);
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -88,7 +88,7 @@ const AccountCollections = ({ id }) => {
           <CreateCollection
             openModalForm={openModalForm}
             handleCloseModalForm={handleCloseModalForm}
-            id={id}
+            userId={userId}
             onRequestGetCollections={onRequestGetCollections}
             collectionId={currentCollectionId}
           />

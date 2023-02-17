@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { getAllCollectionItems, deleteItem, deleteItems } from '../../utils/requests/requests';
 import CollectionInfo from './view-blocks/collection-info';
 import CollectionTools from './view-blocks/collection-tools';
@@ -9,8 +9,7 @@ import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import { ToastContainer, toast } from 'react-toastify';
 
-const CollectionView = ({ collectionData }) => {
-  const collectionId = useParams().id;
+const CollectionView = ({ collectionId, collectionData }) => {
   const [items, setItems] = useState([]);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -22,10 +21,10 @@ const CollectionView = ({ collectionData }) => {
     onItemsRequest(collectionId);
   }, [collectionId])
 
-  const onItemsRequest = (id) => {
+  const onItemsRequest = (collectionId) => {
     setError(null);
     setLoading(true);
-    getAllCollectionItems(id)
+    getAllCollectionItems(collectionId)
       .then(res => {
         setItems(res);
         setLoading(false);

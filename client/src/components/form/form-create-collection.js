@@ -12,7 +12,7 @@ import FormCreateExtraField from './form-elements/form-create-extra-field';
 
 const FormCreateCollection = ({
   handleClose,
-  id,
+  userId,
   onRequestCreate,
   onRequestUpdate,
   collectionId,
@@ -47,7 +47,7 @@ const FormCreateCollection = ({
     if (isEditing) {
       onRequestUpdate(collectionId, values);
     } else {
-      values.authorId = id;
+      values.authorId = userId;
       onRequestCreate(values);
     }
     handleClose();

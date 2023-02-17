@@ -9,7 +9,7 @@ import FormCreateCollection from '../../form/form-create-collection';
 const CreateCollection = ({
   openModalForm,
   handleCloseModalForm,
-  id,
+  userId,
   onRequestGetCollections,
   collectionId
 }) => {
@@ -54,7 +54,7 @@ const CreateCollection = ({
   const onRequestCreateCollection = (values) => {
     createCollection({ ...values })
       .then(res => {
-        onRequestGetCollections(id);
+        onRequestGetCollections(userId);
       }).catch(error => {
         console.log(error);
         // toast.error(error.message, { position: 'top-right' });
@@ -64,7 +64,7 @@ const CreateCollection = ({
   const onRequestUpdateCollection = (collectionId, values) => {
     updateCollection(collectionId, { ...values })
       .then(res => {
-        onRequestGetCollections(id);
+        onRequestGetCollections(userId);
       }).catch(error => {
         console.log(error);
         // toast.error(error.message, { position: 'top-right' });
@@ -93,7 +93,7 @@ const CreateCollection = ({
       <DialogContent>
         <FormCreateCollection
           handleClose={handleCloseModalForm}
-          id={id}
+          userId={userId}
           onRequestCreate={onRequestCreateCollection}
           onRequestUpdate={onRequestUpdateCollection}
           collectionId={collectionId}

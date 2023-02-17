@@ -8,15 +8,15 @@ import BreadCrumbs from '../components/BreadCrumbs';
 import CollectionView from '../components/collection/collection-view';
 
 export const Collection = () => {
-  const { id } = useParams();
+  const { collectionId } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [collectionData, setCollectionData] = useState({});
   const [authorInfo, setAuthorInfo] = useState({});
 
   useEffect(() => {
-    onCollectionRequest(id);
-  }, [id]);
+    onCollectionRequest(collectionId);
+  }, [collectionId]);
 
   useEffect(() => {
     if (collectionData.authorId) {
@@ -24,10 +24,10 @@ export const Collection = () => {
     }
   }, [collectionData.authorId]);
 
-  const onCollectionRequest = (id) => {
+  const onCollectionRequest = (collectionId) => {
     setError(null);
     setLoading(true);
-    getOneCollection(id)
+    getOneCollection(collectionId)
       .then(res => {
         setCollectionData(res);
         setLoading(false);
@@ -38,8 +38,8 @@ export const Collection = () => {
       })
   }
 
-  const onUserInfoRequest = (id) => {
-    getOneUser(id)
+  const onUserInfoRequest = (userId) => {
+    getOneUser(userId)
       .then(res => {
         setAuthorInfo(res);
       })
@@ -62,6 +62,7 @@ export const Collection = () => {
         current={collectionData.title}
       />
       <CollectionView
+        collectionId={collectionId}
         collectionData={collectionData}
       />
     </>

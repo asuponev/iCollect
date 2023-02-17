@@ -8,7 +8,7 @@ import BreadCrumbs from '../components/BreadCrumbs';
 import AccountView from '../components/account/account-view';
 
 export const Account = () => {
-  const { id } = useParams();
+  const { userId } = useParams();
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ export const Account = () => {
   useEffect(() => {
     setError(null);
     setLoading(true);
-    getOneUser(id)
+    getOneUser(userId)
       .then(res => {
         setUserData(res);
         setLoading(false);
@@ -25,7 +25,7 @@ export const Account = () => {
         setLoading(false);
         setError(error.message);
       })
-  }, [id])
+  }, [userId]);
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -35,7 +35,7 @@ export const Account = () => {
         prevLinks={[{ 'Home': '/' }]}
         current={`${userData.firstName} ${userData.lastName}`}
       />
-      <AccountView userData={userData} id={id} />
+      <AccountView userData={userData} userId={userId} />
     </>
   ) : null;
 
