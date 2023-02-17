@@ -3,6 +3,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import LaunchIcon from '@mui/icons-material/Launch';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 // import TableTools from './TableTools';
 import { tableStyles } from '../../admin/table-styles';
@@ -13,7 +14,8 @@ const TableItems = ({
   setSelectedItems,
   extraFields,
   collectionId,
-  onEditItem
+  onEditItem,
+  onDeleteItem
 }) => {
   if (!items) items = [];
 
@@ -28,19 +30,33 @@ const TableItems = ({
   })
 
   const actionColumns = [
-    { field: 'edit', type: 'actions', width: 50, getActions: (params) => [
-      <GridActionsCellItem
-        icon={<EditOutlinedIcon color="primary"/>}
-        label="Edit item"
-        onClick={() => onEditItem(params.id)}
-      />]
+    {
+      field: 'view', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={<LaunchIcon color="primary" />}
+          label="View item"
+          onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
+        />]
     },
-    { field: 'view', type: 'actions', width: 50, getActions: (params) => [
-      <GridActionsCellItem
-        icon={<LaunchIcon color="primary"/>}
-        label="View item"
-        onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
-      />]
+    {
+      field: 'edit', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={<EditOutlinedIcon color="primary" />}
+          label="Edit item"
+          onClick={() => onEditItem(params.id)}
+        />]
+    },
+    {
+      field: 'delete', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={<DeleteOutlinedIcon color="#585E67" />}
+          label="Delete item"
+          onClick={() => {
+            if (window.confirm('Are you sure?')) {
+              onDeleteItem(params.id);
+            }
+          }}
+        />]
     },
   ]
 

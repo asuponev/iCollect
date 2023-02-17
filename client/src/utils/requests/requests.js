@@ -120,6 +120,27 @@ export const updateItem = async (collectionId, itemId, values) => {
   }
 }
 
+export const deleteItem = async (collectionId, itemId) => {
+  try {
+    const { data } = await axios.delete(`collections/${collectionId}/items/${itemId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const deleteItems = async (collectionId, items) => {
+  try {
+    const { data } = await axios.delete(
+      `collections/${collectionId}/items/`,
+      { params: items }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
 export const getAllCollectionItems = async (collectionId) => {
   try {
     const { data } = await axios.get(`collections/${collectionId}/items`);

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAllCollectionItems } from '../../utils/requests/requests';
+import { getAllCollectionItems, deleteItem, deleteItems } from '../../utils/requests/requests';
 import CollectionInfo from './view-blocks/collection-info';
 import CollectionTools from './view-blocks/collection-tools';
 import CreateItem from './view-blocks/create-item';
 import TableItems from './view-blocks/collection-table-items';
 import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
+import { ToastContainer, toast } from 'react-toastify';
 
 const CollectionView = ({ collectionData }) => {
   const collectionId = useParams().id;
@@ -49,6 +50,30 @@ const CollectionView = ({ collectionData }) => {
     setTimeout(() => setCurrentItemId(''), 300);
   };
 
+  const onDeleteItem = (itemId) => {
+    deleteItem(collectionId, itemId)
+      .then(res => {
+        toast.info(res.message, { position: 'top-right' });
+        onItemsRequest(collectionId);
+      })
+      .catch(error => {
+        console.log(error);
+        toast.error(error.message, { position: 'top-right' });
+      })
+  }
+
+  const onDeleteItems = (items) => {
+    deleteItems(collectionId, items)
+    .then(res => {
+      toast.info(res.message, { position: 'top-right' });
+      onItemsRequest(collectionId);
+    })
+    .catch(error => {
+      console.log(error);
+      toast.error(error.message, { position: 'top-right' });
+    })
+  }
+
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
@@ -60,15 +85,19 @@ const CollectionView = ({ collectionData }) => {
         extraFields={collectionData.extraFields}
         collectionId={collectionId}
         onEditItem={onEditItem}
+        onDeleteItem={onDeleteItem}
       />
     </>
   ) : null;
 
   return (
     <>
+      <ToastContainer />
       <CollectionInfo data={collectionData} />
       <CollectionTools
         onCreateItem={onCreateItem}
+        selectedItems={selectedItems}
+        onDeleteItems={onDeleteItems}
       />
       <CreateItem
         collectionId={collectionId}

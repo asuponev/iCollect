@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { register, login, getMe } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
 import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection } from '../controllers/collections.js';
-import { createItem, getAllCollectionItems, getItem, updateItem } from '../controllers/items.js';
+import { createItem, getAllCollectionItems, getItem, updateItem, deleteItem, deleteItems } from '../controllers/items.js';
 import { createComment, getAllItemComment } from '../controllers/comments.js';
 import { addLike, getAllItemLikes, removeLike } from '../controllers/likes.js';
 import { registerValidation, loginValidation, collectionValidation, itemValidation } from '../middlewares/validations.js';
@@ -29,6 +29,8 @@ router.post('/collections/:id', checkAuth, itemValidation, handleValidationsErro
 router.get('/collections/:id/items', getAllCollectionItems);
 router.get('/collections/:collectionId/items/:itemId', getItem);
 router.patch('/collections/:collectionId/items/:itemId', checkAuth, itemValidation, handleValidationsErrors, updateItem);
+router.delete('/collections/:collectionId/items/:itemId', checkAuth, deleteItem);
+router.delete('/collections/:collectionId/items/', checkAuth, deleteItems);
 
 router.post('/comments', checkAuth, createComment);
 router.get('/comments/:itemId', checkAuth, getAllItemComment);
