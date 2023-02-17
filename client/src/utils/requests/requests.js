@@ -76,6 +76,15 @@ export const updateCollection = async (collectionId, values) => {
   }
 }
 
+export const deleteCollection = async (collectionId) => {
+  try {
+    const { data } = await axios.delete(`/collections/${collectionId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
 export const getAllCollectionsUser = async (id) => {
   try {
     const { data } = await axios.get(`${urls.USERS}/${id}/collections`);

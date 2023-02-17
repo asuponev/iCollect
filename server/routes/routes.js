@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { register, login, getMe } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
-import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection } from '../controllers/collections.js';
+import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection, deleteCollection } from '../controllers/collections.js';
 import { createItem, getAllCollectionItems, getItem, updateItem, deleteItem, deleteItems } from '../controllers/items.js';
 import { createComment, getAllItemComment } from '../controllers/comments.js';
 import { addLike, getAllItemLikes, removeLike } from '../controllers/likes.js';
@@ -24,6 +24,7 @@ router.get('/users/:id/collections', checkAuth, getAllCollectionsUser);
 router.post('/collections', checkAuth, collectionValidation, handleValidationsErrors, createCollection);
 router.get('/collections/:id', getOneCollection);
 router.patch('/collections/:id', checkAuth, collectionValidation, handleValidationsErrors, updateCollection);
+router.delete('/collections/:collectionId', checkAuth, deleteCollection);
 
 router.post('/collections/:id', checkAuth, itemValidation, handleValidationsErrors, createItem);
 router.get('/collections/:id/items', getAllCollectionItems);

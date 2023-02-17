@@ -48,6 +48,30 @@ export const updateCollection = async (req, res) => {
   }
 }
 
+export const deleteCollection = async (req, res) => {
+  try {
+    const requestor = req.user;
+    const requestorId = requestor._id.toString();
+    const collection = await Collection.findById(req.params.collectionId);
+    const authorId = collection.authorId.toString();
+    if (requestor.role === 'ADMIN' || requestorId === authorId) {
+      await Collection.deleteOne({ _id: req.params.collectionId })
+      res.json({
+        message: `Collection "${collection.title}" was successfully deleted`
+      });
+    } else {
+      res.status(403).json({
+        message: 'No access'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
+
 export const getAllCollectionsUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

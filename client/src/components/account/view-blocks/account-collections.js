@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Stack, Typography, Button } from '@mui/material';
 import Spinner from '../../Spinner';
 import ErrorMessage from '../../ErrorMessage';
-import { getAllCollectionsUser } from '../../../utils/requests/requests';
+import { getAllCollectionsUser, deleteCollection } from '../../../utils/requests/requests';
 import CreateCollection from '../account-collections/create-collection';
 import CollectionCard from '../account-collections/collection-card';
+import { ToastContainer, toast } from 'react-toastify';
 
 const AccountCollections = ({ id }) => {
   const [collections, setCollections] = useState([]);
@@ -46,7 +47,14 @@ const AccountCollections = ({ id }) => {
   }
 
   const onDeleteCollection = (collectionId) => {
-    console.log(collectionId);
+    deleteCollection(collectionId)
+      .then(res => {
+        toast.info(res.message, { position: 'top-right' });
+        onRequestGetCollections(id);
+      }).catch(error => {
+        console.log(error);
+        toast.error(error.message, { position: 'top-right' });
+      })
   }
 
   const cards = collections.map(collection => {
@@ -69,32 +77,36 @@ const AccountCollections = ({ id }) => {
   ) : null;
 
   return (
-    <Stack>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
-        <Typography variant="h5" fontWeight="500">Collections</Typography>
-        <Button variant="contained" onClick={onCreateCollection}>
-          + Add Collection
-        </Button>
-        <CreateCollection
-          openModalForm={openModalForm}
-          handleCloseModalForm={handleCloseModalForm}
-          id={id}
-          onRequestGetCollections={onRequestGetCollections}
-          collectionId={currentCollectionId}
-        />
+    <>
+      <ToastContainer />
+      <Stack>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
+          <Typography variant="h5" fontWeight="500">Collections</Typography>
+          <Button variant="contained" onClick={onCreateCollection}>
+            + Add Collection
+          </Button>
+          <CreateCollection
+            openModalForm={openModalForm}
+            handleCloseModalForm={handleCloseModalForm}
+            id={id}
+            onRequestGetCollections={onRequestGetCollections}
+            collectionId={currentCollectionId}
+          />
+        </Stack>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
+          mb={6}
+        >
+          {errorMessage}
+          {spinner}
+          {content}
+        </Stack>
       </Stack>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
-        mb={6}
-      >
-        {errorMessage}
-        {spinner}
-        {content}
-      </Stack>
-    </Stack>
+    </>
+
   )
 }
 
