@@ -1,8 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import { Stack, Typography, Card, CardActions, CardContent, CardMedia, CardActionArea, Tooltip, IconButton } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useNavigate } from 'react-router';
 import imageNotFound from '../../../utils/constants/image-not-found';
+import { getAllCollectionItems } from '../../../utils/requests/requests';
 
 const CollectionCard = ({
   _id,
@@ -10,12 +12,23 @@ const CollectionCard = ({
   title,
   description,
   coverUrl,
-  count,
   onEditCollection,
   onDeleteCollection
 }) => {
   let navigate = useNavigate();
   if (description.length > 100) description = `${description.slice(0, 100)}...`;
+  const [countItems, setCountItems] = useState(0);
+
+  useEffect(() => {
+    getAllCollectionItems(_id)
+    .then(res => {
+      setCountItems(res.length);
+    })
+    .catch(error => {
+      console.log(error);
+      setCountItems(0);
+    })
+  }, [_id]);
 
   return (
     <Card
@@ -40,7 +53,7 @@ const CollectionCard = ({
             color="text.secondary"
           >
             <Typography variant="overline" lineHeight="18px">{subject}</Typography>
-            <Typography variant="caption">{count ? count : 0} items</Typography>
+            <Typography variant="caption">{countItems} items</Typography>
           </Stack>
           <Typography gutterBottom variant="h6">{title}</Typography>
           <Typography variant="body2" color="text.secondary">{description}</Typography>
