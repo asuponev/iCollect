@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
 import { getAllCollectionItems, deleteItem, deleteItems } from '../../utils/requests/requests';
 import CollectionInfo from './view-blocks/collection-info';
 import CollectionTools from './view-blocks/collection-tools';

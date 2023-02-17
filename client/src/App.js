@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
 
@@ -10,34 +10,33 @@ import * as Pages from './pages/pages';
 
 function App() {
   const [status, setStatus] = useState({
-    id: '',
     isAuth: false,
     isAdmin: false,
     isActive: true,
-  })
+  });
   const [userInfo, setUserInfo] = useState({
     userId: '',
     firstName: '',
     lastName: ''
-  })
+  });
 
   useEffect(() => {
     checkAuth()
       .then(res => {
         if (res.role === 'ADMIN') {
-          setStatus({ ...status, id: res._id, isAuth: true, isAdmin: true });
+          setStatus({ ...status, isAuth: true, isAdmin: true });
         } else {
-          setStatus({ ...status, id: res._id, isAuth: true });
+          setStatus({ ...status, isAuth: true });
         }
         setUserInfo({ ...userInfo, userId: res._id, firstName: res.firstName, lastName: res.lastName })
       })
       .catch(error => {
-        setStatus({ ...status, id: '', isAuth: false });
+        setStatus({ ...status, isAuth: false });
         setUserInfo({ ...userInfo, userId: '', firstName: '', lastName: '' })
         console.log(error.message);
       })
     // eslint-disable-next-line
-  }, [])
+  }, []);
 
   return (
     <GlobalContext.Provider value={{ status, setStatus, userInfo, setUserInfo }}>

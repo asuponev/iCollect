@@ -5,7 +5,7 @@ import * as HeaderItems from './header-items/header-items';
 import GlobalContext from '../../utils/context/GlobalContext';
 
 function Header() {
-  const { status, setStatus } = useContext(GlobalContext);
+  const { status } = useContext(GlobalContext);
 
   return (
     <Box component="header" sx={{ width: "100%", backgroundColor: "#142339" }}>
@@ -29,8 +29,8 @@ function Header() {
                 status.isAuth ? (
                   <>
                     {status.isAdmin ? <HeaderItems.BtnAdminPanel /> : null}
-                    <HeaderItems.BtnAccount status={status} />
-                    <HeaderItems.BtnLogOut status={status} setStatus={setStatus} />
+                    <HeaderItems.BtnAccount />
+                    <HeaderItems.BtnLogOut />
                   </>
                 ) : (
                   <>

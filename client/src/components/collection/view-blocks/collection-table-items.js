@@ -5,7 +5,6 @@ import LaunchIcon from '@mui/icons-material/Launch';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-// import TableTools from './TableTools';
 import { tableStyles } from '../../admin/table-styles';
 
 const TableItems = ({

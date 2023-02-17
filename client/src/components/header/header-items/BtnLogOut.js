@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
 export const BtnLogOut = ({ status, setStatus }) => {
+  const { userInfo, setUserInfo } = useContext(GlobalContext);
+  const { status, setStatus } = useContext(GlobalContext);
   let navigate = useNavigate();
 
   const logout = () => {
     localStorage.removeItem('token');
-    setStatus({ ...status, id: '', isAdmin: false, isAuth: false });
+    setStatus({ ...status, isAdmin: false, isAuth: false });
+    setUserInfo({ ...userInfo, userId: '', firstName: '', lastName: '' });
     navigate('/');
   }
 
