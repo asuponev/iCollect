@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Typography } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
+import GlobalContext from '../../../utils/context/GlobalContext';
 
 export const BtnAccount = () => {
   const { userInfo } = useContext(GlobalContext);

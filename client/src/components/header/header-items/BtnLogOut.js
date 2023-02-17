@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
+import GlobalContext from '../../../utils/context/GlobalContext';
 
-export const BtnLogOut = ({ status, setStatus }) => {
+export const BtnLogOut = () => {
   const { userInfo, setUserInfo } = useContext(GlobalContext);
   const { status, setStatus } = useContext(GlobalContext);
   let navigate = useNavigate();
