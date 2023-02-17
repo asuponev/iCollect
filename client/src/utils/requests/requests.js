@@ -1,10 +1,9 @@
 import axios from '../myAxios';
-import urls from '../constants/urlsApi';
 
 export const authApi = async (typeAuth, values) => {
   try {
     const { data } = await axios.post(
-      typeAuth === 'register' ? urls.REGISTER : urls.LOGIN,
+      typeAuth === 'register' ? '/auth/register' : '/auth/login',
       values,
       { withCredentials: true }
     );
@@ -16,7 +15,7 @@ export const authApi = async (typeAuth, values) => {
 
 export const checkAuth = async () => {
   try {
-    const { data } = await axios.get(urls.AUTH);
+    const { data } = await axios.get('/auth/me');
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -25,7 +24,7 @@ export const checkAuth = async () => {
 
 export const getOneUser = async (userId) => {
   try {
-    const { data } = await axios.get(`${urls.USERS}/${userId}`);
+    const { data } = await axios.get(`/users/${userId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -34,7 +33,7 @@ export const getOneUser = async (userId) => {
 
 export const getUsers = async () => {
   try {
-    const { data } = await axios.get(urls.USERS);
+    const { data } = await axios.get('/users');
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -43,7 +42,7 @@ export const getUsers = async () => {
 
 export const updateUsers = async (usersWithAction) => {
   try {
-    const { data } = await axios.patch(urls.USERS, usersWithAction);
+    const { data } = await axios.patch('/users', usersWithAction);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -87,7 +86,7 @@ export const deleteCollection = async (collectionId) => {
 
 export const getAllCollectionsUser = async (userId) => {
   try {
-    const { data } = await axios.get(`${urls.USERS}/${userId}/collections`);
+    const { data } = await axios.get(`/users/${userId}/collections`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message || error.message);
