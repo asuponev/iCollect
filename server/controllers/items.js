@@ -75,13 +75,13 @@ export const updateItem = async (req, res) => {
 
 export const getAllCollectionItems = async (req, res) => {
   try {
-    const collection = await Collection.findById(req.params.id);
+    const collection = await Collection.findById(req.params.collectionId);
     if (collection) {
-      const allCollectionItems = await Item.find({ collectionId: req.params.id });
+      const allCollectionItems = await Item.find({ collectionId: req.params.collectionId });
       res.json(allCollectionItems);
     } else {
       res.status(404).json({
-        message: `Collection with ID ${req.params.id} was not found`
+        message: `Collection with ID ${req.params.collectionId} was not found`
       });
     }
   } catch (error) {

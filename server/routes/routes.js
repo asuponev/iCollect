@@ -16,18 +16,18 @@ router.post('/auth/register', registerValidation, handleValidationsErrors, regis
 router.post('/auth/login', loginValidation, handleValidationsErrors, login);
 router.get('/auth/me', checkAuth, getMe);
 
-router.get('/users/:id', checkAuth, getUser);
+router.get('/users/:userId', checkAuth, getUser);
 router.get('/users', checkAuth, checkAdmin, getAllUsers);
 router.patch('/users', checkAuth, checkAdmin, updateSelectUsers);
 
-router.get('/users/:id/collections', checkAuth, getAllCollectionsUser);
+router.get('/users/:userId/collections', checkAuth, getAllCollectionsUser);
 router.post('/collections', checkAuth, collectionValidation, handleValidationsErrors, createCollection);
-router.get('/collections/:id', getOneCollection);
-router.patch('/collections/:id', checkAuth, collectionValidation, handleValidationsErrors, updateCollection);
+router.get('/collections/:collectionId', getOneCollection);
+router.patch('/collections/:collectionId', checkAuth, collectionValidation, handleValidationsErrors, updateCollection);
 router.delete('/collections/:collectionId', checkAuth, deleteCollection);
 
-router.post('/collections/:id', checkAuth, itemValidation, handleValidationsErrors, createItem);
-router.get('/collections/:id/items', getAllCollectionItems);
+router.post('/collections/:collectionId', checkAuth, itemValidation, handleValidationsErrors, createItem);
+router.get('/collections/:collectionId/items', getAllCollectionItems);
 router.get('/collections/:collectionId/items/:itemId', getItem);
 router.patch('/collections/:collectionId/items/:itemId', checkAuth, itemValidation, handleValidationsErrors, updateItem);
 router.delete('/collections/:collectionId/items/:itemId', checkAuth, deleteItem);

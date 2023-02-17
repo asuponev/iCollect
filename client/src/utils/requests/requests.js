@@ -23,9 +23,9 @@ export const checkAuth = async () => {
   }
 }
 
-export const getOneUser = async (id) => {
+export const getOneUser = async (userId) => {
   try {
-    const { data } = await axios.get(`${urls.USERS}/${id}`);
+    const { data } = await axios.get(`${urls.USERS}/${userId}`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -85,9 +85,9 @@ export const deleteCollection = async (collectionId) => {
   }
 }
 
-export const getAllCollectionsUser = async (id) => {
+export const getAllCollectionsUser = async (userId) => {
   try {
-    const { data } = await axios.get(`${urls.USERS}/${id}/collections`);
+    const { data } = await axios.get(`${urls.USERS}/${userId}/collections`);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message || error.message);

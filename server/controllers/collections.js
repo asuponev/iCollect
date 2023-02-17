@@ -25,7 +25,7 @@ export const updateCollection = async (req, res) => {
   try {
     const requestor = req.user;
     const requestorId = requestor._id.toString();
-    const collection = await Collection.findById(req.params.id);
+    const collection = await Collection.findById(req.params.collectionId);
     const authorId = collection.authorId.toString();
     if (requestor.role === 'ADMIN' || requestorId === authorId) {
       collection.title = req.body.title;
@@ -74,13 +74,13 @@ export const deleteCollection = async (req, res) => {
 
 export const getAllCollectionsUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.userId);
     if (user) {
-      const allCollectionsUser = await Collection.find({ authorId: req.params.id }).sort({ updatedAt: -1 });
+      const allCollectionsUser = await Collection.find({ authorId: req.params.userId }).sort({ updatedAt: -1 });
       res.json(allCollectionsUser);
     } else {
       res.status(404).json({
-        message: `User with ID ${req.params.id} was not found`
+        message: `User with ID ${req.params.userId} was not found`
       });
     }
   } catch (error) {
@@ -93,7 +93,7 @@ export const getAllCollectionsUser = async (req, res) => {
 
 export const getOneCollection = async (req, res) => {
   try {
-    const collection = await Collection.findById(req.params.id);
+    const collection = await Collection.findById(req.params.collectionId);
     res.json(collection);
   } catch (error) {
     console.log(error);
