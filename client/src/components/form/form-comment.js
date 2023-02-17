@@ -7,7 +7,6 @@ const FormComment = ({ onCreateComment, itemId }) => {
 
   const onFormSubmit = (event, message) => {
     event.preventDefault();
-    console.log(message);
     onCreateComment(itemId, message);
     setMessage('');
   }

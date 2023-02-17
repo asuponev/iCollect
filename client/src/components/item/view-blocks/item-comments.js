@@ -22,7 +22,6 @@ const ItemComments = ({ itemId }) => {
     setLoading(true);
     getAllItemComment(itemId)
       .then(res => {
-        console.log(res)
         setCommentData(res);
         setLoading(false);
       }).catch(error => {

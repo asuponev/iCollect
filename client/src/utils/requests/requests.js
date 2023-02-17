@@ -146,3 +146,34 @@ export const getAllItemComment = async (itemId) => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const addLIke = async (itemId) => {
+  try {
+    const { data } = await axios.post(
+      '/likes',
+      { itemId },
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const getAllItemLikes = async (itemId) => {
+  try {
+    const { data } = await axios.get(`likes/${itemId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const removeLike = async (itemId) => {
+  try {
+    const { data } = await axios.delete(`likes/${itemId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}

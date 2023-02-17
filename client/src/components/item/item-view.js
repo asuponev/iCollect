@@ -26,7 +26,7 @@ const ItemView = ({ itemData, collectionData, authorData }) => {
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography variant="caption">ID {itemData._id}</Typography>
-          <ItemLikes />
+          <ItemLikes itemId={itemData._id} />
         </Stack>
         <Typography fontSize={24} fontWeight={700}>{itemData.title}</Typography>
         <ItemTags itemData={itemData} />
