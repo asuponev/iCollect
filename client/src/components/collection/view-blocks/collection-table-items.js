@@ -2,6 +2,7 @@ import React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import LaunchIcon from '@mui/icons-material/Launch';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 // import TableTools from './TableTools';
 import { tableStyles } from '../../admin/table-styles';
@@ -11,7 +12,8 @@ const TableItems = ({
   selectedItems,
   setSelectedItems,
   extraFields,
-  collectionId
+  collectionId,
+  onEditItem
 }) => {
   if (!items) items = [];
 
@@ -26,10 +28,17 @@ const TableItems = ({
   })
 
   const actionColumns = [
-    { field: 'actions', type: 'actions', width: 50, getActions: (params) => [
+    { field: 'edit', type: 'actions', width: 50, getActions: (params) => [
+      <GridActionsCellItem
+        icon={<EditOutlinedIcon color="primary"/>}
+        label="Edit item"
+        onClick={() => onEditItem(params.id)}
+      />]
+    },
+    { field: 'view', type: 'actions', width: 50, getActions: (params) => [
       <GridActionsCellItem
         icon={<LaunchIcon color="primary"/>}
-        label="View profile"
+        label="View item"
         onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
       />]
     },

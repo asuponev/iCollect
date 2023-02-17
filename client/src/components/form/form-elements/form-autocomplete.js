@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller } from 'react-hook-form';
 import { Autocomplete, TextField } from '@mui/material';
 
-const FormAutocomplete = ({ control, name, label, options, errors }) => {
+const FormAutocomplete = ({ control, name, label, options, errors, defaultValue }) => {
   return (
     <Controller
       name={name}
@@ -27,7 +27,7 @@ const FormAutocomplete = ({ control, name, label, options, errors }) => {
             onChange(data);
             return data;
           }}
-          defaultValue={[]}
+          defaultValue={defaultValue}
           freeSolo
           autoSelect
         />

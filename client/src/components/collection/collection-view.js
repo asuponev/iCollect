@@ -15,6 +15,7 @@ const CollectionView = ({ collectionData }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentItemId, setCurrentItemId] = useState('');
 
   useEffect(() => {
     onItemsRequest(collectionId);
@@ -38,10 +39,15 @@ const CollectionView = ({ collectionData }) => {
     setOpenModalForm(true);
   }
 
-  const handleCloseModalForm = () => {
-    setOpenModalForm(false);
+  const onEditItem = (itemId) => {
+    setCurrentItemId(itemId);
+    setTimeout(() => setOpenModalForm(true), 500);
   };
 
+  const handleCloseModalForm = () => {
+    setOpenModalForm(false);
+    setTimeout(() => setCurrentItemId(''), 300);
+  };
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -53,6 +59,7 @@ const CollectionView = ({ collectionData }) => {
         setSelectedItems={setSelectedItems}
         extraFields={collectionData.extraFields}
         collectionId={collectionId}
+        onEditItem={onEditItem}
       />
     </>
   ) : null;
@@ -69,6 +76,7 @@ const CollectionView = ({ collectionData }) => {
         handleCloseModalForm={handleCloseModalForm}
         onItemsRequest={onItemsRequest}
         extraFields={collectionData.extraFields}
+        itemId={currentItemId}
       />
       {errorMessage}
       {spinner}

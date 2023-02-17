@@ -107,6 +107,19 @@ export const createItem = async (collectionId, values) => {
   }
 }
 
+export const updateItem = async (collectionId, itemId, values) => {
+  try {
+    const { data } = await axios.patch(
+      `collections/${collectionId}/items/${itemId}`,
+      values,
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
 export const getAllCollectionItems = async (collectionId) => {
   try {
     const { data } = await axios.get(`collections/${collectionId}/items`);

@@ -1,6 +1,6 @@
 import { Box, TextField, FormControlLabel, Checkbox } from '@mui/material';
 
-const FormItemExtraFields = ({ extraFields, register }) => {
+const FormItemExtraFields = ({ extraFields, register, valuesForEdit }) => {
   return (
     <>
       {extraFields.map((element, index) => {
@@ -12,6 +12,7 @@ const FormItemExtraFields = ({ extraFields, register }) => {
                 label={element.name}
                 variant="outlined"
                 fullWidth
+                defaultValue={valuesForEdit[element.type] || ''}
               />
               : element.type.slice(0, -1) === 'checkbox' ?
                 <FormControlLabel
@@ -19,6 +20,7 @@ const FormItemExtraFields = ({ extraFields, register }) => {
                   control={
                     <Checkbox
                       {...register(element.type)}
+                      defaultChecked={valuesForEdit[element.type] || false}
                     />
                   }
                 />
@@ -30,6 +32,7 @@ const FormItemExtraFields = ({ extraFields, register }) => {
                     label={element.name}
                     variant="outlined"
                     fullWidth
+                    defaultValue={valuesForEdit[element.type] || null}
                   />
                   :
                   element.type.slice(0, -1) === 'text' ?
@@ -38,6 +41,7 @@ const FormItemExtraFields = ({ extraFields, register }) => {
                       label={element.name}
                       variant="outlined"
                       fullWidth
+                      defaultValue={valuesForEdit[element.type] || ''}
                     />
                     :
                     element.type.slice(0, -1) === 'date' ?
@@ -47,6 +51,7 @@ const FormItemExtraFields = ({ extraFields, register }) => {
                         label={element.name}
                         variant="outlined"
                         fullWidth
+                        defaultValue={valuesForEdit[element.type] || ''}
                       />
                       : null
           }
