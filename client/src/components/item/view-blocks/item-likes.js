@@ -7,7 +7,7 @@ import GlobalContext from '../../../utils/context/GlobalContext';
 import { addLIke, removeLike, getAllItemLikes } from '../../../utils/requests/requests';
 
 const ItemLikes = ({ itemId }) => {
-  const { userInfo } = useContext(GlobalContext);
+  const { userInfo, status } = useContext(GlobalContext);
   const [likesData, setLikesData] = useState([]);
   const [isLike, setIsLike] = useState(false);
 
@@ -58,21 +58,27 @@ const ItemLikes = ({ itemId }) => {
   }
 
   return (
-    <Stack direction="row" spacing={1} alignItems="center">
-      <Tooltip title={`${likesData.length} likes`} placement="left">
-      {isLike ?
-        (
-          <IconButton onClick={() => onRemoveLike(itemId)}>
-            <FavoriteIcon />
-          </IconButton>
-        ) : (
-          <IconButton onClick={() => onAddLike(itemId)}>
-            <FavoriteBorderIcon />
-          </IconButton>
-        )
+    <>
+      {
+        status.isAuth ? (
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Tooltip title={`${likesData.length} likes`} placement="left">
+              {isLike ?
+                (
+                  <IconButton onClick={() => onRemoveLike(itemId)}>
+                    <FavoriteIcon />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={() => onAddLike(itemId)}>
+                    <FavoriteBorderIcon />
+                  </IconButton>
+                )
+              }
+            </Tooltip>
+          </Stack >
+        ) : null
       }
-      </Tooltip>
-    </Stack >
+    </>
   )
 }
 
