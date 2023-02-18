@@ -174,7 +174,11 @@ export const deleteItems = async (req, res) => {
 export const getLastItems = async (req, res) => {
   try {
     const items = await Item.find().sort({ createdAt: -1 }).limit(4);
-    res.json(items);
+    const response = await Promise.all(items.map(async (item) => {
+      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+      return { ...item._doc, collection };
+    }))
+    res.json(response);
   } catch (error) {
     console.log(error);
     res.status(500).json({
