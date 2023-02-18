@@ -10,7 +10,7 @@ import FormRegister from '../components/form/form-register';
 import { authApi } from '../utils/requests/requests';
 
 export const Registration = () => {
-  const { status, setStatus } = useContext(GlobalContext);
+  const { status, setStatus, userInfo, setUserInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -18,7 +18,8 @@ export const Registration = () => {
     authApi('register', { ...values })
       .then(res => {
         localStorage.setItem('token', res.token);
-        setStatus({ ...status, isAuth: true, id: res._id });
+        setStatus({ ...status, isAuth: true });
+        setUserInfo({...userInfo, firstName: res.firstName, lastName: res.lastName, userId: res._id});
         navigate('/');
       }).catch(error => {
         toast.error(error.message, { position: 'top-right' });

@@ -10,7 +10,7 @@ import FormLogin from '../components/form/form-login';
 import { authApi } from '../utils/requests/requests';
 
 export const Login = () => {
-  const { status, setStatus } = useContext(GlobalContext);
+  const { status, setStatus, userInfo, setUserInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -18,10 +18,10 @@ export const Login = () => {
     authApi('login', { ...values })
       .then(res => {
         localStorage.setItem('token', res.token);
+        setStatus({ ...status, isAuth: true });
+        setUserInfo({...userInfo, firstName: res.firstName, lastName: res.lastName, userId: res._id});
         if (res.role === 'ADMIN') {
-          setStatus({ ...status, isAuth: true, id: res._id, isAdmin: true });
-        } else {
-          setStatus({ ...status, isAuth: true, id: res._id });
+          setStatus({ ...status, isAdmin: true });
         }
         navigate('/');
       }).catch(error => {
