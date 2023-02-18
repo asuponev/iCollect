@@ -56,7 +56,7 @@ const ItemComments = ({ itemId }) => {
         my={3}
       >
         <Avatar sx={avatarStyles}>
-          {comment.firstName[0]} {comment.lastName[0]}
+          {comment.firstName[0]}{comment.lastName[0]}
         </Avatar>
         <Stack spacing={1}>
           <Typography color="#142339" fontWeight={500}>{comment.firstName} {comment.lastName}</Typography>
@@ -74,7 +74,7 @@ const ItemComments = ({ itemId }) => {
       {commentsBlock}
       <Stack direction="row" spacing={1} mt={3} mb={10}>
         <Avatar sx={avatarStyles}>
-          {userInfo.firstName[0]} {userInfo.lastName[0]}
+          {userInfo.firstName[0]}{userInfo.lastName[0]}
         </Avatar>
         <FormComment onCreateComment={onCreateComment} itemId={itemId} />
       </Stack>

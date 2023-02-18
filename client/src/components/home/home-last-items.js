@@ -20,7 +20,6 @@ const HomeLastItems = () => {
     setLoading(true);
     getLastItems()
       .then(res => {
-        console.log(res)
         setLastItems(res);
         setLoading(false);
       })

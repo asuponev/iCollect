@@ -20,7 +20,6 @@ const HomeBiggestCollections = () => {
     setLoading(true);
     getBiggestCollections()
       .then(res => {
-        console.log(res)
         setBiggestCollections(res);
         setLoading(false);
       })
