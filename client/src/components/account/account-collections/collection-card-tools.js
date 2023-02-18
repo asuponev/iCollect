@@ -20,7 +20,11 @@ const CollectionCardTools = ({
       <Tooltip title="Delete collection" placement="bottom">
         <IconButton
           color="#585E67"
-          onClick={() => onDeleteCollection(collectionId)}
+          onClick={() => {
+            if (window.confirm('Are you sure?')) {
+              onDeleteCollection(collectionId);
+            }
+          }}
         >
           <DeleteOutlinedIcon fontSize="small" sx={{ color: "#F43B47" }} />
         </IconButton>
