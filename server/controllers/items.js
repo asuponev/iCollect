@@ -1,6 +1,14 @@
 import Item from '../models/Item.js';
 import Collection from '../models/Collection.js';
 
+const updateCollection = async (collectionId, action) => {
+  const filter = { _id: collectionId };
+  const update = action === 'create'
+    ? { $inc: { items: 1 } }
+    : { $inc: { items: -1 } }
+  await Collection.findOneAndUpdate(filter, update, { new: true });
+}
+
 export const createItem = async (req, res) => {
   try {
     const doc = new Item({
@@ -24,6 +32,7 @@ export const createItem = async (req, res) => {
       checkbox3: req.body.checkbox3,
     });
     const item = await doc.save();
+    updateCollection(item.collectionId, 'create');
     res.json(item);
   } catch (error) {
     console.log(error);
@@ -111,7 +120,8 @@ export const deleteItem = async (req, res) => {
     const collection = await Collection.findById(req.params.collectionId);
     const authorId = collection.authorId.toString();
     if (requestor.role === 'ADMIN' || requestorId === authorId) {
-      await Item.deleteOne({ _id: req.params.itemId })
+      await Item.deleteOne({ _id: req.params.itemId });
+      updateCollection(req.params.collectionId, 'delete');
       res.json({
         message: 'The item was successfully deleted'
       });
