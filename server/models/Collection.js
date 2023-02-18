@@ -22,12 +22,16 @@ const CollectionSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    items: {
+      type: Number,
+      default: 0,
+    },
     coverUrl: String,
     extraFields: Array
   }, {
   timestamps: true
 });
 
-const Collection = mongoose.model('Collections', CollectionSchema);
+const Collection = mongoose.model('Collection', CollectionSchema);
 
 export default Collection;
