@@ -9,6 +9,7 @@ import { registerValidation, loginValidation, collectionValidation, itemValidati
 import { handleValidationsErrors } from '../middlewares/handleValidationsErrors.js';
 import checkAuth from '../middlewares/checkAuth.js';
 import checkAdmin from '../middlewares/checkAdmin.js';
+import checkOwnerCollection from '../middlewares/checkOwnerCollection.js';
 
 const router = new Router();
 
@@ -23,15 +24,15 @@ router.patch('/users', checkAuth, checkAdmin, updateSelectUsers);
 router.get('/users/:userId/collections', checkAuth, getAllCollectionsUser);
 router.post('/collections', checkAuth, collectionValidation, handleValidationsErrors, createCollection);
 router.get('/collections/:collectionId', getOneCollection);
-router.patch('/collections/:collectionId', checkAuth, collectionValidation, handleValidationsErrors, updateCollection);
-router.delete('/collections/:collectionId', checkAuth, deleteCollection);
+router.patch('/collections/:collectionId', checkAuth, checkOwnerCollection, collectionValidation, handleValidationsErrors, updateCollection);
+router.delete('/collections/:collectionId', checkAuth, checkOwnerCollection, deleteCollection);
 
-router.post('/collections/:collectionId', checkAuth, itemValidation, handleValidationsErrors, createItem);
+router.post('/collections/:collectionId', checkAuth, checkOwnerCollection, itemValidation, handleValidationsErrors, createItem);
 router.get('/collections/:collectionId/items', getAllCollectionItems);
 router.get('/collections/:collectionId/items/:itemId', getItem);
-router.patch('/collections/:collectionId/items/:itemId', checkAuth, itemValidation, handleValidationsErrors, updateItem);
-router.delete('/collections/:collectionId/items/:itemId', checkAuth, deleteItem);
-router.delete('/collections/:collectionId/items/', checkAuth, deleteItems);
+router.patch('/collections/:collectionId/items/:itemId', checkAuth, checkOwnerCollection, itemValidation, handleValidationsErrors, updateItem);
+router.delete('/collections/:collectionId/items/:itemId', checkAuth, checkOwnerCollection, deleteItem);
+router.delete('/collections/:collectionId/items/', checkAuth, checkOwnerCollection, deleteItems);
 
 router.post('/comments', checkAuth, createComment);
 router.get('/comments/:itemId', checkAuth, getAllItemComment);

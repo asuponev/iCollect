@@ -26,23 +26,14 @@ export const createCollection = async (req, res) => {
 
 export const updateCollection = async (req, res) => {
   try {
-    const requestor = req.user;
-    const requestorId = requestor._id.toString();
     const collection = await Collection.findById(req.params.collectionId);
-    const authorId = collection.authorId.toString();
-    if (requestor.role === 'ADMIN' || requestorId === authorId) {
-      collection.title = req.body.title;
-      collection.description = req.body.description;
-      collection.subject = req.body.subject;
-      collection.coverUrl = req.body.coverUrl;
-      collection.extraFields = req.body.extraFields;
-      await collection.save();
-      res.json(collection);
-    } else {
-      res.status(403).json({
-        message: 'No access'
-      });
-    }
+    collection.title = req.body.title;
+    collection.description = req.body.description;
+    collection.subject = req.body.subject;
+    collection.coverUrl = req.body.coverUrl;
+    collection.extraFields = req.body.extraFields;
+    await collection.save();
+    res.json(collection);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -53,26 +44,17 @@ export const updateCollection = async (req, res) => {
 
 export const deleteCollection = async (req, res) => {
   try {
-    const requestor = req.user;
-    const requestorId = requestor._id.toString();
     const collection = await Collection.findById(req.params.collectionId);
-    const authorId = collection.authorId.toString();
-    if (requestor.role === 'ADMIN' || requestorId === authorId) {
-      await Collection.deleteOne({ _id: req.params.collectionId });
-      const items = await Item.find({ collectionId: req.params.collectionId });
-      items.forEach(async (item) => {
-        await Item.deleteOne({ _id: item._id });
-        await Like.deleteMany({ itemId: item._id });
-        await Comment.deleteMany({ itemId: item._id });
-      });
-      res.json({
-        message: `Collection "${collection.title}" was successfully deleted`
-      });
-    } else {
-      res.status(403).json({
-        message: 'No access'
-      });
-    }
+    await Collection.deleteOne({ _id: req.params.collectionId });
+    const items = await Item.find({ collectionId: req.params.collectionId });
+    items.forEach(async (item) => {
+      await Item.deleteOne({ _id: item._id });
+      await Like.deleteMany({ itemId: item._id });
+      await Comment.deleteMany({ itemId: item._id });
+    });
+    res.json({
+      message: `Collection "${collection.title}" was successfully deleted`
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
