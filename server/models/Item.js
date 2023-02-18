@@ -6,7 +6,7 @@ const ItemSchema = new mongoose.Schema(
       type: String,
       required: true,
       min: 2,
-      max: 20,
+      max: 30,
     },
     tags: {
       type: Array,

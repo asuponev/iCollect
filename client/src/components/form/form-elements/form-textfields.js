@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material';
 
 export const FormTextField = ({ name, label, register, errors }) => {
-  const validValue = name === 'title' ? 20 : 50;
+  const validValue = name === 'title' ? 30 : 50;
 
   return (
     <TextField
