@@ -1,5 +1,7 @@
 import Item from '../models/Item.js';
 import Collection from '../models/Collection.js';
+import Like from '../models/Like.js';
+import Comment from '../models/Comment.js';
 
 const updateCollection = async (collectionId, action) => {
   const filter = { _id: collectionId };
@@ -121,6 +123,8 @@ export const deleteItem = async (req, res) => {
     const authorId = collection.authorId.toString();
     if (requestor.role === 'ADMIN' || requestorId === authorId) {
       await Item.deleteOne({ _id: req.params.itemId });
+      await Like.deleteMany({ itemId: req.params.itemId });
+      await Comment.deleteMany({ itemId: req.params.itemId });
       updateCollection(req.params.collectionId, 'delete');
       res.json({
         message: 'The item was successfully deleted'
@@ -146,7 +150,11 @@ export const deleteItems = async (req, res) => {
     const collection = await Collection.findById(req.params.collectionId);
     const authorId = collection.authorId.toString();
     if (requestor.role === 'ADMIN' || requestorId === authorId) {
-      selectedItemsId.forEach(async (item) => await Item.deleteOne({ _id: item }))
+      selectedItemsId.forEach(async (item) => {
+        await Item.deleteOne({ _id: item });
+        await Like.deleteMany({ itemId: item });
+        await Comment.deleteMany({ itemId: item });
+      });
       res.json({
         message: 'The items was successfully deleted'
       });
