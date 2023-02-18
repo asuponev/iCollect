@@ -4,7 +4,9 @@ const subjects = [
   'Coins',
   'Postage stamps',
   'Celebrity autographs',
-  'Vinyl records'
+  'Vinyl records',
+  'Seashells',
+  'Postcards'
 ];
 
 export default subjects;
