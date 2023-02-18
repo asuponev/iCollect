@@ -17,7 +17,7 @@ const ItemCard = ({ _id, title, tags, collectionId }) => {
     if (collectionData.authorId) {
       onUserInfoRequest(collectionData.authorId);
     }
-  }, [collectionData.authorId]);
+  }, [collectionData?.authorId]);
 
   const onCollectionRequest = (collectionId) => {
     getOneCollection(collectionId)
@@ -54,7 +54,7 @@ const ItemCard = ({ _id, title, tags, collectionId }) => {
             <Typography fontSize={16} color="#142339" fontWeight={700}>{title}</Typography>
             <ItemTags tags={tags} />
             <Stack direction="row" spacing={1} sx={{ color: "#797E85" }}>
-              <Typography variant="overline">{collectionData.title}</Typography>
+              <Typography variant="overline">{collectionData?.title}</Typography>
               <Typography variant="overline">—</Typography>
               <Typography variant="overline">by {authorInfo.firstName} {authorInfo.lastName}</Typography>
             </Stack>

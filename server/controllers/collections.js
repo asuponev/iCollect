@@ -102,3 +102,15 @@ export const getOneCollection = async (req, res) => {
     });
   }
 }
+
+export const getBiggestCollections = async (req, res) => {
+  try {
+    let data = await Collection.find().sort({ items: -1 }).limit(4).populate('authorId');
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+} 

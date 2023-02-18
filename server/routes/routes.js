@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { register, login, getMe } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
-import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection, deleteCollection } from '../controllers/collections.js';
+import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection, deleteCollection, getBiggestCollections } from '../controllers/collections.js';
 import { createItem, getAllCollectionItems, getItem, updateItem, deleteItem, deleteItems, getLastItems } from '../controllers/items.js';
 import { createComment, getAllItemComment } from '../controllers/comments.js';
 import { addLike, getAllItemLikes, removeLike } from '../controllers/likes.js';
@@ -41,5 +41,6 @@ router.get('/likes/:itemId', checkAuth, getAllItemLikes);
 router.delete('/likes/:itemId', checkAuth, removeLike);
 
 router.get('/items', getLastItems);
+router.get('/collections', getBiggestCollections);
 
 export default router;

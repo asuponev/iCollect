@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Stack, Typography, Card, CardActions, CardContent, CardMedia, CardActionArea, Tooltip, IconButton } from '@mui/material';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import React from 'react';
+import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router';
 import imageNotFound from '../../../utils/constants/image-not-found';
-import { getAllCollectionItems } from '../../../utils/requests/requests';
+import CollectionCardTools from './collection-card-tools';
 
 const CollectionCard = ({
   _id,
@@ -12,23 +10,14 @@ const CollectionCard = ({
   title,
   description,
   coverUrl,
+  authorId,
+  items,
   onEditCollection,
-  onDeleteCollection
+  onDeleteCollection,
+  hidden
 }) => {
   let navigate = useNavigate();
   if (description.length > 100) description = `${description.slice(0, 100)}...`;
-  const [countItems, setCountItems] = useState(0);
-
-  useEffect(() => {
-    getAllCollectionItems(_id)
-    .then(res => {
-      setCountItems(res.length);
-    })
-    .catch(error => {
-      console.log(error);
-      setCountItems(0);
-    })
-  }, [_id]);
 
   return (
     <Card
@@ -45,7 +34,7 @@ const CollectionCard = ({
           image={coverUrl || imageNotFound}
           title={title}
         />
-        <CardContent sx={{ padding: "16px 16px 0", height: 115 }}>
+        <CardContent sx={{ padding: "16px 16px 0", height: 140 }}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -53,30 +42,25 @@ const CollectionCard = ({
             color="text.secondary"
           >
             <Typography variant="overline" lineHeight="18px">{subject}</Typography>
-            <Typography variant="caption">{countItems} items</Typography>
+            <Typography variant="caption">{items} items</Typography>
           </Stack>
           <Typography gutterBottom variant="h6">{title}</Typography>
           <Typography variant="body2" color="text.secondary">{description}</Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions sx={{ padding: 2, alignItems: "center" }}>
-        <Tooltip title="Edit collection" placement="bottom">
-          <IconButton
-            color="#585E67"
-            onClick={() => onEditCollection(_id)}
-          >
-            <EditOutlinedIcon fontSize="small" sx={{ color: "#1E70EB" }} />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Delete collection" placement="bottom">
-          <IconButton
-            color="#585E67"
-            onClick={() => onDeleteCollection(_id)}
-          >
-            <DeleteOutlinedIcon fontSize="small" sx={{ color: "#F43B47" }} />
-          </IconButton>
-        </Tooltip>
-      </CardActions>
+      {
+        !hidden ? (
+          <CollectionCardTools
+            onEditCollection={onEditCollection}
+            onDeleteCollection={onDeleteCollection}
+            collectionId={_id}
+          />
+        ) : (
+          <Stack p={2}>
+            <Typography variant="overline" lineHeight="18px">by {authorId.firstName} {authorId.lastName}</Typography>
+          </Stack>
+        )
+      }
     </Card>
   )
 }

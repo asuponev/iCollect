@@ -228,3 +228,12 @@ export const getLastItems = async () => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const getBiggestCollections = async () => {
+  try {
+    const { data } = await axios.get(`/collections`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
