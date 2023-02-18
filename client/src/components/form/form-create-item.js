@@ -13,7 +13,8 @@ const FormCreateItem = ({
   isEditing,
   valuesForEdit,
   onRequestUpdate,
-  itemId
+  itemId,
+  tagsList
 }) => {
   const { register, handleSubmit, control, formState: { errors }, getValues } = useForm({
     defaultValues: {
@@ -32,8 +33,6 @@ const FormCreateItem = ({
     handleClose();
   }
 
-  const tags = ['one', 'two', 'three']
-
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} style={{ width: 336 }}>
       <Stack>
@@ -50,7 +49,7 @@ const FormCreateItem = ({
             name="tags"
             label="Tags"
             control={control}
-            options={tags}
+            options={tagsList}
             errors={errors}
             defaultValue={getValues().tags ? getValues().tags : []}
           />

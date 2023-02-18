@@ -237,3 +237,12 @@ export const getBiggestCollections = async () => {
     throw new Error(error.response.data.message);
   }
 }
+
+export const getAllTags = async () => {
+  try {
+    const { data } = await axios.get(`/tags`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}

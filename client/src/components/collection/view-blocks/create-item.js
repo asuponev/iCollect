@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-
-import { createItem, getItem, updateItem } from '../../../utils/requests/requests';
+import defaultItemValues from '../../../utils/constants/default-item-values';
+import { createItem, getAllTags, getItem, updateItem } from '../../../utils/requests/requests';
 import FormCreateItem from '../../form/form-create-item';
 
 const CreateItem = ({
@@ -13,25 +13,8 @@ const CreateItem = ({
   extraFields,
   itemId
 }) => {
-  const [valuesForEdit, setValuesForEdit] = useState({
-    title: '',
-    tags: [],
-    number1: 0,
-    number2: 0,
-    number3: 0,
-    string1: '',
-    string2: '',
-    string3: '',
-    text1: '',
-    text2: '',
-    text3: '',
-    date1: '',
-    date2: '',
-    date3: '',
-    checkbox1: false,
-    checkbox2: false,
-    checkbox3: false,
-  })
+  const [valuesForEdit, setValuesForEdit] = useState({ ...defaultItemValues });
+  const [tagsList, setTagsList] = useState([]);
 
   const isEditing = Boolean(itemId);
 
@@ -39,28 +22,16 @@ const CreateItem = ({
     if (isEditing) {
       onGetItemForEdit(collectionId, itemId);
     } else {
-      setValuesForEdit({
-        title: '',
-        tags: [],
-        number1: 0,
-        number2: 0,
-        number3: 0,
-        string1: '',
-        string2: '',
-        string3: '',
-        text1: '',
-        text2: '',
-        text3: '',
-        date1: '',
-        date2: '',
-        date3: '',
-        checkbox1: false,
-        checkbox2: false,
-        checkbox3: false,
-      })
+      setValuesForEdit({ ...defaultItemValues })
     }
     // eslint-disable-next-line
-  }, [isEditing])
+  }, [isEditing]);
+
+  useEffect(() => {
+    getAllTags()
+      .then(res => setTagsList(res))
+      .catch(error => console.log(error));
+  }, []);
 
   const onRequestCreateItem = (collectionId, values) => {
     createItem(collectionId, { ...values })
@@ -139,6 +110,7 @@ const CreateItem = ({
           valuesForEdit={valuesForEdit}
           onRequestUpdate={onRequestUpdateItem}
           itemId={itemId}
+          tagsList={tagsList}
         />
       </DialogContent>
     </Dialog>

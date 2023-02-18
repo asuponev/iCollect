@@ -186,3 +186,17 @@ export const getLastItems = async (req, res) => {
     });
   }
 }
+
+export const getAllTags = async (req, res) => {
+  try {
+    const items = await Item.find();
+    const tags = [];
+    items.forEach(item => tags.push(...item.tags));
+    res.json([...new Set(tags)]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
