@@ -91,6 +91,7 @@ const AccountCollections = ({ userId }) => {
             userId={userId}
             onRequestGetCollections={onRequestGetCollections}
             collectionId={currentCollectionId}
+            toast={toast}
           />
         </Stack>
         <Stack

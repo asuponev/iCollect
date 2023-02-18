@@ -11,7 +11,8 @@ const CreateCollection = ({
   handleCloseModalForm,
   userId,
   onRequestGetCollections,
-  collectionId
+  collectionId,
+  toast
 }) => {
   const [valuesForEdit, setValuesForEdit] = useState({
     title: '',
@@ -19,7 +20,7 @@ const CreateCollection = ({
     description: '',
     coverUrl: '',
     extraFields: []
-  })
+  });
 
   const isEditing = Boolean(collectionId);
 
@@ -36,7 +37,6 @@ const CreateCollection = ({
           })
         }).catch(error => {
           console.log(error);
-          // toast.error(error.message, { position: 'top-right' });
         })
     } else {
       setValuesForEdit({
@@ -55,9 +55,10 @@ const CreateCollection = ({
     createCollection({ ...values })
       .then(res => {
         onRequestGetCollections(userId);
+        toast.success(`Collection "${res.title}" successfully created`, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
-        // toast.error(error.message, { position: 'top-right' });
+        toast.error(error.message, { position: 'top-right' });
       })
   }
 
@@ -65,9 +66,10 @@ const CreateCollection = ({
     updateCollection(collectionId, { ...values })
       .then(res => {
         onRequestGetCollections(userId);
+        toast.success(`Collection "${res.title}" successfully updated`, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
-        // toast.error(error.message, { position: 'top-right' });
+        toast.error(error.message, { position: 'top-right' });
       })
   }
 
