@@ -1,5 +1,8 @@
 import User from '../models/User.js';
 import Collection from '../models/Collection.js';
+import Item from '../models/Item.js';
+import Like from '../models/Like.js';
+import Comment from '../models/Comment.js';
 
 export const createCollection = async (req, res) => {
   try {
@@ -55,7 +58,13 @@ export const deleteCollection = async (req, res) => {
     const collection = await Collection.findById(req.params.collectionId);
     const authorId = collection.authorId.toString();
     if (requestor.role === 'ADMIN' || requestorId === authorId) {
-      await Collection.deleteOne({ _id: req.params.collectionId })
+      await Collection.deleteOne({ _id: req.params.collectionId });
+      const items = await Item.find({ collectionId: req.params.collectionId });
+      items.forEach(async (item) => {
+        await Item.deleteOne({ _id: item._id });
+        await Like.deleteMany({ itemId: item._id });
+        await Comment.deleteMany({ itemId: item._id });
+      });
       res.json({
         message: `Collection "${collection.title}" was successfully deleted`
       });
