@@ -11,7 +11,8 @@ const CreateItem = ({
   handleCloseModalForm,
   onItemsRequest,
   extraFields,
-  itemId
+  itemId,
+  toast
 }) => {
   const [valuesForEdit, setValuesForEdit] = useState({ ...defaultItemValues });
   const [tagsList, setTagsList] = useState([]);
@@ -37,9 +38,10 @@ const CreateItem = ({
     createItem(collectionId, { ...values })
       .then(res => {
         onItemsRequest(collectionId);
+        toast.success(`Item "${res.title}" successfully created`, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
-        // toast.error(error.message, { position: 'top-right' });
+        toast.error(error.message, { position: 'top-right' });
       })
   };
 
@@ -47,9 +49,10 @@ const CreateItem = ({
     updateItem(collectionId, itemId, { ...values })
       .then(res => {
         onItemsRequest(collectionId);
+        toast.success(`Item "${res.title}" successfully updated`, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
-        // toast.error(error.message, { position: 'top-right' });
+        toast.error(error.message, { position: 'top-right' });
       })
   };
 
@@ -75,7 +78,6 @@ const CreateItem = ({
           checkbox2: res.checkbox2 || false,
           checkbox3: res.checkbox2 || false,
         })
-        onItemsRequest(collectionId);
       }).catch(error => {
         console.log(error);
       })

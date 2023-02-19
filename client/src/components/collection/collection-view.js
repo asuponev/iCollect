@@ -42,7 +42,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
 
   const onEditItem = (itemId) => {
     setCurrentItemId(itemId);
-    setTimeout(() => setOpenModalForm(true), 500);
+    setTimeout(() => setOpenModalForm(true), 800);
   };
 
   const handleCloseModalForm = () => {
@@ -109,6 +109,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
               onItemsRequest={onItemsRequest}
               extraFields={collectionData.extraFields}
               itemId={currentItemId}
+              toast={toast}
             />
           </>
         ) : null
