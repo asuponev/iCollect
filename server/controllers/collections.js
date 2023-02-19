@@ -84,7 +84,7 @@ export const getAllCollectionsUser = async (req, res) => {
 
 export const getOneCollection = async (req, res) => {
   try {
-    const collection = await Collection.findById(req.params.collectionId);
+    const collection = await Collection.findById(req.params.collectionId).populate('authorId');
     res.json(collection);
   } catch (error) {
     console.log(error);
