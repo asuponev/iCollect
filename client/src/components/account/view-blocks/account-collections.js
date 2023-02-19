@@ -71,9 +71,14 @@ const AccountCollections = ({ userId }) => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <>
+    <Stack
+      direction="row"
+      alignItems="center"
+      sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
+      mb={6}
+    >
       {cards}
-    </>
+    </Stack>
   ) : null;
 
   return (
@@ -94,17 +99,9 @@ const AccountCollections = ({ userId }) => {
             toast={toast}
           />
         </Stack>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
-          mb={6}
-        >
-          {errorMessage}
-          {spinner}
-          {content}
-        </Stack>
+        {errorMessage}
+        {spinner}
+        {content}
       </Stack>
     </>
 
