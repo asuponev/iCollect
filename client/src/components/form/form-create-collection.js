@@ -66,6 +66,7 @@ const FormCreateCollection = ({
                   setSelectedImg={setSelectedImg}
                   imageUrl={imageUrl}
                   setImageUrl={setImageUrl}
+                  toast={toast}
                 />
               ) : (
                 <FormUploadingImage

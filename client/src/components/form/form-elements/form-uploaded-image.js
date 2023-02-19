@@ -1,11 +1,20 @@
 import { Stack, Box, Tooltip, IconButton } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
+import { storage } from '../../../utils/firebase';
 
-const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl }) => {
+const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => {
+
+  const imageRef = ref(storage, imageUrl);
 
   const onRemoveImg = () => {
     setSelectedImg(null);
     setImageUrl('');
+    deleteObject(imageRef).then(() => {
+      toast.info('Image remove', { position: 'top-right' });
+    }).catch((error) => {
+      console.log(error)
+    });
   }
 
   return (
