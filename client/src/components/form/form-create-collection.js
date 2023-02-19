@@ -58,7 +58,7 @@ const FormCreateCollection = ({
       <ToastContainer />
       <form onSubmit={handleSubmit(onFormSubmit)} style={{ width: 336 }}>
         <Stack>
-          <Box my={2}>
+          <Box mb={2}>
             {
               (selectedImg instanceof File && imageUrl) ||
                 (isEditing && imageUrl) ? (
