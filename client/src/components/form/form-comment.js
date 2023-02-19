@@ -20,6 +20,7 @@ const FormComment = ({ onCreateComment, itemId }) => {
           onChange={event => setMessage(event.target.value)}
           sx={{ border: "1px solid #DEDFE1" }}
           placeholder="Text"
+          required
         />
       </Box>
       <Button type="submit" variant="contained">Send</Button>
