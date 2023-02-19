@@ -17,11 +17,11 @@ router.post('/auth/register', registerValidation, handleValidationsErrors, regis
 router.post('/auth/login', loginValidation, handleValidationsErrors, login);
 router.get('/auth/me', checkAuth, getMe);
 
-router.get('/users/:userId', checkAuth, getUser);
+router.get('/users/:userId', getUser);
 router.get('/users', checkAuth, checkAdmin, getAllUsers);
 router.patch('/users', checkAuth, checkAdmin, updateSelectUsers);
 
-router.get('/users/:userId/collections', checkAuth, getAllCollectionsUser);
+router.get('/users/:userId/collections', getAllCollectionsUser);
 router.post('/collections', checkAuth, collectionValidation, handleValidationsErrors, createCollection);
 router.get('/collections/:collectionId', getOneCollection);
 router.patch('/collections/:collectionId', checkAuth, checkOwnerCollection, collectionValidation, handleValidationsErrors, updateCollection);
