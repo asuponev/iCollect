@@ -17,11 +17,12 @@ export const Login = () => {
   const onFormSubmit = async (values) => {
     authApi('login', { ...values })
       .then(res => {
-        localStorage.setItem('token', res.token);
-        setStatus({ ...status, isAuth: true });
+        localStorage.setItem('token', res.token); 
         setUserInfo({...userInfo, firstName: res.firstName, lastName: res.lastName, userId: res._id});
         if (res.role === 'ADMIN') {
-          setStatus({ ...status, isAdmin: true });
+          setStatus({ ...status, isAdmin: true, isAuth: true });
+        } else {
+          setStatus({ ...status, isAuth: true });
         }
         navigate('/');
       }).catch(error => {
