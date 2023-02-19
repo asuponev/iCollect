@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -24,13 +25,19 @@ const Footer = () => {
           <Typography
             color="#9B9EA4"
             fontSize={12}
-            fontWeight={400}>© 2023 iCollect. All rights reserved.</Typography>
-          <Link to="https://github.com/elsuppo" target="_blank">
+            fontWeight={400}
+          >© 2023 iCollect. All rights reserved.
+          </Typography>
+          <Link
+            to="https://github.com/elsuppo"
+            target="_blank"
+            style={{ textDecoration: 'none' }}
+          >
             <Typography
-              color="#142339"
+              color="#9B9EA4"
               fontSize={12}
               fontWeight={400}
-              sx={{ "&:hover": { color: "#0D6EFD" } }}
+              sx={{ "&:hover": { color: "#000000" } }}
             >Development</Typography>
           </Link>
         </Stack>
