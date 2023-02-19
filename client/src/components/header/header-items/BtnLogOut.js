@@ -3,7 +3,7 @@ import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import GlobalContext from '../../../utils/context/GlobalContext';
 
-export const BtnLogOut = () => {
+export const BtnLogOut = ({ onMenuToggle }) => {
   const { userInfo, setUserInfo } = useContext(GlobalContext);
   const { status, setStatus } = useContext(GlobalContext);
   let navigate = useNavigate();
@@ -13,6 +13,7 @@ export const BtnLogOut = () => {
     setStatus({ ...status, isAdmin: false, isAuth: false });
     setUserInfo({ ...userInfo, userId: '', firstName: '', lastName: '' });
     navigate('/');
+    onMenuToggle();
   }
 
   return (

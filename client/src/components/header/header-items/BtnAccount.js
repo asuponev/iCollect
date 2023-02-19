@@ -4,14 +4,19 @@ import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
 import GlobalContext from '../../../utils/context/GlobalContext';
 
-export const BtnAccount = () => {
+export const BtnAccount = ({ onMenuToggle }) => {
   const { userInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
+
+  const onHandleClick = () => {
+    navigate(`/users/${userInfo.userId}`);
+    onMenuToggle();
+  };
 
   return (
     <Button
       variant="text"
-      onClick={() => navigate(`/users/${userInfo.userId}`)}
+      onClick={onHandleClick}
       startIcon={
         <PermIdentityOutlinedIcon sx={{ color: "#FFFFFF" }} />
       }

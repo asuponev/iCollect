@@ -3,13 +3,18 @@ import { Button, Typography } from '@mui/material';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useNavigate } from 'react-router';
 
-export const BtnAdminPanel = () => {
+export const BtnAdminPanel = ({ onMenuToggle }) => {
   let navigate = useNavigate();
+
+  const onHandleClick = () => {
+    navigate('/admin')
+    onMenuToggle();
+  };
 
   return (
     <Button
       variant="text"
-      onClick={() => navigate('/admin')}
+      onClick={onHandleClick}
       startIcon={
         <AppsOutlinedIcon sx={{ color: "#FFFFFF" }} />
       }

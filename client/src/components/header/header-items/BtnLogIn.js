@@ -2,11 +2,12 @@ import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 
-export const BtnLogIn = () => {
+export const BtnLogIn = ({ onMenuToggle }) => {
   let navigate = useNavigate();
 
   const onClickLogin = () => {
     navigate('/login');
+    onMenuToggle();
   };
 
   return (

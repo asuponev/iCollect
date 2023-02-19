@@ -18,7 +18,7 @@ export const ThemeSwitcher = () => {
   };
 
   return (
-    <Stack sx={{ background: "#192B45", borderRadius: "4px" }}>
+    <Stack sx={{ background: "#192B45", borderRadius: "4px", height: 32 }}>
       <Tooltip
         title={
           theme === 'dark'
