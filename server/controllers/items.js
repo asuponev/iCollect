@@ -96,7 +96,8 @@ export const getAllCollectionItems = async (req, res) => {
 export const getItem = async (req, res) => {
   try {
     const item = await Item.findById(req.params.itemId);
-    res.json(item);
+    const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+    res.json({ ...item._doc, collection });
   } catch (error) {
     console.log(error);
     res.status(500).json({

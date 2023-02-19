@@ -2,17 +2,20 @@ import React from 'react';
 
 import BreadCrumbs from '../../BreadCrumbs';
 
-const ItemBreadcrumbs = ({ itemData, collectionData, authorData }) => {
+const ItemBreadcrumbs = ({ itemData }) => {
 
-  const authorName = `${authorData.firstName || ''} ${authorData.lastName || ''}`;
-  const collectionTitle = `${collectionData.title}`;
+  const authorName = `
+    ${itemData.collection.authorId.firstName || ''} 
+    ${itemData.collection.authorId.lastName || ''}
+  `;
+  const collectionTitle = `${itemData.collection.title}`;
 
   return (
     <BreadCrumbs
       prevLinks={[
         { Home: '/' },
-        { [authorName]: `/users/${authorData._id}` },
-        { [collectionTitle]: `/collections/${collectionData._id}` }
+        { [authorName]: `/users/${itemData.collection.authorId._id}` },
+        { [collectionTitle]: `/collections/${itemData.collection._id}` }
       ]}
       current={itemData.title}
     />
