@@ -7,7 +7,7 @@ export const BtnLogIn = () => {
 
   const onClickLogin = () => {
     navigate('/login');
-  }
+  };
 
   return (
     <Button

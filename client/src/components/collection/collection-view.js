@@ -18,7 +18,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
 
   useEffect(() => {
     onItemsRequest(collectionId);
-  }, [collectionId])
+  }, [collectionId]);
 
   const onItemsRequest = (collectionId) => {
     setError(null);
@@ -32,11 +32,11 @@ const CollectionView = ({ collectionId, collectionData }) => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const onCreateItem = () => {
     setOpenModalForm(true);
-  }
+  };
 
   const onEditItem = (itemId) => {
     setCurrentItemId(itemId);
@@ -58,19 +58,19 @@ const CollectionView = ({ collectionId, collectionData }) => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
       })
-  }
+  };
 
   const onDeleteItems = (items) => {
     deleteItems(collectionId, items)
-    .then(res => {
-      toast.info(res.message, { position: 'top-right' });
-      onItemsRequest(collectionId);
-    })
-    .catch(error => {
-      console.log(error);
-      toast.error(error.message, { position: 'top-right' });
-    })
-  }
+      .then(res => {
+        toast.info(res.message, { position: 'top-right' });
+        onItemsRequest(collectionId);
+      })
+      .catch(error => {
+        console.log(error);
+        toast.error(error.message, { position: 'top-right' });
+      })
+  };
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;

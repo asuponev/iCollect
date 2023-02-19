@@ -39,7 +39,7 @@ const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
         </CardContent>
       </CardActionArea>
     </Card>
-  )
+  );
 }
 
 export default ItemCard;

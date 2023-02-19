@@ -22,11 +22,11 @@ const TableItems = ({
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 70 },
     { field: 'title', headerName: 'Item', flex: 1, minWidth: 130 },
     { field: 'tags', headerName: 'Tags', flex: 1, minWidth: 130 },
-  ]
+  ];
 
   const extraColumns = extraFields.map(field => {
     return { field: field.type, headerName: field.name, flex: 1, minWidth: 130 }
-  })
+  });
 
   const actionColumns = [
     {
@@ -57,13 +57,13 @@ const TableItems = ({
           }}
         />]
     },
-  ]
+  ];
 
   const columns = [
     ...constantColumns,
     ...extraColumns,
     ...actionColumns
-  ]
+  ];
 
   const rows = items.map(item => {
     let newItem = {}
@@ -77,8 +77,7 @@ const TableItems = ({
     return {
       ...newItem
     }
-
-  })
+  });
 
   const tableSize = items.length > 10 ? 10 : items.length;
   const tableHeight = tableSize * 40 + 100;

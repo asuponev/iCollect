@@ -1,5 +1,4 @@
 import React from 'react';
-
 import BreadCrumbs from '../../BreadCrumbs';
 
 const ItemBreadcrumbs = ({ itemData }) => {
@@ -19,7 +18,7 @@ const ItemBreadcrumbs = ({ itemData }) => {
       ]}
       current={itemData.title}
     />
-  )
+  );
 }
 
 export default ItemBreadcrumbs;

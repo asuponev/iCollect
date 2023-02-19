@@ -11,7 +11,7 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
   useEffect(() => {
     uploadImg(selectedImg);
     // eslint-disable-next-line
-  }, [selectedImg])
+  }, [selectedImg]);
 
   const uploadImg = (img) => {
     if (!img) return;
@@ -26,7 +26,7 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
         getDownloadURL(uploadTask.snapshot.ref)
           .then(url => setImageUrl(url));
       })
-  }
+  };
 
   return (
     <>
@@ -78,7 +78,7 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
         }}
       />
     </>
-  )
+  );
 }
 
 export default FormUploadingImage;

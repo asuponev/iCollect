@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import imageNotFound from '../../../utils/constants/image-not-found';
 import CollectionCardTools from './collection-card-tools';
 
@@ -57,12 +58,14 @@ const CollectionCard = ({
           />
         ) : (
           <Stack p={2}>
-            <Typography variant="overline" lineHeight="18px">by {authorId.firstName} {authorId.lastName}</Typography>
+            <Typography variant="overline" lineHeight="18px" color="#797E85">
+              by <Link to={`/users/${authorId._id}`}>{authorId.firstName} {authorId.lastName}</Link>
+            </Typography>
           </Stack>
         )
       }
     </Card>
-  )
+  );
 }
 
 export default CollectionCard;

@@ -1,9 +1,15 @@
+import React from 'react';
 import { IconButton, Stack, Typography, Divider, Tooltip } from '@mui/material';
 import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
 
-const AdminTableTools = ({ selectedUsers, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
+const AdminTableTools = ({
+  selectedUsers,
+  deleteSelectedUsers,
+  blockSelectedUsers,
+  makeAdminSelectedUsers
+}) => {
 
   return (
     <Stack spacing={2} mt={2} mb={3}>
@@ -39,7 +45,7 @@ const AdminTableTools = ({ selectedUsers, deleteSelectedUsers, blockSelectedUser
               </IconButton>
             </Tooltip>
             <Tooltip title="Make admin / Withdraw authority" placement="top">
-              <IconButton 
+              <IconButton
                 color="#585E67"
                 onClick={() => {
                   if (window.confirm('Are you sure?')) {
@@ -53,9 +59,8 @@ const AdminTableTools = ({ selectedUsers, deleteSelectedUsers, blockSelectedUser
           </Stack>
         )
       }
-
     </Stack>
-  )
+  );
 }
 
 export default AdminTableTools;

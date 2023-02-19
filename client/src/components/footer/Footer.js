@@ -30,13 +30,13 @@ const Footer = () => {
               color="#142339"
               fontSize={12}
               fontWeight={400}
-              sx={{ "&:hover": { color: "#2F4059" } }}
+              sx={{ "&:hover": { color: "#0D6EFD" } }}
             >Development</Typography>
           </Link>
         </Stack>
       </Container>
     </Box>
-  )
+  );
 }
 
 export default Footer;

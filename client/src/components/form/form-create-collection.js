@@ -39,7 +39,7 @@ const FormCreateCollection = ({
       setExtraFields([]);
     }
     // eslint-disable-next-line
-  }, [isEditing])
+  }, [isEditing]);
 
   const onFormSubmit = async (values) => {
     values.extraFields = extraFields;
@@ -51,7 +51,7 @@ const FormCreateCollection = ({
       onRequestCreate(values);
     }
     handleClose();
-  }
+  };
 
   return (
     <>
@@ -124,7 +124,7 @@ const FormCreateCollection = ({
         </Box>
       </form>
     </>
-  )
+  );
 }
 
 export default FormCreateCollection;

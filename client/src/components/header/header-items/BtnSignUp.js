@@ -7,7 +7,7 @@ export const BtnSignUp = () => {
 
   const onClickSignUp = () => {
     navigate('/register');
-  }
+  };
 
   return (
     <Button

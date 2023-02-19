@@ -27,7 +27,7 @@ const HomeBiggestCollections = () => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const collections = biggestCollections.map(collection => {
     return (
@@ -37,7 +37,7 @@ const HomeBiggestCollections = () => {
         hidden={true}
       />
     )
-  })
+  });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -54,7 +54,7 @@ const HomeBiggestCollections = () => {
       {spinner}
       {content}
     </Stack>
-  )
+  );
 }
 
 export default HomeBiggestCollections;

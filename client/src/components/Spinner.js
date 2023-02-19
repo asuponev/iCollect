@@ -6,7 +6,7 @@ const Spinner = () => {
       <CircularProgress />
       <Typography>Loading</Typography>
     </Stack>
-  )
+  );
 }
 
 export default Spinner;

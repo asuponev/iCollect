@@ -28,7 +28,7 @@ export const Item = () => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -42,5 +42,5 @@ export const Item = () => {
       {spinner}
       {content}
     </>
-  )
+  );
 }

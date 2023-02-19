@@ -27,7 +27,7 @@ const HomeLastItems = () => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const items = lastItems.map(item => {
     return (
@@ -36,7 +36,7 @@ const HomeLastItems = () => {
         {...item}
       />
     )
-  })
+  });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -53,7 +53,7 @@ const HomeLastItems = () => {
       {spinner}
       {content}
     </Stack>
-  )
+  );
 }
 
 export default HomeLastItems;

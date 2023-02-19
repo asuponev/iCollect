@@ -28,7 +28,7 @@ const ItemComments = ({ itemId }) => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const onCreateComment = (itemId, message) => {
     createComment(itemId, message)
@@ -38,14 +38,14 @@ const ItemComments = ({ itemId }) => {
       .catch(error => {
         console.log(error);
       })
-  }
+  };
 
   const avatarStyles = {
     background: "linear-gradient(180deg, #F43B47 0%, #453A94 100%)",
     width: 40,
     height: 40,
     fontSize: 16,
-  }
+  };
 
   const commentsBlock = commentsData.map(comment => {
     return (
@@ -64,7 +64,7 @@ const ItemComments = ({ itemId }) => {
         </Stack>
       </Stack>
     )
-  })
+  });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -93,7 +93,7 @@ const ItemComments = ({ itemId }) => {
         ) : null
       }
     </>
-  )
+  );
 }
 
 export default ItemComments;

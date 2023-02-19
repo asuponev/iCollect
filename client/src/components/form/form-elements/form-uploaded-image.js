@@ -16,7 +16,7 @@ const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => 
       console.log(error);
       toast.error(error.message, { position: 'top-right' });
     });
-  }
+  };
 
   return (
     <>
@@ -35,7 +35,7 @@ const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => 
         <img src={imageUrl} alt="uploaded" style={{ maxWidth: 336, maxHeight: 160, objectFit: "cover" }}></img>
       </Stack>
     </>
-  )
+  );
 }
 
 export default FormUploadedImage;

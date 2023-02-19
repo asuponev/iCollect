@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button } from '@mui/material';
 import { FormTextField, FormEmailField, FormPswField } from './form-elements/form-textfields';
 
@@ -38,7 +39,7 @@ const FormRegister = ({ register, handleSubmit, errors, onFormSubmit }) => {
         variant="contained"
         fullWidth>Create an Account</Button>
     </form>
-  )
+  );
 }
 
 export default FormRegister;

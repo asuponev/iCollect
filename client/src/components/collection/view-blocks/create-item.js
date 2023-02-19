@@ -41,7 +41,7 @@ const CreateItem = ({
         console.log(error);
         // toast.error(error.message, { position: 'top-right' });
       })
-  }
+  };
 
   const onRequestUpdateItem = (collectionId, itemId, values) => {
     updateItem(collectionId, itemId, { ...values })
@@ -51,7 +51,7 @@ const CreateItem = ({
         console.log(error);
         // toast.error(error.message, { position: 'top-right' });
       })
-  }
+  };
 
   const onGetItemForEdit = (collectionId, itemId) => {
     getItem(collectionId, itemId)
@@ -79,7 +79,7 @@ const CreateItem = ({
       }).catch(error => {
         console.log(error);
       })
-  }
+  };
 
   return (
     <Dialog open={openModalForm} onClose={handleCloseModalForm}>
@@ -114,7 +114,7 @@ const CreateItem = ({
         />
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 
 export default CreateItem;

@@ -9,7 +9,7 @@ const FormComment = ({ onCreateComment, itemId }) => {
     event.preventDefault();
     onCreateComment(itemId, message);
     setMessage('');
-  }
+  };
 
   return (
     <form style={{ width: "100%" }} onSubmit={(event) => onFormSubmit(event, message)}>

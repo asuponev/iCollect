@@ -34,7 +34,7 @@ const ItemLikes = ({ itemId }) => {
         setIsLike(false);
         console.log(error);
       })
-  }
+  };
 
   const onRemoveLike = (itemId) => {
     setIsLike(false);
@@ -45,7 +45,7 @@ const ItemLikes = ({ itemId }) => {
         setIsLike(true);
         console.log(error);
       })
-  }
+  };
 
   const onGetRequest = (itemId) => {
     getAllItemLikes(itemId)
@@ -55,7 +55,7 @@ const ItemLikes = ({ itemId }) => {
         console.log(error);
         setLikesData([]);
       })
-  }
+  };
 
   return (
     <>
@@ -79,7 +79,7 @@ const ItemLikes = ({ itemId }) => {
         ) : null
       }
     </>
-  )
+  );
 }
 
 export default ItemLikes;

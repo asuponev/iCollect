@@ -1,6 +1,5 @@
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
-
 import imageNotFound from '../../../utils/constants/image-not-found';
 
 const CollectionInfo = ({ data }) => {

@@ -13,7 +13,7 @@ export const Admin = () => {
 
   useEffect(() => {
     onRequest(getUsers);
-  }, [])
+  }, []);
 
   const onRequest = (request, users) => {
     setError(null);
@@ -27,28 +27,28 @@ export const Admin = () => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const deleteSelectedUsers = (users) => {
     if (users) {
       onRequest(updateUsers, [users, 'delete']);
       onRequest(getUsers);
     }
-  }
+  };
 
   const blockSelectedUsers = (users) => {
     if (users) {
       onRequest(updateUsers, [users, 'block']);
       onRequest(getUsers);
     }
-  }
+  };
 
   const makeAdminSelectedUsers = (users) => {
     if (users) {
       onRequest(updateUsers, [users, 'admin']);
       onRequest(getUsers);
     }
-  }
+  };
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;

@@ -31,7 +31,7 @@ const FormCreateItem = ({
       onRequestCreate(collectionId, values);
     }
     handleClose();
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} style={{ width: 336 }}>
@@ -69,7 +69,7 @@ const FormCreateItem = ({
         <Button variant="text" onClick={() => handleClose()}>Cancel</Button>
       </Box>
     </form>
-  )
+  );
 }
 
 export default FormCreateItem;

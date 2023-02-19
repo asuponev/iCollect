@@ -18,13 +18,13 @@ const ItemExtraFields = ({ itemData, extraFields }) => {
         }
       })
     }
-  }
+  };
 
   return (
     <>
       {extraFieldsView}
     </>
-  )
+  );
 }
 
 export default ItemExtraFields;

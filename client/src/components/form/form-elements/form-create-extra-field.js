@@ -9,22 +9,22 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
     let newExtraField = [...extraFields];
     newExtraField[i][e.target.name] = e.target.value;
     setExtraFields(newExtraField);
-  }
+  };
 
   const addExtraFields = () => {
     setExtraFields([...extraFields, { name: '', type: '' }]);
-  }
+  };
 
   const removeExtraFields = (i) => {
     let newExtraField = [...extraFields];
     newExtraField.splice(i, 1);
     setExtraFields(newExtraField);
-  }
+  };
 
   return (
     <>
       {extraFields.map((element, index) => (
-        <Box 
+        <Box
           my={2}
           display="flex"
           justifyContent="space-between"
@@ -58,14 +58,14 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
             onClick={() => removeExtraFields(index)}
             sx={{ width: 35, height: 35 }}
           >
-            <RemoveIcon sx={{ width: 20, height: 20 }}/>
+            <RemoveIcon sx={{ width: 20, height: 20 }} />
           </IconButton>
         </Box>
       ))
       }
       <Button onClick={() => addExtraFields()}>Add extra field for items</Button>
     </>
-  )
+  );
 }
 
 export default FormCreateExtraField;

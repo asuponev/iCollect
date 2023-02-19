@@ -22,8 +22,8 @@ export const FormTextField = ({ name, label, register, errors }) => {
       helperText={errors[name]?.message}
       fullWidth
     />
-  )
-}
+  );
+};
 
 export const FormEmailField = ({ register, errors }) => {
   return (
@@ -41,8 +41,8 @@ export const FormEmailField = ({ register, errors }) => {
       error={!!errors.email}
       helperText={errors.email && `${errors.email.message}`}
     />
-  )
-}
+  );
+};
 
 export const FormPswField = ({ register, errors }) => {
   return (
@@ -60,8 +60,8 @@ export const FormPswField = ({ register, errors }) => {
       error={!!errors.password}
       helperText={errors.password && `${errors.password.message}`}
     />
-  )
-}
+  );
+};
 
 export const FieldDescription = ({ name, label, register, errors }) => {
   return (
@@ -79,5 +79,5 @@ export const FieldDescription = ({ name, label, register, errors }) => {
       helperText={errors[name]?.message}
       fullWidth
     />
-  )
-}
+  );
+};

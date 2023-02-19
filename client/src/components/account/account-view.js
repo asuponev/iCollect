@@ -7,8 +7,7 @@ const AccountView = ({ userData, userId }) => {
       <UserInfo userData={userData} />
       <AccountCollections userId={userId} />
     </>
-
-  )
+  );
 }
 
 export default AccountView;

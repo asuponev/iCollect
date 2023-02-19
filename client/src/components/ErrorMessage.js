@@ -7,8 +7,7 @@ const ErrorMessage = ({ error }) => {
       <ErrorOutlineIcon fontSize="large"/>
       <Typography>{error}</Typography>
     </Stack>
-
-  )
+  );
 }
 
 export default ErrorMessage;

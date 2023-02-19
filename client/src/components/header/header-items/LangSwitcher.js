@@ -7,7 +7,7 @@ export const LangSwitcher = () => {
   const handleChange = (event) => {
     setLang(event.target.value);
     localStorage.setItem('lang', event.target.value);
-  }
+  };
 
   return (
     <FormControl>
@@ -35,5 +35,5 @@ export const LangSwitcher = () => {
         <MenuItem value={"ru"}>Ru</MenuItem>
       </Select>
     </FormControl>
-  )
+  );
 }

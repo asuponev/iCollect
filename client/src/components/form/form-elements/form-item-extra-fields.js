@@ -59,7 +59,7 @@ const FormItemExtraFields = ({ extraFields, register, valuesForEdit }) => {
         )
       })}
     </>
-  )
+  );
 }
 
 export default FormItemExtraFields;

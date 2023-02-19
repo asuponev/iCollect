@@ -1,5 +1,4 @@
 import React from 'react';
-
 import BreadCrumbs from '../../BreadCrumbs';
 
 const CollectionBreadcrumbs = ({ collectionData }) => {
@@ -17,7 +16,7 @@ const CollectionBreadcrumbs = ({ collectionData }) => {
       ]}
       current={collectionData.title}
     />
-  )
+  );
 }
 
 export default CollectionBreadcrumbs;

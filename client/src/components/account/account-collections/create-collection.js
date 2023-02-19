@@ -48,7 +48,7 @@ const CreateCollection = ({
       })
     }
     // eslint-disable-next-line
-  }, [isEditing])
+  }, [isEditing]);
 
 
   const onRequestCreateCollection = (values) => {
@@ -60,7 +60,7 @@ const CreateCollection = ({
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
       })
-  }
+  };
 
   const onRequestUpdateCollection = (collectionId, values) => {
     updateCollection(collectionId, { ...values })
@@ -71,7 +71,7 @@ const CreateCollection = ({
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
       })
-  }
+  };
 
   return (
     <Dialog open={openModalForm} onClose={handleCloseModalForm}>

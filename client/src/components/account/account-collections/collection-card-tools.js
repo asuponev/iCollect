@@ -30,7 +30,7 @@ const CollectionCardTools = ({
         </IconButton>
       </Tooltip>
     </CardActions>
-  )
+  );
 }
 
 export default CollectionCardTools;

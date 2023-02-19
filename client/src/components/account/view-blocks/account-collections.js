@@ -16,7 +16,7 @@ const AccountCollections = ({ userId }) => {
 
   useEffect(() => {
     onRequestGetCollections(userId);
-  }, [userId])
+  }, [userId]);
 
   const onRequestGetCollections = (userId) => {
     setError(null);
@@ -30,7 +30,7 @@ const AccountCollections = ({ userId }) => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const handleCloseModalForm = () => {
     setOpenModalForm(false);
@@ -39,12 +39,12 @@ const AccountCollections = ({ userId }) => {
 
   const onCreateCollection = () => {
     setOpenModalForm(true);
-  }
+  };
 
   const onEditCollection = (collectionId) => {
     setCurrentCollectionId(collectionId);
     setTimeout(() => setOpenModalForm(true), 500);
-  }
+  };
 
   const onDeleteCollection = (collectionId) => {
     deleteCollection(collectionId)
@@ -55,7 +55,7 @@ const AccountCollections = ({ userId }) => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
       })
-  }
+  };
 
   const cards = collections.map(collection => {
     return (
@@ -65,8 +65,8 @@ const AccountCollections = ({ userId }) => {
         onEditCollection={onEditCollection}
         onDeleteCollection={onDeleteCollection}
       />
-    )
-  })
+    );
+  });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -104,8 +104,7 @@ const AccountCollections = ({ userId }) => {
         {content}
       </Stack>
     </>
-
-  )
+  );
 }
 
 export default AccountCollections;

@@ -21,7 +21,7 @@ const ItemTags = ({ tags }) => {
     <Stack direction="row" alignItems="center" justifyContent="flex-start">
       {tagsView}
     </Stack>
-  )
+  );
 }
 
 export default ItemTags;

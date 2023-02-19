@@ -44,7 +44,7 @@ const ItemView = ({ itemData }) => {
       </Stack>
       <ItemComments itemId={itemData._id} />
     </>
-  )
+  );
 }
 
 export default ItemView;

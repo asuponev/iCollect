@@ -1,3 +1,4 @@
+import React from 'react';
 import { Stack, Avatar, Typography } from '@mui/material';
 import ErrorMessage from '../../ErrorMessage';
 
@@ -20,7 +21,7 @@ const UserInfo = ({ userData }) => {
       <Typography variant="caption" fontSize="14px" color="text.secondary">{userData.email}</Typography>
       </Stack>
     </Stack>
-  )
+  );
 }
 
 export default UserInfo;

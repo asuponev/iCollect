@@ -22,4 +22,4 @@ export const tableStyles = {
   "& .MuiTablePagination-displayedRows": {
     margin: 0
   }
-}
+};

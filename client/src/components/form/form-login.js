@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button } from '@mui/material';
 import { FormEmailField, FormPswField } from './form-elements/form-textfields';
 
@@ -21,7 +22,7 @@ const FormLogin = ({ register, handleSubmit, errors, onFormSubmit }) => {
         variant="contained"
         fullWidth>Log In</Button>
     </form>
-  )
+  );
 }
 
 export default FormLogin;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getOneCollection, getOneUser } from '../utils/requests/requests';
+import { getOneCollection } from '../utils/requests/requests';
 
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
@@ -29,7 +29,7 @@ export const Collection = () => {
         setLoading(false);
         setError(error.message);
       })
-  }
+  };
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
