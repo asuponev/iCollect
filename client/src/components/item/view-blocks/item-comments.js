@@ -8,7 +8,7 @@ import ErrorMessage from '../../ErrorMessage';
 import Spinner from '../../Spinner';
 
 const ItemComments = ({ itemId }) => {
-  const { userInfo, status } = useContext(GlobalContext);
+  const { userInfo } = useContext(GlobalContext);
   const [commentsData, setCommentData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -83,15 +83,9 @@ const ItemComments = ({ itemId }) => {
 
   return (
     <>
-      {
-        status.isAuth ? (
-          <>
-            {errorMessage}
-            {spinner}
-            {content}
-          </>
-        ) : null
-      }
+      {errorMessage}
+      {spinner}
+      {content}
     </>
   );
 }

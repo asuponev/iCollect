@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Stack, Typography } from '@mui/material';
 
 import ItemBreadcrumbs from './view-blocks/item-breadcrumbs';
@@ -6,8 +6,10 @@ import ItemLikes from './view-blocks/item-likes';
 import ItemTags from './view-blocks/item-tags';
 import ItemExtraFields from './view-blocks/item-extra-fields';
 import ItemComments from './view-blocks/item-comments';
+import GlobalContext from '../../utils/context/GlobalContext';
 
 const ItemView = ({ itemData }) => {
+  const { status } = useContext(GlobalContext);
   const collectionTitle = itemData.collection.title,
     authorFirstName = itemData.collection.authorId.firstName,
     authorLastName = itemData.collection.authorId.lastName;
@@ -25,7 +27,9 @@ const ItemView = ({ itemData }) => {
       >
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography variant="caption">ID {itemData._id}</Typography>
-          <ItemLikes itemId={itemData._id} />
+          {
+            status.isAuth ? <ItemLikes itemId={itemData._id} /> : null
+          }
         </Stack>
         <Typography fontSize={24} fontWeight={700}>{itemData.title}</Typography>
         <Stack direction="row" spacing={1} sx={{ color: "#797E85" }}>
@@ -42,7 +46,9 @@ const ItemView = ({ itemData }) => {
           extraFields={itemData.collection.extraFields}
         />
       </Stack>
-      <ItemComments itemId={itemData._id} />
+      {
+        status.isAuth ? <ItemComments itemId={itemData._id} /> : null
+      }
     </>
   );
 }

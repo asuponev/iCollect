@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Stack, Typography, Button } from '@mui/material';
 import Spinner from '../../Spinner';
 import ErrorMessage from '../../ErrorMessage';
@@ -6,8 +6,10 @@ import { getAllCollectionsUser, deleteCollection } from '../../../utils/requests
 import CreateCollection from '../account-collections/create-collection';
 import CollectionCard from '../account-collections/collection-card';
 import { ToastContainer, toast } from 'react-toastify';
+import GlobalContext from '../../../utils/context/GlobalContext';
 
 const AccountCollections = ({ userId }) => {
+  const { status } = useContext(GlobalContext);
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -87,17 +89,23 @@ const AccountCollections = ({ userId }) => {
       <Stack>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
           <Typography variant="h5" fontWeight="500">Collections</Typography>
-          <Button variant="contained" onClick={onCreateCollection}>
-            + Add Collection
-          </Button>
-          <CreateCollection
-            openModalForm={openModalForm}
-            handleCloseModalForm={handleCloseModalForm}
-            userId={userId}
-            onRequestGetCollections={onRequestGetCollections}
-            collectionId={currentCollectionId}
-            toast={toast}
-          />
+          {
+            status.isAuth ? (
+              <>
+                <Button variant="contained" onClick={onCreateCollection}>
+                  + Add Collection
+                </Button>
+                <CreateCollection
+                  openModalForm={openModalForm}
+                  handleCloseModalForm={handleCloseModalForm}
+                  userId={userId}
+                  onRequestGetCollections={onRequestGetCollections}
+                  collectionId={currentCollectionId}
+                  toast={toast}
+                />
+              </>
+            ) : null
+          }
         </Stack>
         {errorMessage}
         {spinner}

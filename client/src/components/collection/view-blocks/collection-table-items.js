@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import LaunchIcon from '@mui/icons-material/Launch';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import GlobalContext from '../../../utils/context/GlobalContext';
 
 import { tableStyles } from '../../admin/table-styles';
 
@@ -16,6 +17,7 @@ const TableItems = ({
   onEditItem,
   onDeleteItem
 }) => {
+  const { status } = useContext(GlobalContext);
   if (!items) items = [];
 
   const constantColumns = [
@@ -28,7 +30,7 @@ const TableItems = ({
     return { field: field.type, headerName: field.name, flex: 1, minWidth: 130 }
   });
 
-  const actionColumns = [
+  const actionColumns = status.isAuth ? [
     {
       field: 'view', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
@@ -55,6 +57,15 @@ const TableItems = ({
               onDeleteItem(params.id);
             }
           }}
+        />]
+    },
+  ] : [
+    {
+      field: 'view', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={<LaunchIcon color="primary" />}
+          label="View item"
+          onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
         />]
     },
   ];
@@ -89,7 +100,7 @@ const TableItems = ({
         columns={columns}
         pageSize={tableSize}
         rowsPerPageOptions={[tableSize]}
-        checkboxSelection
+        checkboxSelection={status.isAuth ? true : false}
         headerHeight={44}
         rowHeight={40}
         onSelectionModelChange={(newSelect) => {

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import imageNotFound from '../../../utils/constants/image-not-found';
 import CollectionCardTools from './collection-card-tools';
+import GlobalContext from '../../../utils/context/GlobalContext';
 
 const CollectionCard = ({
   _id,
@@ -17,6 +18,7 @@ const CollectionCard = ({
   onDeleteCollection,
   hidden
 }) => {
+  const { status } = useContext(GlobalContext);
   let navigate = useNavigate();
   if (description.length > 100) description = `${description.slice(0, 100)}...`;
 
@@ -51,11 +53,13 @@ const CollectionCard = ({
       </CardActionArea>
       {
         !hidden ? (
-          <CollectionCardTools
-            onEditCollection={onEditCollection}
-            onDeleteCollection={onDeleteCollection}
-            collectionId={_id}
-          />
+          status.isAuth ? (
+            <CollectionCardTools
+              onEditCollection={onEditCollection}
+              onDeleteCollection={onDeleteCollection}
+              collectionId={_id}
+            />
+          ) : null
         ) : (
           <Stack p={2}>
             <Typography variant="overline" lineHeight="18px" color="#797E85">

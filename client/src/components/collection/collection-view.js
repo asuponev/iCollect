@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { getAllCollectionItems, deleteItem, deleteItems } from '../../utils/requests/requests';
 import CollectionInfo from './view-blocks/collection-info';
 import CollectionTools from './view-blocks/collection-tools';
@@ -7,8 +7,10 @@ import TableItems from './view-blocks/collection-table-items';
 import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import { ToastContainer, toast } from 'react-toastify';
+import GlobalContext from '../../utils/context/GlobalContext';
 
 const CollectionView = ({ collectionId, collectionData }) => {
+  const { status } = useContext(GlobalContext);
   const [items, setItems] = useState([]);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -92,19 +94,25 @@ const CollectionView = ({ collectionId, collectionData }) => {
     <>
       <ToastContainer />
       <CollectionInfo data={collectionData} />
-      <CollectionTools
-        onCreateItem={onCreateItem}
-        selectedItems={selectedItems}
-        onDeleteItems={onDeleteItems}
-      />
-      <CreateItem
-        collectionId={collectionId}
-        openModalForm={openModalForm}
-        handleCloseModalForm={handleCloseModalForm}
-        onItemsRequest={onItemsRequest}
-        extraFields={collectionData.extraFields}
-        itemId={currentItemId}
-      />
+      {
+        status.isAuth ? (
+          <>
+            <CollectionTools
+              onCreateItem={onCreateItem}
+              selectedItems={selectedItems}
+              onDeleteItems={onDeleteItems}
+            />
+            <CreateItem
+              collectionId={collectionId}
+              openModalForm={openModalForm}
+              handleCloseModalForm={handleCloseModalForm}
+              onItemsRequest={onItemsRequest}
+              extraFields={collectionData.extraFields}
+              itemId={currentItemId}
+            />
+          </>
+        ) : null
+      }
       {errorMessage}
       {spinner}
       {content}
