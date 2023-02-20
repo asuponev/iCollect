@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/material';
 
 import { getLastItems } from '../../utils/requests/requests';
-import ItemCard from './home-elements.js/item-card';
+import ItemCard from './home-elements/item-card';
 import ErrorMessage from '../ErrorMessage';
 import Spinner from '../Spinner';
 
