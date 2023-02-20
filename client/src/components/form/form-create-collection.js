@@ -56,7 +56,7 @@ const FormCreateCollection = ({
   return (
     <>
       <ToastContainer />
-      <form onSubmit={handleSubmit(onFormSubmit)} style={{ width: 336 }}>
+      <form onSubmit={handleSubmit(onFormSubmit)}>
         <Stack>
           <Box mb={2}>
             {

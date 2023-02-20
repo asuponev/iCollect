@@ -34,7 +34,7 @@ const FormCreateItem = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} style={{ width: 336 }}>
+    <form onSubmit={handleSubmit(onFormSubmit)}>
       <Stack>
         <Box my={2}>
           <FormTextField

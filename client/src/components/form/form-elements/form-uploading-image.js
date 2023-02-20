@@ -53,7 +53,6 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
           },
           "& .MuiInputBase-input": {
             height: "100%",
-            width: 336,
             padding: 0,
             background: "#F9F9F9",
             border: "1px dashed #585E67",
