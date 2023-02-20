@@ -1,15 +1,26 @@
 import axios from '../myAxios';
 
-export const authApi = async (typeAuth, values) => {
+export const fetchLogin = async (values) => {
   try {
-    const { data } = await axios.post(
-      typeAuth === 'register' ? '/auth/register' : '/auth/login',
+    const { data } = await axios.post('/auth/login',
       values,
       { withCredentials: true }
     );
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);
+  }
+}
+
+export const fetchRegister = async (values) => {
+  try {
+    const { data } = await axios.post('/auth/register',
+      values,
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message || 'Registration failed');
   }
 }
 
