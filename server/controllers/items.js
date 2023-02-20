@@ -2,6 +2,7 @@ import Item from '../models/Item.js';
 import Collection from '../models/Collection.js';
 import Like from '../models/Like.js';
 import Comment from '../models/Comment.js';
+import { fullTextSearch } from '../utils/fullTextSearch.js';
 
 const updateCollection = async (collectionId, action) => {
   const filter = { _id: collectionId };
@@ -164,6 +165,24 @@ export const getAllTags = async (req, res) => {
     const tags = [];
     items.forEach(item => tags.push(...item.tags));
     res.json([...new Set(tags)]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
+
+export const getSearchItems = async (req, res) => {
+  try {
+    const { value } = req.params;
+    const allItems = await Item.find();
+    const items = await Promise.all(allItems.map(async (item) => {
+      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+      return { ...item._doc, collection };
+    }));
+    const response = fullTextSearch(items, value);
+    res.json(response);
   } catch (error) {
     console.log(error);
     res.status(500).json({
