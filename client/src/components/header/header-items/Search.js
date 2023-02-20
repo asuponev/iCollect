@@ -22,8 +22,10 @@ export const Search = () => {
   };
 
   const onSubmit = () => {
-    navigate(`/search/${value.trim()}`);
-    handleClear();
+    if (value) {
+      navigate(`/search/${value.trim()}`);
+      handleClear();
+    }
   };
 
   const handleKeyDown = (event) => {
