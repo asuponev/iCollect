@@ -63,7 +63,9 @@ const CollectionCard = ({
         ) : (
           <Stack p={2}>
             <Typography variant="overline" lineHeight="18px" color="#797E85">
-              by <Link to={`/users/${authorId._id}`}>{authorId.firstName} {authorId.lastName}</Link>
+              by <Link to={`/users/${authorId._id}`}>
+                {authorId.firstName} {authorId.firstName.length < 30 ? authorId.lastName : `${authorId.lastName[0]}.`}
+              </Link>
             </Typography>
           </Stack>
         )

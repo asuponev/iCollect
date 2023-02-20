@@ -6,14 +6,15 @@ import ItemTags from '../../item/view-blocks/item-tags';
 const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
   let navigate = useNavigate();
   let collectionTitle = collection.title,
-      authorFirstName = collection.authorId.firstName,
-      authorLastName = collection.authorId.lastName;
-  if (collectionTitle.length > 17) {
-    collectionTitle = `${collectionTitle.slice(0, 17)}...`;
-  };
-  if ((authorFirstName.length + authorLastName.length) > 12) {
-    authorFirstName = `${authorFirstName.slice(0, 8)}...`;
-    authorLastName = `${authorLastName[0]}.`;
+      firstName = collection.authorId.firstName,
+      lastName = collection.authorId.lastName;
+
+  if (collectionTitle.length > 16) {
+    collectionTitle = `${collectionTitle.slice(0, 16)}...`;
+    if ((firstName.length + lastName.length) > 12) {
+      firstName = firstName.length > 8 ? `${firstName.slice(0, 8)}...` : firstName;
+      lastName = `${lastName[0]}.`;
+    };
   };
 
   return (
@@ -29,11 +30,11 @@ const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
           <Stack spacing={1}>
             <Typography fontSize={10} color="#9B9EA4">ID {_id}</Typography>
             <Typography fontSize={16} color="#142339" fontWeight={700}>{title}</Typography>
-            <ItemTags tags={tags} />
+            <ItemTags tags={tags} compact={true} />
             <Stack direction="row" spacing={1} sx={{ color: "#797E85" }}>
               <Typography variant="overline">{collectionTitle}</Typography>
               <Typography variant="overline">—</Typography>
-              <Typography variant="overline">by {authorFirstName} {authorLastName}</Typography>
+              <Typography variant="overline">by {firstName} {lastName}</Typography>
             </Stack>
           </Stack>
         </CardContent>
