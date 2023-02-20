@@ -240,6 +240,15 @@ export const getLastItems = async () => {
   }
 }
 
+export const getSearchItems = async (value) => {
+  try {
+    const { data } = await axios.get(`/search/${value}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
 export const getBiggestCollections = async () => {
   try {
     const { data } = await axios.get(`/collections`);

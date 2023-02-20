@@ -50,6 +50,7 @@ function App() {
           <Route path="/collections/:collectionId" element={<Pages.Collection />} />
           <Route path="/collections/:collectionId/items/:itemId" element={<Pages.Item />} />
           <Route path="/admin" element={<Pages.Admin />} />
+          <Route path="/search/:value" element={<Pages.SearchResult />} />
         </Routes>
       </Container>
       <Footer />

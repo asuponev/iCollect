@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { FormControl, InputAdornment, TextField } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import { useWindowWidth } from '@react-hook/window-size';
 
 export const Search = () => {
+  let navigate = useNavigate();
   const [value, setValue] = useState('');
   const [showClearIcon, setShowClearIcon] = useState('none');
   const windowWidth = useWindowWidth();
@@ -19,6 +21,17 @@ export const Search = () => {
     setShowClearIcon('none');
   };
 
+  const onSubmit = () => {
+    navigate(`/search/${value.trim()}`);
+    handleClear();
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      onSubmit();
+    }
+  };
+
   return (
     <FormControl>
       <TextField
@@ -26,6 +39,7 @@ export const Search = () => {
         variant="outlined"
         value={value}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         placeholder="Search..."
         sx={{
           backgroundColor: "#192B45",
@@ -40,14 +54,14 @@ export const Search = () => {
         }}
         InputProps={{
           startAdornment: (
-            <InputAdornment position="start">
+            <InputAdornment position="start" onClick={onSubmit} sx={{ cursor: "pointer" }}>
               <SearchOutlinedIcon sx={{ color: "#7E97BB" }} />
             </InputAdornment>
           ),
           endAdornment: (
             <InputAdornment
               position="end"
-              style={{ display: showClearIcon }}
+              style={{ display: showClearIcon, cursor: "pointer" }}
               onClick={handleClear}
             >
               <ClearOutlinedIcon
