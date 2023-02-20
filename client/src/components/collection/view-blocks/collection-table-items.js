@@ -15,9 +15,10 @@ const TableItems = ({
   extraFields,
   collectionId,
   onEditItem,
-  onDeleteItem
+  onDeleteItem,
+  authorId
 }) => {
-  const { status } = useContext(GlobalContext);
+  const { status, userInfo } = useContext(GlobalContext);
   if (!items) items = [];
 
   const constantColumns = [
@@ -30,7 +31,7 @@ const TableItems = ({
     return { field: field.type, headerName: field.name, flex: 1, minWidth: 130 }
   });
 
-  const actionColumns = status.isAuth ? [
+  const actionColumns = (status.isAuth && authorId === userInfo.userId) || status.isAdmin ? [
     {
       field: 'view', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
@@ -100,11 +101,13 @@ const TableItems = ({
         columns={columns}
         pageSize={tableSize}
         rowsPerPageOptions={[tableSize]}
-        checkboxSelection={status.isAuth ? true : false}
+        checkboxSelection={(status.isAuth && authorId === userInfo.userId) || status.isAdmin ? true : false}
         headerHeight={44}
         rowHeight={40}
         onSelectionModelChange={(newSelect) => {
-          setSelectedItems(newSelect);
+          if ((status.isAuth && authorId === userInfo.userId) || status.isAdmin) {
+            setSelectedItems(newSelect);
+          }
         }}
         selectionModel={selectedItems}
         sx={tableStyles}

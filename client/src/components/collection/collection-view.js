@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import GlobalContext from '../../utils/context/GlobalContext';
 
 const CollectionView = ({ collectionId, collectionData }) => {
-  const { status } = useContext(GlobalContext);
+  const { status, userInfo } = useContext(GlobalContext);
   const [items, setItems] = useState([]);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -42,7 +42,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
 
   const onEditItem = (itemId) => {
     setCurrentItemId(itemId);
-    setTimeout(() => setOpenModalForm(true), 800);
+    setTimeout(() => setOpenModalForm(true), 1000);
   };
 
   const handleCloseModalForm = () => {
@@ -74,6 +74,8 @@ const CollectionView = ({ collectionId, collectionData }) => {
       })
   };
 
+  const authorId = collectionData.authorId._id;
+
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
@@ -86,6 +88,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
         collectionId={collectionId}
         onEditItem={onEditItem}
         onDeleteItem={onDeleteItem}
+        authorId={authorId}
       />
     </>
   ) : null;
@@ -95,7 +98,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
       <ToastContainer />
       <CollectionInfo data={collectionData} />
       {
-        status.isAuth ? (
+        (status.isAuth && authorId === userInfo.userId ) || status.isAdmin ? (
           <>
             <CollectionTools
               onCreateItem={onCreateItem}

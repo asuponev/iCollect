@@ -18,7 +18,7 @@ const CollectionCard = ({
   onDeleteCollection,
   hidden
 }) => {
-  const { status } = useContext(GlobalContext);
+  const { status, userInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
   if (description.length > 100) description = `${description.slice(0, 100)}...`;
 
@@ -53,7 +53,7 @@ const CollectionCard = ({
       </CardActionArea>
       {
         !hidden ? (
-          status.isAuth ? (
+          (status.isAuth && authorId === userInfo.userId) || status.isAdmin ? (
             <CollectionCardTools
               onEditCollection={onEditCollection}
               onDeleteCollection={onDeleteCollection}

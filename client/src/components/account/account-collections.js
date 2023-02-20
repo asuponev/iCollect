@@ -9,7 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import GlobalContext from '../../utils/context/GlobalContext';
 
 const AccountCollections = ({ userId }) => {
-  const { status } = useContext(GlobalContext);
+  const { status, userInfo } = useContext(GlobalContext);
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,7 +45,7 @@ const AccountCollections = ({ userId }) => {
 
   const onEditCollection = (collectionId) => {
     setCurrentCollectionId(collectionId);
-    setTimeout(() => setOpenModalForm(true), 500);
+    setTimeout(() => setOpenModalForm(true), 1000);
   };
 
   const onDeleteCollection = (collectionId) => {
@@ -90,7 +90,7 @@ const AccountCollections = ({ userId }) => {
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
           <Typography variant="h5" fontWeight="500">Collections</Typography>
           {
-            status.isAuth ? (
+            (status.isAuth && userId === userInfo.userId) || status.isAdmin ? (
               <>
                 <Button variant="contained" onClick={onCreateCollection}>
                   + Add Collection
