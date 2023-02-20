@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Stack, Typography, Button } from '@mui/material';
-import Spinner from '../../Spinner';
-import ErrorMessage from '../../ErrorMessage';
-import { getAllCollectionsUser, deleteCollection } from '../../../utils/requests/requests';
-import CreateCollection from '../account-collections/create-collection';
-import CollectionCard from '../account-collections/collection-card';
+import Spinner from '../Spinner';
+import ErrorMessage from '../ErrorMessage';
+import { getAllCollectionsUser, deleteCollection } from '../../utils/requests/requests';
+import CreateCollection from './account-collections/create-collection';
+import CollectionCard from './account-collections/collection-card';
 import { ToastContainer, toast } from 'react-toastify';
-import GlobalContext from '../../../utils/context/GlobalContext';
+import GlobalContext from '../../utils/context/GlobalContext';
 
 const AccountCollections = ({ userId }) => {
   const { status } = useContext(GlobalContext);

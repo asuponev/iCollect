@@ -5,7 +5,8 @@ import { getOneUser } from '../../src/utils/requests/requests';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
 import BreadCrumbs from '../components/BreadCrumbs';
-import AccountView from '../components/account/account-view';
+import AccountCollections from '../components/account/account-collections';
+import AccountUserInfo from '../components/account/account-user-info';
 
 export const Account = () => {
   const { userId } = useParams();
@@ -35,7 +36,8 @@ export const Account = () => {
         prevLinks={[{ 'Home': '/' }]}
         current={`${userData.firstName} ${userData.lastName}`}
       />
-      <AccountView userData={userData} userId={userId} />
+      <AccountUserInfo userData={userData} />
+      <AccountCollections userId={userId} />
     </>
   ) : null;
 

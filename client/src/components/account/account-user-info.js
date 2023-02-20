@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack, Avatar, Typography } from '@mui/material';
-import ErrorMessage from '../../ErrorMessage';
+import ErrorMessage from '../ErrorMessage';
 
-const UserInfo = ({ userData }) => {
+const AccountUserInfo = ({ userData }) => {
   if (!Object.keys(userData).length) return <ErrorMessage />;
 
   return (
@@ -24,4 +24,4 @@ const UserInfo = ({ userData }) => {
   );
 }
 
-export default UserInfo;
+export default AccountUserInfo;
