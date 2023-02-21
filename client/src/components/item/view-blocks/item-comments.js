@@ -3,7 +3,7 @@ import { Avatar, Stack, Grid, Typography } from '@mui/material';
 import { createComment, getAllItemComment } from '../../../utils/requests/requests';
 import GlobalContext from '../../../utils/context/GlobalContext';
 import FormComment from '../../form/form-comment';
-
+import { Link } from 'react-router-dom';
 import ErrorMessage from '../../ErrorMessage';
 import Spinner from '../../Spinner';
 
@@ -46,21 +46,20 @@ const ItemComments = ({ itemId }) => {
     height: 40,
     fontSize: 16,
   };
-
+  console.log(commentsData)
   const commentsBlock = commentsData.map(comment => {
     return (
-      <Stack
-        key={comment._id}
-        direction="row"
-        spacing={2}
-        my={3}
-      >
-        <Avatar sx={avatarStyles}>
-          {comment.firstName[0]}{comment.lastName[0]}
-        </Avatar>
+      <Stack key={comment._id} direction="row" spacing={2} my={3}>
+        <Link to={`/users/${comment.authorId}`} style={{ textDecoration: 'none' }}>
+          <Avatar sx={avatarStyles}>
+            {comment.firstName[0]}{comment.lastName[0]}
+          </Avatar>
+        </Link>
         <Grid container wrap="nowrap" direction="column" width="calc(100% - 56px)">
           <Typography color="#142339" fontWeight={500} noWrap>
-            {comment.firstName} {comment.lastName}
+            <Link to={`/users/${comment.authorId}`} style={{ textDecoration: 'none' }}>
+              {comment.firstName} {comment.lastName}
+            </Link>
           </Typography>
           <Typography color="#585E67" sx={{ wordWrap: "break-word" }}>
             {comment.message}
@@ -76,7 +75,7 @@ const ItemComments = ({ itemId }) => {
     <Stack>
       <Typography variant="h6" gutterBottom>Comments</Typography>
       {commentsBlock}
-      <Stack direction="row" spacing={1} mt={3} mb={5}>
+      <Stack direction="row" spacing={1} mt={3}>
         <Avatar sx={avatarStyles}>
           {userInfo.firstName[0]}{userInfo.lastName[0]}
         </Avatar>

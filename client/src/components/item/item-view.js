@@ -15,10 +15,10 @@ const ItemView = ({ itemData }) => {
     authorLastName = itemData.collection.authorId.lastName;
 
   return (
-    <>
+    <Stack mb={10} spacing={4}>
       <ItemBreadcrumbs itemData={itemData} />
       <Stack
-        p={2} pt={1} mt={4} mb={6}
+        p={2} pt={1}
         sx={{
           boxShadow: "2px 2px 14px rgba(0, 0, 0, 0.1)",
           borderRadius: 2,
@@ -56,7 +56,7 @@ const ItemView = ({ itemData }) => {
       {
         status.isAuth ? <ItemComments itemId={itemData._id} /> : null
       }
-    </>
+    </Stack>
   );
 }
 

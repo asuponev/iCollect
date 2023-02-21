@@ -4,6 +4,17 @@ import { Typography, Stack } from '@mui/material';
 
 const TagsCloud = ({ tags }) => {
 
+  const tagStyle = {
+    color: "#797E85",
+    backgroundColor: "#EEEFF0",
+    borderRadius: "100px",
+    padding: "10px 18px",
+    "&:hover": {
+      color: "#142339",
+      backgroundColor: "#DEDFE1",
+    }
+  };
+
   const tagsView = tags.map((tag, i) => {
     return (
       <Typography key={i} sx={tagStyle} noWrap>
@@ -18,25 +29,10 @@ const TagsCloud = ({ tags }) => {
   });
 
   return (
-    <Stack
-      direction="row"
-      flexWrap="wrap"
-      gap={1}
-    >
+    <Stack direction="row" flexWrap="wrap" gap={1}>
       {tagsView}
     </Stack>
   );
 }
 
 export default TagsCloud;
-
-const tagStyle = {
-  color: "#797E85",
-  backgroundColor: "#EEEFF0",
-  borderRadius: "100px",
-  padding: "10px 18px",
-  "&:hover": {
-    color: "#142339",
-    backgroundColor: "#DEDFE1",
-  }
-};

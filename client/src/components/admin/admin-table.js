@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { Stack } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
-import LaunchIcon from '@mui/icons-material/Launch';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AdminTableTools from './admin-table-tools';
 import { tableStyles } from './table-styles';
 
 const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
   if (!users) users = [];
-
   const [selectedUsers, setSelectedUsers] = useState([]);
+
+  let navigate = useNavigate();
+  const routeChange = (id) => {
+    let path = `/users/${id}`;
+    navigate(path);
+  };
 
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 70 },
@@ -21,9 +28,9 @@ const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminS
     {
       field: 'actions', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<LaunchIcon color="primary" />}
+          icon={<VisibilityOutlinedIcon color="primary" />}
           label="View profile"
-          onClick={() => window.open(`/users/${params.id}`, '_blank')}
+          onClick={() => routeChange(params.id)}
         />]
     },
   ];
@@ -55,7 +62,7 @@ const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminS
         blockSelectedUsers={blockSelectedUsers}
         makeAdminSelectedUsers={makeAdminSelectedUsers}
       />
-      <div style={{ height: tableHeight, width: "100%" }}>
+      <Stack height={tableHeight} width="100%" mb={10}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -70,7 +77,7 @@ const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminS
           selectionModel={selectedUsers}
           sx={tableStyles}
         />
-      </div>
+      </Stack>
     </>
   );
 }

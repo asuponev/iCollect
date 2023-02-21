@@ -38,7 +38,7 @@ export const SearchResult = () => {
 
   const itemsCards = items.map(item => {
     return (
-      <Grid item lg={3} md={6} xs={12} key={item._id}>
+      <Grid item lg={3} md={4} sm={6} xs={12} key={item._id}>
         <ItemCard {...item} />
       </Grid>
     );
@@ -47,7 +47,7 @@ export const SearchResult = () => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Grid container spacing={2} my={4}>
+    <Grid container spacing={2} mt={4} mb={10}>
       {itemsCards}
     </Grid>
   ) : null;
@@ -58,8 +58,8 @@ export const SearchResult = () => {
         prevLinks={[{ 'Home': '/' }]}
         current='Search'
       />
-      <Stack mt={5}>
-        <Typography variant="h6" mb={1} color="#142339" noWrap>
+      <Stack mt={4} spacing={1}>
+        <Typography variant="h6" color="#142339" noWrap>
           {
             byTag
               ? <>Search results for tag «{value.slice(7)}»</>
@@ -69,10 +69,10 @@ export const SearchResult = () => {
         <Typography fontSize={14} color="#9B9EA4">
           {items.length} results
         </Typography>
-        {errorMessage}
-        {spinner}
-        {content}
       </Stack>
+      {errorMessage}
+      {spinner}
+      {content}
     </>
   );
 }

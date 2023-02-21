@@ -34,7 +34,7 @@ const HomeTagsCloud = () => {
   const content = !(loading || error) ? <TagsCloud tags={tags} /> : null;
 
   return (
-    <Stack my={5}>
+    <Stack>
       <Typography variant="h6" mb={4}>Explore by tags</Typography>
       {errorMessage}
       {spinner}

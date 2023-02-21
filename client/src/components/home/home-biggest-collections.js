@@ -31,7 +31,7 @@ const HomeBiggestCollections = () => {
 
   const collections = biggestCollections.map(collection => {
     return (
-      <Grid item lg={3} md={6} xs={12} key={collection._id}>
+      <Grid item lg={3} md={4} sm={6} xs={12} key={collection._id}>
         <CollectionCard {...collection} />
       </Grid>
     )
@@ -46,7 +46,7 @@ const HomeBiggestCollections = () => {
   ) : null;
 
   return (
-    <Stack mt={5}>
+    <Stack>
       <Typography variant="h6" mb={4}>The biggest collections</Typography>
       {errorMessage}
       {spinner}

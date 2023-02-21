@@ -11,23 +11,16 @@ const CollectionCardTools = ({
   return (
     <CardActions sx={{ padding: 2, alignItems: "center" }}>
       <Tooltip title="Edit collection" placement="bottom">
-        <IconButton
-          color="#585E67"
-          onClick={() => onEditCollection(collectionId)}
-        >
-          <EditOutlinedIcon fontSize="small" sx={{ color: "#1E70EB" }} />
+        <IconButton onClick={() => onEditCollection(collectionId)}>
+          <EditOutlinedIcon fontSize="small" color="primary" />
         </IconButton>
       </Tooltip>
       <Tooltip title="Delete collection" placement="bottom">
-        <IconButton
-          color="#585E67"
-          onClick={() => {
-            if (window.confirm('Are you sure?')) {
-              onDeleteCollection(collectionId);
-            }
-          }}
+        <IconButton onClick={() => {
+          if (window.confirm('Are you sure?')) onDeleteCollection(collectionId);
+        }}
         >
-          <DeleteOutlinedIcon fontSize="small" sx={{ color: "#F43B47" }} />
+          <DeleteOutlinedIcon fontSize="small" color="grey" />
         </IconButton>
       </Tooltip>
     </CardActions>

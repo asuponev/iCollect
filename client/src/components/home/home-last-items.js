@@ -31,7 +31,7 @@ const HomeLastItems = () => {
 
   const items = lastItems.map(item => {
     return (
-      <Grid item lg={3} md={6} xs={12} key={item._id}>
+      <Grid item lg={3} md={4} sm={6} xs={12} key={item._id}>
         <ItemCard {...item} />
       </Grid>
     );
@@ -46,7 +46,7 @@ const HomeLastItems = () => {
   ) : null;
 
   return (
-    <Stack mt={5}>
+    <Stack>
       <Typography variant="h6" mb={4}>Last added items</Typography>
       {errorMessage}
       {spinner}

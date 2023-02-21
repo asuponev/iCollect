@@ -61,7 +61,7 @@ const AccountCollections = ({ userId }) => {
 
   const cards = collections.map(collection => {
     return (
-      <Grid item lg={3} md={6} xs={12} key={collection._id}>
+      <Grid item lg={3} md={4} sm={6} xs={12} key={collection._id}>
         <CollectionCard
           {...collection}
           onEditCollection={onEditCollection}
@@ -75,7 +75,7 @@ const AccountCollections = ({ userId }) => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} mb={10}>
       {cards}
     </Grid>
   ) : null;

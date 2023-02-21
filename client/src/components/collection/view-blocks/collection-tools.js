@@ -6,7 +6,7 @@ const CollectionTools = ({ onCreateItem, selectedItems, onDeleteItems }) => {
   return (
     <Stack direction="row" justifyContent="space-between" mb={3}>
       {
-        selectedItems.length <= 1 ? (
+        selectedItems.length === 0 ? (
           <Stack sx={{ height: 40 }}></Stack>
         ) : (
           <Stack direction="row" alignItems="center" spacing={2} divider={<Divider orientation="vertical" flexItem />}>

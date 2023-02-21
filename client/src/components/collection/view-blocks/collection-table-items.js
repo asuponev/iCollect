@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router';
+import { Stack } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
-import LaunchIcon from '@mui/icons-material/Launch';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import GlobalContext from '../../../utils/context/GlobalContext';
-
 import { tableStyles } from '../../admin/table-styles';
-import { Stack } from '@mui/material';
 
 const TableItems = ({
   items,
@@ -21,6 +21,11 @@ const TableItems = ({
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   if (!items) items = [];
+  let navigate = useNavigate();
+  const routeChange = (id) => {
+    let path = `/collections/${collectionId}/items/${id}`;
+    navigate(path);
+  };
 
   const constantColumns = [
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 70 },
@@ -36,9 +41,9 @@ const TableItems = ({
     {
       field: 'view', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<LaunchIcon color="primary" />}
+          icon={<VisibilityOutlinedIcon color="primary" />}
           label="View item"
-          onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
+          onClick={() => routeChange(params.id)}
         />]
     },
     {
@@ -52,7 +57,7 @@ const TableItems = ({
     {
       field: 'delete', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<DeleteOutlinedIcon color="#585E67" />}
+          icon={<DeleteOutlinedIcon color="grey" />}
           label="Delete item"
           onClick={() => {
             if (window.confirm('Are you sure?')) {
@@ -65,7 +70,7 @@ const TableItems = ({
     {
       field: 'view', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<LaunchIcon color="primary" />}
+          icon={<VisibilityOutlinedIcon color="primary" />}
           label="View item"
           onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
         />]
@@ -79,24 +84,24 @@ const TableItems = ({
   ];
 
   const rows = items.map(item => {
-    let newItem = {}
+    let newItem = {};
     for (let key in item) {
       if (key === '_id') {
-        newItem.id = item[key]
+        newItem.id = item[key];
       } else {
-        newItem[key] = item[key]
+        newItem[key] = item[key];
       }
     }
     return {
       ...newItem
-    }
+    };
   });
 
   const tableSize = items.length > 10 ? 10 : items.length;
   const tableHeight = tableSize * 40 + 100;
 
   return (
-    <Stack height={tableHeight} width="100%" mb={5}>
+    <Stack height={tableHeight} width="100%" mb={10}>
       <DataGrid
         rows={rows}
         columns={columns}

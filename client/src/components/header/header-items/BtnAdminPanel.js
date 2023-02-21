@@ -7,7 +7,7 @@ export const BtnAdminPanel = ({ onMenuToggle }) => {
   let navigate = useNavigate();
 
   const onHandleClick = () => {
-    navigate('/admin')
+    navigate('/admin');
     onMenuToggle();
   };
 
