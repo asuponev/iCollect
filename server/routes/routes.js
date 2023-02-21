@@ -44,7 +44,7 @@ router.delete('/likes/:itemId', checkAuth, removeLike);
 router.get('/items', getLastItems);
 router.get('/collections', getBiggestCollections);
 
-router.get('/tags', checkAuth, getAllTags);
+router.get('/tags', getAllTags);
 
 router.get('/search/:value', getSearchItems);
 
