@@ -1,6 +1,6 @@
 import MiniSearch from 'minisearch';
 
-let searchIndex = new MiniSearch({
+let searchIndexFull = new MiniSearch({
   idField: '_id',
   fields: [
     'title', 'tags',
@@ -23,8 +23,21 @@ let searchIndex = new MiniSearch({
   }
 });
 
-export const fullTextSearch = (items, value) => {
-  searchIndex.removeAll();
-  searchIndex.addAll(items);
-  return searchIndex.search(value);
+const seacrhIndexTag = new MiniSearch({
+  idField: '_id',
+  fields: ['tags'],
+  storeFields: ['_id', 'title', 'tags', 'collectionId', 'collection']
+});
+
+export const searchItems = (items, value, query) => {
+  if (query === 'full') {
+    searchIndexFull.removeAll();
+    searchIndexFull.addAll(items);
+    return searchIndexFull.search(value);
+  } else if (query === 'tag') {
+    seacrhIndexTag.removeAll();
+    seacrhIndexTag.addAll(items);
+    value = value.slice(7);
+    return seacrhIndexTag.search(value);
+  }
 }

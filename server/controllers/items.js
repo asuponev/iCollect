@@ -2,7 +2,7 @@ import Item from '../models/Item.js';
 import Collection from '../models/Collection.js';
 import Like from '../models/Like.js';
 import Comment from '../models/Comment.js';
-import { fullTextSearch } from '../utils/fullTextSearch.js';
+import { searchItems } from '../utils/searchItems.js';
 
 const updateCollection = async (collectionId, action) => {
   const filter = { _id: collectionId };
@@ -10,6 +10,19 @@ const updateCollection = async (collectionId, action) => {
     ? { $inc: { items: 1 } }
     : { $inc: { items: -1 } }
   await Collection.findOneAndUpdate(filter, update, { new: true });
+}
+
+const getFullItemsData = async (query) => {
+  let items = [];
+  if (query === 'last') {
+    items = await Item.find().sort({ createdAt: -1 }).limit(4);
+  } else if (query === 'full') {
+    items = await Item.find();
+  }
+  return await Promise.all(items.map(async (item) => {
+    const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+    return { ...item._doc, collection };
+  }));
 }
 
 export const createItem = async (req, res) => {
@@ -145,11 +158,7 @@ export const deleteItems = async (req, res) => {
 
 export const getLastItems = async (req, res) => {
   try {
-    const items = await Item.find().sort({ createdAt: -1 }).limit(4);
-    const response = await Promise.all(items.map(async (item) => {
-      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
-      return { ...item._doc, collection };
-    }))
+    const response = await getFullItemsData('last');
     res.json(response);
   } catch (error) {
     console.log(error);
@@ -176,12 +185,9 @@ export const getAllTags = async (req, res) => {
 export const getSearchItems = async (req, res) => {
   try {
     const { value } = req.params;
-    const allItems = await Item.find();
-    const items = await Promise.all(allItems.map(async (item) => {
-      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
-      return { ...item._doc, collection };
-    }));
-    const response = fullTextSearch(items, value);
+    const items = await getFullItemsData('full');
+    const query = value.slice(0, 7) === '--tag--' ? 'tag' : 'full';
+    const response = searchItems(items, value, query);
     res.json(response);
   } catch (error) {
     console.log(error);
