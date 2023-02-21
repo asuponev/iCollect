@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography, Grid } from '@mui/material';
 
 import { getBiggestCollections } from '../../utils/requests/requests';
 import ErrorMessage from '../ErrorMessage';
@@ -31,20 +31,18 @@ const HomeBiggestCollections = () => {
 
   const collections = biggestCollections.map(collection => {
     return (
-      <CollectionCard
-        key={collection._id}
-        {...collection}
-        hidden={true}
-      />
+      <Grid item lg={3} md={6} xs={12} key={collection._id}>
+        <CollectionCard {...collection} />
+      </Grid>
     )
   });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Stack direction="row" flexWrap="wrap" gap={2}>
+    <Grid container spacing={2}>
       {collections}
-    </Stack>
+    </Grid>
   ) : null;
 
   return (

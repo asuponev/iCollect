@@ -5,14 +5,16 @@ const BreadCrumbs = ({ prevLinks, current }) => {
 
   const links = prevLinks.map((link, i) => {
     return (
-      <Link to={Object.values(link)[0]} key={i}>
-        <Typography variant="body2" color="text.secondary">{Object.keys(link)[0]}</Typography>
-      </Link>
-    )
+      <Typography variant="body2" color="text.secondary" key={i}>
+        <Link to={Object.values(link)[0]}>
+          {Object.keys(link)[0]}
+        </Link>
+      </Typography>
+    );
   });
 
   return (
-    <Breadcrumbs aria-label="breadcrumb" sx={{ marginTop: 3 }}>
+    <Breadcrumbs sx={{ marginTop: 3 }}>
       {links}
       <Typography variant="body2" color="text.secondary">
         {current}

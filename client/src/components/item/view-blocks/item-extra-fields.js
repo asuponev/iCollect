@@ -1,5 +1,5 @@
-import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import React, { Fragment } from 'react';
+import { Grid, Typography } from '@mui/material';
 
 const ItemExtraFields = ({ itemData, extraFields }) => {
 
@@ -7,13 +7,13 @@ const ItemExtraFields = ({ itemData, extraFields }) => {
   const extraFieldsView = [];
   for (let key in itemData) {
     if (!constKeys.includes(key) && key) {
-      extraFields.forEach(field => {
+      extraFields.forEach((field, i) => {
         if (field.type === key) {
           extraFieldsView.push(
-            <Stack mt={3} spacing={1.5} key={key}>
-              <Typography>{field.name}</Typography>
-              <Typography fontSize={16} fontWeight={700}>{`${itemData[key]}`}</Typography>
-            </Stack>
+            <Fragment key={i}>
+              <Typography noWrap mt={2.5} mb={1}>{field.name}</Typography>
+              <Typography fontSize={16} fontWeight={700} noWrap>{`${itemData[key]}`}</Typography>
+            </Fragment>
           )
         }
       })
@@ -21,9 +21,9 @@ const ItemExtraFields = ({ itemData, extraFields }) => {
   };
 
   return (
-    <>
+    <Grid container wrap="nowrap" direction="column">
       {extraFieldsView}
-    </>
+    </Grid>
   );
 }
 

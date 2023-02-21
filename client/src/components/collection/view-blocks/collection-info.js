@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Grid, Typography } from '@mui/material';
 import imageNotFound from '../../../utils/constants/image-not-found';
 
 const CollectionInfo = ({ data }) => {
@@ -8,13 +8,17 @@ const CollectionInfo = ({ data }) => {
       <img
         src={`${data.coverUrl || imageNotFound}`}
         alt={data.title}
-        style={{ objectFit: "cover", borderRadius: "8px"}}
+        style={{ objectFit: "cover", borderRadius: "8px" }}
         width="100" height="100"
       />
-      <Stack maxWidth={400}>
-        <Typography variant="h6">{data.title}</Typography>
-        <Typography>{data.description}</Typography>
-      </Stack>
+      <Grid container wrap="nowrap" direction="column" width="calc(100% - 116px)">
+        <Typography variant="h6" noWrap>
+          {data.title}
+        </Typography>
+        <Typography noWrap>
+          {data.description}
+        </Typography>
+      </Grid>
     </Stack>
   );
 }

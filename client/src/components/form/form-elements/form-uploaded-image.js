@@ -32,7 +32,7 @@ const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => 
         </Tooltip>
       </Stack>
       <Stack>
-        <img src={imageUrl} alt="uploaded" style={{ maxWidth: 336, maxHeight: 160, objectFit: "cover" }}></img>
+        <img src={imageUrl} alt="uploaded" style={{ width: "100%", height: 160, objectFit: "cover" }}></img>
       </Stack>
     </>
   );

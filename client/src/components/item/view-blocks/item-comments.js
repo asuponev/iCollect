@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Avatar, Stack, Typography } from '@mui/material';
+import { Avatar, Stack, Grid, Typography } from '@mui/material';
 import { createComment, getAllItemComment } from '../../../utils/requests/requests';
 import GlobalContext from '../../../utils/context/GlobalContext';
 import FormComment from '../../form/form-comment';
@@ -58,10 +58,14 @@ const ItemComments = ({ itemId }) => {
         <Avatar sx={avatarStyles}>
           {comment.firstName[0]}{comment.lastName[0]}
         </Avatar>
-        <Stack spacing={1}>
-          <Typography color="#142339" fontWeight={500}>{comment.firstName} {comment.lastName}</Typography>
-          <Typography color="#585E67">{comment.message}</Typography>
-        </Stack>
+        <Grid container wrap="nowrap" direction="column" width="calc(100% - 56px)">
+          <Typography color="#142339" fontWeight={500} noWrap>
+            {comment.firstName} {comment.lastName}
+          </Typography>
+          <Typography color="#585E67" sx={{ wordWrap: "break-word" }}>
+            {comment.message}
+          </Typography>
+        </Grid>
       </Stack>
     )
   });
@@ -72,7 +76,7 @@ const ItemComments = ({ itemId }) => {
     <Stack>
       <Typography variant="h6" gutterBottom>Comments</Typography>
       {commentsBlock}
-      <Stack direction="row" spacing={1} mt={3} mb={10}>
+      <Stack direction="row" spacing={1} mt={3} mb={5}>
         <Avatar sx={avatarStyles}>
           {userInfo.firstName[0]}{userInfo.lastName[0]}
         </Avatar>

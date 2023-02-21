@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router';
 import { FormControl, InputAdornment, TextField } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { useWindowWidth } from '@react-hook/window-size';
 
 export const Search = () => {
   let navigate = useNavigate();
   const [value, setValue] = useState('');
   const [showClearIcon, setShowClearIcon] = useState('none');
-  const windowWidth = useWindowWidth();
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -45,7 +43,7 @@ export const Search = () => {
         placeholder="Search..."
         sx={{
           backgroundColor: "#192B45",
-          width: windowWidth > 600 ? 200 : 150,
+          maxWidth: 300,
           borderRadius: "4px",
           "& input": {
             color: "#FFFFFF",

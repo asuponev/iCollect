@@ -9,6 +9,7 @@ import subjects from '../../utils/constants/collection-subjects';
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
 import FormCreateExtraField from './form-elements/form-create-extra-field';
+import { useWindowWidth } from '@react-hook/window-size';
 
 const FormCreateCollection = ({
   handleClose,
@@ -19,6 +20,7 @@ const FormCreateCollection = ({
   isEditing,
   valuesForEdit
 }) => {
+  const windowWidth = useWindowWidth();
   const { register, handleSubmit, formState: { errors }, getValues } = useForm({
     defaultValues: {
       title: valuesForEdit.title || '',
@@ -53,10 +55,15 @@ const FormCreateCollection = ({
     handleClose();
   };
 
+  const widthForm = windowWidth > 400 ? 300 : 200;
+
   return (
     <>
       <ToastContainer />
-      <form onSubmit={handleSubmit(onFormSubmit)}>
+      <form
+        onSubmit={handleSubmit(onFormSubmit)}
+        style={{ width: widthForm }}
+      >
         <Stack>
           <Box mb={2}>
             {

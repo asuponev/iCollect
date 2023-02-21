@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Avatar, Typography } from '@mui/material';
+import { Stack, Avatar, Typography, Grid } from '@mui/material';
 import ErrorMessage from '../ErrorMessage';
 
 const AccountUserInfo = ({ userData }) => {
@@ -16,10 +16,14 @@ const AccountUserInfo = ({ userData }) => {
         }}>
         {userData.firstName[0]}{userData.lastName[0]}
       </Avatar>
-      <Stack>
-      <Typography variant="h6">{userData.firstName} {userData.lastName}</Typography>
-      <Typography variant="caption" fontSize="14px" color="text.secondary">{userData.email}</Typography>
-      </Stack>
+      <Grid container wrap="nowrap" direction="column" width="calc(100% - 88px)">
+        <Typography variant="h6" noWrap>
+          {userData.firstName} {userData.lastName}
+        </Typography>
+        <Typography variant="caption" fontSize="14px" color="text.secondary" noWrap>
+          {userData.email}
+        </Typography>
+      </Grid>
     </Stack>
   );
 }

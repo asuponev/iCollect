@@ -32,6 +32,10 @@ export const FormEmailField = ({ register, errors }) => {
         pattern: {
           value: /\S+@\S+\.\S+/,
           message: "Value not match email format"
+        },
+        maxLength: {
+          value: 50,
+          message: `Max length is 50`
         }
       })}
       type="email"

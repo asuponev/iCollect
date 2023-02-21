@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Grid, Stack, Typography } from '@mui/material';
 
 import { getLastItems } from '../../utils/requests/requests';
 import ItemCard from './home-elements/item-card';
@@ -31,19 +31,18 @@ const HomeLastItems = () => {
 
   const items = lastItems.map(item => {
     return (
-      <ItemCard
-        key={item._id}
-        {...item}
-      />
-    )
+      <Grid item lg={3} md={6} xs={12} key={item._id}>
+        <ItemCard {...item} />
+      </Grid>
+    );
   });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Stack direction="row" flexWrap="wrap" gap={2}>
+    <Grid container spacing={2}>
       {items}
-    </Stack>
+    </Grid>
   ) : null;
 
   return (

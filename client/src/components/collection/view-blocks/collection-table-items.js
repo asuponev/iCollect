@@ -7,6 +7,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import GlobalContext from '../../../utils/context/GlobalContext';
 
 import { tableStyles } from '../../admin/table-styles';
+import { Stack } from '@mui/material';
 
 const TableItems = ({
   items,
@@ -95,7 +96,7 @@ const TableItems = ({
   const tableHeight = tableSize * 40 + 100;
 
   return (
-    <div style={{ height: tableHeight, width: "100%" }}>
+    <Stack height={tableHeight} width="100%" mb={5}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -112,7 +113,7 @@ const TableItems = ({
         selectionModel={selectedItems}
         sx={tableStyles}
       />
-    </div>
+    </Stack>
   );
 }
 

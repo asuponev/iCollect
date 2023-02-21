@@ -4,6 +4,7 @@ import { Box, Stack, Button } from '@mui/material';
 import { FormTextField } from './form-elements/form-textfields';
 import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
+import { useWindowWidth } from '@react-hook/window-size';
 
 const FormCreateItem = ({
   collectionId,
@@ -16,6 +17,7 @@ const FormCreateItem = ({
   itemId,
   tagsList
 }) => {
+  const windowWidth = useWindowWidth();
   const { register, handleSubmit, control, formState: { errors }, getValues } = useForm({
     defaultValues: {
       title: valuesForEdit.title || '',
@@ -33,8 +35,13 @@ const FormCreateItem = ({
     handleClose();
   };
 
+  const widthForm = windowWidth > 400 ? 300 : 200;
+
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)}>
+    <form 
+      onSubmit={handleSubmit(onFormSubmit)} 
+      style={{width: widthForm}}
+    >
       <Stack>
         <Box my={2}>
           <FormTextField

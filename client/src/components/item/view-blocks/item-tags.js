@@ -1,12 +1,22 @@
 import React from 'react';
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 
 const ItemTags = ({ tags, compact }) => {
 
+  const tagStyle = {
+    color: "#797E85",
+    backgroundColor: "#EEEFF0",
+    borderRadius: "100px",
+    padding: "4px 8px",
+    maxWidth: "100%"
+  };
+
+
   const tagsView = tags.map((tag, i) => {
-    if (compact && (tag.length > 10)) tag = `${tag.slice(0, 10)}...`;
     return (
-      <Box key={i} sx={tagStyle}>{tag}</Box>
+      <Typography key={i} sx={tagStyle} noWrap>
+        {tag}
+      </Typography>
     );
   });
 
@@ -14,9 +24,8 @@ const ItemTags = ({ tags, compact }) => {
     <Stack
       direction="row"
       alignItems="center"
-      justifyContent="flex-start"
-      flexWrap="wrap"
-      spacing={1}
+      flexWrap={compact ? "nowrap" : "wrap"}
+      gap={1}
     >
       {
         compact && tagsView.length > 2 ? (
@@ -26,19 +35,10 @@ const ItemTags = ({ tags, compact }) => {
               +{tagsView.length - 2}
             </Box>
           </>
-        ) : (
-          <>{tagsView}</>
-        )
+        ) : <>{tagsView}</>
       }
     </Stack>
   );
 }
 
 export default ItemTags;
-
-const tagStyle = {
-  color: "#797E85",
-  backgroundColor: "#EEEFF0",
-  borderRadius: "100px",
-  padding: "4px 8px"
-};

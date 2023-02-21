@@ -17,6 +17,7 @@ const Footer = () => {
           direction="row"
           alignItems="center"
           justifyContent="space-between"
+          spacing={1}
         >
           <Typography
             color="#142339"
@@ -26,6 +27,7 @@ const Footer = () => {
             color="#9B9EA4"
             fontSize={12}
             fontWeight={400}
+            noWrap
           >© 2023 iCollect. All rights reserved.
           </Typography>
           <Link

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Stack, Typography, Button } from '@mui/material';
+import { Stack, Typography, Button, Grid } from '@mui/material';
 import Spinner from '../Spinner';
 import ErrorMessage from '../ErrorMessage';
 import { getAllCollectionsUser, deleteCollection } from '../../utils/requests/requests';
@@ -61,56 +61,51 @@ const AccountCollections = ({ userId }) => {
 
   const cards = collections.map(collection => {
     return (
-      <CollectionCard
-        key={collection._id}
-        {...collection}
-        onEditCollection={onEditCollection}
-        onDeleteCollection={onDeleteCollection}
-      />
+      <Grid item lg={3} md={6} xs={12} key={collection._id}>
+        <CollectionCard
+          {...collection}
+          onEditCollection={onEditCollection}
+          onDeleteCollection={onDeleteCollection}
+          inAccount={true}
+        />
+      </Grid>
     );
   });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Stack
-      direction="row"
-      alignItems="center"
-      sx={{ flexWrap: "wrap", rowGap: "24px", columnGap: "16px" }}
-      mb={6}
-    >
+    <Grid container spacing={2}>
       {cards}
-    </Stack>
+    </Grid>
   ) : null;
 
   return (
     <>
       <ToastContainer />
-      <Stack>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
-          <Typography variant="h5" fontWeight="500">Collections</Typography>
-          {
-            (status.isAuth && userId === userInfo.userId) || status.isAdmin ? (
-              <>
-                <Button variant="contained" onClick={onCreateCollection}>
-                  + Add Collection
-                </Button>
-                <CreateCollection
-                  openModalForm={openModalForm}
-                  handleCloseModalForm={handleCloseModalForm}
-                  userId={userId}
-                  onRequestGetCollections={onRequestGetCollections}
-                  collectionId={currentCollectionId}
-                  toast={toast}
-                />
-              </>
-            ) : null
-          }
-        </Stack>
-        {errorMessage}
-        {spinner}
-        {content}
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
+        <Typography variant="h5" fontWeight="500">Collections</Typography>
+        {
+          (status.isAuth && userId === userInfo.userId) || status.isAdmin ? (
+            <>
+              <Button variant="contained" onClick={onCreateCollection}>
+                + Add Collection
+              </Button>
+              <CreateCollection
+                openModalForm={openModalForm}
+                handleCloseModalForm={handleCloseModalForm}
+                userId={userId}
+                onRequestGetCollections={onRequestGetCollections}
+                collectionId={currentCollectionId}
+                toast={toast}
+              />
+            </>
+          ) : null
+        }
       </Stack>
+      {errorMessage}
+      {spinner}
+      {content}
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea } from '@mui/material';
+import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea, Grid } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import imageNotFound from '../../../utils/constants/image-not-found';
@@ -16,19 +16,17 @@ const CollectionCard = ({
   items,
   onEditCollection,
   onDeleteCollection,
-  hidden
+  inAccount
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
-  if (description.length > 100) description = `${description.slice(0, 100)}...`;
 
   return (
     <Card
       sx={{
-        width: 336,
         border: "1px solid #F9F9F9",
         boxShadow: "2px 2px 16px rgba(0, 0, 0, 0.08)",
-        borderRadius: "8px",
+        borderRadius: 2,
       }}
     >
       <CardActionArea onClick={() => navigate(`/collections/${_id}`)}>
@@ -37,7 +35,7 @@ const CollectionCard = ({
           image={coverUrl || imageNotFound}
           title={title}
         />
-        <CardContent sx={{ padding: "16px 16px 0", height: 140 }}>
+        <CardContent sx={{ padding: "16px 16px 0", height: 100 }}>
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -47,12 +45,14 @@ const CollectionCard = ({
             <Typography variant="overline" lineHeight="18px">{subject}</Typography>
             <Typography variant="caption">{items} items</Typography>
           </Stack>
-          <Typography gutterBottom variant="h6">{title}</Typography>
-          <Typography variant="body2" color="text.secondary">{description}</Typography>
+          <Grid container wrap="nowrap" direction="column">
+            <Typography gutterBottom variant="h6" noWrap>{title}</Typography>
+            <Typography variant="body2" color="text.secondary" noWrap>{description}</Typography>
+          </Grid>
         </CardContent>
       </CardActionArea>
       {
-        !hidden ? (
+        inAccount ? (
           (status.isAuth && authorId === userInfo.userId) || status.isAdmin ? (
             <CollectionCardTools
               onEditCollection={onEditCollection}
@@ -61,13 +61,13 @@ const CollectionCard = ({
             />
           ) : null
         ) : (
-          <Stack p={2}>
-            <Typography variant="overline" lineHeight="18px" color="#797E85">
+          <Grid container wrap="nowrap" p={2}>
+            <Typography variant="overline" color="#797E85" noWrap>
               by <Link to={`/users/${authorId._id}`}>
-                {authorId.firstName} {authorId.firstName.length < 30 ? authorId.lastName : `${authorId.lastName[0]}.`}
+                {authorId.firstName} {authorId.lastName}
               </Link>
             </Typography>
-          </Stack>
+          </Grid>
         )
       }
     </Card>
