@@ -12,6 +12,11 @@ export const SearchResult = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [items, setItems] = useState([]);
+  const [byTag, setByTag] = useState(false);
+
+  useEffect(() => {
+    value.slice(0, 7) === '--tag--' ? setByTag(true) : setByTag(false);
+  }, [value]);
 
   useEffect(() => {
     onRequest(value);
@@ -56,7 +61,12 @@ export const SearchResult = () => {
       />
       <Stack mt={5}>
         <Typography variant="h6" mb={1} color="#142339">
-          Search results for «{value}»
+          {
+            byTag
+              ? <>Search results for tag «{value.slice(7)}»</>
+              : <>Search results for «{value}»</>
+          }
+
         </Typography>
         <Typography fontSize={14} color="#9B9EA4">
           {items.length} results
