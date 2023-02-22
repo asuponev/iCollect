@@ -15,7 +15,9 @@ export const createCollection = async (req, res) => {
       extraFields: req.body.extraFields
     });
     const collection = await doc.save();
-    res.json(collection);
+    res.json({
+      message: `Collection "${collection.title}" successfully created`
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -33,7 +35,9 @@ export const updateCollection = async (req, res) => {
     collection.coverUrl = req.body.coverUrl;
     collection.extraFields = req.body.extraFields;
     await collection.save();
-    res.json(collection);
+    res.json({
+      message: `Collection "${collection.title}" successfully updated`
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -53,7 +57,7 @@ export const deleteCollection = async (req, res) => {
       await Comment.deleteMany({ itemId: item._id });
     });
     res.json({
-      message: `Collection "${collection.title}" was successfully deleted`
+      message: `Collection "${collection.title}" successfully deleted`
     });
   } catch (error) {
     console.log(error);
