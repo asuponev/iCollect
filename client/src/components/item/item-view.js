@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { Stack, Grid, Typography } from '@mui/material';
-
-import ItemBreadcrumbs from './view-blocks/item-breadcrumbs';
+import { FormattedMessage } from 'react-intl';
 import ItemLikes from './view-blocks/item-likes';
 import ItemTags from './view-blocks/item-tags';
 import ItemExtraFields from './view-blocks/item-extra-fields';
@@ -15,8 +14,7 @@ const ItemView = ({ itemData }) => {
     authorLastName = itemData.collection.authorId.lastName;
 
   return (
-    <Stack mb={10} spacing={4}>
-      <ItemBreadcrumbs itemData={itemData} />
+    <>
       <Stack
         p={2} pt={1}
         sx={{
@@ -35,17 +33,22 @@ const ItemView = ({ itemData }) => {
         <Typography fontSize={24} fontWeight={700} noWrap>
           {itemData.title}
         </Typography>
-        <Grid container wrap="nowrap" sx={{ color: "#797E85" }}>
+        <Grid container wrap="nowrap" gap={1} sx={{ color: "#797E85" }}>
           <Typography variant="overline" noWrap>
             {collectionTitle}
           </Typography>
-          <Typography variant="overline" mx={1}>—</Typography>
+          <Typography variant="overline">—</Typography>
+          <Typography variant="overline">
+            <FormattedMessage id="app.collection.by" />
+          </Typography>
           <Typography variant="overline" noWrap>
-            by {authorFirstName} {authorLastName}
+            {authorFirstName} {authorLastName}
           </Typography>
         </Grid>
         <Stack mt={2} spacing={1.5}>
-          <Typography>Tags</Typography>
+          <Typography>
+            <FormattedMessage id="app.item.tags" />
+          </Typography>
           <ItemTags tags={itemData.tags} />
         </Stack>
         <ItemExtraFields
@@ -56,7 +59,7 @@ const ItemView = ({ itemData }) => {
       {
         status.isAuth ? <ItemComments itemId={itemData._id} /> : null
       }
-    </Stack>
+    </>
   );
 }
 

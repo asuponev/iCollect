@@ -4,9 +4,13 @@ import { useEffect } from 'react';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../utils/firebase';
+import { useIntl } from 'react-intl';
 
 const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast }) => {
   const [progress, setProgress] = useState(0);
+
+  const { messages } = useIntl();
+  const text = messages["app.collection.form.errors"];
 
   useEffect(() => {
     uploadImg(selectedImg);
@@ -42,12 +46,13 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
         onChange={(e) => {
           if (e.target.files[0].type.slice(0, 5) !== 'image') {
             setSelectedImg('');
-            toast.error('You need to upload a file of the image type', { position: 'top-right' });
+            toast.error(text.image, { position: 'top-right' });
           } else {
             setSelectedImg(e.target.files[0]);
           }
         }}
         sx={{
+          width: "100%",
           "& .MuiInputBase-root": {
             height: 160,
           },

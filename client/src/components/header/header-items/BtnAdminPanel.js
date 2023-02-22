@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Typography } from '@mui/material';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import { useNavigate } from 'react-router';
+import { FormattedMessage } from 'react-intl';
 
 export const BtnAdminPanel = ({ onMenuToggle }) => {
   let navigate = useNavigate();
@@ -20,7 +21,9 @@ export const BtnAdminPanel = ({ onMenuToggle }) => {
       }
       sx={{ height: 32 }}
     >
-      <Typography variant="button" color="#FFFFFF">Admin Panel</Typography>
+      <Typography variant="button" color="#FFFFFF">
+        <FormattedMessage id="app.header.btn-admin" />
+      </Typography>
     </Button>
   );
 }

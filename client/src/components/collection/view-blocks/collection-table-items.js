@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { useIntl } from 'react-intl';
 import { Stack } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
@@ -21,6 +22,10 @@ const TableItems = ({
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   if (!items) items = [];
+
+  const { messages } = useIntl();
+  const text = messages["app.collection"];
+
   let navigate = useNavigate();
   const routeChange = (id) => {
     let path = `/collections/${collectionId}/items/${id}`;
@@ -29,8 +34,8 @@ const TableItems = ({
 
   const constantColumns = [
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 70 },
-    { field: 'title', headerName: 'Item', flex: 1, minWidth: 130 },
-    { field: 'tags', headerName: 'Tags', flex: 1, minWidth: 130 },
+    { field: 'title', headerName: text.table.item, flex: 1, minWidth: 130 },
+    { field: 'tags', headerName: text.table.tags, flex: 1, minWidth: 130 },
   ];
 
   const extraColumns = extraFields.map(field => {
@@ -60,7 +65,7 @@ const TableItems = ({
           icon={<DeleteOutlinedIcon color="grey" />}
           label="Delete item"
           onClick={() => {
-            if (window.confirm('Are you sure?')) {
+            if (window.confirm(text.tableTools.confirmDelete)) {
               onDeleteItem(params.id);
             }
           }}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Typography, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import { getBiggestCollections } from '../../utils/requests/requests';
 import ErrorMessage from '../ErrorMessage';
@@ -46,12 +46,11 @@ const HomeBiggestCollections = () => {
   ) : null;
 
   return (
-    <Stack>
-      <Typography variant="h6" mb={4}>The biggest collections</Typography>
+    <>
       {errorMessage}
       {spinner}
       {content}
-    </Stack>
+    </>
   );
 }
 

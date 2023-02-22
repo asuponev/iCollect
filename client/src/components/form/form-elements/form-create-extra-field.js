@@ -1,9 +1,12 @@
 import React from 'react';
-import { Box, TextField, MenuItem, IconButton, Button } from '@mui/material';
+import { useIntl, FormattedMessage } from 'react-intl';
+import { Box, TextField, MenuItem, Tooltip, IconButton, Button } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import extraFieldsTypes from '../../../utils/constants/extra-fields-types';
 
 const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
+  const { messages } = useIntl();
+  const text = messages["app.collection.form"];
 
   const handleChange = (i, e) => {
     let newExtraField = [...extraFields];
@@ -33,7 +36,7 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
         >
           <TextField
             name="name"
-            label="Name extra field"
+            label={text.extraname}
             variant="outlined"
             value={element.name || ""}
             onChange={e => handleChange(index, e)}
@@ -42,7 +45,7 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
           <TextField
             select
             name="type"
-            label="Select type"
+            label={text.extraselect}
             value={element.type || ""}
             onChange={e => handleChange(index, e)}
             sx={{ width: 130 }}
@@ -53,17 +56,21 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
               </MenuItem>
             ))}
           </TextField>
-          <IconButton
-            size="small"
-            onClick={() => removeExtraFields(index)}
-            sx={{ width: 35, height: 35 }}
-          >
-            <RemoveIcon sx={{ width: 20, height: 20 }} />
-          </IconButton>
+          <Tooltip title={text.extraremove} placement="top">
+            <IconButton
+              size="small"
+              onClick={() => removeExtraFields(index)}
+              sx={{ width: 35, height: 35 }}
+            >
+              <RemoveIcon sx={{ width: 20, height: 20 }} />
+            </IconButton>
+          </Tooltip>
         </Box>
       ))
       }
-      <Button onClick={() => addExtraFields()}>Add extra field for items</Button>
+      <Button onClick={() => addExtraFields()}>
+        <FormattedMessage id="app.collection.form.addextra" />
+      </Button>
     </>
   );
 }

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Stack, Grid, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+
 import { createComment, getAllItemComment } from '../../../utils/requests/requests';
 import GlobalContext from '../../../utils/context/GlobalContext';
 import FormComment from '../../form/form-comment';
-import { Link } from 'react-router-dom';
 import ErrorMessage from '../../ErrorMessage';
 import Spinner from '../../Spinner';
 
@@ -46,7 +48,7 @@ const ItemComments = ({ itemId }) => {
     height: 40,
     fontSize: 16,
   };
-  console.log(commentsData)
+
   const commentsBlock = commentsData.map(comment => {
     return (
       <Stack key={comment._id} direction="row" spacing={2} my={3}>
@@ -73,7 +75,9 @@ const ItemComments = ({ itemId }) => {
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <Stack>
-      <Typography variant="h6" gutterBottom>Comments</Typography>
+      <Typography variant="h6" gutterBottom>
+        <FormattedMessage id="app.item.comments" />
+      </Typography>
       {commentsBlock}
       <Stack direction="row" spacing={1} mt={3}>
         <Avatar sx={avatarStyles}>

@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router';
 import { FormControl, InputAdornment, TextField } from '@mui/material';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import { useIntl } from 'react-intl';
 
 export const Search = () => {
   let navigate = useNavigate();
+  const { messages } = useIntl();
   const [value, setValue] = useState('');
   const [showClearIcon, setShowClearIcon] = useState('none');
 
@@ -40,7 +42,7 @@ export const Search = () => {
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="Search..."
+        placeholder={messages["app.header.search"]}
         sx={{
           backgroundColor: "#192B45",
           maxWidth: 300,

@@ -2,8 +2,11 @@ import { Stack, Tooltip, IconButton } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { ref, deleteObject } from 'firebase/storage';
 import { storage } from '../../../utils/firebase';
+import { useIntl } from 'react-intl';
 
 const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => {
+  const { messages } = useIntl();
+  const text = messages["app.collection.form"];
 
   const imageRef = ref(storage, imageUrl);
 
@@ -11,7 +14,7 @@ const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => 
     setSelectedImg(null);
     setImageUrl('');
     deleteObject(imageRef).then(() => {
-      toast.info('Image remove', { position: 'top-right' });
+      toast.info(text.imgdeleted, { position: 'top-right' });
     }).catch((error) => {
       console.log(error);
       toast.error(error.message, { position: 'top-right' });
@@ -21,18 +24,25 @@ const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => 
   return (
     <>
       <Stack height={24} alignItems="flex-end">
-        <Tooltip title="Remove image" placement="top">
+        <Tooltip title={text.imgremove} placement="top">
           <IconButton
             color="#585E67"
             onClick={() => onRemoveImg()}
-            sx={{padding: 0}}
+            sx={{ padding: 0 }}
           >
             <HighlightOffIcon />
           </IconButton>
         </Tooltip>
       </Stack>
       <Stack>
-        <img src={imageUrl} alt="uploaded" style={{ width: "100%", height: 160, objectFit: "cover" }}></img>
+        <img
+          src={imageUrl}
+          alt="uploaded"
+          style={{
+            width: "100%",
+            height: 160,
+            objectFit: "cover"
+          }}></img>
       </Stack>
     </>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const Footer = () => {
   return (
@@ -19,29 +20,26 @@ const Footer = () => {
           justifyContent="space-between"
           spacing={1}
         >
-          <Typography
-            color="#142339"
-            fontSize={14}
-            fontWeight={500}>iCollect</Typography>
+          <Typography color="#142339" fontSize={14} fontWeight={500}>
+            iCollect
+          </Typography>
+          <Typography color="#9B9EA4" fontSize={12} fontWeight={400} noWrap>
+          <FormattedMessage id="app.footer.rights" />
+          </Typography>
           <Typography
             color="#9B9EA4"
             fontSize={12}
             fontWeight={400}
-            noWrap
-          >© 2023 iCollect. All rights reserved.
-          </Typography>
-          <Link
-            to="https://github.com/elsuppo"
-            target="_blank"
-            style={{ textDecoration: 'none' }}
+            sx={{ "&:hover": { color: "#000000" } }}
           >
-            <Typography
-              color="#9B9EA4"
-              fontSize={12}
-              fontWeight={400}
-              sx={{ "&:hover": { color: "#000000" } }}
-            >Development</Typography>
-          </Link>
+            <Link
+              to="https://github.com/elsuppo"
+              target="_blank"
+              style={{ textDecoration: 'none' }}
+            >
+              <FormattedMessage id="app.footer.dev" />
+            </Link>
+          </Typography>
         </Stack>
       </Container>
     </Box>

@@ -11,7 +11,6 @@ const ItemTags = ({ tags, compact }) => {
     maxWidth: "100%"
   };
 
-
   const tagsView = tags.map((tag, i) => {
     return (
       <Typography key={i} sx={tagStyle} noWrap>

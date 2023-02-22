@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, TextField, FormControlLabel, Checkbox } from '@mui/material';
 
 const FormItemExtraFields = ({ extraFields, register, valuesForEdit }) => {

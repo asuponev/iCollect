@@ -2,8 +2,11 @@ import React from 'react';
 import { Box, Button } from '@mui/material';
 import { FormTextField, FormEmailField, FormPswField } from './form-elements/form-textfields';
 import { cloneDeepWith } from 'lodash-es';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const FormRegister = ({ register, handleSubmit, errors, onFormSubmit }) => {
+  const { messages } = useIntl();
+  const text = messages["app.auth.form"];
 
   const preSubmit = (values) => {
     const trimmedFormValues = cloneDeepWith(values, p =>
@@ -11,13 +14,13 @@ const FormRegister = ({ register, handleSubmit, errors, onFormSubmit }) => {
     );
     onFormSubmit(trimmedFormValues);
   };
-  
+
   return (
     <form onSubmit={handleSubmit(preSubmit)}>
       <Box my={2}>
         <FormTextField
           name="firstName"
-          label="First name"
+          label={text.firstName}
           register={register}
           errors={errors}
         />
@@ -25,7 +28,7 @@ const FormRegister = ({ register, handleSubmit, errors, onFormSubmit }) => {
       <Box my={2}>
         <FormTextField
           name="lastName"
-          label="Last name"
+          label={text.lastName}
           register={register}
           errors={errors}
         />
@@ -42,10 +45,9 @@ const FormRegister = ({ register, handleSubmit, errors, onFormSubmit }) => {
           errors={errors}
         />
       </Box>
-      <Button
-        type="submit"
-        variant="contained"
-        fullWidth>Create an Account</Button>
+      <Button type="submit" variant="contained" fullWidth>
+        <FormattedMessage id="app.auth.register.btn" />
+      </Button>
     </form>
   );
 }

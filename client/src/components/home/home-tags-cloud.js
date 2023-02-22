@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Stack, Typography } from '@mui/material';
 
 import { getAllTags } from '../../utils/requests/requests';
 import ErrorMessage from '../ErrorMessage';
@@ -34,12 +33,11 @@ const HomeTagsCloud = () => {
   const content = !(loading || error) ? <TagsCloud tags={tags} /> : null;
 
   return (
-    <Stack>
-      <Typography variant="h6" mb={4}>Explore by tags</Typography>
+    <>
       {errorMessage}
       {spinner}
       {content}
-    </Stack>
+    </>
   );
 }
 

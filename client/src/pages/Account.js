@@ -28,14 +28,13 @@ export const Account = () => {
       })
   }, [userId]);
 
+  const nameCurrentPage = `${userData.firstName} ${userData.lastName}`;
+
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <>
-      <BreadCrumbs
-        prevLinks={[{ 'Home': '/' }]}
-        current={`${userData.firstName} ${userData.lastName}`}
-      />
+      <BreadCrumbs current={nameCurrentPage} />
       <AccountUserInfo userData={userData} />
       <AccountCollections userId={userId} />
     </>

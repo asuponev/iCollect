@@ -10,6 +10,7 @@ import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
 import FormCreateExtraField from './form-elements/form-create-extra-field';
 import { useWindowWidth } from '@react-hook/window-size';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const FormCreateCollection = ({
   handleClose,
@@ -31,6 +32,9 @@ const FormCreateCollection = ({
   const [selectedImg, setSelectedImg] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [extraFields, setExtraFields] = useState([]);
+
+  const { messages } = useIntl();
+  const text = messages["app.collection.form"];
 
   useEffect(() => {
     if (isEditing) {
@@ -55,7 +59,9 @@ const FormCreateCollection = ({
     handleClose();
   };
 
-  const widthForm = windowWidth > 400 ? 300 : 200;
+  const widthForm = windowWidth > 900 ? 500
+    : windowWidth > 600 ? 400
+      : windowWidth < 410 ? 200 : 300;
 
   return (
     <>
@@ -88,7 +94,7 @@ const FormCreateCollection = ({
           <Box my={2}>
             <FormTextField
               name="title"
-              label="Title"
+              label={text.title}
               register={register}
               errors={errors}
             />
@@ -96,6 +102,7 @@ const FormCreateCollection = ({
           <Box my={2}>
             <FormSelect
               name="subject"
+              label={text.subject}
               options={subjects}
               register={register}
               errors={errors}
@@ -105,7 +112,7 @@ const FormCreateCollection = ({
           <Box my={2}>
             <FieldDescription
               name="description"
-              label="Description"
+              label={text.description}
               register={register}
               errors={errors}
             />
@@ -124,10 +131,14 @@ const FormCreateCollection = ({
         <Box my={2} sx={{ display: "flex", alignItems: "center", gap: "24px" }}>
           <Button type="submit" variant="contained">
             {
-              !isEditing ? <>Create Collection</> : <>Save Changes</>
+              !isEditing
+                ? <FormattedMessage id="app.collection.form.btncreate" />
+                : <FormattedMessage id="app.collection.form.btnedit" />
             }
           </Button>
-          <Button variant="text" onClick={() => handleClose()}>Cancel</Button>
+          <Button variant="text" onClick={() => handleClose()}>
+            <FormattedMessage id="app.collection.form.btncancel" />
+          </Button>
         </Box>
       </form>
     </>

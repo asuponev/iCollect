@@ -7,6 +7,7 @@ import CreateCollection from './account-collections/create-collection';
 import CollectionCard from './account-collections/collection-card';
 import { ToastContainer, toast } from 'react-toastify';
 import GlobalContext from '../../utils/context/GlobalContext';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const AccountCollections = ({ userId }) => {
   const { status, userInfo } = useContext(GlobalContext);
@@ -15,6 +16,9 @@ const AccountCollections = ({ userId }) => {
   const [error, setError] = useState(null);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [currentCollectionId, setCurrentCollectionId] = useState('');
+
+  const { messages } = useIntl();
+  const text = messages["app.collection"];
 
   useEffect(() => {
     onRequestGetCollections(userId);
@@ -51,7 +55,7 @@ const AccountCollections = ({ userId }) => {
   const onDeleteCollection = (collectionId) => {
     deleteCollection(collectionId)
       .then(res => {
-        toast.info(res.message, { position: 'top-right' });
+        toast.info(text.tools.successdelete, { position: 'top-right' });
         onRequestGetCollections(userId);
       }).catch(error => {
         console.log(error);
@@ -84,12 +88,14 @@ const AccountCollections = ({ userId }) => {
     <>
       <ToastContainer />
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={3}>
-        <Typography variant="h5" fontWeight="500">Collections</Typography>
+        <Typography variant="h5" fontWeight="500">
+          <FormattedMessage id="app.account.header1" />
+        </Typography>
         {
           (status.isAuth && userId === userInfo.userId) || status.isAdmin ? (
             <>
               <Button variant="contained" onClick={onCreateCollection}>
-                + Add Collection
+                <FormattedMessage id="app.account.addcollection" />
               </Button>
               <CreateCollection
                 openModalForm={openModalForm}

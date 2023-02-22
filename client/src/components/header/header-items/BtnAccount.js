@@ -3,6 +3,7 @@ import { Button, Typography } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
 import GlobalContext from '../../../utils/context/GlobalContext';
+import { FormattedMessage } from 'react-intl';
 
 export const BtnAccount = ({ onMenuToggle }) => {
   const { userInfo } = useContext(GlobalContext);
@@ -22,7 +23,9 @@ export const BtnAccount = ({ onMenuToggle }) => {
       }
       sx={{ height: 32 }}
     >
-      <Typography variant="button" color="#FFFFFF">Account</Typography>
+      <Typography variant="button" color="#FFFFFF">
+        <FormattedMessage id="app.header.btn-account" />
+      </Typography>
     </Button>
   );
 }

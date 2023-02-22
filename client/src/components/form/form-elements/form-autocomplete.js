@@ -1,8 +1,12 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
 import { Autocomplete, TextField } from '@mui/material';
+import { useIntl } from 'react-intl';
 
 const FormAutocomplete = ({ control, name, label, options, errors, defaultValue }) => {
+  const { messages } = useIntl();
+  const text = messages["app.item.form"];
+
   return (
     <Controller
       name={name}
@@ -19,7 +23,7 @@ const FormAutocomplete = ({ control, name, label, options, errors, defaultValue 
                 {...params}
                 label={label}
                 error={!!errors[name]}
-                helperText={errors[name] ? 'Tags is required' : null}
+                helperText={errors[name] ? text.required : null}
               />
             )
           }}

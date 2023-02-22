@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import imageNotFound from '../../../utils/constants/image-not-found';
 import CollectionCardTools from './collection-card-tools';
 import GlobalContext from '../../../utils/context/GlobalContext';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 const CollectionCard = ({
   _id,
@@ -20,6 +21,7 @@ const CollectionCard = ({
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
+  const { messages } = useIntl();
 
   return (
     <Card
@@ -42,12 +44,20 @@ const CollectionCard = ({
             alignItems="center"
             color="text.secondary"
           >
-            <Typography variant="overline" lineHeight="18px">{subject}</Typography>
-            <Typography variant="caption">{items} items</Typography>
+            <Typography variant="overline" lineHeight="18px">
+              {subject}
+            </Typography>
+            <Typography variant="caption">
+              {messages["app.collection.amount-items"]} {items}
+            </Typography>
           </Stack>
           <Grid container wrap="nowrap" direction="column">
-            <Typography gutterBottom variant="h6" noWrap>{title}</Typography>
-            <Typography variant="body2" color="text.secondary" noWrap>{description}</Typography>
+            <Typography gutterBottom variant="h6" noWrap>
+              {title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary" noWrap>
+              {description}
+            </Typography>
           </Grid>
         </CardContent>
       </CardActionArea>
@@ -61,9 +71,12 @@ const CollectionCard = ({
             />
           ) : null
         ) : (
-          <Grid container wrap="nowrap" p={2}>
+          <Grid container wrap="nowrap" p={2} gap={1}>
+            <Typography variant="overline" color="#797E85">
+              <FormattedMessage id="app.collection.by" />
+            </Typography>
             <Typography variant="overline" color="#797E85" noWrap>
-              by <Link to={`/users/${authorId._id}`}>
+              <Link to={`/users/${authorId._id}`}>
                 {authorId.firstName} {authorId.lastName}
               </Link>
             </Typography>

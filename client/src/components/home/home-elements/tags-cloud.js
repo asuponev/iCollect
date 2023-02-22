@@ -20,7 +20,7 @@ const TagsCloud = ({ tags }) => {
       <Typography key={i} sx={tagStyle} noWrap>
         <Link
           to={`/search/--tag--${tag}`}
-          style={{ textDecoration: 'none' }}
+          style={{ textDecoration: "none" }}
         >
           {tag}
         </Link>

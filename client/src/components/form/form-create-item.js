@@ -5,6 +5,7 @@ import { FormTextField } from './form-elements/form-textfields';
 import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
 import { useWindowWidth } from '@react-hook/window-size';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const FormCreateItem = ({
   collectionId,
@@ -25,6 +26,9 @@ const FormCreateItem = ({
     }
   });
 
+  const { messages } = useIntl();
+  const text = messages["app.item.form"];
+
   const onFormSubmit = (values) => {
     if (isEditing) {
       onRequestUpdate(collectionId, itemId, values);
@@ -35,18 +39,20 @@ const FormCreateItem = ({
     handleClose();
   };
 
-  const widthForm = windowWidth > 400 ? 300 : 200;
+  const widthForm = windowWidth > 900 ? 500
+    : windowWidth > 600 ? 400
+      : windowWidth < 410 ? 200 : 300;
 
   return (
-    <form 
-      onSubmit={handleSubmit(onFormSubmit)} 
-      style={{width: widthForm}}
+    <form
+      onSubmit={handleSubmit(onFormSubmit)}
+      style={{ width: widthForm }}
     >
       <Stack>
         <Box my={2}>
           <FormTextField
             name="title"
-            label="Title"
+            label={text.title}
             register={register}
             errors={errors}
           />
@@ -54,7 +60,7 @@ const FormCreateItem = ({
         <Box my={2}>
           <FormAutocomplete
             name="tags"
-            label="Tags"
+            label={text.tags}
             control={control}
             options={tagsList}
             errors={errors}
@@ -70,10 +76,14 @@ const FormCreateItem = ({
       <Box my={2} sx={{ display: "flex", alignItems: "center", gap: "24px" }}>
         <Button type="submit" variant="contained">
           {
-            !isEditing ? <>Create Item</> : <>Save Changes</>
+            !isEditing
+              ? <FormattedMessage id="app.item.form.btncreate" />
+              : <FormattedMessage id="app.item.form.btnedit" />
           }
         </Button>
-        <Button variant="text" onClick={() => handleClose()}>Cancel</Button>
+        <Button variant="text" onClick={() => handleClose()}>
+          <FormattedMessage id="app.item.form.btncancel" />
+        </Button>
       </Box>
     </form>
   );

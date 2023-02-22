@@ -11,8 +11,12 @@ const ItemExtraFields = ({ itemData, extraFields }) => {
         if (field.type === key) {
           extraFieldsView.push(
             <Fragment key={i}>
-              <Typography noWrap mt={2.5} mb={1}>{field.name}</Typography>
-              <Typography fontSize={16} fontWeight={700} noWrap>{`${itemData[key]}`}</Typography>
+              <Typography noWrap mt={2.5} mb={1}>
+                {field.name}
+              </Typography>
+              <Typography fontSize={16} fontWeight={700} noWrap>
+                {`${itemData[key]}`}
+              </Typography>
             </Fragment>
           )
         }

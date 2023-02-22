@@ -1,18 +1,22 @@
+import React from 'react';
 import { TextField } from '@mui/material';
+import { useIntl } from 'react-intl';
 
 export const FormTextField = ({ name, label, register, errors }) => {
+  const { messages } = useIntl();
+  const text = messages["app.collection.form.errors"];
 
   return (
     <TextField
       {...register(name, {
-        required: `${label} is required`,
+        required: `${label} ${text.required}`,
         minLength: {
           value: 2,
-          message: "Min length is 2"
+          message: text.titlemin
         },
         maxLength: {
           value: 30,
-          message: `Max length is 30`
+          message: text.titlemax
         }
       })}
       label={label}
@@ -25,21 +29,24 @@ export const FormTextField = ({ name, label, register, errors }) => {
 };
 
 export const FormEmailField = ({ register, errors }) => {
+  const { messages } = useIntl();
+  const text = messages["app.auth.form"];
+
   return (
     <TextField
       {...register("email", {
-        required: "Email is required",
+        required: `${text.email} ${text.required}`,
         pattern: {
           value: /\S+@\S+\.\S+/,
-          message: "Value not match email format"
+          message: text.emailformat
         },
         maxLength: {
           value: 50,
-          message: `Max length is 50`
+          message: text.emailmax
         }
       })}
       type="email"
-      label="Email"
+      label={text.email}
       variant="outlined"
       error={!!errors.email}
       helperText={errors.email && `${errors.email.message}`}
@@ -48,17 +55,20 @@ export const FormEmailField = ({ register, errors }) => {
 };
 
 export const FormPswField = ({ register, errors }) => {
+  const { messages } = useIntl();
+  const text = messages["app.auth.form"];
+
   return (
     <TextField
       {...register("password", {
-        required: "Password is required",
+        required: `${text.password} ${text.required}`,
         minLength: {
           value: 5,
-          message: "Min length is 5"
+          message: text.passwordmin
         }
       })}
       type="password"
-      label="Password"
+      label={text.password}
       variant="outlined"
       error={!!errors.password}
       helperText={errors.password && `${errors.password.message}`}
@@ -67,13 +77,16 @@ export const FormPswField = ({ register, errors }) => {
 };
 
 export const FieldDescription = ({ name, label, register, errors }) => {
+  const { messages } = useIntl();
+  const text = messages["app.collection.form.errors"];
+
   return (
     <TextField
       {...register(name, {
-        required: `${label} is required`,
+        required: `${label} ${text.required}`,
         minLength: {
           value: 5,
-          message: "Min length is 5"
+          message: text.descrmin
         }
       })}
       label={label}

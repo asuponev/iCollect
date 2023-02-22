@@ -11,7 +11,8 @@ const GlobalContext = createContext({
     userId: '',
     firstName: '',
     lastName: ''
-  }
+  },
+  lang: 'en',
 });
 
 export default GlobalContext;

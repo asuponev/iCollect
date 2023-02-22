@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useIntl } from 'react-intl';
 import { Stack, Tooltip, IconButton } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -10,6 +11,8 @@ const ItemLikes = ({ itemId }) => {
   const { userInfo } = useContext(GlobalContext);
   const [likesData, setLikesData] = useState([]);
   const [isLike, setIsLike] = useState(false);
+
+  const { messages } = useIntl();
 
   useEffect(() => {
     onGetRequest(itemId);
@@ -59,7 +62,7 @@ const ItemLikes = ({ itemId }) => {
 
   return (
     <Stack direction="row" spacing={1} alignItems="center">
-      <Tooltip title={`${likesData.length} likes`} placement="left">
+      <Tooltip title={`${messages["app.item.likes"]} ${likesData.length}`} placement="left">
         {isLike ?
           (
             <IconButton onClick={() => onRemoveLike(itemId)}>

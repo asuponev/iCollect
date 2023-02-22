@@ -4,7 +4,7 @@ import { getOneCollection } from '../utils/requests/requests';
 
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
-import CollectionBreadcrumbs from '../components/collection/view-blocks/collection-breadcrumbs';
+import BreadCrumbs from '../components/BreadCrumbs';
 import CollectionView from '../components/collection/collection-view';
 
 export const Collection = () => {
@@ -31,11 +31,21 @@ export const Collection = () => {
       })
   };
 
+  const authorName = `
+  ${collectionData.authorId?.firstName} 
+  ${collectionData.authorId?.lastName}
+`;
+
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <>
-      <CollectionBreadcrumbs collectionData={collectionData} />
+      <BreadCrumbs
+        prevLinks={[{
+          [authorName]: `/users/${collectionData.authorId._id}`
+        }]}
+        current={collectionData.title}
+      />
       <CollectionView
         collectionId={collectionId}
         collectionData={collectionData}

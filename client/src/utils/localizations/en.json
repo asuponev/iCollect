@@ -1,0 +1,140 @@
+{
+  "app.auth.login.btn": "Log In",
+  "app.auth.register.btn": "Create an Account",
+  "app.auth.login": "Log In",
+  "app.auth.register": "Sign Up",
+  "app.auth.register.header": "Create An Account",
+  "app.auth.register.text": "Already have an account? ",
+  "app.auth.login.header": "Welcome Back!",
+  "app.auth.login.text": "Don't have an account? ",
+  "app.auth.form": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "password": "Password",
+    "email": "Email",
+    "required": "is required",
+    "emailformat": "Value not match email format",
+    "emailmax": "Max length is 50",
+    "passwordmin": "Min length is 5"
+  },
+
+  "app.header.btn-admin": "Admin panel",
+  "app.header.btn-account": "Account",
+  "app.header.btn-login": "Log In",
+  "app.header.btn-logout": "Log Out",
+  "app.header.btn-signup": "Sign Up",
+  "app.header.search": "Search",
+  "app.header.theme-dark": "Turn on Dark mode",
+  "app.header.theme-light": "Turn off Dark mode",
+
+  "app.home-page.header1": "Last added items",
+  "app.home-page.header2": "The biggest collections",
+  "app.home-page.header3": "Explore by tags",
+
+  "app.account.header1": "Collections",
+  "app.account.addcollection": "+ Add Collection",
+
+  "app.collection.amount-items": "Items:",
+  "app.collection.by": "by",
+  "app.collection.additem": "+ Add Items",
+  "app.collection": {
+    "tools": {
+      "confirmDelete": "Are you sure you want to delete the collection?",
+      "delete": "Delete collection",
+      "successdelete": "Collection successfully deleted",
+      "edit": "Edit collection"
+    },
+    "table": {
+      "item": "Item",
+      "tags": "Tags"
+    },
+    "tableTools": {
+      "select": "Items selected:",
+      "delete": "Delete selected items",
+      "confirmDelete": "Are you sure you want to delete the item(-s)?",
+      "successdelete1": "Item successfully deleted",
+      "successdelete2": "Items successfully deleted"
+    }
+  },
+
+  "app.collection.form.create": "Add new collection",
+  "app.collection.form.edit": "Edit collection",
+  "app.collection.form.addextra": "Add extra field for items",
+  "app.collection.form.btncreate": "Create Collection",
+  "app.collection.form.btnedit": "Save Changes",
+  "app.collection.form.btncancel": "Cancel",
+  "app.collection.form": {
+    "title": "Title",
+    "subject": "Select subject",
+    "description": "Description",
+    "extraname": "Name extra field",
+    "extraselect": "Select type",
+    "extraremove": "Remove",
+    "imgremove": "Remove image",
+    "btnclose": "Close form",
+    "successcreate": "Collection successfully created",
+    "successupdate": "Collection successfully updated",
+    "imgdeleted": "Image removed"
+  },
+  
+  "app.collection.form.errors": {
+    "required": "is required",
+    "subjectselect": "Please select subject",
+    "titlemin": "Min length is 2",
+    "titlemax": "Max length is 30",
+    "descrmin": "Min length is 5",
+    "image": "You need to upload a file of the image type"
+  },
+
+  "app.item.tags": "Tags",
+  "app.item.likes": "Likes:",
+  "app.item.comments": "Comments",
+  "app.item.comments.placeholder": "Text",
+  "app.item.comments.send": "Send",
+
+  "app.item.form.create": "Add new item",
+  "app.item.form.update": "Edit item",
+  "app.item.form.btncreate": "Create Item",
+  "app.item.form.btnedit": "Save Changes",
+  "app.item.form.btncancel": "Cancel",
+  "app.item.form": {
+    "successcreate": "Item successfully created",
+    "successupdate": "Item successfully updated",
+    "title": "Title",
+    "tags": "Tags",
+    "btnclose": "Close form",
+    "required": "Tags is required"
+  },
+
+  "app.admin-panel.header": "Users",
+  "app.admin-panel.breadcrumbs": "Admin panel",
+  "app.admin-panel": {
+    "table": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "status": "Status",
+      "role": "Role",
+      "created": "Created on",
+      "blocked": "blocked",
+      "active": "active"
+    },
+    "tools": {
+      "select": "Users selected:",
+      "confirm": "Are you sure?",
+      "block": "Block / Unlock selected users",
+      "delete": "Delete selected users",
+      "makeAdmin": "Make admin / Withdraw authority"
+    }
+  },
+
+  "app.search-results.breadcrumbs": "Search",
+  "app.search-results.bytag": "Search results for tag",
+  "app.search-results.byinput": "Search results for",
+  "app.search-results.results": "Results: ",
+
+  "app.loading": "Loading",
+
+  "app.footer.dev": "Development",
+  "app.footer.rights": "© 2023 iCollect. All rights reserved."
+}

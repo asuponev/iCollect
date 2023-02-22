@@ -5,11 +5,20 @@ import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AdminTableTools from './admin-table-tools';
+import { useIntl } from 'react-intl';
 import { tableStyles } from './table-styles';
 
-const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminSelectedUsers }) => {
+const AdminTable = ({
+  users,
+  deleteSelectedUsers,
+  blockSelectedUsers,
+  makeAdminSelectedUsers,
+}) => {
   if (!users) users = [];
   const [selectedUsers, setSelectedUsers] = useState([]);
+
+  const { messages } = useIntl();
+  const text = messages["app.admin-panel"];
 
   let navigate = useNavigate();
   const routeChange = (id) => {
@@ -19,12 +28,12 @@ const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminS
 
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 70 },
-    { field: 'firstName', headerName: 'First name', flex: 1, minWidth: 130 },
-    { field: 'lastName', headerName: 'Last name', flex: 1, minWidth: 130 },
-    { field: 'email', headerName: 'Email', flex: 1, minWidth: 180 },
-    { field: 'status', headerName: 'Status', flex: 1, minWidth: 70 },
-    { field: 'role', headerName: 'Role', flex: 1, minWidth: 70 },
-    { field: 'date', headerName: 'Created on', flex: 1, minWidth: 130 },
+    { field: 'firstName', headerName: text.table.firstName, flex: 1, minWidth: 130 },
+    { field: 'lastName', headerName: text.table.lastName, flex: 1, minWidth: 130 },
+    { field: 'email', headerName: text.table.email, flex: 1, minWidth: 180 },
+    { field: 'status', headerName: text.table.status, flex: 1, minWidth: 70 },
+    { field: 'role', headerName: text.table.role, flex: 1, minWidth: 70 },
+    { field: 'date', headerName: text.table.created, flex: 1, minWidth: 130 },
     {
       field: 'actions', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
@@ -45,7 +54,7 @@ const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminS
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.email,
-      status: user.isActive === true ? 'active' : 'blocked',
+      status: user.isActive === true ? text.table.active : text.table.blocked,
       role: user?.role,
       date: user ? (formatDate(user.createdAt)) : '',
     }
@@ -62,7 +71,7 @@ const AdminTable = ({ users, deleteSelectedUsers, blockSelectedUsers, makeAdminS
         blockSelectedUsers={blockSelectedUsers}
         makeAdminSelectedUsers={makeAdminSelectedUsers}
       />
-      <Stack height={tableHeight} width="100%" mb={10}>
+      <Stack height={tableHeight} width="100%">
         <DataGrid
           rows={rows}
           columns={columns}

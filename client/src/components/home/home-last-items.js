@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Stack, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import { getLastItems } from '../../utils/requests/requests';
 import ItemCard from './home-elements/item-card';
@@ -46,12 +46,11 @@ const HomeLastItems = () => {
   ) : null;
 
   return (
-    <Stack>
-      <Typography variant="h6" mb={4}>Last added items</Typography>
+    <>
       {errorMessage}
       {spinner}
       {content}
-    </Stack>
+    </>
   );
 }
 

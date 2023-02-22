@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import defaultItemValues from '../../../utils/constants/default-item-values';
 import { createItem, getAllTags, getItem, updateItem } from '../../../utils/requests/requests';
 import FormCreateItem from '../../form/form-create-item';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const CreateItem = ({
   collectionId,
@@ -16,6 +17,9 @@ const CreateItem = ({
 }) => {
   const [valuesForEdit, setValuesForEdit] = useState({ ...defaultItemValues });
   const [tagsList, setTagsList] = useState([]);
+
+  const { messages } = useIntl();
+  const text = messages["app.item.form"];
 
   const isEditing = Boolean(itemId);
 
@@ -38,7 +42,7 @@ const CreateItem = ({
     createItem(collectionId, { ...values })
       .then(res => {
         onItemsRequest(collectionId);
-        toast.success(`Item "${res.title}" successfully created`, { position: 'top-right' });
+        toast.success(text.successcreate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -49,7 +53,7 @@ const CreateItem = ({
     updateItem(collectionId, itemId, { ...values })
       .then(res => {
         onItemsRequest(collectionId);
-        toast.success(`Item "${res.title}" successfully updated`, { position: 'top-right' });
+        toast.success(text.successupdate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -86,7 +90,7 @@ const CreateItem = ({
   return (
     <Dialog open={openModalForm} onClose={handleCloseModalForm}>
       <Tooltip
-        title="Close form"
+        title={text.btnclose}
         placement="top"
         sx={{ position: "relative" }}
       >
@@ -99,7 +103,9 @@ const CreateItem = ({
       </Tooltip>
       <DialogTitle>
         {
-          !isEditing ? <>Add new item</> : <>Edit item</>
+          !isEditing
+            ? <FormattedMessage id="app.item.form.create" />
+            : <FormattedMessage id="app.item.form.update" />
         }
       </DialogTitle>
       <DialogContent>

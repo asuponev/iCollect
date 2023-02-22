@@ -1,0 +1,140 @@
+{
+  "app.auth.login.btn": "Вход",
+  "app.auth.register.btn": "Создать аккаунт",
+  "app.auth.login": "Войти",
+  "app.auth.register": "Регистрация",
+  "app.auth.register.header": "Создайте аккаунт",
+  "app.auth.register.text": "У вас уже есть аккаунт? ",
+  "app.auth.login.header": "Войти",
+  "app.auth.login.text": "У вас нет аккаунта? ",
+  "app.auth.form": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "password": "Пароль",
+    "email": "Эл. почта",
+    "required": "- обязательное поле",
+    "emailformat": "Введите в формате эл. почты",
+    "emailmax": "Максимум 50 символов",
+    "passwordmin": "Минимум 5 символов"
+  },
+
+  "app.header.btn-admin": "Админ панель",
+  "app.header.btn-account": "Аккаунт",
+  "app.header.btn-login": "Вход",
+  "app.header.btn-logout": "Выйти",
+  "app.header.btn-signup": "Регистрация",
+  "app.header.search": "Поиск",
+  "app.header.theme-dark": "Включить тёмную тему",
+  "app.header.theme-light": "Выключить тёмную тему",
+
+  "app.home-page.header1": "Последние добавленные предметы",
+  "app.home-page.header2": "Самые большие коллекции",
+  "app.home-page.header3": "Найти предметы по тегу",
+
+  "app.account.header1": "Коллекции",
+  "app.account.addcollection": "+ Создать коллекцию",
+
+  "app.collection.amount-items": "Предметов в коллекции:",
+  "app.collection.by": "Автор",
+  "app.collection.additem": "+ Добавить предмет",
+  "app.collection": {
+    "tools": {
+      "confirmDelete": "Вы уверены, что хотите удалить коллекцию?",
+      "delete": "Удалить коллекцию",
+      "successdelete": "Коллекция удалена",
+      "edit": "Редактировать коллекцию"
+    },
+    "table": {
+      "item": "Предмет",
+      "tags": "Теги"
+    },
+    "tableTools": {
+      "select": "Выбрано предметов:",
+      "delete": "Удалить выбранные предметы",
+      "confirmDelete": "Вы уверены, что хотите удалить предмет(-ы)?",
+      "successdelete1": "Предмет удален",
+      "successdelete2": "Предметы удалены"
+    }
+  },
+
+  "app.collection.form.create": "Создание коллекции",
+  "app.collection.form.edit": "Редактирование коллекции",
+  "app.collection.form.addextra": "Добавить дополнительное поле",
+  "app.collection.form.btncreate": "Создать коллекцию",
+  "app.collection.form.btnedit": "Сохранить",
+  "app.collection.form.btncancel": "Отмена",
+  "app.collection.form": {
+    "title": "Название",
+    "subject": "Выберите тему",
+    "description": "Описание",
+    "extraname": "Название",
+    "extraselect": "Тип данных",
+    "extraremove": "Удалить",
+    "imgremove": "Удалить изображение",
+    "btnclose": "Закрыть форму",
+    "successcreate": "Коллекция успешно создана",
+    "successupdate": "Коллекция успешно откорректирована",
+    "imgdeleted": "Изображение удалено"
+  },
+
+  "app.collection.form.errors": {
+    "required": "- обязательное поле",
+    "subjectselect": "Необходимо выбрать тему",
+    "titlemin": "Минимум 2 символа",
+    "titlemax": "Максимум 30 символов",
+    "descrmin": "Минимум 5 символов",
+    "image": "Файл должен быть изображением"
+  },
+
+  "app.item.tags": "Теги",
+  "app.item.likes": "Нравится:",
+  "app.item.comments": "Комментарии",
+  "app.item.comments.placeholder": "Текст",
+  "app.item.comments.send": "Отправить",
+
+  "app.item.form.create": "Добавление предмета",
+  "app.item.form.update": "Редактирование предмета",
+  "app.item.form.btncreate": "Создать предмет",
+  "app.item.form.btnedit": "Сохранить",
+  "app.item.form.btncancel": "Отмена",
+  "app.item.form": {
+    "successcreate": "Предмет успешно добавлен в коллекцию",
+    "successupdate": "Предмет успешно отредактирован",
+    "title": "Название",
+    "tags": "Теги",
+    "btnclose": "Закрыть форму",
+    "required": "Добавьте хотя бы 1 тег"
+  },
+
+  "app.admin-panel.header": "Пользователи",
+  "app.admin-panel.breadcrumbs": "Админ панель",
+  "app.admin-panel": {
+    "table": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "email": "Эл. почта",
+      "status": "Статус",
+      "role": "Роль",
+      "created": "Дата регистрации",
+      "blocked": "Заблокирован",
+      "active": "Активный"
+    },
+    "tools": {
+      "select": "Выбрано пользователей:",
+      "confirm": "Вы уверены?",
+      "block": "Заблокировать / Разблокировать",
+      "delete": "Удалить выбранных пользоователей",
+      "makeAdmin": "Сделать администратором / Снять полномочия"
+    }
+  },
+
+  "app.search-results.breadcrumbs": "Поиск",
+  "app.search-results.bytag": "Результаты поиска по тегу",
+  "app.search-results.byinput": "Результаты поиска по запросу",
+  "app.search-results.results": "Результатов:",
+
+  "app.loading": "Загрузка",
+
+  "app.footer.dev": "Разработка",
+  "app.footer.rights": "© 2023 iCollect. Все права защищены."
+}

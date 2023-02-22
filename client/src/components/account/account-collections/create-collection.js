@@ -3,8 +3,8 @@ import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton } from '@mui/ma
 import CloseIcon from '@mui/icons-material/Close';
 import { createCollection, updateCollection } from '../../../utils/requests/requests';
 import { getOneCollection } from '../../../utils/requests/requests';
-
 import FormCreateCollection from '../../form/form-create-collection';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const CreateCollection = ({
   openModalForm,
@@ -21,6 +21,9 @@ const CreateCollection = ({
     coverUrl: '',
     extraFields: []
   });
+
+  const { messages } = useIntl();
+  const text = messages["app.collection.form"];
 
   const isEditing = Boolean(collectionId);
 
@@ -55,7 +58,7 @@ const CreateCollection = ({
     createCollection({ ...values })
       .then(res => {
         onRequestGetCollections(userId);
-        toast.success(`Collection "${res.title}" successfully created`, { position: 'top-right' });
+        toast.success(text.successcreate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -66,7 +69,7 @@ const CreateCollection = ({
     updateCollection(collectionId, { ...values })
       .then(res => {
         onRequestGetCollections(userId);
-        toast.success(`Collection "${res.title}" successfully updated`, { position: 'top-right' });
+        toast.success(text.successupdate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -76,7 +79,7 @@ const CreateCollection = ({
   return (
     <Dialog open={openModalForm} onClose={handleCloseModalForm}>
       <Tooltip
-        title="Close form"
+        title={text.btnclose}
         placement="top"
         sx={{ position: "relative" }}
       >
@@ -89,7 +92,9 @@ const CreateCollection = ({
       </Tooltip>
       <DialogTitle>
         {
-          !isEditing ? <>Add new collection</> : <>Edit collection</>
+          !isEditing
+            ? <FormattedMessage id="app.collection.form.create" />
+            : <FormattedMessage id="app.collection.form.edit" />
         }
       </DialogTitle>
       <DialogContent>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
 import { getUsers, updateUsers } from '../utils/requests/requests';
+import { Stack, Typography } from '@mui/material';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Spinner from '../components/Spinner';
 import ErrorMessage from '../components/ErrorMessage';
 import BreadCrumbs from '../components/BreadCrumbs';
@@ -10,6 +11,8 @@ export const Admin = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { messages } = useIntl();
 
   useEffect(() => {
     onRequest(getUsers);
@@ -53,18 +56,20 @@ export const Admin = () => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <>
-      <BreadCrumbs
-        prevLinks={[{ 'Home': '/' }]}
-        current='Admin Panel'
-      />
-      <AdminTable
-        users={users}
-        deleteSelectedUsers={deleteSelectedUsers}
-        blockSelectedUsers={blockSelectedUsers}
-        makeAdminSelectedUsers={makeAdminSelectedUsers}
-      />
-    </>
+    <Stack spacing={4} mb={10}>
+      <BreadCrumbs current={messages["app.admin-panel.breadcrumbs"]} />
+      <Stack spacing={3}>
+        <Typography variant="h5" fontWeight="500">
+          <FormattedMessage id="app.admin-panel.header" />
+        </Typography>
+        <AdminTable
+          users={users}
+          deleteSelectedUsers={deleteSelectedUsers}
+          blockSelectedUsers={blockSelectedUsers}
+          makeAdminSelectedUsers={makeAdminSelectedUsers}
+        />
+      </Stack>
+    </Stack>
   ) : null;
 
   return (

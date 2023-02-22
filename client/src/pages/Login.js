@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import GlobalContext from '../utils/context/GlobalContext';
 import FormLogin from '../components/form/form-login';
 import { fetchLogin } from '../utils/requests/requests';
+import { FormattedMessage } from 'react-intl';
 
 export const Login = () => {
   const { status, setStatus, userInfo, setUserInfo } = useContext(GlobalContext);
@@ -37,20 +38,20 @@ export const Login = () => {
   return (
     <>
       <ToastContainer />
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        my={10}
-      >
-
-        <Typography variant="h6" my={2}>Welcome Back!</Typography>
+      <Stack alignItems="center" justifyContent="center" my={10}>
+        <Typography variant="h6" my={2}>
+          <FormattedMessage id="app.auth.login.header" />
+        </Typography>
         <FormLogin
           register={register}
           handleSubmit={handleSubmit}
           errors={errors}
           onFormSubmit={onFormSubmit}
         />
-        <Typography my={2} fontSize={13}>Don't have an account ? <Link to="/register">Sign Up</Link></Typography>
+        <Typography my={2} fontSize={13}>
+          <FormattedMessage id="app.auth.login.text" />
+          <Link to="/register"><FormattedMessage id="app.auth.register" /></Link>
+        </Typography>
       </Stack>
     </>
   );

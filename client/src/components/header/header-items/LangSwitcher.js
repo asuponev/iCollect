@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Select, FormControl, MenuItem } from '@mui/material';
+import GlobalContext from '../../../utils/context/GlobalContext';
 
 export const LangSwitcher = () => {
-  const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
+  const { lang, setLang } = useContext(GlobalContext);
 
   const handleChange = (event) => {
     setLang(event.target.value);

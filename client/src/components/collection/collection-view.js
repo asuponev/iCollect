@@ -8,6 +8,7 @@ import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import { ToastContainer, toast } from 'react-toastify';
 import GlobalContext from '../../utils/context/GlobalContext';
+import { useIntl } from 'react-intl';
 
 const CollectionView = ({ collectionId, collectionData }) => {
   const { status, userInfo } = useContext(GlobalContext);
@@ -17,6 +18,9 @@ const CollectionView = ({ collectionId, collectionData }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentItemId, setCurrentItemId] = useState('');
+
+  const { messages } = useIntl();
+  const text = messages["app.collection"];
 
   useEffect(() => {
     onItemsRequest(collectionId);
@@ -53,7 +57,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
   const onDeleteItem = (itemId) => {
     deleteItem(collectionId, itemId)
       .then(res => {
-        toast.info(res.message, { position: 'top-right' });
+        toast.info(text.tableTools.successdelete1, { position: 'top-right' });
         onItemsRequest(collectionId);
       })
       .catch(error => {
@@ -65,7 +69,7 @@ const CollectionView = ({ collectionId, collectionData }) => {
   const onDeleteItems = (items) => {
     deleteItems(collectionId, items)
       .then(res => {
-        toast.info(res.message, { position: 'top-right' });
+        toast.info(text.tableTools.successdelete2, { position: 'top-right' });
         onItemsRequest(collectionId);
       })
       .catch(error => {

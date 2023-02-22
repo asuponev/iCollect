@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import GlobalContext from '../utils/context/GlobalContext';
 import FormRegister from '../components/form/form-register';
 import { fetchRegister } from '../utils/requests/requests';
+import { FormattedMessage } from 'react-intl';
 
 export const Registration = () => {
   const { status, setStatus, userInfo, setUserInfo } = useContext(GlobalContext);
@@ -33,19 +34,20 @@ export const Registration = () => {
   return (
     <>
       <ToastContainer />
-      <Stack
-        alignItems="center"
-        justifyContent="center"
-        my={10}
-      >
-        <Typography variant="h6" my={2}>Create An Account</Typography>
+      <Stack alignItems="center" justifyContent="center" my={10}>
+        <Typography variant="h6" my={2}>
+          <FormattedMessage id="app.auth.register.header" />
+        </Typography>
         <FormRegister
           register={register}
           handleSubmit={handleSubmit}
           errors={errors}
           onFormSubmit={onFormSubmit}
         />
-        <Typography my={2} fontSize={13}>Already have an account? <Link to="/login">Log In</Link></Typography>
+        <Typography my={2} fontSize={13}>
+          <FormattedMessage id="app.auth.register.text" />
+          <Link to="/login"><FormattedMessage id="app.auth.login" /></Link>
+        </Typography>
       </Stack>
     </>
   );
