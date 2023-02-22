@@ -27,6 +27,7 @@
   "app.header.theme-dark": "Включить тёмную тему",
   "app.header.theme-light": "Выключить тёмную тему",
 
+  "app.home-page.breadcrumbs": "Главная страница",
   "app.home-page.header1": "Последние добавленные предметы",
   "app.home-page.header2": "Самые большие коллекции",
   "app.home-page.header3": "Найти предметы по тегу",

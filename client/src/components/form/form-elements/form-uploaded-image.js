@@ -1,8 +1,9 @@
 import { Stack, Tooltip, IconButton } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { ref, deleteObject } from 'firebase/storage';
-import { storage } from '../../../utils/firebase';
 import { useIntl } from 'react-intl';
+
+import { storage } from '../../../utils/firebase';
 
 const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => {
   const { messages } = useIntl();

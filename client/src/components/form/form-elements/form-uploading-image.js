@@ -3,8 +3,9 @@ import { TextField, LinearProgress, Stack } from '@mui/material';
 import { useEffect } from 'react';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from '../../../utils/firebase';
 import { useIntl } from 'react-intl';
+
+import { storage } from '../../../utils/firebase';
 
 const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast }) => {
   const [progress, setProgress] = useState(0);

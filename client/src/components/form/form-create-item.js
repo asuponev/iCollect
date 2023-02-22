@@ -1,11 +1,12 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
+import { useWindowWidth } from '@react-hook/window-size';
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import { FormTextField } from './form-elements/form-textfields';
 import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
-import { useWindowWidth } from '@react-hook/window-size';
-import { FormattedMessage, useIntl } from 'react-intl';
 
 const FormCreateItem = ({
   collectionId,

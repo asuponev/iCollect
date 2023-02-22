@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
-import { FormTextField, FieldDescription } from './form-elements/form-textfields';
-// import FormMarkdownText from './form-elements/form-mdtext';
-import FormSelect from './form-elements/form-select';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { useWindowWidth } from '@react-hook/window-size';
+
 import subjects from '../../utils/constants/collection-subjects';
+
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
+import { FormTextField, FieldDescription } from './form-elements/form-textfields';
+import FormSelect from './form-elements/form-select';
 import FormCreateExtraField from './form-elements/form-create-extra-field';
-import { useWindowWidth } from '@react-hook/window-size';
-import { FormattedMessage, useIntl } from 'react-intl';
 
 const FormCreateCollection = ({
   handleClose,

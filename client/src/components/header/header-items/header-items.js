@@ -1,9 +1,9 @@
-export { BtnSignUp } from './BtnSignUp';
-export { BtnLogIn } from './BtnLogIn';
-export { ThemeSwitcher } from './ThemeSwitcher';
-export { LangSwitcher } from './LangSwitcher';
+export { BtnSignUp } from './btn-signup';
+export { BtnLogIn } from './btn-login';
+export { ThemeSwitcher } from './theme-switcher';
+export { LangSwitcher } from './lang-switcher';
 export { Logo } from './Logo';
-export { BtnLogOut } from './BtnLogOut';
-export { BtnAccount } from './BtnAccount';
-export { BtnAdminPanel } from './BtnAdminPanel';
-export { Search } from './Search';
+export { BtnLogOut } from './btn-logout';
+export { BtnAccount } from './btn-account';
+export { BtnAdmin } from './btn-admin';
+export { SearchInput } from './search-input';

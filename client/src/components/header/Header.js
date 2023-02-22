@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { Box, Container, IconButton, Stack } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
-import * as HeaderItems from './header-items/header-items';
+
 import GlobalContext from '../../utils/context/GlobalContext';
+
+import * as HeaderItems from './header-items/header-items';
 import './header.scss';
 
 function Header() {
@@ -27,7 +29,7 @@ function Header() {
         >
           <Stack direction="row" alignItems="center" spacing={1}>
             <HeaderItems.Logo />
-            <HeaderItems.Search />
+            <HeaderItems.SearchInput />
           </Stack>
           <Stack direction="row" position="relative">
             <Stack direction="row" spacing={1}>
@@ -40,7 +42,7 @@ function Header() {
                   <>
                     {
                       status.isAdmin
-                        ? <HeaderItems.BtnAdminPanel onMenuToggle={onMenuToggle} />
+                        ? <HeaderItems.BtnAdmin onMenuToggle={onMenuToggle} />
                         : null
                     }
                     <HeaderItems.BtnAccount onMenuToggle={onMenuToggle} />

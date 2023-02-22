@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Breadcrumbs, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import GlobalContext from '../utils/context/GlobalContext';
+import { FormattedMessage } from 'react-intl';
 
 const BreadCrumbs = ({ prevLinks, current }) => {
-  const { lang } = useContext(GlobalContext);
   let links = []
   if (prevLinks) {
     links = prevLinks.map((link, i) => {
@@ -22,7 +21,7 @@ const BreadCrumbs = ({ prevLinks, current }) => {
     <Breadcrumbs sx={{ mt: 3 }}>
       <Typography variant="body2" color="text.secondary">
         <Link to='/'>
-          {lang === 'en' ? 'Home' : 'Главная страница'}
+          <FormattedMessage id="app.home-page.breadcrumbs" />
         </Link>
       </Typography>
       {links}

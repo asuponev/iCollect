@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Box, TextField, MenuItem, Tooltip, IconButton, Button } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
+
 import extraFieldsTypes from '../../../utils/constants/extra-fields-types';
 
 const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
