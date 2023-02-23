@@ -63,25 +63,25 @@ function App() {
       mode,
       setMode
     }}>
-        <ThemeProvider theme={theme}>
-          <IntlProvider locale={lang} messages={messages[lang]}>
-            <CssBaseline />
-            <Header />
-            <Container maxWidth={false} sx={{ maxWidth: 1440 }} >
-              <Routes>
-                <Route path="/" element={<Pages.Home />} />
-                <Route path="/login" element={<Pages.Login />} />
-                <Route path="/register" element={<Pages.Registration />} />
-                <Route path="/users/:userId" element={<Pages.Account />} />
-                <Route path="/collections/:collectionId" element={<Pages.Collection />} />
-                <Route path="/collections/:collectionId/items/:itemId" element={<Pages.Item />} />
-                <Route path="/admin" element={<Pages.Admin />} />
-                <Route path="/search/:value" element={<Pages.SearchResult />} />
-              </Routes>
-            </Container>
-            <Footer />
-          </IntlProvider>
-        </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <IntlProvider locale={lang} messages={messages[lang]}>
+          <CssBaseline />
+          <Header />
+          <Container maxWidth={false} sx={{ maxWidth: 1440 }} >
+            <Routes>
+              <Route path="/" element={<Pages.Home />} />
+              <Route path="/login" element={<Pages.Login />} />
+              <Route path="/register" element={<Pages.Registration />} />
+              <Route path="/users/:userId" element={<Pages.Account />} />
+              <Route path="/collections/:collectionId" element={<Pages.Collection />} />
+              <Route path="/collections/:collectionId/items/:itemId" element={<Pages.Item />} />
+              <Route path="/admin" element={<Pages.Admin />} />
+              <Route path="/search/:value" element={<Pages.SearchResult />} />
+            </Routes>
+          </Container>
+          <Footer />
+        </IntlProvider>
+      </ThemeProvider>
     </GlobalContext.Provider>
   );
 }
