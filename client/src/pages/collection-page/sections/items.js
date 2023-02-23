@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { Stack } from '@mui/material';
+import CsvDownloadButton from 'react-json-to-csv';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 import { getAllCollectionItems, deleteItem, deleteItems } from '../../../utils/requests/requests';
@@ -11,6 +13,7 @@ import CreateItem from '../../../components/modals/create-item';
 import TableItems from '../../../components/tables/collection-table/collection-table-items';
 import CollectionTools from '../../../components/tables/collection-table/collection-tools';
 import EmptyTable from '../../../components/tables/empty-table';
+import './btn-csv-style.scss';
 
 const Items = ({ collectionId, collectionData }) => {
   const { status, userInfo } = useContext(GlobalContext);
@@ -88,16 +91,21 @@ const Items = ({ collectionId, collectionData }) => {
     <>
       {
         items.length > 0 ? (
-          <TableItems
-            items={items}
-            selectedItems={selectedItems}
-            setSelectedItems={setSelectedItems}
-            extraFields={collectionData.extraFields}
-            collectionId={collectionId}
-            onEditItem={onEditItem}
-            onDeleteItem={onDeleteItem}
-            authorId={authorId}
-          />
+          <Stack mb={10}>
+            <TableItems
+              items={items}
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              extraFields={collectionData.extraFields}
+              collectionId={collectionId}
+              onEditItem={onEditItem}
+              onDeleteItem={onDeleteItem}
+              authorId={authorId}
+            />
+            <CsvDownloadButton data={items} className="btn-export-to-csv">
+              <FormattedMessage id="app.exportsvg" />
+            </CsvDownloadButton>
+          </Stack>
         ) : <EmptyTable />
       }
     </>

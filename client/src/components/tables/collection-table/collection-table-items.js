@@ -108,7 +108,7 @@ const TableItems = ({
   const tableHeight = tableSize * 40 + 100;
 
   return (
-    <Stack height={tableHeight} width="100%" mb={10}>
+    <Stack height={tableHeight} width="100%" mb={4}>
       <DataGrid
         rows={rows}
         columns={columns}

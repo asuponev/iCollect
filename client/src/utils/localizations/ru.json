@@ -139,5 +139,7 @@
   "app.loading": "Загрузка",
 
   "app.footer.dev": "Разработка",
-  "app.footer.rights": "© 2023 iCollect. Все права защищены."
+  "app.footer.rights": "© 2023 iCollect. Все права защищены.",
+
+  "app.exportsvg": "Экспорт в CSV"
 }
