@@ -65,7 +65,7 @@ const FormCreateItem = ({
             control={control}
             options={tagsList}
             errors={errors}
-            defaultValue={getValues().tags ? getValues().tags : []}
+            getValues={getValues}
           />
         </Box>
         <FormItemExtraFields

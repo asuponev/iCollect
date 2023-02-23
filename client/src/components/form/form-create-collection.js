@@ -23,7 +23,7 @@ const FormCreateCollection = ({
   valuesForEdit
 }) => {
   const windowWidth = useWindowWidth();
-  const { register, handleSubmit, formState: { errors }, getValues } = useForm({
+  const { register, handleSubmit, formState: { errors }, getValues, control } = useForm({
     defaultValues: {
       title: valuesForEdit.title || '',
       subject: valuesForEdit.subject || '',
@@ -107,7 +107,8 @@ const FormCreateCollection = ({
               options={subjects}
               register={register}
               errors={errors}
-              defaultValue={getValues().subject ? getValues().subject : ''}
+              control={control}
+              getValues={getValues}
             />
           </Box>
           <Box my={2}>

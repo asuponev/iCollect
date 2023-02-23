@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Autocomplete, TextField } from '@mui/material';
 import { useIntl } from 'react-intl';
 
-const FormAutocomplete = ({ control, name, label, options, errors, defaultValue }) => {
+const FormAutocomplete = ({ control, name, label, options, errors, getValues }) => {
   const { messages } = useIntl();
   const text = messages["app.item.form"];
 
@@ -31,7 +31,7 @@ const FormAutocomplete = ({ control, name, label, options, errors, defaultValue 
             onChange(data);
             return data;
           }}
-          defaultValue={defaultValue}
+          value={getValues()[name] ? getValues()[name] : []}
           freeSolo
           autoSelect
         />
