@@ -76,7 +76,8 @@
     "btnclose": "Close form",
     "successcreate": "Collection successfully created",
     "successupdate": "Collection successfully updated",
-    "imgdeleted": "Image removed"
+    "imgdeleted": "Image removed",
+    "extrafields": "Only 3 fields of one type can be selected"
   },
   
   "app.collection.form.errors": {

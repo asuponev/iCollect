@@ -1,28 +1,69 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Box, TextField, MenuItem, Tooltip, IconButton, Button } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 
+import GlobalContext from '../../../utils/context/GlobalContext';
 import extraFieldsTypes from '../../../utils/constants/extra-fields-types';
 
-const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
+const FormCreateExtraField = ({ extraFields, setExtraFields, toast }) => {
   const { messages } = useIntl();
   const text = messages["app.collection.form"];
+  const { lang } = useContext(GlobalContext);
 
-  const handleChange = (i, e) => {
+  const handleChangeName = (i, e) => {
     let newExtraField = [...extraFields];
     newExtraField[i][e.target.name] = e.target.value;
     setExtraFields(newExtraField);
   };
+
+  // TO DO: FUNCTION REFACTORING
+  const handleChangeType = (i, e) => {
+    const selectedTypes = extraFields.map(field => field.type)
+    let newExtraField = [...extraFields];
+    newExtraField[i][e.target.name] = e.target.value;
+    if (!selectedTypes[0]) {
+      newExtraField[i].type = `${newExtraField[i].type}1`;
+      setExtraFields(newExtraField);
+    } else {
+      if (selectedTypes.includes(`${newExtraField[i].type}1`)
+        && selectedTypes.includes(`${newExtraField[i].type}2`)
+        && selectedTypes.includes(`${newExtraField[i].type}3`)) {
+        toast.info(text.extrafields, { position: 'top-right' });
+        return
+      } else if (selectedTypes.includes(`${newExtraField[i].type}1`)
+        && selectedTypes.includes(`${newExtraField[i].type}2`)) {
+        newExtraField[i].type = `${newExtraField[i].type}3`;
+        setExtraFields(newExtraField);
+      } else if (selectedTypes.includes(`${newExtraField[i].type}2`)
+        && selectedTypes.includes(`${newExtraField[i].type}3`)) {
+        newExtraField[i].type = `${newExtraField[i].type}1`;
+        setExtraFields(newExtraField);
+      } else if (selectedTypes.includes(`${newExtraField[i].type}1`)
+        && selectedTypes.includes(`${newExtraField[i].type})3`)) {
+        newExtraField[i].type = `${newExtraField[i].type}2`;
+        setExtraFields(newExtraField);
+      } else if (selectedTypes.includes(`${newExtraField[i].type}1`)) {
+        newExtraField[i].type = `${newExtraField[i].type}2`;
+        setExtraFields(newExtraField);
+      } else if (selectedTypes.includes(`${newExtraField[i].type}2`)) {
+        newExtraField[i].type = `${newExtraField[i].type}1`;
+        setExtraFields(newExtraField);
+      } else {
+        newExtraField[i].type = `${newExtraField[i].type}1`;
+        setExtraFields(newExtraField);
+      }
+    }
+  }
 
   const addExtraFields = () => {
     setExtraFields([...extraFields, { name: '', type: '' }]);
   };
 
   const removeExtraFields = (i) => {
-    let newExtraField = [...extraFields];
-    newExtraField.splice(i, 1);
-    setExtraFields(newExtraField);
+    let newExtraFields = [...extraFields];
+    newExtraFields.splice(i, 1);
+    setExtraFields(newExtraFields);
   };
 
   return (
@@ -39,20 +80,20 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
             label={text.extraname}
             variant="outlined"
             value={element.name || ""}
-            onChange={e => handleChange(index, e)}
+            onChange={e => handleChangeName(index, e)}
             sx={{ width: "50%" }}
           />
           <TextField
             select
             name="type"
             label={text.extraselect}
-            value={element.type || ""}
-            onChange={e => handleChange(index, e)}
+            value={element.type.slice(0, -1) || ""}
+            onChange={e => handleChangeType(index, e)}
             sx={{ width: "40%" }}
           >
-            {extraFieldsTypes.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
+            {extraFieldsTypes[lang].map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
               </MenuItem>
             ))}
           </TextField>

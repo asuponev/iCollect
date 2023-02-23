@@ -1,19 +1,48 @@
-const extraFieldsTypes = [
-  'number1',
-  'number2',
-  'number3',
-  'string1',
-  'string2',
-  'string3',
-  'text1',
-  'text2',
-  'text3',
-  'date1',
-  'date2',
-  'date3',
-  'checkbox1',
-  'checkbox2',
-  'checkbox3'
-];
+const extraFieldsTypes = {
+  en: [
+    {
+      label: 'number',
+      value: 'number'
+    },
+    {
+      label: 'string',
+      value: 'string',
+    },
+    {
+      label: 'text',
+      value: 'text',
+    },
+    {
+      label: 'date',
+      value: 'date',
+    },
+    {
+      label: 'checkbox',
+      value: 'checkbox',
+    },
+  ],
+  ru: [
+    {
+      label: 'число',
+      value: 'number'
+    },
+    {
+      label: 'строка',
+      value: 'string',
+    },
+    {
+      label: 'текст',
+      value: 'text',
+    },
+    {
+      label: 'дата',
+      value: 'date',
+    },
+    {
+      label: 'чекбокс',
+      value: 'checkbox',
+    },
+  ]
+};
 
 export default extraFieldsTypes;

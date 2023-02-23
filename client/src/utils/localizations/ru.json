@@ -76,7 +76,8 @@
     "btnclose": "Закрыть форму",
     "successcreate": "Коллекция успешно создана",
     "successupdate": "Коллекция успешно откорректирована",
-    "imgdeleted": "Изображение удалено"
+    "imgdeleted": "Изображение удалено",
+    "extrafields": "Можно выбрать только 3 поля одного типа"
   },
 
   "app.collection.form.errors": {

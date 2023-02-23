@@ -126,6 +126,7 @@ const FormCreateCollection = ({
             <FormCreateExtraField
               extraFields={extraFields}
               setExtraFields={setExtraFields}
+              toast={toast}
             />
           </Box>
         </Stack>
