@@ -6,6 +6,7 @@ import { getAllTags } from '../../../utils/requests/requests';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
+import { TagStylesBig } from '../../../styles/tag-styles';
 
 const TagsCloud = () => {
   const [loading, setLoading] = useState(false);
@@ -30,21 +31,10 @@ const TagsCloud = () => {
       })
   };
 
-  const tagStyle = {
-    color: "#797E85",
-    backgroundColor: "#EEEFF0",
-    borderRadius: "100px",
-    padding: "10px 18px",
-    "&:hover": {
-      color: "#142339",
-      backgroundColor: "#DEDFE1",
-    }
-  };
-
   const tagsView = tags.map((tag, i) => {
     return (
       <Link to={`/search/--tag--${tag}`} style={{ textDecoration: "none" }} key={i}>
-        <Typography sx={tagStyle} noWrap>
+        <Typography sx={TagStylesBig} noWrap>
           {tag}
         </Typography>
       </Link>

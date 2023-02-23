@@ -1,17 +1,16 @@
 import React from 'react';
-import { Box, Container, Stack, Typography } from '@mui/material';
+import { Box, Container, Stack, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 const Footer = () => {
+  const theme = useTheme();
+
   return (
     <Box
       component="footer"
-      sx={{
-        width: "100%",
-        backgroundColor: "#F0F3F6",
-        marginTop: "auto"
-      }}
+      backgroundColor={theme.palette.background.footer}
+      sx={{ width: "100%", marginTop: "auto" }}
     >
       <Container maxWidth={false} sx={{ padding: "12px 24px", maxWidth: 1440 }}>
         <Stack
@@ -20,17 +19,17 @@ const Footer = () => {
           justifyContent="space-between"
           spacing={1}
         >
-          <Typography color="#142339" fontSize={14} fontWeight={500}>
+          <Typography color={theme.palette.text.main} fontSize={14} fontWeight={500}>
             iCollect
           </Typography>
-          <Typography color="#9B9EA4" fontSize={12} fontWeight={400} noWrap>
-          <FormattedMessage id="app.footer.rights" />
+          <Typography color="text.secondary" fontSize={12} fontWeight={400} noWrap>
+            <FormattedMessage id="app.footer.rights" />
           </Typography>
           <Typography
-            color="#9B9EA4"
+            color="text.secondary"
             fontSize={12}
             fontWeight={400}
-            sx={{ "&:hover": { color: "#000000" } }}
+            sx={{ "&:hover": { color: theme.palette.text.main } }}
           >
             <Link
               to="https://github.com/elsuppo"

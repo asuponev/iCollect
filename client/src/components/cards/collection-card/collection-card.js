@@ -8,6 +8,7 @@ import GlobalContext from '../../../utils/context/GlobalContext';
 import imageNotFound from '../../../utils/constants/image-not-found';
 
 import CollectionCardTools from './collection-card-tools';
+import { CardStyles } from '../../../styles/card-styles';
 
 const CollectionCard = ({
   _id,
@@ -26,13 +27,7 @@ const CollectionCard = ({
   const { messages } = useIntl();
 
   return (
-    <Card
-      sx={{
-        border: "1px solid #F9F9F9",
-        boxShadow: "2px 2px 16px rgba(0, 0, 0, 0.08)",
-        borderRadius: 2,
-      }}
-    >
+    <Card sx={CardStyles}>
       <CardActionArea onClick={() => navigate(`/collections/${_id}`)}>
         <CardMedia
           sx={{ height: 160 }}
@@ -40,16 +35,11 @@ const CollectionCard = ({
           title={title}
         />
         <CardContent sx={{ padding: "16px 16px 0", height: 100 }}>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            color="text.secondary"
-          >
-            <Typography variant="overline" lineHeight="18px">
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography variant="overline" lineHeight="18px" color="text.secondary">
               {subject}
             </Typography>
-            <Typography variant="caption">
+            <Typography variant="caption" color="text.disabled">
               {messages["app.collection.amount-items"]} {items}
             </Typography>
           </Stack>
@@ -74,10 +64,10 @@ const CollectionCard = ({
           ) : null
         ) : (
           <Grid container wrap="nowrap" p={2} gap={1}>
-            <Typography variant="overline" color="#797E85">
+            <Typography variant="overline" color="text.secondary">
               <FormattedMessage id="app.collection.by" />
             </Typography>
-            <Typography variant="overline" color="#797E85" noWrap>
+            <Typography variant="overline" color="text.secondary" noWrap>
               <Link to={`/users/${authorId._id}`}>
                 {authorId.firstName} {authorId.lastName}
               </Link>

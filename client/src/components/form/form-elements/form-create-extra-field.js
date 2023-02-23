@@ -31,7 +31,6 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
         <Box
           my={2}
           display="flex"
-          justifyContent="space-between"
           alignItems="center"
           gap={1} key={index}
         >
@@ -41,7 +40,7 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
             variant="outlined"
             value={element.name || ""}
             onChange={e => handleChange(index, e)}
-            sx={{ width: 150 }}
+            sx={{ width: "50%" }}
           />
           <TextField
             select
@@ -49,7 +48,7 @@ const FormCreateExtraField = ({ extraFields, setExtraFields }) => {
             label={text.extraselect}
             value={element.type || ""}
             onChange={e => handleChange(index, e)}
-            sx={{ width: 130 }}
+            sx={{ width: "40%" }}
           >
             {extraFieldsTypes.map((option) => (
               <MenuItem key={option} value={option}>

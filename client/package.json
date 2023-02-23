@@ -5,8 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mui/base": "^5.0.0-alpha.118",
     "@mui/icons-material": "^5.11.0",
-    "@mui/joy": "^5.0.0-alpha.67",
     "@mui/material": "^5.11.7",
     "@mui/x-data-grid": "^5.17.22",
     "@react-hook/window-size": "^3.1.1",

@@ -7,6 +7,7 @@ import GlobalContext from '../../../utils/context/GlobalContext';
 import ItemLikes from '../../../components/cards/item-card/elements/item-likes';
 import ItemTags from '../../../components/cards/item-card/elements/item-tags';
 import ItemExtraFields from '../../../components/cards/item-card/elements/item-extra-fields';
+import { CardStyles } from '../../../styles/card-styles';
 
 const ItemView = ({ itemData }) => {
   const { status } = useContext(GlobalContext);
@@ -16,15 +17,9 @@ const ItemView = ({ itemData }) => {
 
   return (
     <>
-      <Stack
-        p={2} pt={1}
-        sx={{
-          boxShadow: "2px 2px 14px rgba(0, 0, 0, 0.1)",
-          borderRadius: 2,
-        }}
-      >
+      <Stack p={2} pt={1} sx={CardStyles}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography fontSize={10} color="#9B9EA4">
+          <Typography fontSize={10} color="text.disabled">
             ID {itemData._id}
           </Typography>
           {
@@ -34,15 +29,15 @@ const ItemView = ({ itemData }) => {
         <Typography fontSize={24} fontWeight={700} noWrap>
           {itemData.title}
         </Typography>
-        <Grid container wrap="nowrap" gap={1} sx={{ color: "#797E85" }}>
-          <Typography variant="overline" noWrap>
+        <Grid container wrap="nowrap" gap={1}>
+          <Typography variant="overline" color="text.secondary" noWrap>
             {collectionTitle}
           </Typography>
-          <Typography variant="overline">—</Typography>
-          <Typography variant="overline">
+          <Typography variant="overline" color="text.secondary">—</Typography>
+          <Typography variant="overline" color="text.secondary">
             <FormattedMessage id="app.collection.by" />
           </Typography>
-          <Typography variant="overline" noWrap>
+          <Typography variant="overline" color="text.secondary" noWrap>
             {authorFirstName} {authorLastName}
           </Typography>
         </Grid>
@@ -57,7 +52,6 @@ const ItemView = ({ itemData }) => {
           extraFields={itemData.collection.extraFields}
         />
       </Stack>
-
     </>
   );
 }

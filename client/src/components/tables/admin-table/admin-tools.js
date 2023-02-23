@@ -5,7 +5,7 @@ import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
 
-const AdminTableTools = ({
+const AdminTools = ({
   selectedUsers,
   deleteSelectedUsers,
   blockSelectedUsers,
@@ -70,4 +70,4 @@ const AdminTableTools = ({
   );
 }
 
-export default AdminTableTools;
+export default AdminTools;

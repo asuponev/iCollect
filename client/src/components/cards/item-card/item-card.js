@@ -4,35 +4,31 @@ import { FormattedMessage } from 'react-intl';
 import { Typography, Card, CardContent, CardActionArea, Grid } from '@mui/material';
 
 import ItemTags from './elements/item-tags';
+import { CardStyles } from '../../../styles/card-styles'
 
 const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
   let navigate = useNavigate();
 
   return (
-    <Card
-      sx={{
-        boxShadow: "2px 2px 16px rgba(0, 0, 0, 0.08)",
-        borderRadius: 2,
-      }}
-    >
+    <Card sx={CardStyles}>
       <CardActionArea onClick={() => navigate(`/collections/${collectionId}/items/${_id}`)}>
         <CardContent sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-          <Typography fontSize={10} color="#9B9EA4">
+          <Typography fontSize={10} color="text.disabled">
             ID {_id}
           </Typography>
-          <Typography fontSize={16} color="#142339" fontWeight={700} gutterBottom>
+          <Typography fontSize={16} fontWeight={700} gutterBottom>
             {title}
           </Typography>
           <ItemTags tags={tags} compact={true} />
-          <Grid container wrap="nowrap" mt={1} sx={{ color: "#797E85" }} gap={1}>
-            <Typography variant="overline" noWrap>
+          <Grid container wrap="nowrap" mt={1} gap={1}>
+            <Typography variant="overline" color="text.secondary" noWrap>
               {collection.title}
             </Typography>
-            <Typography variant="overline">—</Typography>
-            <Typography variant="overline" >
+            <Typography variant="overline" color="text.secondary">—</Typography>
+            <Typography variant="overline" color="text.secondary">
               <FormattedMessage id="app.collection.by" />
             </Typography>
-            <Typography variant="overline" noWrap>
+            <Typography variant="overline" color="text.secondary" noWrap>
               {collection.authorId.firstName} {collection.authorId.lastName}
             </Typography>
           </Grid>

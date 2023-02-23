@@ -1,38 +1,39 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { IconButton, Stack, Tooltip } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { useIntl } from 'react-intl';
 
+import GlobalContext from '../../../utils/context/GlobalContext';
+
 export const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'ligth');
+  const { mode, setMode } = useContext(GlobalContext);
   const { messages } = useIntl();
-  
+
   const handleChange = () => {
-    if (theme === 'ligth') {
-      setTheme('dark');
+    if (mode === 'dark') {
+      localStorage.setItem('theme', 'light');
+      setMode('light');
+    } else {
       localStorage.setItem('theme', 'dark');
-    }
-    if (theme === 'dark') {
-      setTheme('ligth');
-      localStorage.setItem('theme', 'ligth');
+      setMode('dark');
     }
   };
 
   return (
-    <Stack sx={{ background: "#192B45", borderRadius: "4px", height: 32 }}>
+    <Stack sx={{ background: "#192B45", borderRadius: 1, height: 32 }}>
       <Tooltip
         title={
-          theme === 'dark'
+          mode === 'dark'
             ? `${messages["app.header.theme-light"]}`
             : `${messages["app.header.theme-dark"]}`
         }
       >
-        <IconButton size="small" onClick={handleChange} sx={{ color: "#FFFFFF" }}>
+        <IconButton size="small" onClick={handleChange} sx={{ color: "#FFFFFF", height: 32 }}>
           {
-            theme === 'dark'
-              ? <LightModeOutlinedIcon sx={{ height: 22 }} />
-              : <DarkModeOutlinedIcon sx={{ height: 22 }} />
+            mode === 'dark'
+              ? <LightModeOutlinedIcon />
+              : <DarkModeOutlinedIcon />
           }
         </IconButton>
       </Tooltip>

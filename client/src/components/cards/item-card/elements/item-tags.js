@@ -1,19 +1,13 @@
 import React from 'react';
 import { Box, Stack, Typography } from '@mui/material';
 
-const ItemTags = ({ tags, compact }) => {
+import { TagStylesSmall } from '../../../../styles/tag-styles';
 
-  const tagStyle = {
-    color: "#797E85",
-    backgroundColor: "#EEEFF0",
-    borderRadius: "100px",
-    padding: "4px 8px",
-    maxWidth: "100%"
-  };
+const ItemTags = ({ tags, compact }) => {
 
   const tagsView = tags.map((tag, i) => {
     return (
-      <Typography key={i} sx={tagStyle} noWrap>
+      <Typography key={i} sx={TagStylesSmall} noWrap>
         {tag}
       </Typography>
     );
@@ -30,7 +24,7 @@ const ItemTags = ({ tags, compact }) => {
         compact && tagsView.length > 2 ? (
           <>
             {tagsView.slice(0, 2)}
-            <Box sx={tagStyle}>
+            <Box sx={TagStylesSmall}>
               +{tagsView.length - 2}
             </Box>
           </>

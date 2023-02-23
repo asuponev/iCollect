@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, LinearProgress, Stack } from '@mui/material';
+import { TextField, LinearProgress, Stack, useTheme } from '@mui/material';
 import { useEffect } from 'react';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
@@ -12,6 +12,7 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
 
   const { messages } = useIntl();
   const text = messages["app.collection.form.errors"];
+  const theme = useTheme();
 
   useEffect(() => {
     uploadImg(selectedImg);
@@ -60,21 +61,20 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
           "& .MuiInputBase-input": {
             height: "100%",
             padding: 0,
-            background: "#F9F9F9",
             border: "1px dashed #585E67",
             borderRadius: "8px",
-            cursor: "pointer",
             "&::file-selector-button": {
               margin: 0,
               padding: 0,
               height: "100%",
               width: "100%",
-              background: "#F9F9F9",
-              border: "none"
+              background: theme.palette.background.alt,
+              border: "none",
+              cursor: "pointer"
             },
           },
           "& .MuiInputBase-input:hover": {
-            border: "1px solid #000000",
+            border: "1px solid #000000"
           },
           "& .MuiOutlinedInput-notchedOutline": {
             border: "none",

@@ -10,7 +10,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 
-import { tableStyles } from '../table-styles';
+import { TableStyles } from '../../../styles/table-styles';
 
 const TableItems = ({
   items,
@@ -123,7 +123,7 @@ const TableItems = ({
           }
         }}
         selectionModel={selectedItems}
-        sx={tableStyles}
+        sx={TableStyles}
       />
     </Stack>
   );

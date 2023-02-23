@@ -59,12 +59,12 @@ const ItemComments = ({ itemId }) => {
           </Avatar>
         </Link>
         <Grid container wrap="nowrap" direction="column" width="calc(100% - 56px)">
-          <Typography color="#142339" fontWeight={500} noWrap>
+          <Typography fontWeight={500} noWrap>
             <Link to={`/users/${comment.authorId}`} style={{ textDecoration: 'none' }}>
               {comment.firstName} {comment.lastName}
             </Link>
           </Typography>
-          <Typography color="#585E67" sx={{ wordWrap: "break-word" }}>
+          <Typography color="text.secondary" sx={{ wordWrap: "break-word" }}>
             {comment.message}
           </Typography>
         </Grid>

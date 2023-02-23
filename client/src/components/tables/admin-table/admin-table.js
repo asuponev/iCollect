@@ -6,8 +6,8 @@ import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useIntl } from 'react-intl';
 
-import AdminTableTools from './admin-table-tools';
-import { tableStyles } from '../table-styles';
+import AdminTools from './admin-tools';
+import { TableStyles } from '../../../styles/table-styles';
 
 const AdminTable = ({
   users,
@@ -66,7 +66,7 @@ const AdminTable = ({
 
   return (
     <>
-      <AdminTableTools
+      <AdminTools
         selectedUsers={selectedUsers}
         deleteSelectedUsers={deleteSelectedUsers}
         blockSelectedUsers={blockSelectedUsers}
@@ -85,7 +85,7 @@ const AdminTable = ({
             setSelectedUsers(newSelect);
           }}
           selectionModel={selectedUsers}
-          sx={tableStyles}
+          sx={TableStyles}
         />
       </Stack>
     </>

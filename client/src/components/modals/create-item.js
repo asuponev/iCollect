@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -22,6 +22,7 @@ const CreateItem = ({
 
   const { messages } = useIntl();
   const text = messages["app.item.form"];
+  const theme = useTheme();
 
   const isEditing = Boolean(itemId);
 
@@ -103,14 +104,14 @@ const CreateItem = ({
           <CloseIcon />
         </IconButton>
       </Tooltip>
-      <DialogTitle>
+      <DialogTitle sx={{ backgroundColor: theme.palette.background.default }}>
         {
           !isEditing
             ? <FormattedMessage id="app.item.form.create" />
             : <FormattedMessage id="app.item.form.update" />
         }
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ backgroundColor: theme.palette.background.default }}>
         <FormCreateItem
           collectionId={collectionId}
           handleClose={handleCloseModalForm}
