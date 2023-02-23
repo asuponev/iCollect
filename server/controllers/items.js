@@ -96,7 +96,9 @@ export const getAllCollectionItems = async (req, res) => {
   try {
     const collection = await Collection.findById(req.params.collectionId);
     if (collection) {
-      const allCollectionItems = await Item.find({ collectionId: req.params.collectionId });
+      const allCollectionItems = await Item.find({ 
+        collectionId: req.params.collectionId 
+      }).sort({ updatedAt: -1 });
       res.json(allCollectionItems);
     } else {
       res.status(404).json({
