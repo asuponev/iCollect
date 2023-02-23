@@ -10,6 +10,7 @@ import CreateCollection from '../../../components/modals/create-collection';
 import CollectionCard from '../../../components/cards/collection-card/collection-card';
 import Spinner from '../../../components/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage';
+import EmptyAccount from './empty-account';
 
 const Collections = ({ userId }) => {
   const { status, userInfo } = useContext(GlobalContext);
@@ -81,9 +82,17 @@ const Collections = ({ userId }) => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Grid container spacing={2} mb={10}>
-      {cards}
-    </Grid>
+    <>
+      {
+        cards.length > 0 ? (
+          <Grid container spacing={2} mb={10}>
+            {cards}
+          </Grid>
+        ) : (
+          <EmptyAccount />
+        )
+      }
+    </>
   ) : null;
 
   return (
