@@ -35,7 +35,7 @@
   "app.account.header1": "Коллекции",
   "app.account.addcollection": "+ Создать коллекцию",
 
-  "app.collection.amount-items": "Предметов в коллекции:",
+  "app.collection.amount-items": "Предметов:",
   "app.collection.by": "Автор",
   "app.collection.additem": "+ Добавить предмет",
   "app.collection.emptytable": "В коллекции нет предметов",
