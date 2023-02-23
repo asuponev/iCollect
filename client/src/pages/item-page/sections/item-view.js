@@ -18,7 +18,7 @@ const ItemView = ({ itemData }) => {
   return (
     <>
       <Stack p={2} pt={1} sx={CardStyles}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack direction="row" alignItems="center" justifyContent="space-between" height={40}>
           <Typography fontSize={10} color="text.disabled">
             ID {itemData._id}
           </Typography>

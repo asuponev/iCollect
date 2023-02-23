@@ -38,6 +38,7 @@
   "app.collection.amount-items": "Items:",
   "app.collection.by": "by",
   "app.collection.additem": "+ Add Items",
+  "app.collection.emptytable": "You don't have any items yet",
   "app.collection": {
     "tools": {
       "confirmDelete": "Are you sure you want to delete the collection?",

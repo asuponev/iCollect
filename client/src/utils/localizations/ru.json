@@ -38,6 +38,7 @@
   "app.collection.amount-items": "Предметов в коллекции:",
   "app.collection.by": "Автор",
   "app.collection.additem": "+ Добавить предмет",
+  "app.collection.emptytable": "В коллекции нет предметов",
   "app.collection": {
     "tools": {
       "confirmDelete": "Вы уверены, что хотите удалить коллекцию?",

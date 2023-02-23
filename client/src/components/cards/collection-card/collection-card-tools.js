@@ -13,7 +13,7 @@ const CollectionCardTools = ({
   const text = messages["app.collection"];
 
   return (
-    <CardActions sx={{ padding: 2, alignItems: "center" }}>
+    <CardActions sx={{ p: 2, alignItems: "center" }}>
       <Tooltip title={text.tools.edit} placement="bottom">
         <IconButton onClick={() => onEditCollection(collectionId)}>
           <EditOutlinedIcon fontSize="small" color="primary" />

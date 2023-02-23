@@ -18,10 +18,10 @@ const UserInfo = ({ data }) => {
         {data.firstName[0]}{data.lastName[0]}
       </Avatar>
       <Grid container wrap="nowrap" direction="column" width="calc(100% - 88px)">
-        <Typography variant="h6" noWrap>
+        <Typography variant="h6" sx={{ wordWrap: "break-word" }}>
           {data.firstName} {data.lastName}
         </Typography>
-        <Typography variant="caption" fontSize="14px" color="text.secondary" noWrap>
+        <Typography variant="caption" fontSize="14px" color="text.secondary" sx={{ wordWrap: "break-word" }}>
           {data.email}
         </Typography>
       </Grid>

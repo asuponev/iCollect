@@ -13,10 +13,10 @@ const CollectionInfo = ({ data }) => {
         width="100" height="100"
       />
       <Grid container wrap="nowrap" direction="column" width="calc(100% - 116px)">
-        <Typography variant="h6" noWrap>
+        <Typography variant="h5" sx={{ wordWrap: "break-word" }}>
           {data.title}
         </Typography>
-        <Typography noWrap>
+        <Typography color="text.secondary" sx={{ wordWrap: "break-word" }}>
           {data.description}
         </Typography>
       </Grid>

@@ -34,7 +34,7 @@ const CollectionCard = ({
           image={coverUrl || imageNotFound}
           title={title}
         />
-        <CardContent sx={{ padding: "16px 16px 0", height: 100 }}>
+        <CardContent sx={{ p: 2 }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography variant="overline" lineHeight="18px" color="text.secondary">
               {subject}

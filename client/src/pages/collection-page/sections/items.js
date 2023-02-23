@@ -10,6 +10,7 @@ import ErrorMessage from '../../../components/ErrorMessage';
 import CreateItem from '../../../components/modals/create-item';
 import TableItems from '../../../components/tables/collection-table/collection-table-items';
 import CollectionTools from '../../../components/tables/collection-table/collection-tools';
+import EmptyTable from '../../../components/tables/empty-table';
 
 const Items = ({ collectionId, collectionData }) => {
   const { status, userInfo } = useContext(GlobalContext);
@@ -85,16 +86,20 @@ const Items = ({ collectionId, collectionData }) => {
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <>
-      <TableItems
-        items={items}
-        selectedItems={selectedItems}
-        setSelectedItems={setSelectedItems}
-        extraFields={collectionData.extraFields}
-        collectionId={collectionId}
-        onEditItem={onEditItem}
-        onDeleteItem={onDeleteItem}
-        authorId={authorId}
-      />
+      {
+        items.length > 0 ? (
+          <TableItems
+            items={items}
+            selectedItems={selectedItems}
+            setSelectedItems={setSelectedItems}
+            extraFields={collectionData.extraFields}
+            collectionId={collectionId}
+            onEditItem={onEditItem}
+            onDeleteItem={onDeleteItem}
+            authorId={authorId}
+          />
+        ) : <EmptyTable />
+      }
     </>
   ) : null;
 
@@ -102,7 +107,7 @@ const Items = ({ collectionId, collectionData }) => {
     <>
       <ToastContainer />
       {
-        (status.isAuth && authorId === userInfo.userId ) || status.isAdmin ? (
+        (status.isAuth && authorId === userInfo.userId) || status.isAdmin ? (
           <>
             <CollectionTools
               onCreateItem={onCreateItem}
