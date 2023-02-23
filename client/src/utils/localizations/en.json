@@ -84,7 +84,7 @@
     "required": "is required",
     "subjectselect": "Please select subject",
     "titlemin": "Min length is 2",
-    "titlemax": "Max length is 30",
+    "titlemax": "Max length is 50",
     "descrmin": "Min length is 5",
     "image": "You need to upload a file of the image type"
   },

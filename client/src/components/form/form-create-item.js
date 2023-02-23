@@ -71,6 +71,7 @@ const FormCreateItem = ({
         <FormItemExtraFields
           extraFields={extraFields}
           register={register}
+          errors={errors}
           valuesForEdit={valuesForEdit}
         />
       </Stack>

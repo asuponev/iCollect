@@ -1,7 +1,11 @@
 import React from 'react';
 import { Box, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { useIntl } from 'react-intl';
 
-const FormItemExtraFields = ({ extraFields, register, valuesForEdit }) => {
+const FormItemExtraFields = ({ extraFields, register, valuesForEdit, errors }) => {
+  const { messages } = useIntl();
+  const text = messages["app.collection.form.errors"];
+
   return (
     <>
       {extraFields.map((element, index) => {
@@ -9,9 +13,16 @@ const FormItemExtraFields = ({ extraFields, register, valuesForEdit }) => {
           {
             element.type.slice(0, -1) === 'string' ?
               <TextField
-                {...register(element.type)}
+                {...register(element.type, {
+                  maxLength: {
+                    value: 50,
+                    message: text.titlemax
+                  }
+                })}
                 label={element.name}
                 variant="outlined"
+                error={!!errors[element.type]}
+                helperText={errors[element.type]?.message}
                 fullWidth
                 defaultValue={valuesForEdit[element.type] || ''}
               />

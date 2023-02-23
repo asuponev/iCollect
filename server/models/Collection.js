@@ -6,7 +6,7 @@ const CollectionSchema = new mongoose.Schema(
       type: String,
       required: true,
       min: 2,
-      max: 30,
+      max: 50,
     },
     description: {
       type: String,

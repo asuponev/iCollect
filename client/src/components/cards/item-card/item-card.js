@@ -16,7 +16,7 @@ const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
           <Typography fontSize={10} color="text.disabled">
             ID {_id}
           </Typography>
-          <Typography fontSize={16} fontWeight={700} gutterBottom>
+          <Typography fontSize={16} fontWeight={700} gutterBottom noWrap>
             {title}
           </Typography>
           <ItemTags tags={tags} compact={true} />

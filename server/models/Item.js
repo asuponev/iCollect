@@ -6,7 +6,7 @@ const ItemSchema = new mongoose.Schema(
       type: String,
       required: true,
       min: 2,
-      max: 30,
+      max: 50,
     },
     tags: {
       type: Array,
@@ -21,9 +21,18 @@ const ItemSchema = new mongoose.Schema(
     number1: Number,
     number2: Number,
     number3: Number,
-    string1: String,
-    string2: String,
-    string3: String,
+    string1: {
+      type: String,
+      max: 50,
+    },
+    string2: {
+      type: String,
+      max: 50,
+    },
+    string3: {
+      type: String,
+      max: 50,
+    },
     text1: String,
     text2: String,
     text3: String,

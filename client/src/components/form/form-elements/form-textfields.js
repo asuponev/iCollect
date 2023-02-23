@@ -15,7 +15,7 @@ export const FormTextField = ({ name, label, register, errors }) => {
           message: text.titlemin
         },
         maxLength: {
-          value: 30,
+          value: 50,
           message: text.titlemax
         }
       })}

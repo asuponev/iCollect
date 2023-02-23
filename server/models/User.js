@@ -6,13 +6,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       min: 2,
-      max: 30,
+      max: 50,
     },
     lastName: {
       type: String,
       required: true,
       min: 2,
-      max: 30,
+      max: 50,
     },
     email: {
       type: String,
