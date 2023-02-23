@@ -14,6 +14,7 @@ const UserInfo = ({ data }) => {
           width: 72,
           height: 72,
           fontSize: 24,
+          color: "#FFFFFF"
         }}>
         {data.firstName[0]}{data.lastName[0]}
       </Avatar>

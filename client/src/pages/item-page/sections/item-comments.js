@@ -48,6 +48,7 @@ const ItemComments = ({ itemId }) => {
     width: 40,
     height: 40,
     fontSize: 16,
+    color: "#FFFFFF"
   };
 
   const commentsBlock = commentsData.map(comment => {
