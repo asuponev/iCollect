@@ -61,7 +61,7 @@ export const SearchResult = () => {
     <>
       <BreadCrumbs current={messages["app.search-results.breadcrumbs"]} />
       <Stack mt={4} spacing={1}>
-        <Typography variant="h6" color="#142339" noWrap>
+        <Typography variant="h6" noWrap>
           {
             byTag
               ? <><FormattedMessage id="app.search-results.bytag" /> «{value.slice(7)}»</>
