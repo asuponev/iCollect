@@ -1,0 +1,84 @@
+// main editor styles
+.editor {
+  border-radius: 4px;
+  width: 100%;
+
+  .rdw-editor-toolbar {
+    background-color: inherit;
+    border: none;
+
+    .rdw-inline-wrapper {
+      width: 100%;
+      gap: 4px;
+
+      .rdw-option-wrapper {
+        margin: 0;
+      }
+    }
+  }
+
+  .rdw-editor-main {
+    padding: 16.5px 14px;
+    cursor: text;
+  }
+
+  .public-DraftStyleDefault-block {
+    margin: 0;
+  }
+}
+
+// light editor styles
+.editor-light {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  .rdw-editor-toolbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    .rdw-option-wrapper {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.editor-light:hover {
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+
+// dark editor styles
+.editor-dark {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  .rdw-editor-toolbar {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    .rdw-option-wrapper {
+      background-color: #495D7A;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.editor-dark:hover {
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+// custom error style
+.custom-error-light {
+  border: 1px solid #D32F2F;
+}
+
+.custom-error-dark {
+  border: 1px solid #F44336;
+}
+
+.custom-error-text-light {
+  color: #D32F2F;
+  margin: 3px 14px 0;
+  font-size: 12px;
+}
+
+.custom-error-text-dark {
+  color: #F44336;
+  margin: 3px 14px 0;
+  font-size: 12px;
+}

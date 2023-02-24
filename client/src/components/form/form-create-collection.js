@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,12 +6,16 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useWindowWidth } from '@react-hook/window-size';
 
 import subjects from '../../utils/constants/collection-subjects';
+import GlobalContext from '../../utils/context/GlobalContext';
 
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
-import { FormTextField, FieldDescription } from './form-elements/form-textfields';
+import { FormTextField } from './form-elements/form-textfields';
 import FormSelect from './form-elements/form-select';
 import FormCreateExtraField from './form-elements/form-create-extra-field';
+import FormMdEditor from './form-elements/form-mdeditor';
+
+import './form-elements/form-mdeditor.scss';
 
 const FormCreateCollection = ({
   handleClose,
@@ -23,6 +27,7 @@ const FormCreateCollection = ({
   valuesForEdit
 }) => {
   const windowWidth = useWindowWidth();
+  const { mode } = useContext(GlobalContext);
   const { register, handleSubmit, formState: { errors }, getValues, control } = useForm({
     defaultValues: {
       title: valuesForEdit.title || '',
@@ -112,16 +117,13 @@ const FormCreateCollection = ({
             />
           </Box>
           <Box my={2}>
-            <FieldDescription
+            <FormMdEditor
               name="description"
-              label={text.description}
-              register={register}
+              control={control}
               errors={errors}
+              placeholder={text.description}
             />
-            {/* <FormMarkdownText
-            control={control}
-            name="description"
-          /> */}
+            <p className={`custom-error-text-${mode}`}>{errors.description?.message}</p>
           </Box>
           <Box my={2}>
             <FormCreateExtraField

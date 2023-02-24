@@ -75,25 +75,3 @@ export const FormPswField = ({ register, errors }) => {
     />
   );
 };
-
-export const FieldDescription = ({ name, label, register, errors }) => {
-  const { messages } = useIntl();
-  const text = messages["app.collection.form.errors"];
-
-  return (
-    <TextField
-      {...register(name, {
-        required: `${label} ${text.required}`,
-        minLength: {
-          value: 5,
-          message: text.descrmin
-        }
-      })}
-      label={label}
-      variant="outlined"
-      error={!!errors[name]}
-      helperText={errors[name]?.message}
-      fullWidth
-    />
-  );
-};

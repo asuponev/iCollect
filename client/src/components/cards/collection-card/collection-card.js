@@ -3,6 +3,7 @@ import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea, Grid }
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useIntl, FormattedMessage } from 'react-intl';
+import Markdown from 'markdown-to-jsx';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 import imageNotFound from '../../../utils/constants/image-not-found';
@@ -47,8 +48,10 @@ const CollectionCard = ({
             <Typography gutterBottom variant="h6" noWrap>
               {title}
             </Typography>
-            <Typography variant="body2" color="text.secondary" noWrap>
-              {description}
+            <Typography component={'div'} variant="body2" color="text.secondary" noWrap>
+              <Markdown>
+                {description}
+              </Markdown>
             </Typography>
           </Grid>
         </CardContent>

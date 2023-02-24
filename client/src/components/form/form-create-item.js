@@ -73,6 +73,7 @@ const FormCreateItem = ({
           register={register}
           errors={errors}
           valuesForEdit={valuesForEdit}
+          control={control}
         />
       </Stack>
       <Box my={2} sx={{ display: "flex", alignItems: "center", gap: "24px" }}>

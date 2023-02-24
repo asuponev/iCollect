@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack, Grid, Typography } from '@mui/material';
+import Markdown from 'markdown-to-jsx';
 
 import imageNotFound from '../../../utils/constants/image-not-found';
 
@@ -19,8 +20,8 @@ const CollectionInfo = ({ data }) => {
         <Typography variant="h5" mt={0.5} mb={1} sx={{ wordWrap: "break-word" }}>
           {data.title}
         </Typography>
-        <Typography color="text.secondary" sx={{ wordWrap: "break-word" }}>
-          {data.description}
+        <Typography component={'div'} color="text.secondary" sx={{ wordWrap: "break-word" }}>
+          <Markdown>{data.description}</Markdown>
         </Typography>
       </Grid>
     </Stack>

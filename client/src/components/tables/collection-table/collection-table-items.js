@@ -7,6 +7,7 @@ import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { convert } from 'html-to-text';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 
@@ -95,6 +96,8 @@ const TableItems = ({
     for (let key in item) {
       if (key === '_id') {
         newItem.id = item[key];
+      } else if (key === 'text1' || key === 'text2' || key === 'text2') {
+        newItem[key] = convert(item[key]);
       } else {
         newItem[key] = item[key];
       }

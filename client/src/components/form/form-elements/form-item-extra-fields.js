@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, TextField, FormControlLabel, Checkbox } from '@mui/material';
 import { useIntl } from 'react-intl';
 
-const FormItemExtraFields = ({ extraFields, register, valuesForEdit, errors }) => {
+import GlobalContext from '../../../utils/context/GlobalContext';
+
+import FormMdEditor from './form-mdeditor';
+
+const FormItemExtraFields = ({ extraFields, register, valuesForEdit, control, errors }) => {
+  const { mode } = useContext(GlobalContext);
   const { messages } = useIntl();
   const text = messages["app.collection.form.errors"];
 
@@ -48,13 +53,17 @@ const FormItemExtraFields = ({ extraFields, register, valuesForEdit, errors }) =
                   />
                   :
                   element.type.slice(0, -1) === 'text' ?
-                    <TextField
-                      {...register(element.type)}
-                      label={element.name}
-                      variant="outlined"
-                      fullWidth
-                      defaultValue={valuesForEdit[element.type] || ''}
-                    />
+                    <>
+                      <FormMdEditor
+                        name={element.type}
+                        control={control}
+                        errors={errors}
+                        extrafield={true}
+                        placeholder={element.name}
+                        defaultValue={valuesForEdit[element.type] || ''}
+                      />
+                      <p className={`custom-error-text-${mode}`}>{errors[element.type]?.message}</p>
+                    </>
                     :
                     element.type.slice(0, -1) === 'date' ?
                       <TextField

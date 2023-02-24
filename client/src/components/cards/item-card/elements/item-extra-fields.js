@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Grid, Typography } from '@mui/material';
+import Markdown from 'markdown-to-jsx';
 
 const ItemExtraFields = ({ itemData, extraFields }) => {
 
@@ -14,8 +15,10 @@ const ItemExtraFields = ({ itemData, extraFields }) => {
               <Typography noWrap mt={2.5} mb={1}>
                 {field.name}
               </Typography>
-              <Typography fontSize={16} fontWeight={700} noWrap>
-                {`${itemData[key]}`}
+              <Typography component={'div'} fontSize={16} fontWeight={700} noWrap>
+                <Markdown>
+                  {`${itemData[key]}`}
+                </Markdown>
               </Typography>
             </Fragment>
           )
