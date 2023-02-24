@@ -13,6 +13,7 @@ const GlobalContext = createContext({
     lastName: ''
   },
   lang: 'en',
+  mode: 'light'
 });
 
 export default GlobalContext;
