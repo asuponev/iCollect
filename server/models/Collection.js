@@ -11,7 +11,7 @@ const CollectionSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
-      min: 5,
+      max: 200,
     },
     subject: {
       type: String,
