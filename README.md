@@ -77,17 +77,23 @@ The project has forms:
 
 Images uploaded by the user are stored in **Firebase** cloud. An image url is saved to the database when the collection creation form is submitted
 
-### MarkDowm
+### MarkDown
 
-Using **react-draft-wysiwyg** it is possible to stylize user-entered text (**bold**, *italic*, underline, strikethrough, monospace, superscript and subscript)
+Using **react-draft-wysiwyg** it is possible to stylize user-entered text (**bold**, *italic*, <u>underline</u>, ~~strikethrough~~, ``monospace``, superscript<sup>superscript</sup> and subscript<sub>subscript</sub>)
 
 Using **markdown-to-jsx** the formatted text is displayed in the interface
 
 Using **html-to-text** these fields appear as plain text in the table on the collection page
 
+### Live comments
+
+On the page of each item is implemented comments block, which are updated in live mode using **Pusher**. 
+
+Comments block is available only to authorized users
+
 ### Full-text search
 
-The full-text search is done with the help of **minisearch** on server side and the result is a list of items
+The full-text search is done with the help of **MiniSearch** on server side and the result is a list of items
 
 ### Dark mode
 
