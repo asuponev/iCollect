@@ -33,11 +33,15 @@ The main page contains the latest added items, the largest collections, as well 
 
 ## Features
 
-### UI
+<details>
+<summary>UI</summary>
 
 The project is made using **Material UI** components
 
-### Forms
+</details>
+
+<details>
+<summary>Forms</summary>
 
 The forms in the project are controlled by **react-hook-form**
 
@@ -73,11 +77,17 @@ The project has forms:
       4. Date
       5. Checkbox
 
-### Image uploading
+</details>
+
+<details>
+<summary>Image uploading</summary>
 
 Images uploaded by the user are stored in **Firebase** cloud. An image url is saved to the database when the collection creation form is submitted
 
-### MarkDown
+</details>
+
+<details>
+<summary>MarkDown</summary>
 
 Using **react-draft-wysiwyg** it is possible to stylize user-entered text (**bold**, *italic*, <u>underline</u>, ~~strikethrough~~, ``monospace``, superscript<sup>superscript</sup> and subscript<sub>subscript</sub>)
 
@@ -85,28 +95,45 @@ Using **markdown-to-jsx** the formatted text is displayed in the interface
 
 Using **html-to-text** these fields appear as plain text in the table on the collection page
 
-### Live comments
+</details>
+
+<details>
+<summary>Live comments</summary>
 
 On the page of each item is implemented comments block, which are updated in live mode using **Pusher**. 
 
 Comments block is available only to authorized users
 
-### Full-text search
+</details>
+
+<details>
+<summary>Full-text search</summary>
 
 The full-text search is done with the help of **MiniSearch** on server side and the result is a list of items
 
-### Dark mode
+</details>
+
+<details>
+<summary>Dark mode</summary>
 
 Switching the theme of the site is done by clicking on the button in the header
 
 Implemented based on MUI **createTheme** and **ThemeProvider**
 
-### Locales
+</details>
+
+<details>
+<summary>Locales</summary>
 
 Site localization can be switched by selecting a language in the header
 
 Implemented based on **react-intl**
 
-### Export to .csv
+</details>
+
+<details>
+<summary>Export to .csv</summary>
 
 Implemented possible to save a list of items of a particular collection in csv format using **react-json-to-csv**
+
+</details>
