@@ -16,13 +16,19 @@ const getFullItemsData = async (query) => {
   let items = [];
   if (query === 'last') {
     items = await Item.find().sort({ createdAt: -1 }).limit(4);
+    return await Promise.all(items.map(async (item) => {
+      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+      return { ...item._doc, collection };
+    }));
   } else if (query === 'full') {
     items = await Item.find();
+    return await Promise.all(items.map(async (item) => {
+      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+      const comments = await Comment.find({ itemId: item._id });
+      const messages = comments.map(comment => comment.message);
+      return { ...item._doc, collection, comments: messages };
+    }));
   }
-  return await Promise.all(items.map(async (item) => {
-    const collection = await Collection.findById(item.collectionId._id).populate('authorId');
-    return { ...item._doc, collection };
-  }));
 }
 
 export const createItem = async (req, res) => {

@@ -11,7 +11,8 @@ let searchIndexFull = new MiniSearch({
     'collection.title',
     'collection.description',
     'collection.authorId.firstName',
-    'collection.authorId.lastName'
+    'collection.authorId.lastName',
+    'comments',
   ],
   extractField: (document, fieldName) => {
     return fieldName.split('.').reduce((doc, key) => doc && doc[key], document)
