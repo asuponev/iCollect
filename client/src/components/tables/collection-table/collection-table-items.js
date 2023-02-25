@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { useIntl } from 'react-intl';
-import { Stack } from '@mui/material';
+import { Stack, CircularProgress } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
@@ -21,7 +21,10 @@ const TableItems = ({
   collectionId,
   onEditItem,
   onDeleteItem,
-  authorId
+  authorId,
+  loadingEdit,
+  currentItemId,
+  loadingDelete
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   if (!items) items = [];
@@ -57,7 +60,11 @@ const TableItems = ({
     {
       field: 'edit', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<EditOutlinedIcon color="primary" />}
+          icon={
+            loadingEdit && currentItemId === params.id
+              ? <CircularProgress color="primary" size={20} />
+              : <EditOutlinedIcon color="primary" />
+          }
           label="Edit item"
           onClick={() => onEditItem(params.id)}
         />]
@@ -65,7 +72,11 @@ const TableItems = ({
     {
       field: 'delete', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<DeleteOutlinedIcon color="grey" />}
+          icon={
+            loadingDelete && currentItemId === params.id
+              ? <CircularProgress color="grey" size={20} />
+              : <DeleteOutlinedIcon color="grey" />
+          }
           label="Delete item"
           onClick={() => {
             if (window.confirm(text.tableTools.confirmDelete)) {

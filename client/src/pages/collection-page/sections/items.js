@@ -5,7 +5,8 @@ import { Stack } from '@mui/material';
 import CsvDownloadButton from 'react-json-to-csv';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
-import { getAllCollectionItems, deleteItem, deleteItems } from '../../../utils/requests/requests';
+import { getAllCollectionItems, deleteItem, deleteItems, getItem } from '../../../utils/requests/requests';
+import defaultItemValues from '../../../utils/constants/default-item-values';
 
 import Spinner from '../../../components/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -23,6 +24,9 @@ const Items = ({ collectionId, collectionData }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentItemId, setCurrentItemId] = useState('');
+  const [valuesForEdit, setValuesForEdit] = useState({ ...defaultItemValues });
+  const [loadingEdit, setLoadingEdit] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   const { messages } = useIntl();
   const text = messages["app.collection"];
@@ -45,29 +49,67 @@ const Items = ({ collectionId, collectionData }) => {
       })
   };
 
+  const onGetItemForEdit = (collectionId, itemId) => {
+    setCurrentItemId(itemId);
+    setLoadingEdit(true);
+    getItem(collectionId, itemId)
+      .then(res => {
+        setValuesForEdit({
+          title: res.title,
+          tags: res.tags,
+          number1: res.number1 || 0,
+          number2: res.number2 || 0,
+          number3: res.number3 || 0,
+          string1: res.string1 || '',
+          string2: res.string2 || '',
+          string3: res.string3 || '',
+          text1: res.text1 || '',
+          text2: res.text2 || '',
+          text3: res.text3 || '',
+          date1: res.date1 || '',
+          date2: res.date2 || '',
+          date3: res.date3 || '',
+          checkbox1: res.checkbox1 || false,
+          checkbox2: res.checkbox2 || false,
+          checkbox3: res.checkbox2 || false,
+        });
+        setLoadingEdit(false);
+        setOpenModalForm(true);
+      }).catch(error => {
+        console.log(error);
+        toast.error(text.tools.editerror, { position: 'top-right' });
+        setLoadingEdit(false);
+        setValuesForEdit({ ...defaultItemValues });
+      })
+  };
+
   const onCreateItem = () => {
     setOpenModalForm(true);
   };
 
   const onEditItem = (itemId) => {
-    setCurrentItemId(itemId);
-    setTimeout(() => setOpenModalForm(true), 1000);
+    onGetItemForEdit(collectionId, itemId);
   };
 
   const handleCloseModalForm = () => {
     setOpenModalForm(false);
+    setValuesForEdit({ ...defaultItemValues });
     setTimeout(() => setCurrentItemId(''), 300);
   };
 
   const onDeleteItem = (itemId) => {
+    setCurrentItemId(itemId);
+    setLoadingDelete(true);
     deleteItem(collectionId, itemId)
       .then(res => {
         toast.info(text.tableTools.successdelete1, { position: 'top-right' });
         onItemsRequest(collectionId);
+        setLoadingDelete(false);
       })
       .catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
+        setLoadingDelete(false);
       })
   };
 
@@ -101,6 +143,9 @@ const Items = ({ collectionId, collectionData }) => {
               onEditItem={onEditItem}
               onDeleteItem={onDeleteItem}
               authorId={authorId}
+              loadingEdit={loadingEdit}
+              currentItemId={currentItemId}
+              loadingDelete={loadingDelete}
             />
             <CsvDownloadButton data={items} className="btn-export-to-csv">
               <FormattedMessage id="app.exportsvg" />
@@ -130,6 +175,7 @@ const Items = ({ collectionId, collectionData }) => {
               extraFields={collectionData.extraFields}
               itemId={currentItemId}
               toast={toast}
+              valuesForEdit={valuesForEdit}
             />
           </>
         ) : null

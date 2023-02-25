@@ -3,8 +3,7 @@ import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton, useTheme } fro
 import CloseIcon from '@mui/icons-material/Close';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import defaultItemValues from '../../utils/constants/default-item-values';
-import { createItem, getAllTags, getItem, updateItem } from '../../utils/requests/requests';
+import { createItem, getAllTags, updateItem } from '../../utils/requests/requests';
 
 import FormCreateItem from '../form/form-create-item';
 
@@ -15,9 +14,10 @@ const CreateItem = ({
   onItemsRequest,
   extraFields,
   itemId,
-  toast
+  toast,
+  valuesForEdit
 }) => {
-  const [valuesForEdit, setValuesForEdit] = useState({ ...defaultItemValues });
+  
   const [tagsList, setTagsList] = useState([]);
 
   const { messages } = useIntl();
@@ -25,15 +25,6 @@ const CreateItem = ({
   const theme = useTheme();
 
   const isEditing = Boolean(itemId);
-
-  useEffect(() => {
-    if (isEditing) {
-      onGetItemForEdit(collectionId, itemId);
-    } else {
-      setValuesForEdit({ ...defaultItemValues })
-    }
-    // eslint-disable-next-line
-  }, [isEditing]);
 
   useEffect(() => {
     getAllTags()
@@ -60,33 +51,6 @@ const CreateItem = ({
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
-      })
-  };
-
-  const onGetItemForEdit = (collectionId, itemId) => {
-    getItem(collectionId, itemId)
-      .then(res => {
-        setValuesForEdit({
-          title: res.title,
-          tags: res.tags,
-          number1: res.number1 || 0,
-          number2: res.number2 || 0,
-          number3: res.number3 || 0,
-          string1: res.string1 || '',
-          string2: res.string2 || '',
-          string3: res.string3 || '',
-          text1: res.text1 || '',
-          text2: res.text2 || '',
-          text3: res.text3 || '',
-          date1: res.date1 || '',
-          date2: res.date2 || '',
-          date3: res.date3 || '',
-          checkbox1: res.checkbox1 || false,
-          checkbox2: res.checkbox2 || false,
-          checkbox3: res.checkbox2 || false,
-        })
-      }).catch(error => {
-        console.log(error);
       })
   };
 
