@@ -96,6 +96,7 @@
   "app.item.comments": "Comments",
   "app.item.comments.placeholder": "Text",
   "app.item.comments.send": "Send",
+  "app.item.comments.senderror": "Failed to send a comment, try again later",
 
   "app.item.form.create": "Add new item",
   "app.item.form.update": "Edit item",

@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Stack, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import Pusher from 'pusher-js';
+import { ToastContainer, toast } from 'react-toastify';
 
 import { createComment, getAllItemComment } from '../../../utils/requests/requests';
 import GlobalContext from '../../../utils/context/GlobalContext';
@@ -15,6 +17,24 @@ const ItemComments = ({ itemId }) => {
   const [commentsData, setCommentData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { messages } = useIntl();
+  const texterror = messages["app.item.comments.senderror"];
+
+  useEffect(() => {
+    const pusher = new Pusher(process.env.REACT_APP_pusher_key, {
+      cluster: process.env.REACT_APP_pusher_cluster,
+      encrypted: true
+    });
+    const channel = pusher.subscribe(process.env.REACT_APP_pusher_channel);
+    channel.bind('new_comment', comment => {
+      setCommentData(prevData => [...prevData, comment]);
+    });
+
+    return (() => {
+      pusher.unsubscribe('icollect-comments')
+    });
+  }, []);
 
   useEffect(() => {
     onRequestComment(itemId);
@@ -35,11 +55,10 @@ const ItemComments = ({ itemId }) => {
 
   const onCreateComment = (itemId, message) => {
     createComment(itemId, message)
-      .then(res => {
-        setCommentData([...commentsData, res]);
-      })
+      .then()
       .catch(error => {
         console.log(error);
+        toast.error(texterror, { position: 'top-right' });
       })
   };
 
@@ -92,6 +111,7 @@ const ItemComments = ({ itemId }) => {
 
   return (
     <>
+      <ToastContainer />
       {errorMessage}
       {spinner}
       {content}

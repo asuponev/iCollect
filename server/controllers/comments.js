@@ -1,5 +1,16 @@
 import Comment from '../models/Comment.js';
 import Item from '../models/Item.js';
+import Pusher from 'pusher';
+
+const pusherConnect = () => {
+  return new Pusher({
+    appId: process.env.PUSHER_APP_ID,
+    key: process.env.PUSHER_KEY,
+    secret: process.env.PUSHER_SECRET,
+    cluster: process.env.PUSHER_CLUSTER,
+    useTLS: true
+  });
+}
 
 export const createComment = async (req, res) => {
   try {
@@ -11,7 +22,11 @@ export const createComment = async (req, res) => {
       message: req.body.message
     });
     const message = await doc.save();
-    res.json(message);
+    const pusher = pusherConnect();
+    pusher.trigger(process.env.PUSHER_CHANNEL, 'new_comment', message);
+    res.json({
+      message: 'Comment successfully sent'
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

@@ -96,6 +96,7 @@
   "app.item.comments": "Комментарии",
   "app.item.comments.placeholder": "Текст",
   "app.item.comments.send": "Отправить",
+  "app.item.comments.senderror": "Не удалось отправить комментарий, попробуйте позже",
 
   "app.item.form.create": "Добавление предмета",
   "app.item.form.update": "Редактирование предмета",
