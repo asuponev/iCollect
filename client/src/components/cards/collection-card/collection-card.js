@@ -21,7 +21,10 @@ const CollectionCard = ({
   items,
   onEditCollection,
   onDeleteCollection,
-  inAccount
+  inAccount,
+  loadingEdit,
+  loadingDelete,
+  currentCollectionId
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
@@ -63,6 +66,9 @@ const CollectionCard = ({
               onEditCollection={onEditCollection}
               onDeleteCollection={onDeleteCollection}
               collectionId={_id}
+              loadingEdit={loadingEdit}
+              loadingDelete={loadingDelete}
+              currentCollectionId={currentCollectionId}
             />
           ) : null
         ) : (

@@ -45,7 +45,8 @@
       "confirmDelete": "Are you sure you want to delete the collection?",
       "delete": "Delete collection",
       "successdelete": "Collection successfully deleted",
-      "edit": "Edit collection"
+      "edit": "Edit collection",
+      "editerror": "Failed to load data, try again later"
     },
     "table": {
       "item": "Item",

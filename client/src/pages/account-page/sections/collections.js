@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
-import { getAllCollectionsUser, deleteCollection } from '../../../utils/requests/requests';
+import { getAllCollectionsUser, deleteCollection, getOneCollection } from '../../../utils/requests/requests';
 
 import CreateCollection from '../../../components/modals/create-collection';
 import CollectionCard from '../../../components/cards/collection-card/collection-card';
@@ -19,6 +19,15 @@ const Collections = ({ userId }) => {
   const [error, setError] = useState(null);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [currentCollectionId, setCurrentCollectionId] = useState('');
+  const [loadingEdit, setLoadingEdit] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [valuesForEdit, setValuesForEdit] = useState({
+    title: '',
+    subject: '',
+    description: '',
+    coverUrl: '',
+    extraFields: []
+  });
 
   const { messages } = useIntl();
   const text = messages["app.collection"];
@@ -41,9 +50,44 @@ const Collections = ({ userId }) => {
       })
   };
 
+  const onRequestValuesForEdit = (collectionId) => {
+    setCurrentCollectionId(collectionId);
+    setLoadingEdit(true);
+    getOneCollection(collectionId)
+      .then(res => {
+        setValuesForEdit({
+          title: res.title,
+          subject: res.subject,
+          description: res.description,
+          coverUrl: res.coverUrl,
+          extraFields: res.extraFields
+        });
+        setLoadingEdit(false);
+        setOpenModalForm(true);
+      }).catch(error => {
+        console.log(error);
+        toast.error(text.tools.editerror, { position: 'top-right' });
+        setLoadingEdit(false);
+        setValuesForEdit({
+          title: '',
+          subject: '',
+          description: '',
+          coverUrl: '',
+          extraFields: []
+        })
+      })
+  }
+
   const handleCloseModalForm = () => {
     setOpenModalForm(false);
     setTimeout(() => setCurrentCollectionId(''), 300);
+    setValuesForEdit({
+      title: '',
+      subject: '',
+      description: '',
+      coverUrl: '',
+      extraFields: []
+    });
   };
 
   const onCreateCollection = () => {
@@ -51,17 +95,20 @@ const Collections = ({ userId }) => {
   };
 
   const onEditCollection = (collectionId) => {
-    setCurrentCollectionId(collectionId);
-    setTimeout(() => setOpenModalForm(true), 1000);
+    onRequestValuesForEdit(collectionId);
   };
 
   const onDeleteCollection = (collectionId) => {
+    setCurrentCollectionId(collectionId);
+    setLoadingDelete(true);
     deleteCollection(collectionId)
       .then(res => {
+        setLoadingDelete(false);
         toast.info(text.tools.successdelete, { position: 'top-right' });
         onRequestGetCollections(userId);
       }).catch(error => {
         console.log(error);
+        setLoadingDelete(false);
         toast.error(error.message, { position: 'top-right' });
       })
   };
@@ -74,6 +121,9 @@ const Collections = ({ userId }) => {
           onEditCollection={onEditCollection}
           onDeleteCollection={onDeleteCollection}
           inAccount={true}
+          loadingEdit={loadingEdit}
+          loadingDelete={loadingDelete}
+          currentCollectionId={currentCollectionId}
         />
       </Grid>
     );
@@ -115,6 +165,7 @@ const Collections = ({ userId }) => {
                 onRequestGetCollections={onRequestGetCollections}
                 collectionId={currentCollectionId}
                 toast={toast}
+                valuesForEdit={valuesForEdit}
               />
             </>
           ) : null

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { createCollection, updateCollection, getOneCollection } from '../../utils/requests/requests';
+import { createCollection, updateCollection } from '../../utils/requests/requests';
 
 import FormCreateCollection from '../form/form-create-collection';
 
@@ -13,48 +13,14 @@ const CreateCollection = ({
   userId,
   onRequestGetCollections,
   collectionId,
-  toast
+  toast,
+  valuesForEdit
 }) => {
-  const [valuesForEdit, setValuesForEdit] = useState({
-    title: '',
-    subject: '',
-    description: '',
-    coverUrl: '',
-    extraFields: []
-  });
-
   const { messages } = useIntl();
   const text = messages["app.collection.form"];
   const theme = useTheme();
 
   const isEditing = Boolean(collectionId);
-
-  useEffect(() => {
-    if (isEditing) {
-      getOneCollection(collectionId)
-        .then(res => {
-          setValuesForEdit({
-            title: res.title,
-            subject: res.subject,
-            description: res.description,
-            coverUrl: res.coverUrl,
-            extraFields: res.extraFields
-          })
-        }).catch(error => {
-          console.log(error);
-        })
-    } else {
-      setValuesForEdit({
-        title: '',
-        subject: '',
-        description: '',
-        coverUrl: '',
-        extraFields: []
-      })
-    }
-    // eslint-disable-next-line
-  }, [isEditing]);
-
 
   const onRequestCreateCollection = (values) => {
     createCollection({ ...values })
