@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Stack, Grid, Typography } from '@mui/material';
+import { Stack, Grid, Typography, Card, CardContent } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
@@ -16,8 +16,8 @@ const ItemView = ({ itemData }) => {
     authorLastName = itemData.collection.authorId.lastName;
 
   return (
-    <>
-      <Stack p={2} pt={1} sx={CardStyles}>
+    <Card sx={CardStyles}>
+      <CardContent>
         <Stack direction="row" alignItems="center" justifyContent="space-between" height={40}>
           <Typography fontSize={10} color="text.disabled">
             ID {itemData._id}
@@ -51,8 +51,8 @@ const ItemView = ({ itemData }) => {
           itemData={itemData}
           extraFields={itemData.collection.extraFields}
         />
-      </Stack>
-    </>
+      </CardContent>
+    </Card>
   );
 }
 

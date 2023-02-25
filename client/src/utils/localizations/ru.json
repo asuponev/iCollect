@@ -67,6 +67,7 @@
   "app.collection.form.btncreate": "Создать коллекцию",
   "app.collection.form.btnedit": "Сохранить",
   "app.collection.form.btncancel": "Отмена",
+  "app.collection.form.upload": "Загрузить изображение",
   "app.collection.form": {
     "title": "Название",
     "subject": "Выберите тему",
@@ -93,6 +94,7 @@
 
   "app.item.tags": "Теги",
   "app.item.likes": "Нравится:",
+  "app.item.likeserror": "Не удалось обработать запрос, попробуйте позже",
   "app.item.comments": "Комментарии",
   "app.item.comments.placeholder": "Текст",
   "app.item.comments.send": "Отправить",

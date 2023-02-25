@@ -67,6 +67,7 @@
   "app.collection.form.btncreate": "Create Collection",
   "app.collection.form.btnedit": "Save Changes",
   "app.collection.form.btncancel": "Cancel",
+  "app.collection.form.upload": "Upload Image",
   "app.collection.form": {
     "title": "Title",
     "subject": "Select subject",
@@ -93,6 +94,7 @@
 
   "app.item.tags": "Tags",
   "app.item.likes": "Likes:",
+  "app.item.likeserror": "Failed to process request, try again later",
   "app.item.comments": "Comments",
   "app.item.comments.placeholder": "Text",
   "app.item.comments.send": "Send",

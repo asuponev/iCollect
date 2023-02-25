@@ -58,7 +58,6 @@ export const Item = () => {
         status.isAuth ? <ItemComments itemId={itemId} /> : null
       }
     </Stack>
-
   ) : null;
 
   return (

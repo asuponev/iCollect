@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useIntl } from 'react-intl';
-import { Stack, Tooltip, IconButton } from '@mui/material';
+import { Stack, IconButton, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { ToastContainer, toast } from 'react-toastify';
 
 import GlobalContext from '../../../../utils/context/GlobalContext';
 
@@ -37,6 +38,7 @@ const ItemLikes = ({ itemId }) => {
       }).catch(error => {
         setIsLike(false);
         console.log(error);
+        toast.error(messages["app.item.likeserror"], { position: 'top-right' });
       })
   };
 
@@ -48,6 +50,7 @@ const ItemLikes = ({ itemId }) => {
       }).catch(error => {
         setIsLike(true);
         console.log(error);
+        toast.error(messages["app.item.likeserror"], { position: 'top-right' });
       })
   };
 
@@ -62,8 +65,12 @@ const ItemLikes = ({ itemId }) => {
   };
 
   return (
-    <Stack direction="row" spacing={1} alignItems="center">
-      <Tooltip title={`${messages["app.item.likes"]} ${likesData.length}`} placement="left">
+    <>
+      <ToastContainer />
+      <Stack direction="row" spacing={1} alignItems="center">
+        <Typography fontSize={13} color="text.secondary">
+          {messages["app.item.likes"]} {likesData.length}
+        </Typography>
         {isLike ?
           (
             <IconButton onClick={() => onRemoveLike(itemId)}>
@@ -75,8 +82,8 @@ const ItemLikes = ({ itemId }) => {
             </IconButton>
           )
         }
-      </Tooltip>
-    </Stack >
+      </Stack >
+    </>
   );
 }
 
