@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { TextField, InputLabel, FormControl, LinearProgress, Stack, useTheme } from '@mui/material';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { TextField, InputLabel, FormControl, LinearProgress, Stack } from '@mui/material';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -14,7 +13,6 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
 
   const { messages } = useIntl();
   const text = messages["app.collection.form.errors"];
-  const theme = useTheme();
 
   useEffect(() => {
     uploadImg(selectedImg);
