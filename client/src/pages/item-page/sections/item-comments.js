@@ -1,19 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Avatar, Stack, Grid, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Stack, Typography } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Pusher from 'pusher-js';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { createComment, getAllItemComment } from '../../../utils/requests/requests';
-import GlobalContext from '../../../utils/context/GlobalContext';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
+import Comment from '../../../components/comment/comment';
 import FormComment from '../../../components/form/form-comment';
 
 const ItemComments = ({ itemId }) => {
-  const { userInfo } = useContext(GlobalContext);
   const [commentsData, setCommentData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,9 +29,7 @@ const ItemComments = ({ itemId }) => {
       setCommentData(prevData => [...prevData, comment]);
     });
 
-    return (() => {
-      pusher.unsubscribe('icollect-comments')
-    });
+    return (() => pusher.unsubscribe(process.env.REACT_APP_pusher_channel));
   }, []);
 
   useEffect(() => {
@@ -62,56 +58,25 @@ const ItemComments = ({ itemId }) => {
       })
   };
 
-  const avatarStyles = {
-    background: "linear-gradient(180deg, #F43B47 0%, #453A94 100%)",
-    width: 40,
-    height: 40,
-    fontSize: 16,
-    color: "#FFFFFF"
-  };
-
   const commentsBlock = commentsData.map(comment => {
-    return (
-      <Stack key={comment._id} direction="row" spacing={2} my={3}>
-        <Link to={`/users/${comment.authorId}`} style={{ textDecoration: 'none' }}>
-          <Avatar sx={avatarStyles}>
-            {comment.firstName[0]}{comment.lastName[0]}
-          </Avatar>
-        </Link>
-        <Grid container wrap="nowrap" direction="column" width="calc(100% - 56px)">
-          <Typography fontWeight={500} noWrap>
-            <Link to={`/users/${comment.authorId}`} style={{ textDecoration: 'none' }}>
-              {comment.firstName} {comment.lastName}
-            </Link>
-          </Typography>
-          <Typography color="text.secondary" sx={{ wordWrap: "break-word" }}>
-            {comment.message}
-          </Typography>
-        </Grid>
-      </Stack>
-    )
+    return <Comment key={comment._id} comment={comment} />
   });
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <Stack>
+      <ToastContainer />
       <Typography variant="h6" gutterBottom>
         <FormattedMessage id="app.item.comments" />
       </Typography>
       {commentsBlock}
-      <Stack direction="row" spacing={1} mt={3}>
-        <Avatar sx={avatarStyles}>
-          {userInfo.firstName[0]}{userInfo.lastName[0]}
-        </Avatar>
-        <FormComment onCreateComment={onCreateComment} itemId={itemId} />
-      </Stack>
+      <FormComment onCreateComment={onCreateComment} itemId={itemId} />
     </Stack>
   ) : null;
 
   return (
     <>
-      <ToastContainer />
       {errorMessage}
       {spinner}
       {content}
