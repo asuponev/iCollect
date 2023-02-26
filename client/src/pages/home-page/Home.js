@@ -9,7 +9,7 @@ import TagsCloud from './sections/tags-cloud';
 export const Home = () => {
 
   return (
-    <Stack mt={5} mb={10} spacing={5}>
+    <Stack mt={13} mb={10} spacing={5}>
       <Box>
         <Typography variant="h6" mb={3}>
           <FormattedMessage id="app.home-page.header1" />

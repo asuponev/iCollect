@@ -139,7 +139,7 @@
   "app.search-results.breadcrumbs": "Поиск",
   "app.search-results.bytag": "Результаты поиска по тегу",
   "app.search-results.byinput": "Результаты поиска по запросу",
-  "app.search-results.results": "Результатов:",
+  "app.search-results.results": "Результатов: ",
   "app.search-results.empty": "К сожалению, результаты по запросу «{value}» не найдены. {br} Пожалуйста, проверьте правильность ввода или используйте другой запрос.",
 
   "app.loading": "Загрузка",

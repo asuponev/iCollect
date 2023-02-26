@@ -18,7 +18,7 @@ const BreadCrumbs = ({ prevLinks, current }) => {
   };
 
   return (
-    <Breadcrumbs sx={{ mt: 3 }}>
+    <Breadcrumbs sx={{ mt: 11 }}>
       <Typography variant="body2" color="text.secondary">
         <Link to='/'>
           <FormattedMessage id="app.home-page.breadcrumbs" />
