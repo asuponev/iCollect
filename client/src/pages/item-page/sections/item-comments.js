@@ -65,7 +65,7 @@ const ItemComments = ({ itemId }) => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Stack>
+    <Stack spacing={4}>
       <ToastContainer />
       <Typography variant="h6" gutterBottom>
         <FormattedMessage id="app.item.comments" />

@@ -25,7 +25,7 @@ const FormComment = ({ onCreateComment, itemId }) => {
         {userInfo.firstName[0]}{userInfo.lastName[0]}
       </Avatar>
       <form style={{ width: "100%" }} onSubmit={(event) => onFormSubmit(event, message)}>
-        <Box mb={2}>
+        <Box mb={1}>
           <TextareaAutosize
             minRows={7}
             value={message}

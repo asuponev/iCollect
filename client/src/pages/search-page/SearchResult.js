@@ -9,6 +9,7 @@ import BreadCrumbs from '../../components/BreadCrumbs';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
 import ItemCard from '../../components/cards/item-card/item-card';
+import EmptySearch from './empty-search';
 
 export const SearchResult = () => {
   const { value } = useParams();
@@ -52,9 +53,17 @@ export const SearchResult = () => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Grid container spacing={2} mt={4} mb={10}>
-      {itemsCards}
-    </Grid>
+    <>
+      {
+        items.length > 0 ? (
+          <Grid container spacing={2} mt={4} mb={10}>
+            {itemsCards}
+          </Grid>
+        ) : (
+          <EmptySearch value={value} />
+        )
+      }
+    </>
   ) : null;
 
   return (

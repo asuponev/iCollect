@@ -140,6 +140,7 @@
   "app.search-results.bytag": "Search results for tag",
   "app.search-results.byinput": "Search results for",
   "app.search-results.results": "Results: ",
+  "app.search-results.empty": "No results found for «{value}». {br} Check the spelling or use a different word or phrase.",
 
   "app.loading": "Loading",
 

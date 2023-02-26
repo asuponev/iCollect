@@ -30,19 +30,19 @@ const ItemView = ({ itemData }) => {
           {itemData.title}
         </Typography>
         <Grid container wrap="nowrap" gap={1}>
-          <Typography variant="overline" color="text.secondary" noWrap>
+          <Typography variant="overline" noWrap>
             {collectionTitle}
           </Typography>
           <Typography variant="overline" color="text.secondary">—</Typography>
-          <Typography variant="overline" color="text.secondary">
+          <Typography variant="overline">
             <FormattedMessage id="app.collection.by" />
           </Typography>
-          <Typography variant="overline" color="text.secondary" noWrap>
+          <Typography variant="overline" noWrap>
             {authorFirstName} {authorLastName}
           </Typography>
         </Grid>
         <Stack mt={2} spacing={1.5}>
-          <Typography>
+          <Typography color="text.secondary">
             <FormattedMessage id="app.item.tags" />
           </Typography>
           <ItemTags tags={itemData.tags} />

@@ -17,7 +17,7 @@ const CollectionInfo = ({ data }) => {
         <Typography variant="overline" lineHeight={1.5} color="text.disabled">
           {data.subject}
         </Typography>
-        <Typography variant="h5" mt={0.5} mb={1} sx={{ wordWrap: "break-word" }}>
+        <Typography variant="h6" mt={0.5} mb={1} sx={{ wordWrap: "break-word" }}>
           {data.title}
         </Typography>
         <Typography component={'div'} color="text.secondary" sx={{ wordWrap: "break-word" }}>

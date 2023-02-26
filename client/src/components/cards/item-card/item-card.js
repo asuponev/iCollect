@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 import { Typography, Card, CardContent, CardActionArea, Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import ItemTags from './elements/item-tags';
 import { CardStyles } from '../../../styles/card-styles'
@@ -20,20 +21,24 @@ const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
             {title}
           </Typography>
           <ItemTags tags={tags} compact={true} />
-          <Grid container wrap="nowrap" mt={1} gap={1}>
-            <Typography variant="overline" color="text.secondary" noWrap>
-              {collection.title}
-            </Typography>
-            <Typography variant="overline" color="text.secondary">—</Typography>
-            <Typography variant="overline" color="text.secondary">
-              <FormattedMessage id="app.collection.by" />
-            </Typography>
-            <Typography variant="overline" color="text.secondary" noWrap>
-              {collection.authorId.firstName} {collection.authorId.lastName}
-            </Typography>
-          </Grid>
         </CardContent>
       </CardActionArea>
+      <Grid container wrap="nowrap" px={2} py={1} gap={1}>
+        <Typography variant="overline" color="text.secondary" noWrap>
+          <Link to={`/collections/${collection._id}`}>
+            {collection.title}
+          </Link>
+        </Typography>
+        <Typography variant="overline" color="text.secondary">—</Typography>
+        <Typography variant="overline" color="text.secondary">
+          <FormattedMessage id="app.collection.by" />
+        </Typography>
+        <Typography variant="overline" color="text.secondary" noWrap>
+          <Link to={`/users/${collection.authorId._id}`}>
+            {collection.authorId.firstName} {collection.authorId.lastName}
+          </Link>
+        </Typography>
+      </Grid>
     </Card>
   );
 }
