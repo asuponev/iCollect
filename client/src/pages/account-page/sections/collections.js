@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 import { getAllCollectionsUser, deleteCollection, getOneCollection } from '../../../utils/requests/requests';
+import { removeImg } from '../../../utils/firebase/methods';
 
 import CreateCollection from '../../../components/modals/create-collection';
 import CollectionCard from '../../../components/cards/collection-card/collection-card';
@@ -103,6 +104,7 @@ const Collections = ({ userId }) => {
     setLoadingDelete(true);
     deleteCollection(collectionId)
       .then(res => {
+        removeImg(res.coverUrl);
         setLoadingDelete(false);
         toast.info(text.tools.successdelete, { position: 'top-right' });
         onRequestGetCollections(userId);

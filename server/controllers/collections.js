@@ -56,9 +56,7 @@ export const deleteCollection = async (req, res) => {
       await Like.deleteMany({ itemId: item._id });
       await Comment.deleteMany({ itemId: item._id });
     });
-    res.json({
-      message: `Collection "${collection.title}" successfully deleted`
-    });
+    res.json(collection);
   } catch (error) {
     console.log(error);
     res.status(500).json({
