@@ -7,6 +7,7 @@ import { useWindowWidth } from '@react-hook/window-size';
 
 import subjects from '../../utils/constants/collection-subjects';
 import GlobalContext from '../../utils/context/GlobalContext';
+import { removeImg } from '../../utils/firebase/methods';
 
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
@@ -57,6 +58,9 @@ const FormCreateCollection = ({
     values.extraFields = extraFields;
     values.coverUrl = imageUrl;
     if (isEditing) {
+      if (valuesForEdit.coverUrl && valuesForEdit.coverUrl !== values.coverUrl) {
+        removeImg(valuesForEdit.coverUrl);
+      }
       onRequestUpdate(collectionId, values);
     } else {
       values.authorId = userId;
@@ -85,7 +89,7 @@ const FormCreateCollection = ({
                   setSelectedImg={setSelectedImg}
                   imageUrl={imageUrl}
                   setImageUrl={setImageUrl}
-                  toast={toast}
+                  isEditing={isEditing}
                 />
               ) : (
                 <FormUploadingImage

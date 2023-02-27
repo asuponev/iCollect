@@ -1,25 +1,18 @@
+import React from 'react';
 import { Stack, Tooltip, IconButton } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { ref, deleteObject } from 'firebase/storage';
 import { useIntl } from 'react-intl';
 
-import { storage } from '../../../utils/firebase';
+import { removeImg } from '../../../utils/firebase/methods';
 
-const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, toast }) => {
+const FormUploadedImage = ({ setSelectedImg, imageUrl, setImageUrl, isEditing }) => {
   const { messages } = useIntl();
   const text = messages["app.collection.form"];
 
-  const imageRef = ref(storage, imageUrl);
-
   const onRemoveImg = () => {
+    if (!isEditing) removeImg(imageUrl);
     setSelectedImg(null);
     setImageUrl('');
-    deleteObject(imageRef).then(() => {
-      toast.info(text.imgdeleted, { position: 'top-right' });
-    }).catch((error) => {
-      console.log(error);
-      toast.error(error.message, { position: 'top-right' });
-    });
   };
 
   return (

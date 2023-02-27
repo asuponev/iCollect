@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, InputLabel, FormControl, LinearProgress, Stack } from '@mui/material';
-import { v4 } from 'uuid';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { storage } from '../../../utils/firebase';
+import { uploadImg } from '../../../utils/firebase/methods';
 
 import { ImageUploadStyles } from '../../../styles/image-upload-styles';
 
@@ -15,24 +13,9 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
   const text = messages["app.collection.form.errors"];
 
   useEffect(() => {
-    uploadImg(selectedImg);
+    uploadImg(selectedImg, setProgress, setImageUrl);
     // eslint-disable-next-line
   }, [selectedImg]);
-
-  const uploadImg = (img) => {
-    if (!img) return;
-    const imageRef = ref(storage, `images/collections/${v4()}${img.name}`);
-    const uploadTask = uploadBytesResumable(imageRef, img);
-    uploadTask.on('state_changed', (snapshot) => {
-      const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      setProgress(progress);
-    },
-      (err) => console.log(err),
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref)
-          .then(url => setImageUrl(url));
-      })
-  };
 
   return (
     <>
