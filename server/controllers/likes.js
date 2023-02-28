@@ -1,5 +1,6 @@
 import Like from '../models/Like.js';
 import Item from '../models/Item.js';
+import { pusherConnect } from '../utils/pusherConnect.js';
 
 export const addLike = async (req, res) => {
   try {
@@ -17,7 +18,11 @@ export const addLike = async (req, res) => {
         itemId: req.body.itemId,
       });
       const like = await doc.save();
-      res.json(like);
+      const pusher = pusherConnect();
+      pusher.trigger(process.env.PUSHER_CHANNEL, 'new_like', like);
+      res.json({
+        message: 'Like successfully added'
+      });
     }
   } catch (error) {
     console.log(error);
@@ -34,9 +39,11 @@ export const removeLike = async (req, res) => {
       itemId: req.params.itemId
     });
     if (like) {
-      await Like.deleteOne({ _id: like._id })
+      await Like.deleteOne({ _id: like._id });
+      const pusher = pusherConnect();
+      pusher.trigger(process.env.PUSHER_CHANNEL, 'remove_like', like._id);
       res.json({
-        success: true
+        message: 'Like successfully removed'
       });
     } else {
       res.status(404).json({
