@@ -4,14 +4,16 @@ import { FormattedMessage } from 'react-intl';
 import { Typography, Card, CardContent, CardActionArea, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 
+import CustomizeMui from '../../../utils/theme/customizeMui';
+
 import ItemTags from './elements/item-tags';
-import { CardStyles } from '../../../styles/card-styles'
 
 const ItemCard = ({ _id, title, tags, collectionId, collection }) => {
   let navigate = useNavigate();
+  const { cardStyles } = CustomizeMui();
 
   return (
-    <Card sx={CardStyles}>
+    <Card sx={cardStyles}>
       <CardActionArea onClick={() => navigate(`/collections/${collectionId}/items/${_id}`)}>
         <CardContent sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
           <Typography fontSize={10} color="text.disabled">

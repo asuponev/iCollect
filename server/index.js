@@ -3,7 +3,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-import routes from './routes/routes.js';
+import authRoutes from './routes/auth.js';
+import usersRoutes from './routes/users.js';
+import collectionsRoutes from './routes/collections.js';
+import itemsRoutes from './routes/items.js';
+import featuresRoutes from './routes/features.js';
 
 dotenv.config();
 const app = express();
@@ -17,7 +21,11 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use('/', routes);
+app.use('/auth', authRoutes);
+app.use('/users', usersRoutes);
+app.use('/collections', collectionsRoutes);
+app.use('/collections', itemsRoutes);
+app.use('/', featuresRoutes);
 
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,

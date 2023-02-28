@@ -3,12 +3,11 @@ import { TextField, InputLabel, FormControl, LinearProgress, Stack } from '@mui/
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { uploadImg } from '../../../utils/firebase/methods';
-
-import { ImageUploadStyles } from '../../../styles/image-upload-styles';
+import CustomizeMui from '../../../utils/theme/customizeMui';
 
 const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast }) => {
   const [progress, setProgress] = useState(0);
-
+  const { imageUploadStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.collection.form.errors"];
 
@@ -41,7 +40,7 @@ const FormUploadingImage = ({ selectedImg, setSelectedImg, setImageUrl, toast })
               setSelectedImg(e.target.files[0]);
             }
           }}
-          sx={ImageUploadStyles}
+          sx={imageUploadStyles}
         />
       </FormControl>
     </>

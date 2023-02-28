@@ -128,7 +128,7 @@ export const getOneCollection = async (collectionId) => {
 export const createItem = async (collectionId, values) => {
   try {
     const { data } = await axios.post(
-      `/collections/${collectionId}`,
+      `/collections/${collectionId}/items`,
       values,
       { withCredentials: true }
     );

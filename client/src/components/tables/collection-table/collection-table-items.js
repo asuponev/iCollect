@@ -10,8 +10,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { convert } from 'html-to-text';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
-
-import { TableStyles } from '../../../styles/table-styles';
+import CustomizeMui from '../../../utils/theme/customizeMui';
 
 const TableItems = ({
   items,
@@ -28,7 +27,7 @@ const TableItems = ({
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
   if (!items) items = [];
-
+  const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.collection"];
 
@@ -137,7 +136,7 @@ const TableItems = ({
           }
         }}
         selectionModel={selectedItems}
-        sx={TableStyles}
+        sx={tableStyles}
       />
     </Stack>
   );

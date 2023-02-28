@@ -11,7 +11,7 @@ import CreateCollection from '../../../components/modals/create-collection';
 import CollectionCard from '../../../components/cards/collection-card/collection-card';
 import Spinner from '../../../components/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage';
-import EmptyAccount from './empty-account';
+import EmptyElement from '../../../components/EmptyElement';
 
 const Collections = ({ userId }) => {
   const { status, userInfo } = useContext(GlobalContext);
@@ -141,7 +141,7 @@ const Collections = ({ userId }) => {
             {cards}
           </Grid>
         ) : (
-          <EmptyAccount />
+          <EmptyElement target={'account'} />
         )
       }
     </>

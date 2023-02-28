@@ -3,15 +3,17 @@ import { Typography, Stack } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { getAllTags } from '../../../utils/requests/requests';
+import CustomizeMui from '../../../utils/theme/customizeMui';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
-import { TagStylesBig } from '../../../styles/tag-styles';
 
 const TagsCloud = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [tags, setTags] = useState([]);
+
+  const { tagStylesCloud } = CustomizeMui();
 
   useEffect(() => {
     onRequest();
@@ -34,7 +36,7 @@ const TagsCloud = () => {
   const tagsView = tags.map((tag, i) => {
     return (
       <Link to={`/search/--tag--${tag}`} style={{ textDecoration: "none" }} key={i}>
-        <Typography sx={TagStylesBig} noWrap>
+        <Typography sx={tagStylesCloud} noWrap>
           {tag}
         </Typography>
       </Link>

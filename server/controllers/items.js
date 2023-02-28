@@ -109,8 +109,8 @@ export const getAllCollectionItems = async (req, res) => {
   try {
     const collection = await Collection.findById(req.params.collectionId);
     if (collection) {
-      const allCollectionItems = await Item.find({ 
-        collectionId: req.params.collectionId 
+      const allCollectionItems = await Item.find({
+        collectionId: req.params.collectionId
       }).sort({ updatedAt: -1 });
       res.json(allCollectionItems);
     } else {
@@ -129,8 +129,14 @@ export const getAllCollectionItems = async (req, res) => {
 export const getItem = async (req, res) => {
   try {
     const item = await Item.findById(req.params.itemId);
-    const collection = await Collection.findById(item.collectionId._id).populate('authorId');
-    res.json({ ...item._doc, collection });
+    if (item) {
+      const collection = await Collection.findById(item.collectionId._id).populate('authorId');
+      res.json({ ...item._doc, collection });
+    } else {
+      res.status(404).json({
+        message: `Item with ID ${req.params.itemId} was not found`
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({

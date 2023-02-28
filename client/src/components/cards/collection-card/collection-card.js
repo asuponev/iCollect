@@ -7,9 +7,9 @@ import Markdown from 'markdown-to-jsx';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 import imageNotFound from '../../../utils/constants/image-not-found';
+import CustomizeMui from '../../../utils/theme/customizeMui';
 
 import CollectionCardTools from './collection-card-tools';
-import { CardStyles } from '../../../styles/card-styles';
 
 const CollectionCard = ({
   _id,
@@ -29,9 +29,10 @@ const CollectionCard = ({
   const { status, userInfo } = useContext(GlobalContext);
   let navigate = useNavigate();
   const { messages } = useIntl();
+  const { cardStyles } = CustomizeMui();
 
   return (
-    <Card sx={CardStyles}>
+    <Card sx={cardStyles}>
       <CardActionArea onClick={() => navigate(`/collections/${_id}`)}>
         <CardMedia
           sx={{ height: 160 }}

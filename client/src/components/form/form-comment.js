@@ -4,14 +4,13 @@ import { Box, Button, Stack, Avatar } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 import GlobalContext from '../../utils/context/GlobalContext';
-
-import avatarStyles from '../../styles/avatar-styles';
-import { TextareaCommentStyles } from '../../styles/textarea-comment-styles';
+import CustomizeMui from '../../utils/theme/customizeMui';
 
 const FormComment = ({ onCreateComment, itemId }) => {
   const { userInfo } = useContext(GlobalContext);
   const [message, setMessage] = useState('');
   const intl = useIntl();
+  const { avatarStyles, textareaCommentStyles } = CustomizeMui();
 
   const onFormSubmit = (event, message) => {
     event.preventDefault();
@@ -32,7 +31,7 @@ const FormComment = ({ onCreateComment, itemId }) => {
             onChange={event => setMessage(event.target.value)}
             placeholder={intl.messages["app.item.comments.placeholder"]}
             required
-            style={TextareaCommentStyles()}
+            style={textareaCommentStyles}
           />
         </Box>
         <Button type="submit" variant="contained">

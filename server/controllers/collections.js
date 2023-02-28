@@ -69,7 +69,9 @@ export const getAllCollectionsUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     if (user) {
-      const allCollectionsUser = await Collection.find({ authorId: req.params.userId }).sort({ updatedAt: -1 });
+      const allCollectionsUser = await Collection.find({
+        authorId: req.params.userId
+      }).sort({ updatedAt: -1 });
       res.json(allCollectionsUser);
     } else {
       res.status(404).json({
@@ -86,7 +88,9 @@ export const getAllCollectionsUser = async (req, res) => {
 
 export const getOneCollection = async (req, res) => {
   try {
-    const collection = await Collection.findById(req.params.collectionId).populate('authorId');
+    const collection = await Collection.findById(
+      req.params.collectionId
+    ).populate('authorId');
     res.json(collection);
   } catch (error) {
     console.log(error);

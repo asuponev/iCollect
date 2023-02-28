@@ -3,20 +3,21 @@ import { Stack, Grid, Typography, Card, CardContent } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
+import CustomizeMui from '../../../utils/theme/customizeMui';
 
 import ItemLikes from '../../../components/cards/item-card/elements/item-likes';
 import ItemTags from '../../../components/cards/item-card/elements/item-tags';
 import ItemExtraFields from '../../../components/cards/item-card/elements/item-extra-fields';
-import { CardStyles } from '../../../styles/card-styles';
 
 const ItemView = ({ itemData }) => {
   const { status } = useContext(GlobalContext);
+  const { cardStyles } = CustomizeMui();
   const collectionTitle = itemData.collection.title,
     authorFirstName = itemData.collection.authorId.firstName,
     authorLastName = itemData.collection.authorId.lastName;
 
   return (
-    <Card sx={CardStyles}>
+    <Card sx={cardStyles}>
       <CardContent>
         <Stack direction="row" alignItems="center" justifyContent="space-between" height={40}>
           <Typography fontSize={10} color="text.disabled">

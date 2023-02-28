@@ -9,7 +9,7 @@ import BreadCrumbs from '../../components/BreadCrumbs';
 import ErrorMessage from '../../components/ErrorMessage';
 import Spinner from '../../components/Spinner';
 import ItemCard from '../../components/cards/item-card/item-card';
-import EmptySearch from './empty-search';
+import EmptyElement from '../../components/EmptyElement';
 
 export const SearchResult = () => {
   const { value } = useParams();
@@ -60,7 +60,7 @@ export const SearchResult = () => {
             {itemsCards}
           </Grid>
         ) : (
-          <EmptySearch value={value} />
+          <EmptyElement target={'search'} values={{ br: <br />, value }} />
         )
       }
     </>

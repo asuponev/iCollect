@@ -1,11 +1,13 @@
 import React from 'react';
 import { Stack, Avatar, Typography, Grid } from '@mui/material';
 
+import CustomizeMui from '../../../utils/theme/customizeMui';
+
 import ErrorMessage from '../../../components/ErrorMessage';
-import avatarStyles from '../../../styles/avatar-styles';
 
 const UserInfo = ({ data }) => {
   if (!Object.keys(data).length) return <ErrorMessage />;
+  const { avatarStyles } = CustomizeMui();
 
   return (
     <Stack direction="row" spacing={2} alignItems="center" mt={4} mb={6}>

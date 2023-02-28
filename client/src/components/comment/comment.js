@@ -2,9 +2,11 @@ import React from 'react';
 import { Stack, Grid, Avatar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-import avatarStyles from '../../styles/avatar-styles';
+import CustomizeMui from '../../utils/theme/customizeMui';
 
 const Comment = ({ comment }) => {
+  const { avatarStyles } = CustomizeMui();
+
   return (
     <Stack direction="row" spacing={2} my={3}>
       <Link to={`/users/${comment.authorId}`} style={{ textDecoration: 'none' }}>

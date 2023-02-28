@@ -6,8 +6,9 @@ import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { useIntl } from 'react-intl';
 
+import CustomizeMui from '../../../utils/theme/customizeMui';
+
 import AdminTools from './admin-tools';
-import { TableStyles } from '../../../styles/table-styles';
 
 const AdminTable = ({
   users,
@@ -17,7 +18,7 @@ const AdminTable = ({
 }) => {
   if (!users) users = [];
   const [selectedUsers, setSelectedUsers] = useState([]);
-
+  const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.admin-panel"];
 
@@ -85,7 +86,7 @@ const AdminTable = ({
             setSelectedUsers(newSelect);
           }}
           selectionModel={selectedUsers}
-          sx={TableStyles}
+          sx={tableStyles}
         />
       </Stack>
     </>

@@ -13,7 +13,7 @@ import ErrorMessage from '../../../components/ErrorMessage';
 import CreateItem from '../../../components/modals/create-item';
 import TableItems from '../../../components/tables/collection-table/collection-table-items';
 import CollectionTools from '../../../components/tables/collection-table/collection-tools';
-import EmptyTable from '../../../components/tables/empty-table';
+import EmptyElement from '../../../components/EmptyElement';
 import './btn-csv-style.scss';
 
 const Items = ({ collectionId, collectionData }) => {
@@ -151,7 +151,7 @@ const Items = ({ collectionId, collectionData }) => {
               <FormattedMessage id="app.exportsvg" />
             </CsvDownloadButton>
           </Stack>
-        ) : <EmptyTable />
+        ) : <EmptyElement target={'table'} />
       }
     </>
   ) : null;
