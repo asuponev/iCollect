@@ -12,6 +12,13 @@ const updateCollection = async (collectionId, action) => {
   await Collection.findOneAndUpdate(filter, update, { new: true });
 }
 
+const deleteOneItem = async (collectionId, itemId) => {
+  await Item.deleteOne({ _id: itemId });
+  await Like.deleteMany({ itemId: itemId });
+  await Comment.deleteMany({ itemId: itemId });
+  updateCollection(collectionId, 'delete');
+}
+
 const getFullItemsData = async (query) => {
   let items = [];
   if (query === 'last') {
@@ -134,10 +141,8 @@ export const getItem = async (req, res) => {
 
 export const deleteItem = async (req, res) => {
   try {
-    await Item.deleteOne({ _id: req.params.itemId });
-    await Like.deleteMany({ itemId: req.params.itemId });
-    await Comment.deleteMany({ itemId: req.params.itemId });
-    updateCollection(req.params.collectionId, 'delete');
+    const { collectionId, itemId } = req.params;
+    deleteOneItem(collectionId, itemId);
     res.json({
       message: 'The item successfully deleted'
     });
@@ -151,11 +156,10 @@ export const deleteItem = async (req, res) => {
 
 export const deleteItems = async (req, res) => {
   try {
+    const { collectionId } = req.params;
     const selectedItemsId = Object.values(req.query);
     selectedItemsId.forEach(async (item) => {
-      await Item.deleteOne({ _id: item });
-      await Like.deleteMany({ itemId: item });
-      await Comment.deleteMany({ itemId: item });
+      deleteOneItem(collectionId, item);
     });
     res.json({
       message: 'The items was successfully deleted'

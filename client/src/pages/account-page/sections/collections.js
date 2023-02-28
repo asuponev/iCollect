@@ -104,7 +104,7 @@ const Collections = ({ userId }) => {
     setLoadingDelete(true);
     deleteCollection(collectionId)
       .then(res => {
-        removeImg(res.coverUrl);
+        if (res.coverUrl) removeImg(res.coverUrl);
         setLoadingDelete(false);
         toast.info(text.tools.successdelete, { position: 'top-right' });
         onRequestGetCollections(userId);
