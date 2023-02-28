@@ -98,11 +98,11 @@ Using **html-to-text** these fields appear as plain text in the table on the col
 </details>
 
 <details>
-<summary>Live comments</summary>
+<summary>Real-time comments & likes</summary>
 
-On the page of each item is implemented comments block, which are updated in live mode using **Pusher**. 
+On the page of each item is implemented comments block and likes, which are updated in real-time mode using **Pusher**. 
 
-Comments block is available only to authorized users
+Comments block and likes is available only to authorized users
 
 </details>
 
