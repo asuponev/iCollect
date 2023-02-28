@@ -22,7 +22,6 @@ const UserSchema = new mongoose.Schema(
     },
     passwordHash: {
       type: String,
-      required: true,
       min: 5,
     },
     isActive: {

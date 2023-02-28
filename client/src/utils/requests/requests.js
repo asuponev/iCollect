@@ -24,6 +24,18 @@ export const fetchRegister = async (values) => {
   }
 }
 
+export const fetchFirebaseLogin = async (values) => {
+  try {
+    const { data } = await axios.post('/auth/firebaseLogin',
+      values,
+      { withCredentials: true }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
 export const checkAuth = async () => {
   try {
     const { data } = await axios.get('/auth/me');

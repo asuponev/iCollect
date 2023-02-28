@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, getMe } from '../controllers/auth.js';
+import { register, login, getMe, firebaseLogin } from '../controllers/auth.js';
 import { getUser, getAllUsers, updateSelectUsers } from '../controllers/users.js';
 import { createCollection, getAllCollectionsUser, updateCollection, getOneCollection, deleteCollection, getBiggestCollections } from '../controllers/collections.js';
 import { createItem, getAllCollectionItems, getItem, updateItem, deleteItem, deleteItems, getLastItems, getAllTags, getSearchItems } from '../controllers/items.js';
@@ -15,6 +15,8 @@ const router = new Router();
 
 router.post('/auth/register', registerValidation, handleValidationsErrors, register);
 router.post('/auth/login', loginValidation, handleValidationsErrors, login);
+router.post('/auth/firebaseLogin', firebaseLogin);
+
 router.get('/auth/me', checkAuth, getMe);
 
 router.get('/users/:userId', getUser);

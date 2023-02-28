@@ -7,6 +7,7 @@
   "app.auth.register.text": "У вас уже есть аккаунт? ",
   "app.auth.login.header": "Войти",
   "app.auth.login.text": "У вас нет аккаунта? ",
+  "app.auth.social.text": "Войти через",
   "app.auth.form": {
     "firstName": "Имя",
     "lastName": "Фамилия",

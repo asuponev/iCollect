@@ -51,7 +51,7 @@ export const login = async (req, res) => {
         message: 'Incorrect login or password'
       })
     };
-    
+
     if (!user.isActive) {
       return res.status(403).json({
         message: 'You are blocked, contact the site administrator'
@@ -69,6 +69,31 @@ export const login = async (req, res) => {
     const { passwordHash, ...userData } = user._doc;
 
     res.status(201).json({ ...userData, token });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({
+      message: 'Failed to log in'
+    });
+  }
+}
+
+export const firebaseLogin = async (req, res) => {
+  try {
+    const { email, firstName, lastName } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+      if (!user.isActive) {
+        return res.status(403).json({
+          message: 'You are blocked, contact the site administrator'
+        });
+      };
+      const token = createToken(user._id);
+      res.status(201).json({ ...user._doc, token });
+    } else {
+      const newUser = await User.create({ email, firstName, lastName, });
+      const token = createToken(newUser._id);
+      res.status(201).json({ ...newUser._doc, token });
+    }
   } catch (error) {
     console.log(error.message);
     res.status(500).json({
