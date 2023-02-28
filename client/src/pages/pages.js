@@ -6,3 +6,4 @@ export { Collection } from './collection-page/Collection';
 export { Item } from './item-page/Item';
 export { Admin } from './admin-page/Admin';
 export { SearchResult } from './search-page/SearchResult';
+export { NotFound } from './notfound-page/NotFound';

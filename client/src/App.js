@@ -77,6 +77,7 @@ function App() {
               <Route path="/collections/:collectionId/items/:itemId" element={<Pages.Item />} />
               <Route path="/admin" element={<Pages.Admin />} />
               <Route path="/search/:value" element={<Pages.SearchResult />} />
+              <Route path="*" element={<Pages.NotFound />} />
             </Routes>
           </Container>
           <Footer />

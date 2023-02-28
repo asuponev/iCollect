@@ -148,5 +148,8 @@
   "app.footer.dev": "Development",
   "app.footer.rights": "© 2023 iCollect. All rights reserved.",
 
-  "app.exportsvg": "Export to CSV"
+  "app.exportsvg": "Export to CSV",
+
+  "app.notfound.text": "Page not found",
+  "app.notfound.link": "Home"
 }
