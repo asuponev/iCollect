@@ -91,7 +91,13 @@ export const getOneCollection = async (req, res) => {
     const collection = await Collection.findById(
       req.params.collectionId
     ).populate('authorId');
-    res.json(collection);
+    if (collection) {
+      res.json(collection);
+    } else {
+      res.status(404).json({
+        message: `Collection with ID ${req.params.collectionId} was not found`
+      });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({
