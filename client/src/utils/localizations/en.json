@@ -116,8 +116,10 @@
   },
 
   "app.admin-panel.header": "Users",
-  "app.admin-panel.breadcrumbs": "Admin panel",
   "app.admin-panel": {
+    "breadcrumbs": "Admin panel",
+    "successdelete1": "User successfully deleted",
+    "successdelete2": "Users successfully deleted",
     "table": {
       "firstName": "First Name",
       "lastName": "Last Name",
@@ -131,9 +133,12 @@
     "tools": {
       "select": "Users selected:",
       "confirm": "Are you sure?",
-      "block": "Block / Unlock selected users",
-      "delete": "Delete selected users",
-      "makeAdmin": "Make admin / Withdraw authority"
+      "block": "Block",
+      "unblock": "Unblock",
+      "makeadmin": "Make admin",
+      "notadmin": "Withdraw authority",
+      "deleteusers": "Delete selected users",
+      "deleteuser": "Delete"
     }
   },
 

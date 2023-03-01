@@ -62,9 +62,7 @@ export const createItem = async (req, res) => {
     });
     const item = await doc.save();
     updateCollection(item.collectionId, 'create');
-    res.json({
-      message: 'The item successfully created'
-    });
+    res.json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -94,9 +92,7 @@ export const updateItem = async (req, res) => {
     item.checkbox2 = req.body.checkbox2;
     item.checkbox3 = req.body.checkbox3;
     await item.save();
-    res.json({
-      message: 'The item successfully updated'
-    });
+    res.json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -148,10 +144,9 @@ export const getItem = async (req, res) => {
 export const deleteItem = async (req, res) => {
   try {
     const { collectionId, itemId } = req.params;
+    const item = await Item.findById(itemId);
     deleteOneItem(collectionId, itemId);
-    res.json({
-      message: 'The item successfully deleted'
-    });
+    res.json(item);
   } catch (error) {
     console.log(error);
     res.status(500).json({

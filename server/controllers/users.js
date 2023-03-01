@@ -27,22 +27,72 @@ export const getAllUsers = async (req, res) => {
   }
 }
 
-export const updateSelectUsers = async (req, res) => {
+export const blockUser = async (req, res) => {
   try {
-    req.body[0].forEach(async (id) => {
-      let user = await User.findById(id);
-      if (req.body[1] === 'block') {
-        user.isActive = !user.isActive;
-      } else if (req.body[1] === 'admin') {
-        user.role = user.role === 'USER' ? 'ADMIN' : 'USER';
-      } else if (req.body[1] === 'delete') {
-        user.role = 'ARCHIVE';
-        user.isActive = false;
-      }
-      await user.save();
-    })
-    const users = await User.find({ role: /ADMIN|USER/ });
-    res.json(users);
+    const { userId } = req.params;
+    let user = await User.findById(userId);
+    user.isActive = !user.isActive;
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
+
+export const makeAdmin = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    let user = await User.findById(userId);
+    user.role = user.role === 'USER' ? 'ADMIN' : 'USER';
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
+
+const deleteOneUser = async (userId) => {
+  let user = await User.findById(userId);
+  user.role = 'ARCHIVE';
+  user.isActive = false;
+  await user.save();
+  return user;
+}
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const adminId = req.user._id.toString();
+    if (userId !== adminId) {
+      const user = await deleteOneUser(userId);
+      res.json(user);
+    } else {
+      res.status(400).json({
+        message: 'Attempting to delete yourself'
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: 'Request failed'
+    });
+  }
+}
+
+export const deleteUsers = async (req, res) => {
+  try {
+    const adminId = req.user._id.toString();
+    const selectedUsers = req.body.filter(userId => userId !== adminId);
+    selectedUsers.forEach(userId => {
+      deleteOneUser(userId);
+    });
+    res.json(selectedUsers);
   } catch (error) {
     console.log(error);
     res.status(500).json({

@@ -11,7 +11,7 @@ const CreateCollection = ({
   openModalForm,
   handleCloseModalForm,
   userId,
-  onRequestGetCollections,
+  setCollections,
   collectionId,
   toast,
   valuesForEdit
@@ -23,9 +23,9 @@ const CreateCollection = ({
   const isEditing = Boolean(collectionId);
 
   const onRequestCreateCollection = (values) => {
-    createCollection({ ...values })
+    createCollection(values)
       .then(res => {
-        onRequestGetCollections(userId);
+        setCollections(prevData => [res, ...prevData]);
         toast.success(text.successcreate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
@@ -34,9 +34,9 @@ const CreateCollection = ({
   };
 
   const onRequestUpdateCollection = (collectionId, values) => {
-    updateCollection(collectionId, { ...values })
+    updateCollection(collectionId, values)
       .then(res => {
-        onRequestGetCollections(userId);
+        setCollections(prevData => [res, ...prevData.filter(item => item._id !== res._id)]);
         toast.success(text.successupdate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);

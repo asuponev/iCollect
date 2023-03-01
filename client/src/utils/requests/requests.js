@@ -63,9 +63,36 @@ export const getUsers = async () => {
   }
 }
 
-export const updateUsers = async (usersWithAction) => {
+export const blockUser = async (userId) => {
   try {
-    const { data } = await axios.patch('/users', usersWithAction);
+    const { data } = await axios.patch(`/users/block/${userId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const makeAdmin = async (userId) => {
+  try {
+    const { data } = await axios.patch(`/users/makeadmin/${userId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const deleteUser = async (userId) => {
+  try {
+    const { data } = await axios.patch(`/users/delete/${userId}`);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+}
+
+export const deleteUsers = async (usersId) => {
+  try {
+    const { data } = await axios.patch('/users/delete', usersId);
     return data;
   } catch (error) {
     throw new Error(error.response.data.message);

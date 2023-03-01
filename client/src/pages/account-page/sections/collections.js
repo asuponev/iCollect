@@ -106,8 +106,8 @@ const Collections = ({ userId }) => {
       .then(res => {
         if (res.coverUrl) removeImg(res.coverUrl);
         setLoadingDelete(false);
+        setCollections(prevData => prevData.filter(item => item._id !== res._id));
         toast.info(text.tools.successdelete, { position: 'top-right' });
-        onRequestGetCollections(userId);
       }).catch(error => {
         console.log(error);
         setLoadingDelete(false);
@@ -164,6 +164,7 @@ const Collections = ({ userId }) => {
                 openModalForm={openModalForm}
                 handleCloseModalForm={handleCloseModalForm}
                 userId={userId}
+                setCollections={setCollections}
                 onRequestGetCollections={onRequestGetCollections}
                 collectionId={currentCollectionId}
                 toast={toast}

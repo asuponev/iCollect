@@ -1,16 +1,22 @@
 import React from 'react';
 import { useIntl, FormattedMessage } from 'react-intl';
-import { Stack, Tooltip, IconButton, Button, Typography, Divider } from '@mui/material';
+import { Stack, Tooltip, IconButton, Button, Typography, Divider, CircularProgress } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const CollectionTools = ({ onCreateItem, selectedItems, onDeleteItems }) => {
+const CollectionTools = ({
+  onCreateItem,
+  items,
+  selectedItems,
+  onDeleteItems,
+  loadingDelete
+}) => {
   const { messages } = useIntl();
   const text = messages["app.collection"];
 
   return (
     <Stack direction="row" justifyContent="space-between" mb={3}>
       {
-        selectedItems.length === 0 ? (
+        items.length === 0 || selectedItems.length === 0 ? (
           <Stack sx={{ height: 40 }}></Stack>
         ) : (
           <Stack
@@ -31,7 +37,11 @@ const CollectionTools = ({ onCreateItem, selectedItems, onDeleteItems }) => {
                   }
                 }}
               >
-                <DeleteOutlinedIcon />
+                {
+                  loadingDelete
+                    ? <CircularProgress color="primary" size={24} />
+                    : <DeleteOutlinedIcon />
+                }
               </IconButton>
             </Tooltip>
           </Stack>

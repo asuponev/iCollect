@@ -15,9 +15,7 @@ export const createCollection = async (req, res) => {
       extraFields: req.body.extraFields
     });
     const collection = await doc.save();
-    res.json({
-      message: `Collection "${collection.title}" successfully created`
-    });
+    res.json(collection);
   } catch (error) {
     console.log(error);
     res.status(500).json({
@@ -35,9 +33,7 @@ export const updateCollection = async (req, res) => {
     collection.coverUrl = req.body.coverUrl;
     collection.extraFields = req.body.extraFields;
     await collection.save();
-    res.json({
-      message: `Collection "${collection.title}" successfully updated`
-    });
+    res.json(collection);
   } catch (error) {
     console.log(error);
     res.status(500).json({

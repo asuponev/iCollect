@@ -102,8 +102,8 @@ const Items = ({ collectionId, collectionData }) => {
     setLoadingDelete(true);
     deleteItem(collectionId, itemId)
       .then(res => {
+        setItems(prevData => prevData.filter(item => item._id !== res._id));
         toast.info(text.tableTools.successdelete1, { position: 'top-right' });
-        onItemsRequest(collectionId);
         setLoadingDelete(false);
       })
       .catch(error => {
@@ -114,14 +114,17 @@ const Items = ({ collectionId, collectionData }) => {
   };
 
   const onDeleteItems = (items) => {
+    setLoadingDelete(true);
     deleteItems(collectionId, items)
       .then(res => {
+        setItems(prevData => prevData.filter(item => !items.includes(item._id)));
         toast.info(text.tableTools.successdelete2, { position: 'top-right' });
-        onItemsRequest(collectionId);
+        setLoadingDelete(false);
       })
       .catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
+        setLoadingDelete(false);
       })
   };
 
@@ -164,14 +167,16 @@ const Items = ({ collectionId, collectionData }) => {
           <>
             <CollectionTools
               onCreateItem={onCreateItem}
+              items={items}
               selectedItems={selectedItems}
               onDeleteItems={onDeleteItems}
+              loadingDelete={loadingDelete}
             />
             <CreateItem
               collectionId={collectionId}
               openModalForm={openModalForm}
               handleCloseModalForm={handleCloseModalForm}
-              onItemsRequest={onItemsRequest}
+              setItems={setItems}
               extraFields={collectionData.extraFields}
               itemId={currentItemId}
               toast={toast}

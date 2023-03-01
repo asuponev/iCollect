@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
-import { Stack } from '@mui/material';
+import { Stack, Tooltip, CircularProgress } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { GridActionsCellItem } from '@mui/x-data-grid/components/cell';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import BlockOutlinedIcon from '@mui/icons-material/BlockOutlined';
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
+import DoNotTouchOutlinedIcon from '@mui/icons-material/DoNotTouchOutlined';
 import { useIntl } from 'react-intl';
 
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
-import AdminTools from './admin-tools';
-
 const AdminTable = ({
   users,
-  deleteSelectedUsers,
-  blockSelectedUsers,
-  makeAdminSelectedUsers,
+  selectedUsers,
+  setSelectedUsers,
+  deleteSelectedUser,
+  blockSelectedUser,
+  makeAdminSelectedUser,
+  loadingBtn,
+  currentAction
 }) => {
   if (!users) users = [];
-  const [selectedUsers, setSelectedUsers] = useState([]);
   const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.admin-panel"];
@@ -37,11 +43,55 @@ const AdminTable = ({
     { field: 'role', headerName: text.table.role, flex: 1, minWidth: 70 },
     { field: 'date', headerName: text.table.created, flex: 1, minWidth: 130 },
     {
-      field: 'actions', type: 'actions', width: 50, getActions: (params) => [
+      field: 'view', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
-          icon={<VisibilityOutlinedIcon color="primary" />}
-          label="View profile"
+          icon={<VisibilityOutlinedIcon color='primary' />}
+          label='View profile'
           onClick={() => routeChange(params.id)}
+        />]
+    },
+    {
+      field: 'block', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={
+            loadingBtn && params.id === currentAction.id && currentAction.action === 'block'
+              ? <CircularProgress color='primary' size={20} />
+              : params.row.status === 'active' || params.row.status === 'Активный'
+                ? <Tooltip title={text.tools.block} placement='top'><BlockOutlinedIcon /></Tooltip>
+                : <Tooltip title={text.tools.unblock} placement='top'><DoneOutlinedIcon /></Tooltip>
+          }
+          label="Block user"
+          onClick={() => blockSelectedUser(params.id)}
+        />]
+    },
+    {
+      field: 'admin', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={
+            loadingBtn && params.id === currentAction.id && currentAction.action === 'admin'
+              ? <CircularProgress color="primary" size={20} />
+              : params.row.role === 'USER'
+                ? <Tooltip title={text.tools.makeadmin} placement='top'><FontDownloadOutlinedIcon /></Tooltip>
+                : <Tooltip title={text.tools.notadmin} placement='top'><DoNotTouchOutlinedIcon /></Tooltip>
+          }
+          label='Make admin'
+          onClick={() => makeAdminSelectedUser(params.id)}
+        />]
+    },
+    {
+      field: 'delete', type: 'actions', width: 50, getActions: (params) => [
+        <GridActionsCellItem
+          icon={
+            loadingBtn && params.id === currentAction.id && currentAction.action === 'delete'
+              ? <CircularProgress color='primary' size={20} />
+              : <Tooltip title={text.tools.deleteuser} placement='top'><DeleteOutlinedIcon /></Tooltip>
+          }
+          label='Delete user'
+          onClick={() => {
+            if (window.confirm(text.tools.confirm)) {
+              deleteSelectedUser(params.id);
+            }
+          }}
         />]
     },
   ];
@@ -67,12 +117,6 @@ const AdminTable = ({
 
   return (
     <>
-      <AdminTools
-        selectedUsers={selectedUsers}
-        deleteSelectedUsers={deleteSelectedUsers}
-        blockSelectedUsers={blockSelectedUsers}
-        makeAdminSelectedUsers={makeAdminSelectedUsers}
-      />
       <Stack height={tableHeight} width="100%">
         <DataGrid
           rows={rows}

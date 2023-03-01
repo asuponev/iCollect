@@ -11,7 +11,7 @@ const CreateItem = ({
   collectionId,
   openModalForm,
   handleCloseModalForm,
-  onItemsRequest,
+  setItems,
   extraFields,
   itemId,
   toast,
@@ -35,7 +35,7 @@ const CreateItem = ({
   const onRequestCreateItem = (collectionId, values) => {
     createItem(collectionId, { ...values })
       .then(res => {
-        onItemsRequest(collectionId);
+        setItems(prevData => [res, ...prevData]);
         toast.success(text.successcreate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
@@ -46,7 +46,7 @@ const CreateItem = ({
   const onRequestUpdateItem = (collectionId, itemId, values) => {
     updateItem(collectionId, itemId, { ...values })
       .then(res => {
-        onItemsRequest(collectionId);
+        setItems(prevData => [res, ...prevData.filter(item => item._id !== res._id)]);
         toast.success(text.successupdate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
