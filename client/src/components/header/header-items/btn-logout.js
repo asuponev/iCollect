@@ -1,19 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
+import useAuthService from '../../../utils/hooks/use-auth-service';
 
 export const BtnLogOut = ({ onMenuToggle }) => {
-  const { userInfo, setUserInfo } = useContext(GlobalContext);
-  const { status, setStatus } = useContext(GlobalContext);
   let navigate = useNavigate();
+  const { removeAuthStatus } = useAuthService();
 
   const logout = () => {
     localStorage.removeItem('token');
-    setStatus({ ...status, isAdmin: false, isAuth: false });
-    setUserInfo({ ...userInfo, userId: '', firstName: '', lastName: '' });
+    removeAuthStatus();
     navigate('/');
     onMenuToggle();
   }

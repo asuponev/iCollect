@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
 import { getOneCollection } from '../../utils/requests/requests';
 
@@ -41,7 +42,7 @@ export const Collection = () => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <>
+    <Stack mb={10}>
       <BreadCrumbs
         prevLinks={[{
           [authorName]: `/users/${collectionData.authorId._id}`
@@ -53,7 +54,7 @@ export const Collection = () => {
         collectionId={collectionId}
         collectionData={collectionData}
       />
-    </>
+    </Stack>
   ) : null;
 
   return (

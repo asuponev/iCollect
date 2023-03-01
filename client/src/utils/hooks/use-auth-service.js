@@ -1,14 +1,11 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router';
 
 import GlobalContext from '../context/GlobalContext';
 
 const useAuthService = () => {
   const { status, setStatus, userInfo, setUserInfo } = useContext(GlobalContext);
-  let navigate = useNavigate();
 
   const changeAuthStatus = (data) => {
-    localStorage.setItem('token', data.token);
     setUserInfo({
       ...userInfo,
       firstName: data.firstName,
@@ -20,10 +17,19 @@ const useAuthService = () => {
     } else {
       setStatus({ ...status, isAuth: true });
     }
-    navigate('/');
   };
 
-  return { changeAuthStatus }
+  const removeAuthStatus = () => {
+    setUserInfo({
+      ...userInfo,
+      userId: '',
+      firstName: '',
+      lastName: ''
+    });
+    setStatus({ ...status, isAuth: false, isAdmin: false });
+  };
+
+  return { changeAuthStatus, removeAuthStatus }
 }
 
 export default useAuthService;

@@ -90,7 +90,7 @@ const TableItems = ({
         <GridActionsCellItem
           icon={<VisibilityOutlinedIcon color="primary" />}
           label="View item"
-          onClick={() => window.open(`/collections/${collectionId}/items/${params.id}`, '_self')}
+          onClick={() => routeChange(params.id)}
         />]
     },
   ];

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
@@ -12,13 +13,16 @@ import FormLogin from '../../components/form/form-login';
 import SocialLogin from '../../components/social/social-login';
 
 export const Login = () => {
+  let navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { changeAuthStatus } = useAuthService();
 
   const onFormSubmit = async (values) => {
     fetchLogin(values)
       .then(res => {
+        localStorage.setItem('token', res.token);
         changeAuthStatus(res);
+        navigate('/');
       }).catch(error => {
         toast.error(error.message, { position: 'top-right' });
       })

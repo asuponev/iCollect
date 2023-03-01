@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Stack } from '@mui/material';
 
 import { getOneUser } from '../../utils/requests/requests';
 
@@ -34,11 +35,11 @@ export const Account = () => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <>
+    <Stack mb={10}>
       <BreadCrumbs current={nameCurrentPage} />
       <UserInfo data={userData} />
       <Collections userId={userId} />
-    </>
+    </Stack>
   ) : null;
 
   return (

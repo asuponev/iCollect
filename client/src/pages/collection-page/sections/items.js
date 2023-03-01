@@ -133,7 +133,7 @@ const Items = ({ collectionId, collectionData }) => {
     <>
       {
         items.length > 0 ? (
-          <Stack mb={10}>
+          <Stack>
             <TableItems
               items={items}
               selectedItems={selectedItems}

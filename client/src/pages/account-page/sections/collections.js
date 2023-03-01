@@ -137,7 +137,7 @@ const Collections = ({ userId }) => {
     <>
       {
         cards.length > 0 ? (
-          <Grid container spacing={2} mb={10}>
+          <Grid container spacing={2}>
             {cards}
           </Grid>
         ) : (

@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Box, Container, IconButton, Stack } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 
 import GlobalContext from '../../utils/context/GlobalContext';
+import { checkAuth } from '../../utils/requests/requests';
+import useAuthService from '../../utils/hooks/use-auth-service';
 
 import * as HeaderItems from './header-items/header-items';
 import './header.scss';
@@ -11,6 +13,24 @@ import './header.scss';
 function Header() {
   const { status } = useContext(GlobalContext);
   const [openMenu, setOpenMenu] = useState(false);
+  const { changeAuthStatus, removeAuthStatus } = useAuthService();
+
+  const token = localStorage.getItem('token');
+  useEffect(() => {
+    if (token) {
+      checkAuth()
+        .then(res => {
+          changeAuthStatus(res);
+        })
+        .catch(error => {
+          removeAuthStatus();
+          console.log(error.message);
+        })
+    } else {
+      removeAuthStatus();
+    }
+    // eslint-disable-next-line
+  }, [token]);
 
   const onMenuToggle = () => {
     const btnsBox = document.querySelector('.header__actions-btns');

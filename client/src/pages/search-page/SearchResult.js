@@ -56,7 +56,7 @@ export const SearchResult = () => {
     <>
       {
         items.length > 0 ? (
-          <Grid container spacing={2} mt={4} mb={10}>
+          <Grid container spacing={2} mt={4}>
             {itemsCards}
           </Grid>
         ) : (
@@ -67,7 +67,7 @@ export const SearchResult = () => {
   ) : null;
 
   return (
-    <>
+    <Stack mb={10}>
       <BreadCrumbs current={messages["app.search-results.breadcrumbs"]} />
       <Stack mt={4} spacing={1}>
         <Typography variant="h6" noWrap>
@@ -84,6 +84,6 @@ export const SearchResult = () => {
       {errorMessage}
       {spinner}
       {content}
-    </>
+    </Stack>
   );
 }
