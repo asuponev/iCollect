@@ -36,7 +36,7 @@ The main page contains the latest added items, the largest collections, as well 
 <details>
 <summary>UI</summary>
 
-The project is made using **Material UI** components
+The project is made using **Material UI** (incl. MUI X) components
 
 </details>
 
@@ -76,6 +76,13 @@ The project has forms:
       3. Text (with the possibility of styling the text by the user)
       4. Date
       5. Checkbox
+
+</details>
+
+<details>
+<summary>Login via Google and Facebook</summary>
+
+In addition to registration and login using the standard forms on the site implemented login via Google and Facebook with **Firebase API**
 
 </details>
 
