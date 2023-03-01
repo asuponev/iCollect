@@ -32,6 +32,7 @@
   "app.home-page.header1": "Последние добавленные предметы",
   "app.home-page.header2": "Самые большие коллекции",
   "app.home-page.header3": "Найти предметы по тегу",
+  "app.home-page.tagshide": "Скрыть",
 
   "app.account.header1": "Коллекции",
   "app.account.addcollection": "+ Создать коллекцию",

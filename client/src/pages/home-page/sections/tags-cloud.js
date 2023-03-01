@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Stack } from '@mui/material';
+import { Typography, Stack, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import { getAllTags } from '../../../utils/requests/requests';
 import CustomizeMui from '../../../utils/theme/customizeMui';
@@ -12,6 +13,7 @@ const TagsCloud = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [tags, setTags] = useState([]);
+  const [countView, setCountView] = useState(10);
 
   const { tagStylesCloud } = CustomizeMui();
 
@@ -47,7 +49,22 @@ const TagsCloud = () => {
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <Stack direction="row" flexWrap="wrap" gap={1}>
-      {tagsView}
+      {tagsView.slice(0, countView)}
+      {
+        tagsView.length > countView ? (
+          <Box onClick={() => setCountView(prev => prev + 10)}>
+            <Typography sx={tagStylesCloud} noWrap>
+              +10
+            </Typography>
+          </Box>
+        ) : (
+          <Box onClick={() => setCountView(10)}>
+            <Typography sx={tagStylesCloud} noWrap>
+              <FormattedMessage id="app.home-page.tagshide" />
+            </Typography>
+          </Box>
+        )
+      }
     </Stack>
   ) : null;
 

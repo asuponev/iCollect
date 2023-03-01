@@ -32,6 +32,7 @@
   "app.home-page.header1": "Last added items",
   "app.home-page.header2": "The biggest collections",
   "app.home-page.header3": "Explore by tags",
+  "app.home-page.tagshide": "Hide",
 
   "app.account.header1": "Collections",
   "app.account.addcollection": "+ Add Collection",

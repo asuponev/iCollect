@@ -48,6 +48,7 @@ const CustomizeMui = () => {
     backgroundColor: theme.palette.background.tags,
     borderRadius: "100px",
     padding: "10px 18px",
+    cursor: "pointer",
     "&:hover": {
       color: theme.palette.text.main,
       backgroundColor: theme.palette.hover.tags,
