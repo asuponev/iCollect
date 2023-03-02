@@ -2,7 +2,7 @@ import { userActionTypes } from '../action-types/action-types'
 
 const initialState = {
   loading: false,
-  user: [],
+  user: {},
   error: null,
 }
 
@@ -11,7 +11,7 @@ export const userReducer = (state = initialState, action) => {
     case userActionTypes.FETCH_USER_START:
       return {
         loading: true,
-        user: [],
+        user: {},
         error: null,
       };
     case userActionTypes.FETCH_USER_SUCCESS:
@@ -23,7 +23,7 @@ export const userReducer = (state = initialState, action) => {
     case userActionTypes.FETCH_USER_ERROR:
       return {
         loading: false,
-        user: [],
+        user: {},
         error: action.payload,
       };
     default:

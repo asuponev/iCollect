@@ -1,42 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
-import { getOneCollection } from '../../utils/requests/requests';
+import { requestGetCollection } from '../../store/action-creators/collection';
 
 import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import CollectionInfo from './sections/collection-info';
-import Items from './sections/items';
+import Items from './sections/Items';
 
 export const Collection = () => {
   const { collectionId } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [collectionData, setCollectionData] = useState({});
+  const dispatch = useDispatch();
+  const { loading, collection, error } = useSelector(state => state.collection);
 
   useEffect(() => {
-    onCollectionRequest(collectionId);
+    dispatch(requestGetCollection(collectionId));
+    // eslint-disable-next-line
   }, [collectionId]);
 
-  const onCollectionRequest = (collectionId) => {
-    setError(null);
-    setLoading(true);
-    getOneCollection(collectionId)
-      .then(res => {
-        setCollectionData(res);
-        setLoading(false);
-      })
-      .catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
-  };
-
   const authorName = `
-  ${collectionData.authorId?.firstName} 
-  ${collectionData.authorId?.lastName}
+  ${collection.authorId?.firstName} 
+  ${collection.authorId?.lastName}
 `;
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
@@ -45,15 +32,12 @@ export const Collection = () => {
     <Stack mb={10}>
       <BreadCrumbs
         prevLinks={[{
-          [authorName]: `/users/${collectionData.authorId._id}`
+          [authorName]: `/users/${collection.authorId?._id}`
         }]}
-        current={collectionData.title}
+        current={collection.title}
       />
-      <CollectionInfo data={collectionData} />
-      <Items
-        collectionId={collectionId}
-        collectionData={collectionData}
-      />
+      <CollectionInfo data={collection} />
+      <Items collectionId={collectionId} />
     </Stack>
   ) : null;
 

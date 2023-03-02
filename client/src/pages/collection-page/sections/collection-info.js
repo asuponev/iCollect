@@ -5,6 +5,7 @@ import Markdown from 'markdown-to-jsx';
 import imageNotFound from '../../../utils/constants/image-not-found';
 
 const CollectionInfo = ({ data }) => {
+  if (Object.keys(data).length === 0) return;
   return (
     <Stack direction="row" spacing={2} alignItems="flex-start" my={4}>
       <img

@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { useContext, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import { FormattedMessage } from 'react-intl';
 import { Stack } from '@mui/material';
 import CsvDownloadButton from 'react-json-to-csv';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
-import { getAllCollectionItems, deleteItem, deleteItems, getItem } from '../../../utils/requests/requests';
-import defaultItemValues from '../../../utils/constants/default-item-values';
+import { requestGetItems } from '../../../store/action-creators/items';
 
 import Spinner from '../../../components/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -16,119 +16,19 @@ import CollectionTools from '../../../components/tables/collection-table/collect
 import EmptyElement from '../../../components/EmptyElement';
 import './btn-csv-style.scss';
 
-const Items = ({ collectionId, collectionData }) => {
+const Items = ({ collectionId }) => {
   const { status, userInfo } = useContext(GlobalContext);
-  const [items, setItems] = useState([]);
-  const [openModalForm, setOpenModalForm] = useState(false);
+  const dispatch = useDispatch();
+  const { loading, items, error } = useSelector(state => state.items);
+  const { collection } = useSelector(state => state.collection);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentItemId, setCurrentItemId] = useState('');
-  const [valuesForEdit, setValuesForEdit] = useState({ ...defaultItemValues });
-  const [loadingEdit, setLoadingEdit] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
-
-  const { messages } = useIntl();
-  const text = messages["app.collection"];
 
   useEffect(() => {
-    onItemsRequest(collectionId);
+    dispatch(requestGetItems(collectionId));
+    // eslint-disable-next-line
   }, [collectionId]);
 
-  const onItemsRequest = (collectionId) => {
-    setError(null);
-    setLoading(true);
-    getAllCollectionItems(collectionId)
-      .then(res => {
-        setItems(res);
-        setLoading(false);
-      })
-      .catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
-  };
-
-  const onGetItemForEdit = (collectionId, itemId) => {
-    setCurrentItemId(itemId);
-    setLoadingEdit(true);
-    getItem(collectionId, itemId)
-      .then(res => {
-        setValuesForEdit({
-          title: res.title,
-          tags: res.tags,
-          number1: res.number1 || 0,
-          number2: res.number2 || 0,
-          number3: res.number3 || 0,
-          string1: res.string1 || '',
-          string2: res.string2 || '',
-          string3: res.string3 || '',
-          text1: res.text1 || '',
-          text2: res.text2 || '',
-          text3: res.text3 || '',
-          date1: res.date1 || '',
-          date2: res.date2 || '',
-          date3: res.date3 || '',
-          checkbox1: res.checkbox1 || false,
-          checkbox2: res.checkbox2 || false,
-          checkbox3: res.checkbox2 || false,
-        });
-        setLoadingEdit(false);
-        setOpenModalForm(true);
-      }).catch(error => {
-        console.log(error);
-        toast.error(text.tools.editerror, { position: 'top-right' });
-        setLoadingEdit(false);
-        setValuesForEdit({ ...defaultItemValues });
-      })
-  };
-
-  const onCreateItem = () => {
-    setOpenModalForm(true);
-  };
-
-  const onEditItem = (itemId) => {
-    onGetItemForEdit(collectionId, itemId);
-  };
-
-  const handleCloseModalForm = () => {
-    setOpenModalForm(false);
-    setValuesForEdit({ ...defaultItemValues });
-    setTimeout(() => setCurrentItemId(''), 300);
-  };
-
-  const onDeleteItem = (itemId) => {
-    setCurrentItemId(itemId);
-    setLoadingDelete(true);
-    deleteItem(collectionId, itemId)
-      .then(res => {
-        setItems(prevData => prevData.filter(item => item._id !== res._id));
-        toast.info(text.tableTools.successdelete1, { position: 'top-right' });
-        setLoadingDelete(false);
-      })
-      .catch(error => {
-        console.log(error);
-        toast.error(error.message, { position: 'top-right' });
-        setLoadingDelete(false);
-      })
-  };
-
-  const onDeleteItems = (items) => {
-    setLoadingDelete(true);
-    deleteItems(collectionId, items)
-      .then(res => {
-        setItems(prevData => prevData.filter(item => !items.includes(item._id)));
-        toast.info(text.tableTools.successdelete2, { position: 'top-right' });
-        setLoadingDelete(false);
-      })
-      .catch(error => {
-        console.log(error);
-        toast.error(error.message, { position: 'top-right' });
-        setLoadingDelete(false);
-      })
-  };
-
-  const authorId = collectionData.authorId._id;
+  const authorId = collection.authorId?._id;
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
@@ -138,17 +38,11 @@ const Items = ({ collectionId, collectionData }) => {
         items.length > 0 ? (
           <Stack>
             <TableItems
-              items={items}
               selectedItems={selectedItems}
               setSelectedItems={setSelectedItems}
-              extraFields={collectionData.extraFields}
+              extraFields={collection.extraFields}
               collectionId={collectionId}
-              onEditItem={onEditItem}
-              onDeleteItem={onDeleteItem}
               authorId={authorId}
-              loadingEdit={loadingEdit}
-              currentItemId={currentItemId}
-              loadingDelete={loadingDelete}
             />
             <CsvDownloadButton data={items} className="btn-export-to-csv">
               <FormattedMessage id="app.exportsvg" />
@@ -166,22 +60,10 @@ const Items = ({ collectionId, collectionData }) => {
         (status.isAuth && authorId === userInfo.userId) || status.isAdmin ? (
           <>
             <CollectionTools
-              onCreateItem={onCreateItem}
-              items={items}
-              selectedItems={selectedItems}
-              onDeleteItems={onDeleteItems}
-              loadingDelete={loadingDelete}
-            />
-            <CreateItem
               collectionId={collectionId}
-              openModalForm={openModalForm}
-              handleCloseModalForm={handleCloseModalForm}
-              setItems={setItems}
-              extraFields={collectionData.extraFields}
-              itemId={currentItemId}
-              toast={toast}
-              valuesForEdit={valuesForEdit}
+              selectedItems={selectedItems}
             />
+            <CreateItem collectionId={collectionId} />
           </>
         ) : null
       }

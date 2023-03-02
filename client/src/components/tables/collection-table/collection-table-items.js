@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useIntl } from 'react-intl';
 import { Stack, CircularProgress } from '@mui/material';
@@ -9,24 +10,21 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { convert } from 'html-to-text';
 
+import { getItemForEdit, onDeleteItem } from '../../../store/action-creators/items';
+
 import GlobalContext from '../../../utils/context/GlobalContext';
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
 const TableItems = ({
-  items,
   selectedItems,
   setSelectedItems,
   extraFields,
   collectionId,
-  onEditItem,
-  onDeleteItem,
   authorId,
-  loadingEdit,
-  currentItemId,
-  loadingDelete
 }) => {
   const { status, userInfo } = useContext(GlobalContext);
-  if (!items) items = [];
+  const dispatch = useDispatch();
+  const { items, loadingBtn, currentId, currentAction } = useSelector(state => state.items);
   const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.collection"];
@@ -60,26 +58,26 @@ const TableItems = ({
       field: 'edit', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
           icon={
-            loadingEdit && currentItemId === params.id
+            loadingBtn && currentId === params.id && currentAction === "edit"
               ? <CircularProgress color="primary" size={20} />
               : <EditOutlinedIcon color="primary" />
           }
           label="Edit item"
-          onClick={() => onEditItem(params.id)}
+          onClick={() => dispatch(getItemForEdit(collectionId, params.id))}
         />]
     },
     {
       field: 'delete', type: 'actions', width: 50, getActions: (params) => [
         <GridActionsCellItem
           icon={
-            loadingDelete && currentItemId === params.id
+            loadingBtn && currentId === params.id && currentAction === "delete"
               ? <CircularProgress color="grey" size={20} />
               : <DeleteOutlinedIcon color="grey" />
           }
           label="Delete item"
           onClick={() => {
             if (window.confirm(text.tableTools.confirmDelete)) {
-              onDeleteItem(params.id);
+              dispatch(onDeleteItem(collectionId, params.id));
             }
           }}
         />]

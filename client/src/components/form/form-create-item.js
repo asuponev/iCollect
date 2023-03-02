@@ -1,24 +1,20 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
 import { useWindowWidth } from '@react-hook/window-size';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { requestCreateItem, requestUpdateItem, onCloseModalForm } from '../../store/action-creators/items';
+
 import { FormTextField } from './form-elements/form-textfields';
 import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
 
-const FormCreateItem = ({
-  collectionId,
-  handleClose,
-  onRequestCreate,
-  extraFields,
-  isEditing,
-  valuesForEdit,
-  onRequestUpdate,
-  itemId,
-  tagsList
-}) => {
+const FormCreateItem = ({ collectionId, tagsList }) => {
+  const dispatch = useDispatch();
+  const { currentId, isEditing, valuesForEdit } = useSelector(state => state.items);
+  const { collection } = useSelector(state => state.collection);
   const windowWidth = useWindowWidth();
   const { register, handleSubmit, control, formState: { errors }, getValues } = useForm({
     defaultValues: {
@@ -32,12 +28,12 @@ const FormCreateItem = ({
 
   const onFormSubmit = (values) => {
     if (isEditing) {
-      onRequestUpdate(collectionId, itemId, values);
+      dispatch(requestUpdateItem(collectionId, currentId, values));
     } else {
       values.collectionId = collectionId;
-      onRequestCreate(collectionId, values);
+      dispatch(requestCreateItem(collectionId, values));
     }
-    handleClose();
+    dispatch(onCloseModalForm());
   };
 
   const widthForm = windowWidth > 900 ? 500
@@ -69,7 +65,7 @@ const FormCreateItem = ({
           />
         </Box>
         <FormItemExtraFields
-          extraFields={extraFields}
+          extraFields={collection.extraFields}
           register={register}
           errors={errors}
           valuesForEdit={valuesForEdit}
@@ -84,7 +80,7 @@ const FormCreateItem = ({
               : <FormattedMessage id="app.item.form.btnedit" />
           }
         </Button>
-        <Button variant="text" onClick={() => handleClose()}>
+        <Button variant="text" onClick={() => dispatch(onCloseModalForm())}>
           <FormattedMessage id="app.item.form.btncancel" />
         </Button>
       </Box>

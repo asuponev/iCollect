@@ -1,30 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { createItem, getAllTags, updateItem } from '../../utils/requests/requests';
+import { getAllTags } from '../../utils/requests/requests';
+import { onCloseModalForm } from '../../store/action-creators/items';
 
 import FormCreateItem from '../form/form-create-item';
 
-const CreateItem = ({
-  collectionId,
-  openModalForm,
-  handleCloseModalForm,
-  setItems,
-  extraFields,
-  itemId,
-  toast,
-  valuesForEdit
-}) => {
-  
+const CreateItem = ({ collectionId }) => {
+  const dispatch = useDispatch();
+  const { openModalForm, isEditing } = useSelector(state => state.items);
   const [tagsList, setTagsList] = useState([]);
 
   const { messages } = useIntl();
   const text = messages["app.item.form"];
   const theme = useTheme();
-
-  const isEditing = Boolean(itemId);
 
   useEffect(() => {
     getAllTags()
@@ -32,37 +24,15 @@ const CreateItem = ({
       .catch(error => console.log(error));
   }, []);
 
-  const onRequestCreateItem = (collectionId, values) => {
-    createItem(collectionId, { ...values })
-      .then(res => {
-        setItems(prevData => [res, ...prevData]);
-        toast.success(text.successcreate, { position: 'top-right' });
-      }).catch(error => {
-        console.log(error);
-        toast.error(error.message, { position: 'top-right' });
-      })
-  };
-
-  const onRequestUpdateItem = (collectionId, itemId, values) => {
-    updateItem(collectionId, itemId, { ...values })
-      .then(res => {
-        setItems(prevData => [res, ...prevData.filter(item => item._id !== res._id)]);
-        toast.success(text.successupdate, { position: 'top-right' });
-      }).catch(error => {
-        console.log(error);
-        toast.error(error.message, { position: 'top-right' });
-      })
-  };
-
   return (
-    <Dialog open={openModalForm} onClose={handleCloseModalForm}>
+    <Dialog open={openModalForm} onClose={() => dispatch(onCloseModalForm())}>
       <Tooltip
         title={text.btnclose}
         placement="top"
         sx={{ position: "relative" }}
       >
         <IconButton
-          onClick={() => handleCloseModalForm()}
+          onClick={() => dispatch(onCloseModalForm())}
           sx={{ position: "absolute", top: 0, right: 0 }}
         >
           <CloseIcon />
@@ -78,13 +48,6 @@ const CreateItem = ({
       <DialogContent sx={{ backgroundColor: theme.palette.background.default }}>
         <FormCreateItem
           collectionId={collectionId}
-          handleClose={handleCloseModalForm}
-          onRequestCreate={onRequestCreateItem}
-          extraFields={extraFields}
-          isEditing={isEditing}
-          valuesForEdit={valuesForEdit}
-          onRequestUpdate={onRequestUpdateItem}
-          itemId={itemId}
           tagsList={tagsList}
         />
       </DialogContent>

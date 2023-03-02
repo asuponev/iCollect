@@ -1,15 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Stack, Tooltip, IconButton, Button, Typography, Divider, CircularProgress } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const CollectionTools = ({
-  onCreateItem,
-  items,
-  selectedItems,
-  onDeleteItems,
-  loadingDelete
-}) => {
+import { onCreateItem, onDeleteItems } from '../../../store/action-creators/items';
+
+const CollectionTools = ({ collectionId, selectedItems }) => {
+  const dispatch = useDispatch();
+  const { items, loadingBtn } = useSelector(state => state.items);
   const { messages } = useIntl();
   const text = messages["app.collection"];
 
@@ -33,12 +32,12 @@ const CollectionTools = ({
                 color="#585E67"
                 onClick={() => {
                   if (window.confirm(text.tableTools.confirmDelete)) {
-                    onDeleteItems(selectedItems);
+                    dispatch(onDeleteItems(collectionId, selectedItems));
                   }
                 }}
               >
                 {
-                  loadingDelete
+                  loadingBtn
                     ? <CircularProgress color="primary" size={24} />
                     : <DeleteOutlinedIcon />
                 }
@@ -48,7 +47,7 @@ const CollectionTools = ({
         )
       }
       <Stack direction="row" spacing={2}>
-        <Button variant="contained" onClick={onCreateItem}>
+        <Button variant="contained" onClick={() => dispatch(onCreateItem())}>
           <FormattedMessage id="app.collection.additem" />
         </Button>
       </Stack>
