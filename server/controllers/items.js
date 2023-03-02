@@ -162,9 +162,7 @@ export const deleteItems = async (req, res) => {
     selectedItemsId.forEach(async (item) => {
       deleteOneItem(collectionId, item);
     });
-    res.json({
-      message: 'The items was successfully deleted'
-    });
+    res.json(selectedItemsId);
   } catch (error) {
     console.log(error);
     res.status(500).json({
