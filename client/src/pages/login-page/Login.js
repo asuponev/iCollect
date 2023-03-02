@@ -31,8 +31,8 @@ export const Login = () => {
   return (
     <>
       <ToastContainer />
-      <Stack alignItems="center" justifyContent="center" my={10}>
-        <Typography variant="h6" my={2}>
+      <Stack alignItems="center" justifyContent="center" mt={18} mb={10}>
+        <Typography variant="h5" fontWeight={700} mb={4}>
           <FormattedMessage id="app.auth.login.header" />
         </Typography>
         <SocialLogin toast={toast} />

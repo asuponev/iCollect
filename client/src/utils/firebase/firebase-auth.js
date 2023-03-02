@@ -17,8 +17,10 @@ export const fetchUserData = async (provider) => {
   try {
     const data = await signInWithPopup(auth, providers[provider]);
     const email = data.user.email
-        ? data.user.email
-        : data.user.providerData[0].email;
+      ? data.user.email
+      : data.user.providerData[0].email
+        ? data.user.providerData[0].email
+        : `${data.user.providerData[0].uid}@${data.providerId}`
     const firstName = data.user.displayName.split(' ')[0];
     const lastName = data.user.displayName.split(' ').splice(1).join('');
     return { email, firstName, lastName };

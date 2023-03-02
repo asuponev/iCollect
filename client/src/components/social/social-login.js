@@ -40,8 +40,8 @@ const SocialLogin = ({ toast }) => {
   };
 
   return (
-    <Box display="flex" alignItems="center" my={2}>
-      <Typography>
+    <Box display="flex" alignItems="center">
+      <Typography marginRight={3}>
         <FormattedMessage id="app.auth.social.text" />
       </Typography>
       <IconButton onClick={() => onFirebaseLogin('google')}>

@@ -7,7 +7,7 @@
   "app.auth.register.text": "Already have an account? ",
   "app.auth.login.header": "Welcome Back!",
   "app.auth.login.text": "Don't have an account? ",
-  "app.auth.social.text": "Sign in with",
+  "app.auth.social.text": "Log in with",
   "app.auth.form": {
     "firstName": "First name",
     "lastName": "Last name",
