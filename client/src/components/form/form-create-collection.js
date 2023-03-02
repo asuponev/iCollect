@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,6 +9,11 @@ import { useWindowWidth } from '@react-hook/window-size';
 import subjects from '../../utils/constants/collection-subjects';
 import GlobalContext from '../../utils/context/GlobalContext';
 import { removeImg } from '../../utils/firebase/methods';
+import {
+  requestCreateCollection,
+  requestUpdateCollection,
+  onCloseModalForm
+} from '../../store/action-creators/collections';
 
 import FormUploadingImage from './form-elements/form-uploading-image';
 import FormUploadedImage from './form-elements/form-uploaded-image';
@@ -18,15 +24,9 @@ import FormMdEditor from './form-elements/form-mdeditor';
 
 import './form-elements/form-mdeditor.scss';
 
-const FormCreateCollection = ({
-  handleClose,
-  userId,
-  onRequestCreate,
-  onRequestUpdate,
-  collectionId,
-  isEditing,
-  valuesForEdit
-}) => {
+const FormCreateCollection = ({ userId }) => {
+  const dispatch = useDispatch();
+  const { isEditing, valuesForEdit, currentId } = useSelector(state => state.collections);
   const windowWidth = useWindowWidth();
   const { mode } = useContext(GlobalContext);
   const { register, handleSubmit, formState: { errors }, getValues, control } = useForm({
@@ -61,12 +61,12 @@ const FormCreateCollection = ({
       if (valuesForEdit.coverUrl && valuesForEdit.coverUrl !== values.coverUrl) {
         removeImg(valuesForEdit.coverUrl);
       }
-      onRequestUpdate(collectionId, values);
+      dispatch(requestUpdateCollection(currentId, values));
     } else {
       values.authorId = userId;
-      onRequestCreate(values);
+      dispatch(requestCreateCollection(values));
     }
-    handleClose();
+    dispatch(onCloseModalForm());
   };
 
   const widthForm = windowWidth > 900 ? 500
@@ -145,7 +145,7 @@ const FormCreateCollection = ({
                 : <FormattedMessage id="app.collection.form.btnedit" />
             }
           </Button>
-          <Button variant="text" onClick={() => handleClose()}>
+          <Button variant="text" onClick={onCloseModalForm}>
             <FormattedMessage id="app.collection.form.btncancel" />
           </Button>
         </Box>

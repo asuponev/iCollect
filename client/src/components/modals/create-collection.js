@@ -1,58 +1,29 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Dialog, DialogTitle, DialogContent, Tooltip, IconButton, useTheme } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { createCollection, updateCollection } from '../../utils/requests/requests';
+import { onCloseModalForm } from '../../store/action-creators/collections';
 
 import FormCreateCollection from '../form/form-create-collection';
 
-const CreateCollection = ({
-  openModalForm,
-  handleCloseModalForm,
-  userId,
-  setCollections,
-  collectionId,
-  toast,
-  valuesForEdit
-}) => {
+const CreateCollection = ({ userId }) => {
+  const dispatch = useDispatch();
+  const { openModalForm, isEditing } = useSelector(state => state.collections);
   const { messages } = useIntl();
   const text = messages["app.collection.form"];
   const theme = useTheme();
 
-  const isEditing = Boolean(collectionId);
-
-  const onRequestCreateCollection = (values) => {
-    createCollection(values)
-      .then(res => {
-        setCollections(prevData => [res, ...prevData]);
-        toast.success(text.successcreate, { position: 'top-right' });
-      }).catch(error => {
-        console.log(error);
-        toast.error(error.message, { position: 'top-right' });
-      })
-  };
-
-  const onRequestUpdateCollection = (collectionId, values) => {
-    updateCollection(collectionId, values)
-      .then(res => {
-        setCollections(prevData => [res, ...prevData.filter(item => item._id !== res._id)]);
-        toast.success(text.successupdate, { position: 'top-right' });
-      }).catch(error => {
-        console.log(error);
-        toast.error(error.message, { position: 'top-right' });
-      })
-  };
-
   return (
-    <Dialog open={openModalForm} onClose={handleCloseModalForm}>
+    <Dialog open={openModalForm} onClose={() => dispatch(onCloseModalForm())}>
       <Tooltip
         title={text.btnclose}
         placement="top"
         sx={{ position: "relative" }}
       >
         <IconButton
-          onClick={() => handleCloseModalForm()}
+          onClick={() => dispatch(onCloseModalForm())}
           sx={{ position: "absolute", top: 0, right: 0 }}
         >
           <CloseIcon />
@@ -66,15 +37,7 @@ const CreateCollection = ({
         }
       </DialogTitle>
       <DialogContent sx={{ backgroundColor: theme.palette.background.default }}>
-        <FormCreateCollection
-          handleClose={handleCloseModalForm}
-          userId={userId}
-          onRequestCreate={onRequestCreateCollection}
-          onRequestUpdate={onRequestUpdateCollection}
-          collectionId={collectionId}
-          isEditing={isEditing}
-          valuesForEdit={valuesForEdit}
-        />
+        <FormCreateCollection userId={userId} />
       </DialogContent>
     </Dialog>
   );

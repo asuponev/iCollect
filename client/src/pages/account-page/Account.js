@@ -1,43 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Stack } from '@mui/material';
 
-import { getOneUser } from '../../utils/requests/requests';
+import { requestGetUser } from '../../store/action-creators/user';
 
 import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import BreadCrumbs from '../../components/BreadCrumbs';
-import Collections from './sections/collections';
+import Collections from './sections/Collections';
 import UserInfo from './sections/user-info';
 
 export const Account = () => {
   const { userId } = useParams();
-  const [userData, setUserData] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const { loading, user, error } = useSelector(state => state.user);
 
   useEffect(() => {
-    setError(null);
-    setLoading(true);
-    getOneUser(userId)
-      .then(res => {
-        setUserData(res);
-        setLoading(false);
-      })
-      .catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
+    dispatch(requestGetUser(userId));
+    // eslint-disable-next-line
   }, [userId]);
 
-  const nameCurrentPage = `${userData.firstName} ${userData.lastName}`;
+  const nameCurrentPage = `${user?.firstName} ${user?.lastName}`;
 
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <Stack mb={10}>
       <BreadCrumbs current={nameCurrentPage} />
-      <UserInfo data={userData} />
+      <UserInfo data={user} />
       <Collections userId={userId} />
     </Stack>
   ) : null;

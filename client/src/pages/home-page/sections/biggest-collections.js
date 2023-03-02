@@ -1,39 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 
-import { getBiggestCollections } from '../../../utils/requests/requests';
+import { requestGetBiggestCollections } from '../../../store/action-creators/collections';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
 import CollectionCard from '../../../components/cards/collection-card/collection-card';
 
 const BiggestCollections = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [biggestCollections, setBiggestCollections] = useState([]);
+  const dispatch = useDispatch();
+  const { loading, biggestCollections, error } = useSelector(state => state.collections);
 
   useEffect(() => {
-    onRequest();
+    dispatch(requestGetBiggestCollections());
+    // eslint-disable-next-line
   }, []);
 
-  const onRequest = () => {
-    setError(null);
-    setLoading(true);
-    getBiggestCollections()
-      .then(res => {
-        setBiggestCollections(res);
-        setLoading(false);
-      })
-      .catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
-  };
-
-  const collections = biggestCollections.map(collection => {
+  const cards = biggestCollections.map(collection => {
     return (
       <Grid item lg={3} md={4} sm={6} xs={12} key={collection._id}>
-        <CollectionCard {...collection} />
+        <CollectionCard data={collection} />
       </Grid>
     )
   });
@@ -42,7 +29,7 @@ const BiggestCollections = () => {
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
     <Grid container spacing={2}>
-      {collections}
+      {cards}
     </Grid>
   ) : null;
 
