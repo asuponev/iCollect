@@ -1,3 +1,4 @@
+import React from 'react';
 import { Stack, CircularProgress, Typography } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
