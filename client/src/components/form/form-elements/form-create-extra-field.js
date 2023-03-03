@@ -76,14 +76,6 @@ const FormCreateExtraField = ({ extraFields, setExtraFields, toast }) => {
           gap={1} key={index}
         >
           <TextField
-            name="name"
-            label={text.extraname}
-            variant="outlined"
-            value={element.name || ""}
-            onChange={e => handleChangeName(index, e)}
-            sx={{ width: "50%" }}
-          />
-          <TextField
             select
             name="type"
             label={text.extraselect}
@@ -97,6 +89,14 @@ const FormCreateExtraField = ({ extraFields, setExtraFields, toast }) => {
               </MenuItem>
             ))}
           </TextField>
+          <TextField
+            name="name"
+            label={text.extraname}
+            variant="outlined"
+            value={element.name || ""}
+            onChange={e => handleChangeName(index, e)}
+            sx={{ width: "50%" }}
+          />
           <Tooltip title={text.extraremove} placement="top">
             <IconButton
               size="small"

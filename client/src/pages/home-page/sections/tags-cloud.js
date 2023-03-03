@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography, Stack, Box } from '@mui/material';
+import { Typography, Stack, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
@@ -35,23 +35,29 @@ const TagsCloud = () => {
   const errorMessage = error ? <ErrorMessage error={error} /> : null;
   const spinner = loading ? <Spinner /> : null;
   const content = !(loading || error) ? (
-    <Stack direction="row" flexWrap="wrap" gap={1}>
+    <Stack direction="row" alignItems="center" flexWrap="wrap" gap={1}>
       {tagsView.slice(0, countView)}
-      {
-        tagsView.length > countView ? (
-          <Box onClick={() => setCountView(prev => prev + 10)}>
-            <Typography sx={tagStylesCloud} noWrap>
-              +10
-            </Typography>
-          </Box>
-        ) : (
-          <Box onClick={() => setCountView(10)}>
-            <Typography sx={tagStylesCloud} noWrap>
-              <FormattedMessage id="app.home-page.tagshide" />
-            </Typography>
-          </Box>
-        )
-      }
+      {tagsView.length > countView ? (
+        <Button
+          variant="text"
+          onClick={() => setCountView(prev => prev + 10)}
+          sx={{ borderRadius: "100px", minWidth: 40 }}
+        >
+          <Typography fontWeight="500">
+            +10
+          </Typography>
+        </Button>
+      ) : (
+        <Button
+          variant="text"
+          onClick={() => setCountView(10)}
+          sx={{ borderRadius: "100px" }}
+        >
+          <Typography fontWeight="500">
+            <FormattedMessage id="app.home-page.tagshide" />
+          </Typography>
+        </Button>
+      )}
     </Stack>
   ) : null;
 

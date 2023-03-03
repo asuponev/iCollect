@@ -144,7 +144,7 @@ const FormCreateCollection = ({ userId }) => {
                 : <FormattedMessage id="app.collection.form.btnedit" />
             }
           </Button>
-          <Button variant="text" onClick={onCloseModalForm}>
+          <Button variant="text" onClick={() => dispatch(onCloseModalForm())}>
             <FormattedMessage id="app.collection.form.btncancel" />
           </Button>
         </Box>
