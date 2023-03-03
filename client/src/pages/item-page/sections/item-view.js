@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Stack, Grid, Typography, Card, CardContent } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
 import ItemLikes from '../../../components/cards/item-card/elements/item-likes';
@@ -10,7 +10,7 @@ import ItemTags from '../../../components/cards/item-card/elements/item-tags';
 import ItemExtraFields from '../../../components/cards/item-card/elements/item-extra-fields';
 
 const ItemView = ({ itemData }) => {
-  const { status } = useContext(GlobalContext);
+  const { status } = useSelector(state => state.auth);
   const { cardStyles } = CustomizeMui();
   const collectionTitle = itemData.collection.title,
     authorFirstName = itemData.collection.authorId.firstName,

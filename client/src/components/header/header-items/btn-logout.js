@@ -1,17 +1,18 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-import useAuthService from '../../../utils/hooks/use-auth-service';
+import { removeAuthData } from '../../../store/action-creators/auth';
 
 export const BtnLogOut = ({ onMenuToggle }) => {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
-  const { removeAuthStatus } = useAuthService();
 
   const logout = () => {
     localStorage.removeItem('token');
-    removeAuthStatus();
+    dispatch(removeAuthData());
     navigate('/');
     onMenuToggle();
   }

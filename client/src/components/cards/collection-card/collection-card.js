@@ -1,18 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Stack, Typography, Card, CardContent, CardMedia, CardActionArea, Grid } from '@mui/material';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useIntl, FormattedMessage } from 'react-intl';
 import Markdown from 'markdown-to-jsx';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
 import imageNotFound from '../../../utils/constants/image-not-found';
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
 import CollectionCardTools from './collection-card-tools';
 
 const CollectionCard = ({ data, inAccount }) => {
-  const { status, userInfo } = useContext(GlobalContext);
+  const { status, userInfo } = useSelector(state => state.auth);
   let navigate = useNavigate();
   const { messages } = useIntl();
   const { cardStyles } = CustomizeMui();

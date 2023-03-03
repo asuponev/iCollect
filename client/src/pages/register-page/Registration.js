@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
@@ -6,26 +7,19 @@ import { Stack, Typography } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
 
+import { requestLogin } from '../../store/action-creators/auth';
 import { fetchRegister } from '../../utils/requests/requests';
-import useAuthService from '../../utils/hooks/use-auth-service';
 
 import FormRegister from '../../components/form/form-register';
 import SocialLogin from '../../components/social/social-login';
 
 export const Registration = () => {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { changeAuthStatus } = useAuthService();
 
-  const onFormSubmit = async (values) => {
-    fetchRegister(values)
-      .then(res => {
-        localStorage.setItem('token', res.token);
-        changeAuthStatus(res);
-        navigate('/');
-      }).catch(error => {
-        toast.error(error.message, { position: 'top-right' });
-      })
+  const onFormSubmit = (values) => {
+    dispatch(requestLogin(values, fetchRegister, navigate));
   };
 
   return (

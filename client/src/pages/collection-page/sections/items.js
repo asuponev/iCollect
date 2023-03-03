@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
 import { Stack } from '@mui/material';
 import CsvDownloadButton from 'react-json-to-csv';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
 import { requestGetItems } from '../../../store/action-creators/items';
 import { getTags } from '../../../store/action-creators/tags';
 
@@ -18,8 +17,8 @@ import EmptyElement from '../../../components/EmptyElement';
 import './btn-csv-style.scss';
 
 const Items = ({ collectionId }) => {
-  const { status, userInfo } = useContext(GlobalContext);
   const dispatch = useDispatch();
+  const { status, userInfo  } = useSelector(state => state.auth);
   const { loading, items, error } = useSelector(state => state.items);
   const { collection } = useSelector(state => state.collection);
   const [selectedItems, setSelectedItems] = useState([]);

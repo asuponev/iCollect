@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Button, Typography } from '@mui/material';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import { useNavigate } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
-
 export const BtnAccount = ({ onMenuToggle }) => {
-  const { userInfo } = useContext(GlobalContext);
+  const { userInfo } = useSelector(state => state.auth);
   let navigate = useNavigate();
 
   const onHandleClick = () => {

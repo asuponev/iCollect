@@ -1,10 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Stack, Typography, Button, Grid } from '@mui/material';
 import { ToastContainer } from 'react-toastify';
 import { FormattedMessage } from 'react-intl';
-
-import GlobalContext from '../../../utils/context/GlobalContext';
 
 import {
   requestGetCollections,
@@ -18,8 +16,8 @@ import ErrorMessage from '../../../components/ErrorMessage';
 import EmptyElement from '../../../components/EmptyElement';
 
 const Collections = ({ userId }) => {
-  const { status, userInfo } = useContext(GlobalContext);
   const dispatch = useDispatch();
+  const { status, userInfo  } = useSelector(state => state.auth);
   const { loading, collections, error } = useSelector(state => state.collections);
 
   useEffect(() => {

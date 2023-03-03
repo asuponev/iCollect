@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Stack, IconButton, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -6,12 +7,10 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Pusher from 'pusher-js';
 import { ToastContainer, toast } from 'react-toastify';
 
-import GlobalContext from '../../../../utils/context/GlobalContext';
-
 import { addLIke, removeLike, getAllItemLikes } from '../../../../utils/requests/requests';
 
 const ItemLikes = ({ itemId }) => {
-  const { userInfo } = useContext(GlobalContext);
+  const { userInfo } = useSelector(state => state.auth);
   const [likesData, setLikesData] = useState([]);
   const [isLike, setIsLike] = useState(false);
 

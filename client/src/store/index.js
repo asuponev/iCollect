@@ -6,6 +6,7 @@ import { collectionsReducer } from './reducers/collectionsReducer';
 import { itemsReducer } from './reducers/itemsReducer';
 import { adminReducer } from './reducers/adminReducer';
 import { tagsReducer } from './reducers/tagsReducer';
+import { authReducer } from './reducers/authReducer';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     collections: collectionsReducer,
     items: itemsReducer,
     admin: adminReducer,
-    tags: tagsReducer
+    tags: tagsReducer,
+    auth: authReducer
   }
 });

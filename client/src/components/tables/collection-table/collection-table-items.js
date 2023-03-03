@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useIntl } from 'react-intl';
@@ -12,7 +12,6 @@ import { convert } from 'html-to-text';
 
 import { getItemForEdit, onDeleteItem } from '../../../store/action-creators/items';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
 const TableItems = ({
@@ -22,8 +21,8 @@ const TableItems = ({
   collectionId,
   authorId,
 }) => {
-  const { status, userInfo } = useContext(GlobalContext);
   const dispatch = useDispatch();
+  const { status, userInfo  } = useSelector(state => state.auth);
   const { items, loadingBtn, currentId, currentAction } = useSelector(state => state.items);
   const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();

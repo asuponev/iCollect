@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Box, IconButton, Typography } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import { FormattedMessage } from 'react-intl';
 
+import { requestLogin } from '../../store/action-creators/auth';
 import { fetchUserData } from '../../utils/firebase/firebase-auth';
 import { fetchFirebaseLogin } from '../../utils/requests/requests';
-import useAuthService from '../../utils/hooks/use-auth-service';
 
 const SocialLogin = ({ toast }) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState({});
   let navigate = useNavigate();
-  const { changeAuthStatus } = useAuthService();
 
   useEffect(() => {
     if (user.email) {
-      fetchFirebaseLogin(user)
-        .then(res => {
-          localStorage.setItem('token', res.token);
-          changeAuthStatus(res);
-          navigate('/');
-        }).catch(error => {
-          toast.error(error.message, { position: 'top-right' });
-        })
+      dispatch(requestLogin(user, fetchFirebaseLogin, navigate));
     }
     // eslint-disable-next-line
   }, [user]);

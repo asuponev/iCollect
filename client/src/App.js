@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Container, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -6,6 +7,7 @@ import { IntlProvider } from 'react-intl';
 
 import GlobalContext from './utils/context/GlobalContext';
 import { themeSettings } from './utils/theme/theme';
+import { checkAuthUser, removeAuthData } from './store/action-creators/auth';
 
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -19,26 +21,23 @@ const messages = {
 };
 
 function App() {
-  const [status, setStatus] = useState({
-    isAuth: false,
-    isAdmin: false,
-    isActive: true,
-  });
-  const [userInfo, setUserInfo] = useState({
-    userId: '',
-    firstName: '',
-    lastName: ''
-  });
+  const dispatch = useDispatch();
   const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
   const [mode, setMode] = useState(localStorage.getItem('theme') || 'light');
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
+  const token = localStorage.getItem('token');
+  useEffect(() => {
+    if (token) {
+      dispatch(checkAuthUser());
+    } else {
+      dispatch(removeAuthData());
+    }
+    // eslint-disable-next-line
+  }, [token]);
+
   return (
     <GlobalContext.Provider value={{
-      status,
-      setStatus,
-      userInfo,
-      setUserInfo,
       lang,
       setLang,
       mode,

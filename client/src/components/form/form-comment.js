@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { Box, Button, Stack, Avatar } from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 
-import GlobalContext from '../../utils/context/GlobalContext';
 import CustomizeMui from '../../utils/theme/customizeMui';
 
 const FormComment = ({ onCreateComment, itemId }) => {
-  const { userInfo } = useContext(GlobalContext);
+  const { userInfo } = useSelector(state => state.auth);
   const [message, setMessage] = useState('');
   const intl = useIntl();
   const { avatarStyles, textareaCommentStyles } = CustomizeMui();

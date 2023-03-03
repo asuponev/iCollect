@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
 import { getItem } from '../../utils/requests/requests';
-import GlobalContext from '../../utils/context/GlobalContext';
 
 import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -12,7 +12,7 @@ import ItemView from './sections/item-view';
 import ItemComments from './sections/item-comments';
 
 export const Item = () => {
-  const { status } = useContext(GlobalContext);
+  const { status } = useSelector(state => state.auth);
   const { collectionId, itemId } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
