@@ -35,12 +35,12 @@ export const onCloseModalForm = () => {
   }
 };
 
-export const requestCreateItem = (collectionId, values) => {
+export const requestCreateItem = (collectionId, values, text) => {
   return (dispatch) => {
     createItem(collectionId, values)
       .then(res => {
         dispatch({ type: itemsActionTypes.CREATE_ITEM_SUCCESS, payload: res });
-        toast.success(`Item "${res.title}" created`, { position: 'top-right' });
+        toast.success(text.successcreate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -48,12 +48,12 @@ export const requestCreateItem = (collectionId, values) => {
   }
 };
 
-export const requestUpdateItem = (collectionId, itemId, values) => {
+export const requestUpdateItem = (collectionId, itemId, values, text) => {
   return (dispatch) => {
     updateItem(collectionId, itemId, values)
       .then(res => {
         dispatch({ type: itemsActionTypes.UPDATE_ITEM_SUCCESS, payload: res });
-        toast.success(`Item "${res.title}" updated`, { position: 'top-right' });
+        toast.success(text.successupdate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -75,13 +75,13 @@ export const getItemForEdit = (collectionId, itemId) => {
   }
 };
 
-export const onDeleteItem = (collectionId, itemId) => {
+export const onDeleteItem = (collectionId, itemId, text) => {
   return (dispatch) => {
     dispatch({ type: itemsActionTypes.DELETE_START, payload: itemId });
     deleteItem(collectionId, itemId)
       .then(res => {
         dispatch({ type: itemsActionTypes.DELETE_SUCCESS, payload: res });
-        toast.info(`Item "${res.title}" deleted`, { position: 'top-right' });
+        toast.info(text.tableTools.successdelete1, { position: 'top-right' });
       })
       .catch(error => {
         console.log(error);
@@ -91,13 +91,13 @@ export const onDeleteItem = (collectionId, itemId) => {
   }
 };
 
-export const onDeleteItems = (collectionId, items) => {
+export const onDeleteItems = (collectionId, items, text) => {
   return (dispatch) => {
     dispatch({ type: itemsActionTypes.DELETE_ITEMS_START });
     deleteItems(collectionId, items)
       .then(res => {
         dispatch({ type: itemsActionTypes.DELETE_ITEMS_SUCCESS, payload: res });
-        toast.info('Selected items deleted', { position: 'top-right' });
+        toast.info(text.tableTools.successdelete2, { position: 'top-right' });
       })
       .catch(error => {
         console.log(error);

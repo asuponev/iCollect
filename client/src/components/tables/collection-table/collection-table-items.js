@@ -76,7 +76,7 @@ const TableItems = ({
           label="Delete item"
           onClick={() => {
             if (window.confirm(text.tableTools.confirmDelete)) {
-              dispatch(onDeleteItem(collectionId, params.id));
+              dispatch(onDeleteItem(collectionId, params.id, text));
             }
           }}
         />]

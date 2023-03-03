@@ -29,10 +29,10 @@ const FormCreateItem = ({ collectionId }) => {
 
   const onFormSubmit = (values) => {
     if (isEditing) {
-      dispatch(requestUpdateItem(collectionId, currentId, values));
+      dispatch(requestUpdateItem(collectionId, currentId, values, text));
     } else {
       values.collectionId = collectionId;
-      dispatch(requestCreateItem(collectionId, values));
+      dispatch(requestCreateItem(collectionId, values, text));
     }
     dispatch(onCloseModalForm());
   };

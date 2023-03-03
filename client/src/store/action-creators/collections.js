@@ -35,12 +35,12 @@ export const onCloseModalForm = () => {
   }
 };
 
-export const requestCreateCollection = (values) => {
+export const requestCreateCollection = (values, text) => {
   return (dispatch) => {
     createCollection(values)
       .then(res => {
         dispatch({ type: collectionsActionTypes.CREATE_COLLECTION_SUCCESS, payload: res });
-        toast.success(`Collection "${res.title}" created`, { position: 'top-right' });
+        toast.success(text.successcreate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -48,12 +48,12 @@ export const requestCreateCollection = (values) => {
   }
 };
 
-export const requestUpdateCollection = (collectionId, values) => {
+export const requestUpdateCollection = (collectionId, values, text) => {
   return (dispatch) => {
     updateCollection(collectionId, values)
       .then(res => {
         dispatch({ type: collectionsActionTypes.UPDATE_COLLECTION_SUCCESS, payload: res });
-        toast.success(`Collection "${res.title}" updated`, { position: 'top-right' });
+        toast.success(text.successupdate, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         toast.error(error.message, { position: 'top-right' });
@@ -75,14 +75,14 @@ export const getValuesForEdit = (collectionId) => {
   }
 }
 
-export const onDeleteCollection = (collectionId) => {
+export const onDeleteCollection = (collectionId, text) => {
   return (dispatch) => {
     dispatch({ type: collectionsActionTypes.DELETE_START, payload: collectionId });
     deleteCollection(collectionId)
       .then(res => {
         if (res.coverUrl) removeImg(res.coverUrl);
         dispatch({ type: collectionsActionTypes.DELETE_SUCCESS, payload: res });
-        toast.info(`Collection "${res.title}" deleted`, { position: 'top-right' });
+        toast.info(text.tools.successdelete, { position: 'top-right' });
       }).catch(error => {
         console.log(error);
         dispatch({ type: collectionsActionTypes.DELETE_ERROR });

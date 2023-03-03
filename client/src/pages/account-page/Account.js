@@ -8,7 +8,7 @@ import { requestGetUser } from '../../store/action-creators/user';
 import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import BreadCrumbs from '../../components/BreadCrumbs';
-import Collections from './sections/Collections';
+import Collections from './sections/account-collections';
 import UserInfo from './sections/user-info';
 
 export const Account = () => {

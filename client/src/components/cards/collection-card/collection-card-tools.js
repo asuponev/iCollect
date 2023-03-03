@@ -34,7 +34,7 @@ const CollectionCardTools = ({ collectionId }) => {
         <Tooltip title={text.tools.delete} placement="bottom">
           <IconButton onClick={() => {
             if (window.confirm(text.tools.confirmDelete)) {
-              dispatch(onDeleteCollection(collectionId));
+              dispatch(onDeleteCollection(collectionId, text));
             }
           }}
           >

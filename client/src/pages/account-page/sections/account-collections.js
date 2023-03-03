@@ -17,7 +17,7 @@ import EmptyElement from '../../../components/EmptyElement';
 
 const Collections = ({ userId }) => {
   const dispatch = useDispatch();
-  const { status, userInfo  } = useSelector(state => state.auth);
+  const { status, userInfo } = useSelector(state => state.auth);
   const { loading, collections, error } = useSelector(state => state.collections);
 
   useEffect(() => {

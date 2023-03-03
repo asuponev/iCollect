@@ -60,10 +60,10 @@ const FormCreateCollection = ({ userId }) => {
       if (valuesForEdit.coverUrl && valuesForEdit.coverUrl !== values.coverUrl) {
         removeImg(valuesForEdit.coverUrl);
       }
-      dispatch(requestUpdateCollection(currentId, values));
+      dispatch(requestUpdateCollection(currentId, values, text));
     } else {
       values.authorId = userId;
-      dispatch(requestCreateCollection(values));
+      dispatch(requestCreateCollection(values, text));
     }
     dispatch(onCloseModalForm());
   };

@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner';
 import ErrorMessage from '../../components/ErrorMessage';
 import BreadCrumbs from '../../components/BreadCrumbs';
 import CollectionInfo from './sections/collection-info';
-import Items from './sections/Items';
+import Items from './sections/collection-items';
 
 export const Collection = () => {
   const { collectionId } = useParams();

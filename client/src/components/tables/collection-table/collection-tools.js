@@ -32,7 +32,7 @@ const CollectionTools = ({ collectionId, selectedItems }) => {
                 color="#585E67"
                 onClick={() => {
                   if (window.confirm(text.tableTools.confirmDelete)) {
-                    dispatch(onDeleteItems(collectionId, selectedItems));
+                    dispatch(onDeleteItems(collectionId, selectedItems, text));
                   }
                 }}
               >
