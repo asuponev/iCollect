@@ -7,6 +7,7 @@ import CsvDownloadButton from 'react-json-to-csv';
 
 import GlobalContext from '../../../utils/context/GlobalContext';
 import { requestGetItems } from '../../../store/action-creators/items';
+import { getTags } from '../../../store/action-creators/tags';
 
 import Spinner from '../../../components/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -27,6 +28,11 @@ const Items = ({ collectionId }) => {
     dispatch(requestGetItems(collectionId));
     // eslint-disable-next-line
   }, [collectionId]);
+
+  useEffect(() => {
+    dispatch(getTags());
+    // eslint-disable-next-line
+  }, []);
 
   const authorId = collection.authorId?._id;
 

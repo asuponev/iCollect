@@ -37,6 +37,27 @@ export const itemsReducer = (state = initialState, action) => {
         items: [],
         error: action.payload,
       };
+    case itemsActionTypes.FETCH_LASTITEMS_START:
+      return {
+        ...state,
+        loading: true,
+        lastItems: [],
+        error: null,
+      };
+    case itemsActionTypes.FETCH_LASTITEMS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        lastItems: action.payload,
+        error: null,
+      };
+    case itemsActionTypes.FETCH_LASTITEMS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        lastItems: [],
+        error: action.payload,
+      };
     case itemsActionTypes.CREATE_ITEM_START:
       return {
         ...state,

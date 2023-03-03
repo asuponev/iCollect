@@ -11,9 +11,10 @@ import { FormTextField } from './form-elements/form-textfields';
 import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
 
-const FormCreateItem = ({ collectionId, tagsList }) => {
+const FormCreateItem = ({ collectionId }) => {
   const dispatch = useDispatch();
   const { currentId, isEditing, valuesForEdit } = useSelector(state => state.items);
+  const { tags } = useSelector(state => state.tags);
   const { collection } = useSelector(state => state.collection);
   const windowWidth = useWindowWidth();
   const { register, handleSubmit, control, formState: { errors }, getValues } = useForm({
@@ -59,7 +60,7 @@ const FormCreateItem = ({ collectionId, tagsList }) => {
             name="tags"
             label={text.tags}
             control={control}
-            options={tagsList}
+            options={tags}
             errors={errors}
             getValues={getValues}
           />

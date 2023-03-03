@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from '@mui/material';
 
-import { getLastItems } from '../../../utils/requests/requests';
+import { requestGetLastItems } from '../../../store/action-creators/items';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
 import ItemCard from '../../../components/cards/item-card/item-card';
 
 const LastItems = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [lastItems, setLastItems] = useState([]);
+  const dispatch = useDispatch();
+  const { loading, lastItems, error } = useSelector(state => state.items);
 
   useEffect(() => {
-    onRequest();
+    dispatch(requestGetLastItems());
+    // eslint-disable-next-line
   }, []);
-
-  const onRequest = () => {
-    setError(null);
-    setLoading(true);
-    getLastItems()
-      .then(res => {
-        setLastItems(res);
-        setLoading(false);
-      })
-      .catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
-  };
 
   const items = lastItems.map(item => {
     return (

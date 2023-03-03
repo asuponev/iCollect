@@ -5,7 +5,8 @@ import {
   updateItem,
   getItem,
   deleteItem,
-  deleteItems
+  deleteItems,
+  getLastItems
 } from '../../utils/requests/requests';
 import { itemsActionTypes } from '../action-types/action-types';
 
@@ -102,6 +103,19 @@ export const onDeleteItems = (collectionId, items) => {
         console.log(error);
         dispatch({ type: itemsActionTypes.DELETE_ERROR });
         toast.error(error.message, { position: 'top-right' });
+      })
+  }
+};
+
+export const requestGetLastItems = () => {
+  return (dispatch) => {
+    dispatch({ type: itemsActionTypes.FETCH_LASTITEMS_START });
+    getLastItems()
+      .then(res => {
+        dispatch({ type: itemsActionTypes.FETCH_LASTITEMS_SUCCESS, payload: res });
+      })
+      .catch(error => {
+        dispatch({ type: itemsActionTypes.FETCH_LASTITEMS_ERROR, payload: error.message });
       })
   }
 };

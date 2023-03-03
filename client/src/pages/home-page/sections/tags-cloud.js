@@ -1,39 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Stack, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
-import { getAllTags } from '../../../utils/requests/requests';
+import { getTags } from '../../../store/action-creators/tags';
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
 
 const TagsCloud = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [tags, setTags] = useState([]);
+  const dispatch = useDispatch();
+  const { loading, tags, error } = useSelector(state => state.tags);
   const [countView, setCountView] = useState(10);
 
   const { tagStylesCloud } = CustomizeMui();
 
   useEffect(() => {
-    onRequest();
+    dispatch(getTags());
+    // eslint-disable-next-line
   }, []);
-
-  const onRequest = () => {
-    setError(null);
-    setLoading(true);
-    getAllTags()
-      .then(res => {
-        setTags(res);
-        setLoading(false);
-      })
-      .catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
-  };
 
   const tagsView = tags.map((tag, i) => {
     return (
