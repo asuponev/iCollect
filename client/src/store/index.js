@@ -7,6 +7,8 @@ import { itemsReducer } from './reducers/itemsReducer';
 import { adminReducer } from './reducers/adminReducer';
 import { tagsReducer } from './reducers/tagsReducer';
 import { authReducer } from './reducers/authReducer';
+import { commentsReducer } from './reducers/commentsReducer';
+import { likesReducer } from './reducers/likesReducer';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ export const store = configureStore({
     items: itemsReducer,
     admin: adminReducer,
     tags: tagsReducer,
-    auth: authReducer
+    auth: authReducer,
+    comments: commentsReducer,
+    likes: likesReducer
   }
 });

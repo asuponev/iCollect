@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { Stack, IconButton, Typography } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Pusher from 'pusher-js';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
-import { addLIke, removeLike, getAllItemLikes } from '../../../../utils/requests/requests';
+import {
+  requestLikes,
+  onAddLike,
+  onRemoveLike,
+  checkLike,
+  pusherAddLike,
+  pusherRemoveLike
+} from '../../../../store/action-creators/likes';
 
 const ItemLikes = ({ itemId }) => {
+  const dispatch = useDispatch();
+  const { likes, isLike } = useSelector(state => state.likes);
   const { userInfo } = useSelector(state => state.auth);
-  const [likesData, setLikesData] = useState([]);
-  const [isLike, setIsLike] = useState(false);
-
+  console.log(likes)
   const { messages } = useIntl();
 
   useEffect(() => {
@@ -23,75 +30,46 @@ const ItemLikes = ({ itemId }) => {
     });
     const channel = pusher.subscribe(process.env.REACT_APP_pusher_channel);
     channel.bind('new_like', like => {
-      setLikesData(prevData => [...prevData, like]);
+      dispatch(pusherAddLike(like));
     });
     channel.bind('remove_like', likeId => {
-      setLikesData(prevData => prevData.filter(like => like._id !== likeId));
+      dispatch(pusherRemoveLike(likeId));
     });
 
     return (() => pusher.unsubscribe(process.env.REACT_APP_pusher_channel));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    onGetRequest(itemId);
+    dispatch(requestLikes(itemId));
+    // eslint-disable-next-line
   }, [itemId]);
 
   useEffect(() => {
-    if (likesData) {
-      likesData.forEach(like => {
+    if (likes) {
+      likes.forEach(like => {
         if (like.userId === userInfo.userId) {
-          setIsLike(true);
+          dispatch(checkLike());
         };
       })
     }
-  }, [likesData, userInfo.userId]);
-
-  const onAddLike = (itemId) => {
-    setIsLike(true);
-    addLIke(itemId)
-      .then()
-      .catch(error => {
-        setIsLike(false);
-        console.log(error);
-        toast.error(messages["app.item.likeserror"], { position: 'top-right' });
-      })
-  };
-
-  const onRemoveLike = (itemId) => {
-    setIsLike(false);
-    removeLike(itemId)
-      .then()
-      .catch(error => {
-        setIsLike(true);
-        console.log(error);
-        toast.error(messages["app.item.likeserror"], { position: 'top-right' });
-      })
-  };
-
-  const onGetRequest = (itemId) => {
-    getAllItemLikes(itemId)
-      .then(res => {
-        setLikesData(res);
-      }).catch(error => {
-        console.log(error);
-        setLikesData([]);
-      })
-  };
+    // eslint-disable-next-line
+  }, [likes, userInfo.userId]);
 
   return (
     <>
       <ToastContainer />
       <Stack direction="row" spacing={1} alignItems="center">
         <Typography fontSize={13} color="text.secondary">
-          {messages["app.item.likes"]} {likesData.length}
+          {messages["app.item.likes"]} {likes.length}
         </Typography>
         {isLike ?
           (
-            <IconButton onClick={() => onRemoveLike(itemId)}>
+            <IconButton onClick={() => dispatch(onRemoveLike(itemId))}>
               <FavoriteIcon />
             </IconButton>
           ) : (
-            <IconButton onClick={() => onAddLike(itemId)}>
+            <IconButton onClick={() => dispatch(onAddLike(itemId))}>
               <FavoriteBorderIcon />
             </IconButton>
           )

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Stack, Typography } from '@mui/material';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Pusher from 'pusher-js';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { createComment, getAllItemComment } from '../../../utils/requests/requests';
+import { requestComments, updateComments } from '../../../store/action-creators/comments';
+import { createComment } from '../../../utils/requests/requests';
 
 import ErrorMessage from '../../../components/ErrorMessage';
 import Spinner from '../../../components/Spinner';
@@ -12,10 +14,8 @@ import Comment from '../../../components/comment/comment';
 import FormComment from '../../../components/form/form-comment';
 
 const ItemComments = ({ itemId }) => {
-  const [commentsData, setCommentData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const dispatch = useDispatch();
+  const { loading, comments, error } = useSelector(state => state.comments);
   const { messages } = useIntl();
   const texterror = messages["app.item.comments.senderror"];
 
@@ -26,28 +26,18 @@ const ItemComments = ({ itemId }) => {
     });
     const channel = pusher.subscribe(process.env.REACT_APP_pusher_channel);
     channel.bind('new_comment', comment => {
-      setCommentData(prevData => [...prevData, comment]);
+      dispatch(updateComments(comment));
+      // setCommentData(prevData => [...prevData, comment]);
     });
 
     return (() => pusher.unsubscribe(process.env.REACT_APP_pusher_channel));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    onRequestComment(itemId);
+    dispatch(requestComments(itemId));
+    // eslint-disable-next-line
   }, [itemId]);
-
-  const onRequestComment = (itemId) => {
-    setError(null);
-    setLoading(true);
-    getAllItemComment(itemId)
-      .then(res => {
-        setCommentData(res);
-        setLoading(false);
-      }).catch(error => {
-        setLoading(false);
-        setError(error.message);
-      })
-  };
 
   const onCreateComment = (itemId, message) => {
     createComment(itemId, message)
@@ -58,7 +48,7 @@ const ItemComments = ({ itemId }) => {
       })
   };
 
-  const commentsBlock = commentsData.map(comment => {
+  const commentsBlock = comments.map(comment => {
     return <Comment key={comment._id} comment={comment} />
   });
 
