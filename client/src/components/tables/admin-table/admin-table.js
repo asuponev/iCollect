@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { Stack, Tooltip, CircularProgress } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -11,19 +12,17 @@ import FontDownloadOutlinedIcon from '@mui/icons-material/FontDownloadOutlined';
 import DoNotTouchOutlinedIcon from '@mui/icons-material/DoNotTouchOutlined';
 import { useIntl } from 'react-intl';
 
-import CustomizeMui from '../../../utils/theme/customizeMui';
-
-const AdminTable = ({
-  users,
-  selectedUsers,
-  setSelectedUsers,
-  deleteSelectedUser,
+import {
   blockSelectedUser,
   makeAdminSelectedUser,
-  loadingBtn,
-  currentAction
-}) => {
-  if (!users) users = [];
+  deleteSelectedUser
+} from '../../../store/action-creators/admin';
+
+import CustomizeMui from '../../../utils/theme/customizeMui';
+
+const AdminTable = ({ selectedUsers, setSelectedUsers }) => {
+  const dispatch = useDispatch();
+  const { users, loadingBtn, currentAction } = useSelector(state => state.admin);
   const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.admin-panel"];
@@ -61,7 +60,7 @@ const AdminTable = ({
                 : <Tooltip title={text.tools.unblock} placement='top'><DoneOutlinedIcon /></Tooltip>
           }
           label="Block user"
-          onClick={() => blockSelectedUser(params.id)}
+          onClick={() => dispatch(blockSelectedUser(params.id))}
         />]
     },
     {
@@ -75,7 +74,7 @@ const AdminTable = ({
                 : <Tooltip title={text.tools.notadmin} placement='top'><DoNotTouchOutlinedIcon /></Tooltip>
           }
           label='Make admin'
-          onClick={() => makeAdminSelectedUser(params.id)}
+          onClick={() => dispatch(makeAdminSelectedUser(params.id))}
         />]
     },
     {
@@ -89,7 +88,7 @@ const AdminTable = ({
           label='Delete user'
           onClick={() => {
             if (window.confirm(text.tools.confirm)) {
-              deleteSelectedUser(params.id);
+              dispatch(deleteSelectedUser(params.id));
             }
           }}
         />]

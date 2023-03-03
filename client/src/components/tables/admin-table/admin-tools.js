@@ -1,13 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, Stack, Divider, Tooltip, CircularProgress } from '@mui/material';
 import { useIntl } from 'react-intl';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const AdminTools = ({
-  selectedUsers,
-  deleteSelectedUsers,
-  loadingBtn
-}) => {
+import { deleteSelectedUsers } from '../../../store/action-creators/admin';
+
+const AdminTools = ({ selectedUsers }) => {
+  const dispatch = useDispatch();
+  const { loadingBtn } = useSelector(state => state.admin);
   const { messages } = useIntl();
   const text = messages["app.admin-panel"];
 
@@ -29,7 +30,7 @@ const AdminTools = ({
                 color="#585E67"
                 onClick={() => {
                   if (window.confirm(text.tools.confirm)) {
-                    deleteSelectedUsers(selectedUsers);
+                    dispatch(deleteSelectedUsers(selectedUsers));
                   }
                 }}
               >
