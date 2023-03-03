@@ -34,6 +34,13 @@ The main page contains the latest added items, the largest collections, as well 
 ## Features
 
 <details>
+<summary>Managing State</summary>
+
+States of the application is managed and centralized using **Redux Toolkit**
+
+</details>
+
+<details>
 <summary>UI</summary>
 
 The project is made using **Material UI** (incl. MUI X) components
