@@ -20,7 +20,6 @@ const ItemLikes = ({ itemId }) => {
   const dispatch = useDispatch();
   const { likes, isLike } = useSelector(state => state.likes);
   const { userInfo } = useSelector(state => state.auth);
-  console.log(likes)
   const { messages } = useIntl();
 
   useEffect(() => {
