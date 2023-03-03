@@ -30,7 +30,6 @@ export const Admin = () => {
   const content = !(loading || error) ? (
     <Stack spacing={4} mb={10}>
       <ToastContainer />
-      <BreadCrumbs current={text.breadcrumbs} />
       <Stack spacing={3}>
         <Typography variant="h5" fontWeight="500">
           <FormattedMessage id="app.admin-panel.header" />
@@ -46,6 +45,7 @@ export const Admin = () => {
 
   return (
     <>
+      <BreadCrumbs current={text.breadcrumbs} />
       {errorMessage}
       {spinner}
       {content}
