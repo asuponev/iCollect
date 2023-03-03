@@ -94,3 +94,8 @@ export const likesActionTypes = {
   REMOVE_LIKE_ERROR: "REMOVE_LIKE_ERROR",
   CHECK_LIKE: "CHECK_LIKE"
 };
+
+export const oprionsActionTypes = {
+  CHANGE_MODE: "CHANGE_MODE",
+  CHANGE_LANG: "CHANGE_LANG"
+};

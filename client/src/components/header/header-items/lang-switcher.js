@@ -1,22 +1,19 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Select, FormControl, MenuItem } from '@mui/material';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
+import { handleChangeLang } from '../../../store/action-creators/options';
 
 export const LangSwitcher = () => {
-  const { lang, setLang } = useContext(GlobalContext);
-
-  const handleChange = (event) => {
-    setLang(event.target.value);
-    localStorage.setItem('lang', event.target.value);
-  };
+  const dispatch = useDispatch();
+  const { lang } = useSelector(state => state.options);
 
   return (
     <FormControl>
       <Select
         name="lang"
         value={lang}
-        onChange={handleChange}
+        onChange={(event) => dispatch(handleChangeLang(event.target.value))}
         sx={{
           width: 64,
           "& .MuiSelect-select": {

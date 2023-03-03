@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Box, TextField, MenuItem, Tooltip, IconButton, Button } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
 import extraFieldsTypes from '../../../utils/constants/extra-fields-types';
 
 const FormCreateExtraField = ({ extraFields, setExtraFields, toast }) => {
+  const { lang } = useSelector(state => state.options);
   const { messages } = useIntl();
   const text = messages["app.collection.form"];
-  const { lang } = useContext(GlobalContext);
 
   const handleChangeName = (i, e) => {
     let newExtraField = [...extraFields];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
@@ -7,7 +7,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useWindowWidth } from '@react-hook/window-size';
 
 import subjects from '../../utils/constants/collection-subjects';
-import GlobalContext from '../../utils/context/GlobalContext';
 import { removeImg } from '../../utils/firebase/methods';
 import {
   requestCreateCollection,
@@ -27,8 +26,8 @@ import './form-elements/form-mdeditor.scss';
 const FormCreateCollection = ({ userId }) => {
   const dispatch = useDispatch();
   const { isEditing, valuesForEdit, currentId } = useSelector(state => state.collections);
+  const { mode } = useSelector(state => state.options);
   const windowWidth = useWindowWidth();
-  const { mode } = useContext(GlobalContext);
   const { register, handleSubmit, formState: { errors }, getValues, control } = useForm({
     defaultValues: {
       title: valuesForEdit.title || '',

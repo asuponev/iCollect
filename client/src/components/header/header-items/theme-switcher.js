@@ -1,24 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, Stack, Tooltip } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { useIntl } from 'react-intl';
 
-import GlobalContext from '../../../utils/context/GlobalContext';
+import { handleChangeMode } from '../../../store/action-creators/options';
 
 export const ThemeSwitcher = () => {
-  const { mode, setMode } = useContext(GlobalContext);
+  const dispatch = useDispatch();
+  const { mode } = useSelector(state => state.options);
   const { messages } = useIntl();
-
-  const handleChange = () => {
-    if (mode === 'dark') {
-      localStorage.setItem('theme', 'light');
-      setMode('light');
-    } else {
-      localStorage.setItem('theme', 'dark');
-      setMode('dark');
-    }
-  };
 
   return (
     <Stack sx={{ background: "#192B45", borderRadius: 1, height: 32 }}>
@@ -29,7 +21,11 @@ export const ThemeSwitcher = () => {
             : `${messages["app.header.theme-dark"]}`
         }
       >
-        <IconButton size="small" onClick={handleChange} sx={{ color: "#FFFFFF", height: 32 }}>
+        <IconButton
+          size="small"
+          onClick={() => dispatch(handleChangeMode(mode))}
+          sx={{ color: "#FFFFFF", height: 32 }}
+        >
           {
             mode === 'dark'
               ? <LightModeOutlinedIcon />

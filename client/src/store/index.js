@@ -9,6 +9,7 @@ import { tagsReducer } from './reducers/tagsReducer';
 import { authReducer } from './reducers/authReducer';
 import { commentsReducer } from './reducers/commentsReducer';
 import { likesReducer } from './reducers/likesReducer';
+import { optionsReducer } from './reducers/optionsReducer';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     tags: tagsReducer,
     auth: authReducer,
     comments: commentsReducer,
-    likes: likesReducer
+    likes: likesReducer,
+    options: optionsReducer
   }
 });

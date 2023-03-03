@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Box, TextField, FormControlLabel, Checkbox } from '@mui/material';
 import { useIntl } from 'react-intl';
-
-import GlobalContext from '../../../utils/context/GlobalContext';
 
 import FormMdEditor from './form-mdeditor';
 
 const FormItemExtraFields = ({ extraFields, register, valuesForEdit, control, errors }) => {
-  const { mode } = useContext(GlobalContext);
+  const { mode } = useSelector(state => state.options);
   const { messages } = useIntl();
   const text = messages["app.collection.form.errors"];
 

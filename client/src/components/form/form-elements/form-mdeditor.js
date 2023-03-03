@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ContentState, convertToRaw, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
@@ -7,13 +8,10 @@ import { Controller } from 'react-hook-form';
 import { convert } from 'html-to-text';
 import { useIntl } from 'react-intl';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-
-import GlobalContext from '../../../utils/context/GlobalContext';
-
 import './form-mdeditor.scss';
 
 const FormMdEditor = ({ name, control, errors, placeholder, extrafield, defaultValue }) => {
-  const { mode } = useContext(GlobalContext);
+  const { mode } = useSelector(state => state.options);
   const { messages } = useIntl();
   const text = messages["app.collection.form.errors"];
 
@@ -67,7 +65,7 @@ export default FormMdEditor;
 
 
 const WYSIWYGEditor = ({ onChange, value, placeholder }) => {
-  const { mode } = useContext(GlobalContext)
+  const { mode } = useSelector(state => state.options);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [updated, setUpdated] = useState(false);
 
