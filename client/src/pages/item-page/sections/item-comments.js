@@ -26,8 +26,7 @@ const ItemComments = ({ itemId }) => {
     });
     const channel = pusher.subscribe(process.env.REACT_APP_pusher_channel);
     channel.bind('new_comment', comment => {
-      dispatch(updateComments(comment));
-      // setCommentData(prevData => [...prevData, comment]);
+      if (comment.itemId === itemId) dispatch(updateComments(comment));
     });
 
     return (() => pusher.unsubscribe(process.env.REACT_APP_pusher_channel));

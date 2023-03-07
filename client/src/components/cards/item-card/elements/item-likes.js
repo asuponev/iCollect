@@ -29,7 +29,7 @@ const ItemLikes = ({ itemId }) => {
     });
     const channel = pusher.subscribe(process.env.REACT_APP_pusher_channel);
     channel.bind('new_like', like => {
-      dispatch(pusherAddLike(like));
+      if (like.itemId === itemId) dispatch(pusherAddLike(like));
     });
     channel.bind('remove_like', likeId => {
       dispatch(pusherRemoveLike(likeId));
