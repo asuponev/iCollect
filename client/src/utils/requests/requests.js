@@ -152,31 +152,31 @@ export const getOneCollection = async (collectionId) => {
   }
 }
 
-export const createItem = async (collectionId, values) => {
-  try {
-    const { data } = await axios.post(
-      `/collections/${collectionId}/items`,
-      values,
-      { withCredentials: true }
-    );
-    return data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-}
+// export const createItem = async (collectionId, values) => {
+//   try {
+//     const { data } = await axios.post(
+//       `/collections/${collectionId}/items`,
+//       values,
+//       { withCredentials: true }
+//     );
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// }
 
-export const updateItem = async (collectionId, itemId, values) => {
-  try {
-    const { data } = await axios.patch(
-      `/collections/${collectionId}/items/${itemId}`,
-      values,
-      { withCredentials: true }
-    );
-    return data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-}
+// export const updateItem = async (collectionId, itemId, values) => {
+//   try {
+//     const { data } = await axios.patch(
+//       `/collections/${collectionId}/items/${itemId}`,
+//       values,
+//       { withCredentials: true }
+//     );
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// }
 
 export const deleteItem = async (collectionId, itemId) => {
   try {
@@ -199,14 +199,14 @@ export const deleteItems = async (collectionId, items) => {
   }
 }
 
-export const getAllCollectionItems = async (collectionId) => {
-  try {
-    const { data } = await axios.get(`/collections/${collectionId}/items`);
-    return data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-}
+// export const getAllCollectionItems = async (collectionId) => {
+//   try {
+//     const { data } = await axios.get(`/collections/${collectionId}/items`);
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// }
 
 export const getItem = async (collectionId, itemId) => {
   try {
@@ -270,14 +270,14 @@ export const removeLike = async (itemId) => {
   }
 }
 
-export const getLastItems = async () => {
-  try {
-    const { data } = await axios.get(`/items`);
-    return data;
-  } catch (error) {
-    throw new Error(error.response.data.message);
-  }
-}
+// export const getLastItems = async () => {
+//   try {
+//     const { data } = await axios.get(`/items`);
+//     return data;
+//   } catch (error) {
+//     throw new Error(error.response.data.message);
+//   }
+// }
 
 export const getSearchItems = async (value) => {
   try {

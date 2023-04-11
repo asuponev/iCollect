@@ -11,63 +11,14 @@ const initialState = {
   isEditing: false,
   valuesForEdit: defaultItemValues,
   openModalForm: false,
-  lastItems: []
 };
 
 export const itemsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case itemsActionTypes.FETCH_ITEMS_START:
-      return {
-        ...state,
-        loading: true,
-        items: [],
-        error: null,
-      };
-    case itemsActionTypes.FETCH_ITEMS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        items: action.payload,
-        error: null,
-      };
-    case itemsActionTypes.FETCH_ITEMS_ERROR:
-      return {
-        ...state,
-        loading: false,
-        items: [],
-        error: action.payload,
-      };
-    case itemsActionTypes.FETCH_LASTITEMS_START:
-      return {
-        ...state,
-        loading: true,
-        lastItems: [],
-        error: null,
-      };
-    case itemsActionTypes.FETCH_LASTITEMS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        lastItems: action.payload,
-        error: null,
-      };
-    case itemsActionTypes.FETCH_LASTITEMS_ERROR:
-      return {
-        ...state,
-        loading: false,
-        lastItems: [],
-        error: action.payload,
-      };
     case itemsActionTypes.CREATE_ITEM_START:
       return {
         ...state,
         openModalForm: true
-      };
-    case itemsActionTypes.CREATE_ITEM_SUCCESS:
-      return {
-        ...state,
-        items: [action.payload, ...state.items],
-        openModalForm: false
       };
     case itemsActionTypes.FETCH_VALUE_FOR_EDIT_START:
       return {
@@ -109,12 +60,6 @@ export const itemsReducer = (state = initialState, action) => {
         loadingBtn: false,
         currentId: '',
         currentAction: ''
-      };
-    case itemsActionTypes.UPDATE_ITEM_SUCCESS:
-      return {
-        ...state,
-        items: [action.payload, ...state.items.filter(item => item._id !== action.payload._id)],
-        openModalForm: false
       };
     case itemsActionTypes.DELETE_START:
       return {

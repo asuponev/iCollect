@@ -5,8 +5,8 @@ import { FormattedMessage } from 'react-intl';
 import { Stack } from '@mui/material';
 import CsvDownloadButton from 'react-json-to-csv';
 
-import { requestGetItems } from '../../../store/action-creators/items';
 import { getTags } from '../../../store/action-creators/tags';
+import { useGetAllCollectionItemsQuery } from '../../../store/api/items.api';
 
 import Spinner from '../../../components/Spinner';
 import ErrorMessage from '../../../components/ErrorMessage';
@@ -17,16 +17,11 @@ import EmptyElement from '../../../components/EmptyElement';
 import './btn-csv-style.scss';
 
 const Items = ({ collectionId }) => {
+  const { isLoading, data, isError, error } = useGetAllCollectionItemsQuery(collectionId);
   const dispatch = useDispatch();
-  const { status, userInfo  } = useSelector(state => state.auth);
-  const { loading, items, error } = useSelector(state => state.items);
+  const { status, userInfo } = useSelector(state => state.auth);
   const { collection } = useSelector(state => state.collection);
   const [selectedItems, setSelectedItems] = useState([]);
-
-  useEffect(() => {
-    dispatch(requestGetItems(collectionId));
-    // eslint-disable-next-line
-  }, [collectionId]);
 
   useEffect(() => {
     dispatch(getTags());
@@ -35,28 +30,13 @@ const Items = ({ collectionId }) => {
 
   const authorId = collection.authorId?._id;
 
-  const errorMessage = error ? <ErrorMessage error={error} /> : null;
-  const spinner = loading ? <Spinner /> : null;
-  const content = !(loading || error) ? (
-    <>
-      {
-        items.length > 0 ? (
-          <Stack>
-            <TableItems
-              selectedItems={selectedItems}
-              setSelectedItems={setSelectedItems}
-              extraFields={collection.extraFields}
-              collectionId={collectionId}
-              authorId={authorId}
-            />
-            <CsvDownloadButton data={items} className="btn-export-to-csv">
-              <FormattedMessage id="app.exportsvg" />
-            </CsvDownloadButton>
-          </Stack>
-        ) : <EmptyElement target={'table'} />
-      }
-    </>
-  ) : null;
+  if (isLoading) {
+    return <Spinner />;
+  };
+
+  if (isError) {
+    return <ErrorMessage error={error.error} />;
+  };
 
   return (
     <>
@@ -72,9 +52,23 @@ const Items = ({ collectionId }) => {
           </>
         ) : null
       }
-      {errorMessage}
-      {spinner}
-      {content}
+      {
+        data.length > 0 ? (
+          <Stack>
+            <TableItems
+              items={data}
+              selectedItems={selectedItems}
+              setSelectedItems={setSelectedItems}
+              extraFields={collection.extraFields}
+              collectionId={collectionId}
+              authorId={authorId}
+            />
+            <CsvDownloadButton data={data} className="btn-export-to-csv">
+              <FormattedMessage id="app.exportsvg" />
+            </CsvDownloadButton>
+          </Stack>
+        ) : <EmptyElement target={'table'} />
+      }
     </>
   );
 }

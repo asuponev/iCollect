@@ -15,6 +15,7 @@ import { getItemForEdit, onDeleteItem } from '../../../store/action-creators/ite
 import CustomizeMui from '../../../utils/theme/customizeMui';
 
 const TableItems = ({
+  items,
   selectedItems,
   setSelectedItems,
   extraFields,
@@ -23,7 +24,7 @@ const TableItems = ({
 }) => {
   const dispatch = useDispatch();
   const { status, userInfo  } = useSelector(state => state.auth);
-  const { items, loadingBtn, currentId, currentAction } = useSelector(state => state.items);
+  const { loadingBtn, currentId, currentAction } = useSelector(state => state.items);
   const { tableStyles } = CustomizeMui();
   const { messages } = useIntl();
   const text = messages["app.collection"];

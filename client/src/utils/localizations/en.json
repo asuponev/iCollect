@@ -113,7 +113,8 @@
     "title": "Title",
     "tags": "Tags",
     "btnclose": "Close form",
-    "required": "Tags is required"
+    "required": "Tags is required",
+    "error": "Failed to add item, try again later"
   },
 
   "app.admin-panel.header": "Users",

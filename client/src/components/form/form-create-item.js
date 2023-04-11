@@ -4,14 +4,19 @@ import { useForm } from 'react-hook-form';
 import { Box, Stack, Button } from '@mui/material';
 import { useWindowWidth } from '@react-hook/window-size';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { toast } from 'react-toastify';
 
-import { requestCreateItem, requestUpdateItem, onCloseModalForm } from '../../store/action-creators/items';
+import { useCreateItemMutation, useUpdateItemMutation } from '../../store/api/items.api';
+import { onCloseModalForm } from '../../store/action-creators/items';
 
 import { FormTextField } from './form-elements/form-textfields';
 import FormAutocomplete from './form-elements/form-autocomplete';
 import FormItemExtraFields from './form-elements/form-item-extra-fields';
 
 const FormCreateItem = ({ collectionId }) => {
+  const [createItem] = useCreateItemMutation();
+  const [updateItem] = useUpdateItemMutation();
+
   const dispatch = useDispatch();
   const { currentId, isEditing, valuesForEdit } = useSelector(state => state.items);
   const { tags } = useSelector(state => state.tags);
@@ -27,12 +32,31 @@ const FormCreateItem = ({ collectionId }) => {
   const { messages } = useIntl();
   const text = messages["app.item.form"];
 
-  const onFormSubmit = (values) => {
+  const onFormSubmit = async (item) => {
     if (isEditing) {
-      dispatch(requestUpdateItem(collectionId, currentId, values, text));
+      const itemId = currentId;
+      updateItem({ collectionId, itemId, item })
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+          toast.success(text.successupdate, { position: 'top-right' });
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(text.error, { position: 'top-right' });
+        })
     } else {
-      values.collectionId = collectionId;
-      dispatch(requestCreateItem(collectionId, values, text));
+      item.collectionId = collectionId;
+      createItem({ collectionId, item })
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+          toast.success(text.successcreate, { position: 'top-right' });
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(text.error, { position: 'top-right' });
+        })
     }
     dispatch(onCloseModalForm());
   };

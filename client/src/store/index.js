@@ -10,6 +10,7 @@ import { authReducer } from './reducers/authReducer';
 import { commentsReducer } from './reducers/commentsReducer';
 import { likesReducer } from './reducers/likesReducer';
 import { optionsReducer } from './reducers/optionsReducer';
+import { api } from './api/api';
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +23,10 @@ export const store = configureStore({
     auth: authReducer,
     comments: commentsReducer,
     likes: likesReducer,
-    options: optionsReducer
-  }
+    options: optionsReducer,
+    [api.reducerPath]: api.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(api.middleware),
+  devTools: process.env.NODE_ENV !== 'production'
 });
